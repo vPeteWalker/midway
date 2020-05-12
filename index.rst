@@ -6,6 +6,8 @@
    :name: _info
    :hidden:
 
+   prereqs/prereqs
+   hpoc/hpoc
    foundation/foundation
 
 .. toctree::
