@@ -17,5 +17,6 @@
    :hidden:
 
    basicconfig/basicconfig
+   pcconfig/pcconfig
 
 **Welcome!** Here is some boilerplate...
