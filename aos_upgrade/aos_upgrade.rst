@@ -37,10 +37,31 @@ Procedure
 #. Do one of the following:
    - If you previously selected Enable Automatic Download and the desired software package has been downloaded, click **Upgrade > Upgrade Now**, then click **Yes** to confirm.
    - If Enable Automatic Download is cleared, click **Download** next to the desired software package. When the download task is completed, click **Upgrade > Upgrade Now**, then click **Yes** to confirm.
+
+      .. figure:: images/2.png
+         :align: left
+         :scale: 60%
+      .. figure:: images/3.png
+         :align: center
+         :scale: 60%
+      .. figure:: images/4.png
+         :align: right
+         :scale: 60%
+
    - Upgrading AOS by uploading binary and metadata files
       - Log on to the Nutanix Support Portal, and select the AOS release from the `Downloads <https://portal.nutanix.com/#/page/releases/nosDetails/>`_ page.
       - Download the AOS binary and metadata .JSON files on your local media. You can also copy these files to a USB stick, CD, or other media.
       - Click the *upload an AOS binary* link. Click **Choose File** for the AOS metadata and binary files, respectively, browse to the file locations, and click **Upload Now**.  Once the software package has been uploaded, click **Upgrade > Upgrade Now**, then click **Yes** to confirm.
+
+      .. figure:: images/6.png
+         :align: left
+         :scale: 60%
+      .. figure:: images/7.png
+         :align: center
+         :scale: 60%
+      .. figure:: images/5.png
+         :align: right
+         :scale: 60%
 
    The Upgrade Software dialog box shows the progress of your selection, including pre-installation and cluster health checks. After the upgrade process is completed on a Controller VM, the Controller VM restarts. This restart is not disruptive to node operations.
 
