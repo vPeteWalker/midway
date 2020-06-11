@@ -34,6 +34,15 @@ Procedure
 
 #. [Optional] To run the pre-upgrade installation checks only on the Controller VM where you are logged on without upgrading, click **Upgrade > Pre-upgrade**. These checks also run as part of the upgrade procedure.
 
+#. Before executing upgrade, recommend one of the following to illustrate that workloads continue to run without interruption while the AOS upgrade proceeds
+   - Option 1. BASIC: Live pings between VMs during upgrade **Link to Basic VM management steps to deploy/clone VMs**
+      - Steps to setup ping between 2 VMs
+   - Option 2. ADVANCED: Use X-ray to run OLTP/VDI workload **Link to X-ray deployment**
+      - X-ray can be run on the cluster for this purpose
+      - When using, select the "Primary" VLAN for worker VMs
+      - Can we cancel/stop a running X-Ray workload? If so, flat recommend running workload for 4 hours and then cancel after upgrade.
+      - Recommendations on hardware to ensure successful demonstration?
+
 #. Do one of the following:
    - If you previously selected Enable Automatic Download and the desired software package has been downloaded, click **Upgrade > Upgrade Now**, then click **Yes** to confirm.
    - If Enable Automatic Download is cleared, click **Download** next to the desired software package. When the download task is completed, click **Upgrade > Upgrade Now**, then click **Yes** to confirm.
