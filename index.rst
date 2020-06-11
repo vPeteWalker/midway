@@ -26,5 +26,6 @@
    :hidden:
 
    node_addremove/node_addremove
+   aos_upgrade/aos_upgrade
 
 **Welcome!** Here is some boilerplate...
