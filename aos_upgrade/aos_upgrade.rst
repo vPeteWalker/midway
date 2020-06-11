@@ -9,11 +9,17 @@ AOS Upgrade
    - Before performing the procedure below, make sure you are running the latest version of the Nutanix Cluster Check (NCC) health checks and upgrade NCC if necessary.  Run all NCC checks, and check the Health Dashboard. If any health checks are failing, resolve them to ensure that the cluster is healthy before continuing.
    - If you use Prism Central to manage your Nutanix clusters, upgrade Prism Central first, then upgrade AOS on the clusters managed by Prism Central.
 
+Guidelines and Requirements
++++++++++++++++++++++++++++
+
 Each node in a cluster runs AOS. When commencing an upgrade, every node will be upgraded to that version. Nutanix provides a live upgrade mechanism that allows the cluster to run continuously while a rolling upgrade of the nodes is started in the background.
 
 AOS supports upgrades that you can apply through the Prism web console Upgrade Software feature (also known as 1-click upgrade).
 
 You can view the available upgrade options, start an upgrade, and monitor upgrade progress through the web console.
+
+Procedure
++++++++++
 
 #. Log on to the web console for any node in the cluster.
 
