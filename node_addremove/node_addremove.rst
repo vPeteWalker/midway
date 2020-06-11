@@ -57,10 +57,10 @@ Add node(s)
 
       .. figure:: images/4.png
          :align: left
-         :scale: 50%
+         :scale: 60%
       .. figure:: images/5.png
          :align: right
-         :scale: 50%
+         :scale: 60%
 
 Remove node
 +++++++++++
