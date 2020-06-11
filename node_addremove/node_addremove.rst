@@ -8,7 +8,7 @@ A cluster is a collection of nodes. You can add new nodes to a cluster at any ti
 
 .. note::
 
-   Run all NCC checks, and check the Health Dashboard. If any health checks are failing, resolve them to ensure that the cluster is healthy before adding any nodes.
+   Before performing the procedure below, make sure you are running the latest version of the Nutanix Cluster Check (NCC) health checks and upgrade NCC if necessary.  Run all NCC checks, and check the Health Dashboard. If any health checks are failing, resolve them to ensure that the cluster is healthy before continuing.
 
    These instuctions assume:
       All nodes have the same hardware configuration, AOS/AHV versions, and passwords.
