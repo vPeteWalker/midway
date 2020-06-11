@@ -13,9 +13,9 @@ A cluster is a collection of nodes. You can add new nodes to a cluster at any ti
 |
 
 - These instuctions assume:
-   - All nodes have the same hardware configuration, AOS/AHV versions, and passwords.
-   - Data-at-rest encryption is not in use.
-   - Rack awareness is not in use.
+   All nodes have the same hardware configuration, AOS/AHV versions, and passwords.
+   Data-at-rest encryption is not in use.
+   Rack awareness is not in use.
 
 Add node(s)
 +++++++++++
@@ -24,6 +24,7 @@ Add node(s)
 
 
    The network is searched for Nutanix nodes and then the **Expand Cluster** dialog box appears (on the *Select Host* screen) with a graphical list of the discovered blocks and nodes. Discovered blocks are blocks with one or more unassigned factory-prepared nodes (hypervisor and Controller VM installed) residing on the same subnet as the cluster. Discovery requires that IPv6 multicast packets are allowed through the physical switch. A lack of IPv6 multicast support might prevent node discovery and successful cluster expansion.
+
 
 
 #. Select the check box for each block to be added to the cluster. All nodes within a checked block are also checked automatically; uncheck any nodes you do not want added to the cluster.
@@ -44,18 +45,18 @@ Add node(s)
 
          .. figure:: images/2.png
 
-   - When all the node values are correct, click the **Next** button.
+#. When all the node values are correct, click the **Next** button.
 
-      The network addresses are validated before continuing. If an issue is discovered, the problem addresses are highlighted in red. If there are no issues, the process moves to the *Assign Rack* screen with a message at the top when the hypervisor, AOS, or other relevant feature is incompatible with the cluster version.
+   The network addresses are validated before continuing. If an issue is discovered, the problem addresses are highlighted in red. If there are no issues, the process moves to the *Assign Rack* screen with a message at the top when the hypervisor, AOS, or other relevant feature is incompatible with the cluster version.
 
-         .. figure:: images/3.png
+      .. figure:: images/3.png
 
-   - When all the fields are correct, click the **Expand Cluster** button.
+#. When all the fields are correct, click the **Expand Cluster** button.
 
-      The **Expand Cluster** dialog box closes and the add node process begins. As the nodes are added, messages appear on the dashboard. A blue bar indicates that the task is progressing normally. Nodes are processed (upgraded or reimaged as needed) and added in parallel. Adding nodes can take some time. Imaging a node typically takes a half hour or more depending on the hypervisor.
+   The **Expand Cluster** dialog box closes and the add node process begins. As the nodes are added, messages appear on the dashboard. A blue bar indicates that the task is progressing normally. Nodes are processed (upgraded or reimaged as needed) and added in parallel. Adding nodes can take some time. Imaging a node typically takes a half hour or more depending on the hypervisor.
 
-         .. figure:: images/4.png
-         .. figure:: images/5.png
+      .. figure:: images/4.png
+      .. figure:: images/5.png
 
 Remove node
 +++++++++++
