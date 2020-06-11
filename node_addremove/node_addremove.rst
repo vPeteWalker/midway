@@ -55,6 +55,7 @@ Add node(s)
       The **Expand Cluster** dialog box closes and the add node process begins. As the nodes are added, messages appear on the dashboard. A blue bar indicates that the task is progressing normally. Nodes are processed (upgraded or reimaged as needed) and added in parallel. Adding nodes can take some time. Imaging a node typically takes a half hour or more depending on the hypervisor.
 
          .. figure:: images/4.png
+         .. figure:: images/5.png
 
 Remove node
 +++++++++++
