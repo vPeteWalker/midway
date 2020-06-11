@@ -23,7 +23,7 @@ Add node(s)
 #. Either click :fa:`gear` **> Settings> Expand Cluster**, or from the dropdown menu choose **Hardware> +Expand Cluster**.
 
 
-   - The network is searched for Nutanix nodes and then the **Expand Cluster** dialog box appears (on the *Select Host* screen) with a graphical list of the discovered blocks and nodes. Discovered blocks are blocks with one or more unassigned factory-prepared nodes (hypervisor and Controller VM installed) residing on the same subnet as the cluster. Discovery requires that IPv6 multicast packets are allowed through the physical switch. A lack of IPv6 multicast support might prevent node discovery and successful cluster expansion.
+   The network is searched for Nutanix nodes and then the **Expand Cluster** dialog box appears (on the *Select Host* screen) with a graphical list of the discovered blocks and nodes. Discovered blocks are blocks with one or more unassigned factory-prepared nodes (hypervisor and Controller VM installed) residing on the same subnet as the cluster. Discovery requires that IPv6 multicast packets are allowed through the physical switch. A lack of IPv6 multicast support might prevent node discovery and successful cluster expansion.
 
 
 #. Select the check box for each block to be added to the cluster. All nodes within a checked block are also checked automatically; uncheck any nodes you do not want added to the cluster.
@@ -35,12 +35,12 @@ Add node(s)
 #. Do the following in the indicated fields for each checked block:
 
    - **Host Name**: Enter the name of the host.
-      - Enter just the host name, not the fully qualified domain name.
+      Enter just the host name, not the fully qualified domain name.
 
    - Review the **Controller VM IP**, **Hypervisor IP**, and **IPMI IP** assigned to each host and do one of the following:
 
-      - If the address is correct, do nothing in this field.
-      - If the address is not correct, either change the incorrect address or enter a starting address on the top line (for multiple hosts). The entered address is assigned to the Controller VM of the first host, and consecutive IP addresses (sequentially from the entered address) are assigned automatically to the remaining hosts.
+      If the address is correct, do nothing in this field.
+      If the address is not correct, either change the incorrect address or enter a starting address on the top line (for multiple hosts). The entered address is assigned to the Controller VM of the first host, and consecutive IP addresses (sequentially from the entered address) are assigned automatically to the remaining hosts.
 
          .. figure:: images/2.png
 
