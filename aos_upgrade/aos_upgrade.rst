@@ -26,13 +26,15 @@ Procedure
 #. Click the :fa:`gear` **> Settings > Upgrade Software > AOS**, or from the dropdown menu choose **Settings > Upgrade Software > AOS** to display the current status of your software versions (and start an upgrade if available and desired).
 
 .. figure:: images/1.png
+   :align: center
+   :scale: 60%
 
    - *CURRENT VERSION* displays the version running currently in the cluster.
    - *AVAILABLE COMPATIBLE VERSIONS* displays any versions to which the cluster can be updated.
    - The upload the AOS base software binary link enables you to install from binary and metadata files, which might be helpful for updating isolated (dark-site) clusters not connected to the Internet.
 
 
-#. [Optional] To run the pre-upgrade installation checks only on the Controller VM where you are logged on without upgrading, click **Upgrade > Pre-upgrade**. These checks also run as part of the upgrade procedure.
+#. Optional* To run the pre-upgrade installation checks only on the Controller VM where you are logged on without upgrading, click **Upgrade > Pre-upgrade**. These checks also run as part of the upgrade procedure.
 
 #. Before executing upgrade, recommend one of the following to illustrate that workloads continue to run without interruption while the AOS upgrade proceeds
    - Option 1. BASIC: Live pings between VMs during upgrade **Link to Basic VM management steps to deploy/clone VMs**
@@ -49,13 +51,15 @@ Procedure
 
       .. figure:: images/2.png
          :align: left
-         :scale: 60%
+         :scale: 40%
       .. figure:: images/3.png
          :align: center
-         :scale: 60%
+         :scale: 40%
       .. figure:: images/4.png
          :align: right
-         :scale: 60%
+         :scale: 40%
+
+|
 
    - Upgrading AOS by uploading binary and metadata files
       - Log on to the Nutanix Support Portal, and select the AOS release from the `Downloads <https://portal.nutanix.com/#/page/releases/nosDetails/>`_ page.
@@ -64,16 +68,17 @@ Procedure
 
       .. figure:: images/6.png
          :align: left
-         :scale: 60%
+         :scale: 40%
       .. figure:: images/7.png
          :align: center
-         :scale: 60%
+         :scale: 40%
       .. figure:: images/5.png
          :align: right
-         :scale: 60%
+         :scale: 40%
 
    The Upgrade Software dialog box shows the progress of your selection, including pre-installation and cluster health checks. After the upgrade process is completed on a Controller VM, the Controller VM restarts. This restart is not disruptive to node operations.
 
 What to do next
++++++++++++++++
 
-   After upgrading AOS and before upgrading your hypervisor on each cluster, perform a Life Cycle Manager (LCM) inventory, update LCM, and upgrade any recommended firmware.  **LINK TO LCM SECTION**
+After upgrading AOS and before upgrading your hypervisor on each cluster, perform a Life Cycle Manager (LCM) inventory, update LCM, and upgrade any recommended firmware.  **LINK TO LCM SECTION**
