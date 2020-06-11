@@ -28,6 +28,7 @@ Add node(s)
 #. Select the check box for each block to be added to the cluster. All nodes within a checked block are also checked automatically; uncheck any nodes you do not want added to the cluster.
 
    .. figure:: images/1.png
+      :align: center
 
    When a block is checked, more fields appear below the block diagram. A separate line for each node (host) in the block appears under each field name.
 
@@ -42,13 +43,14 @@ Add node(s)
       If the address is not correct, either change the incorrect address or enter a starting address on the top line (for multiple hosts). The entered address is assigned to the Controller VM of the first host, and consecutive IP addresses (sequentially from the entered address) are assigned automatically to the remaining hosts.
 
          .. figure:: images/2.png
+            :align: center
 
 #. When all the node values are correct, click the **Next** button.
 
    The network addresses are validated before continuing. If an issue is discovered, the problem addresses are highlighted in red. If there are no issues, the process moves to the *Assign Rack* screen with a message at the top when the hypervisor, AOS, or other relevant feature is incompatible with the cluster version.
 
       .. figure:: images/3.png
-
+         :align: center
 #. When all the fields are correct, click the **Expand Cluster** button.
 
    The **Expand Cluster** dialog box closes and the add node process begins. As the nodes are added, messages appear on the dashboard. A blue bar indicates that the task is progressing normally. Nodes are processed (upgraded or reimaged as needed) and added in parallel. Adding nodes can take some time. Imaging a node typically takes a half hour or more depending on the hypervisor.
@@ -68,7 +70,7 @@ Remove node
 #. Select the target host, and click the **Remove Host** link on the right of the *Summary* line. A dialog box appears to verify the action. Click the **OK** button.
 
    .. figure:: images/6.png
-
+      :align: center
 |
 
    Removing a host takes some time because data on that host must be migrated to other hosts before it can be removed from the cluster. You can monitor progress through the dashboard messages. Removing a host automatically removes all the disks in that host. Only one host can be removed at a time. If you want to remove multiple hosts, you must wait until the first host is removed completely before attempting to remove the next host.
