@@ -18,7 +18,7 @@ A cluster is a collection of nodes. You can add new nodes to a cluster at any ti
 Add node(s)
 +++++++++++
 
-#. Either click :fa:`gear` **> Settings> Expand Cluster**, or from the dropdown menu choose **Hardware> +Expand Cluster**.
+#. Either click :fa:`gear` **> Settings > Expand Cluster**, or from the dropdown menu choose **Hardware > +Expand Cluster**.
 
 
    The network is searched for Nutanix nodes and then the **Expand Cluster** dialog box appears (on the *Select Host* screen) with a graphical list of the discovered blocks and nodes. Discovered blocks are blocks with one or more unassigned factory-prepared nodes (hypervisor and Controller VM installed) residing on the same subnet as the cluster. Discovery requires that IPv6 multicast packets are allowed through the physical switch. A lack of IPv6 multicast support might prevent node discovery and successful cluster expansion.
@@ -29,6 +29,7 @@ Add node(s)
 
    .. figure:: images/1.png
       :align: center
+      :scale: 75%
 
    When a block is checked, more fields appear below the block diagram. A separate line for each node (host) in the block appears under each field name.
 
@@ -44,6 +45,7 @@ Add node(s)
 
          .. figure:: images/2.png
             :align: center
+            :scale: 75%
 
 #. When all the node values are correct, click the **Next** button.
 
@@ -51,6 +53,7 @@ Add node(s)
 
       .. figure:: images/3.png
          :align: center
+         :scale: 75%
 
 #. When all the fields are correct, click the **Expand Cluster** button.
 
@@ -72,7 +75,6 @@ Remove node
 
    .. figure:: images/6.png
       :align: center
-|
 
       Removing a host takes some time because data on that host must be migrated to other hosts before it can be removed from the cluster. You can monitor progress through the dashboard messages. Removing a host automatically removes all the disks in that host. Only one host can be removed at a time. If you want to remove multiple hosts, you must wait until the first host is removed completely before attempting to remove the next host.
 
