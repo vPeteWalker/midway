@@ -64,9 +64,10 @@ Remove node
 #. From the dropdown, choose the **Hardware** dashboard, then click the **Diagram** or **Table** tab.
 
 #. Select the target host, and click the **Remove Host** link on the right of the *Summary* line. A dialog box appears to verify the action. Click the **OK** button.
+   .. figure:: images/6.png
 
-- The Prism web console displays a warning message that you need to reclaim the license after you have removed the node. See the "Reclaiming Licenses" or "Reclaiming Licenses (Portal Connection)" section in the Nutanix Licensing Guide.
+|
 
-- Removing a host takes some time because data on that host must be migrated to other hosts before it can be removed from the cluster. You can monitor progress through the dashboard messages. Removing a host automatically removes all the disks in that host. Only one host can be removed at a time. If you want to remove multiple hosts, you must wait until the first host is removed completely before attempting to remove the next host.
+   Removing a host takes some time because data on that host must be migrated to other hosts before it can be removed from the cluster. You can monitor progress through the dashboard messages. Removing a host automatically removes all the disks in that host. Only one host can be removed at a time. If you want to remove multiple hosts, you must wait until the first host is removed completely before attempting to remove the next host.
 
-#. After a node is removed, it goes into an unconfigured state. You can add such a node back into the cluster through the Add Node(s) workflow.
+   After a node is removed, it goes into an unconfigured state. You can add such a node back into the cluster through the Add Node(s) workflow.
