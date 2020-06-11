@@ -22,6 +22,7 @@ Add node(s)
 
 #. Either click :fa:`gear` **> Settings> Expand Cluster**, or from the dropdown menu choose **Hardware> +Expand Cluster**.
 
+
    - The network is searched for Nutanix nodes and then the **Expand Cluster** dialog box appears (on the *Select Host* screen) with a graphical list of the discovered blocks and nodes. Discovered blocks are blocks with one or more unassigned factory-prepared nodes (hypervisor and Controller VM installed) residing on the same subnet as the cluster. Discovery requires that IPv6 multicast packets are allowed through the physical switch. A lack of IPv6 multicast support might prevent node discovery and successful cluster expansion.
 
 
@@ -36,22 +37,22 @@ Add node(s)
    - **Host Name**: Enter the name of the host.
       - Enter just the host name, not the fully qualified domain name.
 
-   - Review the **Controller VM IP** **Hypervisor IP** and **IPMI IP** assigned to each host and do one of the following:
+   - Review the **Controller VM IP**, **Hypervisor IP**, and **IPMI IP** assigned to each host and do one of the following:
 
       - If the address is correct, do nothing in this field.
       - If the address is not correct, either change the incorrect address or enter a starting address on the top line (for multiple hosts). The entered address is assigned to the Controller VM of the first host, and consecutive IP addresses (sequentially from the entered address) are assigned automatically to the remaining hosts.
 
-      .. figure:: images/2.png
+         .. figure:: images/2.png
 
    - When all the node values are correct, click the **Next** button.
 
       - The network addresses are validated before continuing. If an issue is discovered, the problem addresses are highlighted in red. If there are no issues, the process moves to the *Assign Rack* screen with a message at the top when the hypervisor, AOS, or other relevant feature is incompatible with the cluster version.
 
-      .. figure:: images/3.png
+         .. figure:: images/3.png
 
    - When all the fields are correct, click the **Expand Cluster** button.
 
-   - The **Expand Cluster** dialog box closes and the add node process begins. As the nodes are added, messages appear on the dashboard. A blue bar indicates that the task is progressing normally. Nodes are processed (upgraded or reimaged as needed) and added in parallel. Adding nodes can take some time. Imaging a node typically takes a half hour or more depending on the hypervisor.
+   The **Expand Cluster** dialog box closes and the add node process begins. As the nodes are added, messages appear on the dashboard. A blue bar indicates that the task is progressing normally. Nodes are processed (upgraded or reimaged as needed) and added in parallel. Adding nodes can take some time. Imaging a node typically takes a half hour or more depending on the hypervisor.
 
    .. figure:: images/4.png
 
