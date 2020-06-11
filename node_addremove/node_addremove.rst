@@ -10,12 +10,10 @@ A cluster is a collection of nodes. You can add new nodes to a cluster at any ti
 
    Run all NCC checks, and check the Health Dashboard. If any health checks are failing, resolve them to ensure that the cluster is healthy before adding any nodes.
 
-|
-
-- These instuctions assume:
-   All nodes have the same hardware configuration, AOS/AHV versions, and passwords.
-   Data-at-rest encryption is not in use.
-   Rack awareness is not in use.
+   These instuctions assume:
+      All nodes have the same hardware configuration, AOS/AHV versions, and passwords.
+      Data-at-rest encryption is not in use.
+      Rack awareness is not in use.
 
 Add node(s)
 +++++++++++
@@ -31,11 +29,11 @@ Add node(s)
 
    .. figure:: images/1.png
 
-      When a block is checked, more fields appear below the block diagram. A separate line for each node (host) in the block appears under each field name.
+   When a block is checked, more fields appear below the block diagram. A separate line for each node (host) in the block appears under each field name.
 
 #. Do the following in the indicated fields for each checked block:
 
-   - **Host Name**: Enter the name of the host.
+   - **Host Name**
       Enter just the host name, not the fully qualified domain name.
 
    - Review the **Controller VM IP**, **Hypervisor IP**, and **IPMI IP** assigned to each host and do one of the following:
@@ -56,7 +54,11 @@ Add node(s)
    The **Expand Cluster** dialog box closes and the add node process begins. As the nodes are added, messages appear on the dashboard. A blue bar indicates that the task is progressing normally. Nodes are processed (upgraded or reimaged as needed) and added in parallel. Adding nodes can take some time. Imaging a node typically takes a half hour or more depending on the hypervisor.
 
       .. figure:: images/4.png
+         :align: left
+         :scale: 50%
       .. figure:: images/5.png
+         :align: right
+         :scale: 50%
 
 Remove node
 +++++++++++
@@ -64,6 +66,7 @@ Remove node
 #. From the dropdown, choose the **Hardware** dashboard, then click the **Diagram** or **Table** tab.
 
 #. Select the target host, and click the **Remove Host** link on the right of the *Summary* line. A dialog box appears to verify the action. Click the **OK** button.
+
    .. figure:: images/6.png
 
 |
