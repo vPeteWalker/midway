@@ -46,7 +46,7 @@ Add node(s)
 
    - When all the node values are correct, click the **Next** button.
 
-      - The network addresses are validated before continuing. If an issue is discovered, the problem addresses are highlighted in red. If there are no issues, the process moves to the *Assign Rack* screen with a message at the top when the hypervisor, AOS, or other relevant feature is incompatible with the cluster version.
+      The network addresses are validated before continuing. If an issue is discovered, the problem addresses are highlighted in red. If there are no issues, the process moves to the *Assign Rack* screen with a message at the top when the hypervisor, AOS, or other relevant feature is incompatible with the cluster version.
 
          .. figure:: images/3.png
 
