@@ -19,4 +19,12 @@
    basicconfig/basicconfig
    pcconfig/pcconfig
 
+.. toctree::
+   :maxdepth: 2
+   :caption: AOS/PC
+   :name: _info
+   :hidden:
+
+   node_addremove/node_addremove
+
 **Welcome!** Here is some boilerplate...
