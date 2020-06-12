@@ -44,6 +44,6 @@ Recommended Upgrade Order
       Nutanix Upgrade Order 1 of 2
 
    .. figure:: images/2.png
-      :align: right
-      :scale: 40%
-      Nutanix Upgrade Order 2 of 2
+       :align: right
+       :scale: 40%
+       Nutanix Upgrade Order 2 of 2
