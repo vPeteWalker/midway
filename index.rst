@@ -27,5 +27,6 @@
 
    node_addremove/node_addremove
    aos_upgrade/aos_upgrade
+   lcm/lcm
 
 **Welcome!** Here is some boilerplate...

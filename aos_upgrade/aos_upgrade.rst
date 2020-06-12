@@ -60,7 +60,6 @@ Procedure
          :scale: 40%
 
 |
-
    - Upgrading AOS by uploading binary and metadata files
       - Log on to the Nutanix Support Portal, and select the AOS release from the `Downloads <https://portal.nutanix.com/#/page/releases/nosDetails/>`_ page.
       - Download the AOS binary and metadata .JSON files on your local media. You can also copy these files to a USB stick, CD, or other media.
