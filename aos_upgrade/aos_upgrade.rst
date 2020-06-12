@@ -26,7 +26,7 @@ Procedure
 #. Click the :fa:`gear` **> Settings > Upgrade Software > AOS**, or from the dropdown menu choose **Settings > Upgrade Software > AOS** to display the current status of your software versions (and start an upgrade if available and desired).
 
 .. figure:: images/1.png
-   :align: center
+   :align: right
    :scale: 60%
 
    - *CURRENT VERSION* displays the version running currently in the cluster.

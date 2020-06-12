@@ -30,24 +30,24 @@ Recommended Upgrade Order
    * PE: Run and upgrade Life Cycle Manager (LCM)
 
       * Perform an LCM inventory (also updates LCM framework). Do not upgrade any other software component except LCM in this step.
-
    * PE: Upgrade AOS.
    * PE: Run and upgrade Life Cycle Manager (LCM):
 
-     * Perform an LCM inventory (also updates LCM framework).
-     * Upgrade SATA DOM firmware (for hardware using SATA DOMs) as recommended by LCM.
-     * Upgrade all other firmware as recommended by LCM (BIOS / BMC / other).
-
+      * Perform an LCM inventory (also updates LCM framework).
+      * Upgrade SATA DOM firmware (for hardware using SATA DOMs) as recommended by LCM.
+      * Upgrade all other firmware as recommended by LCM (BIOS / BMC / other).
    * PE: Upgrade AHV for AHV clusters.
    * PE: Upgrade cluster hypervisor hosts other than AHV.
    * PE: Run NCC.
 
-   .. figure:: images/1.png
-      :align: left
-      :scale: 40%
-      Nutanix Upgrade Order 1 of 2
+      .. figure:: images/1.png
+         :align: left
+         :scale: 40%
 
-   .. figure:: images/2.png
-       :align: right
-       :scale: 40%
-       Nutanix Upgrade Order 2 of 2
+         Nutanix Upgrade Order 1 of 2
+
+      .. figure:: images/2.png
+         :align: right
+         :scale: 40%
+
+         Nutanix Upgrade Order 2 of 2
