@@ -40,14 +40,14 @@ Recommended Upgrade Order
    * PE: Upgrade cluster hypervisor hosts other than AHV.
    * PE: Run NCC.
 
-      .. figure:: images/1.png
-         :align: left
-         :scale: 25%
+.. figure:: images/1.png
+   :align: left
+   :scale: 25%
 
-         Nutanix Upgrade Order 1 of 2
+   Nutanix Upgrade Order 1 of 2
 
-      .. figure:: images/2.png
-         :align: right
-         :scale: 25%
+.. figure:: images/2.png
+   :align: right
+   :scale: 25%
 
-         Nutanix Upgrade Order 2 of 2
+   Nutanix Upgrade Order 2 of 2
