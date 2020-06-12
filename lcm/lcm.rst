@@ -1,13 +1,13 @@
 .. _lcm:
 
---------------------------
+-----------------------
 Lifecycle Manager (LCM)
 -----------------------
 
 What is LCM?
 ++++++++++++
 
-- LCM  aims to enable administrators to take inventory of the firmware and software in their Nutanix environment and perform updates in a simple, cluster-aware, fashion.
+- LCM aims to enable administrators to take inventory of the firmware and software in their Nutanix environment and perform updates in a simple, cluster-aware, fashion.
 - LCM is an industry-unique solution - providing the same 1-click operational upgrade simplicity for 7 (and growing) different hardware vendor appliances running Nutanix software.
 - LCM just offers a management layer that will allow users to deploy firmware upgrades simply without having to worry about upgrade paths or conflicts between versions. Customers should not require a manual to upgrade their environment - LCM aims to solve this at scale.
 - Once a customer performs an Inventory of their cluster, all the firmware is downloaded and staged. From there, users can deploy the updates with as much or as little granularity as they desire. You can either select individual entities for upgrade or do the entire cluster at once (subject to what the actual component being upgraded allows).
@@ -38,12 +38,12 @@ Recommended Upgrade Order
    * PE: Upgrade cluster hypervisor hosts other than AHV.
    * PE: Run NCC.
 
-      .. figure:: images/1.png
-         :align: left
-         :scale: 40%
-         Nutanix Upgrade Order 1 of 2
+   .. figure:: images/1.png
+      :align: left
+      :scale: 40%
+      Nutanix Upgrade Order 1 of 2
 
-      .. figure:: images/2.png
-         :align: right
-         :scale: 40%
-         Nutanix Upgrade Order 2 of 2
+   .. figure:: images/2.png
+      :align: right
+      :scale: 40%
+      Nutanix Upgrade Order 2 of 2
