@@ -22,21 +22,21 @@ Recommended Upgrade Order
 - Run “Perform Inventory” in LCM and upgrade LCM to the latest version; then re-run “Perform Inventory”. Applicable if “Auto LCM Framework Update” is not selected.
 - Check minimum Hypervisor versions required for firmware updates before updating firmware.
 
-   - Prism Central (PC): Upgrade and run NCC on Prism Central.
-   - PC: Upgrade Prism Central.
-   - PC: Run NCC.
-   - Prism Element clusters (PE): Upgrade and run NCC.
-   - PE: Upgrade Foundation.
-   - PE: Run and upgrade Life Cycle Manager (LCM):
-      - Perform an LCM inventory (also updates LCM framework). Do not upgrade any other software component except LCM in this step.
-   - PE: Upgrade AOS.
-   - PE: Run and upgrade Life Cycle Manager (LCM):
-      - Perform an LCM inventory (also updates LCM framework).
-      - Upgrade SATA DOM firmware (for hardware using SATA DOMs) as recommended by LCM.
-      - Upgrade all other firmware as recommended by LCM (BIOS / BMC / other).
-   - PE: Upgrade AHV for AHV clusters.
-   - PE: Upgrade cluster hypervisor hosts other than AHV.
-   - PE: Run NCC.
+   * Prism Central (PC): Upgrade and run NCC on Prism Central.
+   * PC: Upgrade Prism Central.
+   * PC: Run NCC.
+   * Prism Element clusters (PE): Upgrade and run NCC.
+   * PE: Upgrade Foundation.
+   * PE: Run and upgrade Life Cycle Manager (LCM):
+      * Perform an LCM inventory (also updates LCM framework). Do not upgrade any other software component except LCM in this step.
+   * PE: Upgrade AOS.
+   * PE: Run and upgrade Life Cycle Manager (LCM):
+      * Perform an LCM inventory (also updates LCM framework).
+      * Upgrade SATA DOM firmware (for hardware using SATA DOMs) as recommended by LCM.
+      * Upgrade all other firmware as recommended by LCM (BIOS / BMC / other).
+   * PE: Upgrade AHV for AHV clusters.
+   * PE: Upgrade cluster hypervisor hosts other than AHV.
+   * PE: Run NCC.
 
       .. figure:: images/1.png
          :align: left
