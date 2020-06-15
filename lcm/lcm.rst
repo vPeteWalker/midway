@@ -42,12 +42,12 @@ Recommended Upgrade Order
 
 .. figure:: images/1.png
    :align: left
-   :scale: 25%
+   :scale: 20%
 
    Nutanix Upgrade Order 1 of 2
 
 .. figure:: images/2.png
    :align: right
-   :scale: 25%
+   :scale: 20%
 
    Nutanix Upgrade Order 2 of 2
