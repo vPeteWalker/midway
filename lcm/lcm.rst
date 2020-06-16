@@ -13,41 +13,63 @@ What is LCM?
 - Once a customer performs an Inventory of their cluster, all the firmware is downloaded and staged. From there, users can deploy the updates with as much or as little granularity as they desire. You can either select individual entities for upgrade or do the entire cluster at once (subject to what the actual component being upgraded allows).
 - A Dark Site LCM version is available
 
-Recommended Upgrade Order
-+++++++++++++++++++++++++
+.. note::
 
-- Upgrade and Run Latest NCC Checks. Fix any issues prior to conducting upgrades.
-- Upgrade AOS to the latest available version in your selected release train (STS or LTS).  Some AOS/LCM interface code is improved in later AOS versions.
-- Upgrade Foundation to the latest “1-click” available version. Latest Phoenix is bundled with newer CVM Foundation versions.
-- Run “Perform Inventory” in LCM and upgrade LCM to the latest version; then re-run “Perform Inventory”. Applicable if “Auto LCM Framework Update” is not selected.
-- Check minimum Hypervisor versions required for firmware updates before updating firmware.
+   For detailed information about LCM, please refer to the `Life Cycle Manager Guide v2.2 <https://portal.nutanix.com/page/documents/details/?targetId=Life-Cycle-Manager-Guide-v22%3ALife-Cycle-Manager-Guide-v22>`_
 
-   * Prism Central (PC): Upgrade and run NCC on Prism Central.
-   * PC: Upgrade Prism Central.
-   * PC: Run NCC.
-   * Prism Element clusters (PE): Upgrade and run NCC.
-   * PE: Upgrade Foundation.
-   * PE: Run and upgrade Life Cycle Manager (LCM)
+Performing Inventory with LCM
++++++++++++++++++++++++++++++
 
-      * Perform an LCM inventory (also updates LCM framework). Do not upgrade any other software component except LCM in this step.
-   * PE: Upgrade AOS.
-   * PE: Run and upgrade Life Cycle Manager (LCM):
+.. note::
 
-      * Perform an LCM inventory (also updates LCM framework).
-      * Upgrade SATA DOM firmware (for hardware using SATA DOMs) as recommended by LCM.
-      * Upgrade all other firmware as recommended by LCM (BIOS / BMC / other).
-   * PE: Upgrade AHV for AHV clusters.
-   * PE: Upgrade cluster hypervisor hosts other than AHV.
-   * PE: Run NCC.
+   Some entities are local to Prism Central, such as Calm, Epsilon, and Karbon. To manage these entities, you must log on to Prism Central.
 
-.. figure:: images/1.png
-   :align: left
-   :scale: 20%
+   Other entities, such as component firmware, are local to Prism Element. To manage these entities, you must log on to Prism Element.
 
-   Nutanix Upgrade Order 1 of 2
+#. From the drop-down menu, select **LCM**.
 
-.. figure:: images/2.png
-   :align: right
-   :scale: 20%
+#. In the LCM sidebar, select **Inventory**.
 
-   Nutanix Upgrade Order 2 of 2
+#. To take an inventory, click **Perform Inventory**.
+
+- If you do not have auto-update enabled, and a new version of the LCM framework is available, LCM shows the following warning message:
+
+   .. figure:: images/3.png
+
+#. To enable auto-inventory, click **Settings** and select the **Enable LCM Auto Inventory** checkbox in the dialog box that appears.
+
+#. Click **OK**.
+
+   .. figure:: images/4.png
+
+      Use the Focus button to switch between a general display and a component-by-component display.
+
+Performing Updates with the Life Cycle Manager
+++++++++++++++++++++++++++++++++++++++++++++++
+
+#. From the drop-down menu, select **LCM**.
+
+#. In the LCM sidebar, under *Updates*, select **Software** or **Firmware**.
+
+#. Select the updates you want to perform.
+
+   - Select the checkbox for the node you want to update, or select All to update the entire cluster.
+   - Select the components you want to update. When you select a node, LCM selects the checkboxes for all updateable components by default. Clear the checkbox of any component you do not want to update.
+
+#. Click **NCC Check**.
+
+   - In the dialog box that appears, specify which prechecks you want LCM to run before updating.
+
+#. Click **Run**.
+
+#. When the prechecks are complete, click **Update**.
+
+#. Review the selected updates and click **Apply Updates**. LCM updates the selected components.
+
+   .. figure:: /images/5.png
+
+   .. figure:: /images/6.png
+
+   .. figure:: /images/7.png
+
+   .. figure:: /images/8.png
