@@ -28,5 +28,6 @@
    node_addremove/node_addremove
    aos_upgrade/aos_upgrade
    lcm/lcm
+   files/files
 
 **Welcome!** Here is some boilerplate...
