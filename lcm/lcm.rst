@@ -22,9 +22,9 @@ Performing Inventory with LCM
 
 .. note::
 
-   Some entities are local to Prism Central, such as Calm, Epsilon, and Karbon. To manage these entities, you must log on to Prism Central.
+   Some entities are local to Prism Central, such as Calm, Epsilon, and Karbon. To manage these entities, you must log on to **Prism Central**.
 
-   Other entities, such as component firmware, are local to Prism Element. To manage these entities, you must log on to Prism Element.
+   Other entities, such as component firmware, are local to Prism Element. To manage these entities, you must log on to **Prism Element**.
 
 #. From the drop-down menu, select **LCM**.
 
@@ -32,15 +32,18 @@ Performing Inventory with LCM
 
 #. To take an inventory, click **Perform Inventory**.
 
-- If you do not have auto-update enabled, and a new version of the LCM framework is available, LCM shows the following warning message:
+   - If you do not have auto-update enabled, and a new version of the LCM framework is available, LCM shows the following warning message:
 
    .. figure:: images/3.png
+      :align: center
+      :scale: 50%
 
 #. To enable auto-inventory, click **Settings** and select the **Enable LCM Auto Inventory** checkbox in the dialog box that appears.
 
 #. Click **OK**.
 
    .. figure:: images/4.png
+      :align: center
 
       Use the Focus button to switch between a general display and a component-by-component display.
 
@@ -56,9 +59,7 @@ Performing Updates with the Life Cycle Manager
    - Select the checkbox for the node you want to update, or select All to update the entire cluster.
    - Select the components you want to update. When you select a node, LCM selects the checkboxes for all updateable components by default. Clear the checkbox of any component you do not want to update.
 
-#. Click **NCC Check**.
-
-   - In the dialog box that appears, specify which prechecks you want LCM to run before updating.
+#. Click **NCC Check**.  In the dialog box that appears, specify which prechecks you want LCM to run before updating.
 
 #. Click **Run**.
 
@@ -66,10 +67,12 @@ Performing Updates with the Life Cycle Manager
 
 #. Review the selected updates and click **Apply Updates**. LCM updates the selected components.
 
-   .. figure:: /images/5.png
+   .. figure:: images/5.png
 
-   .. figure:: /images/6.png
+   .. figure:: images/6.png
 
-   .. figure:: /images/7.png
+   .. figure:: images/7.png
 
-   .. figure:: /images/8.png
+   .. figure:: images/8.png
+
+#. You may wish to run the **Performing Inventory with LCM** steps upon completion to identify any available updates to the cluster.
