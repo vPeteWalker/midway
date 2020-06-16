@@ -7,14 +7,12 @@ Files
 Prerequisites and Requirements
 ++++++++++++++++++++++++++++++
 
-Review `NUTANIX FILES GUIDE <https://portal.nutanix.com/page/documents/details/?targetId=Acropolis-File-Services-Guide-v22:Acropolis-File-Services-Guide-v22/>`_ for all details including, but not limited to, prerequities and requirements before proceeding.
+Review `NUTANIX FILES GUIDE <https://portal.nutanix.com/page/documents/details/?targetId=Acropolis-File-Services-Guide-v22:Acropolis-File-Services-Guide-v22/>`_ and `FILE ANALYTICS GUIDE <https://portal.nutanix.com/page/documents/details/?targetId=File-Analytics-v2_1%3AFile-Analytics-v2_1>`_ for all details including, but not limited to, prerequities and requirements before proceeding.
 
 Creating a File Server
 ++++++++++++++++++++++
 
 #. In the Prism web console, go to the *File Server* page by clicking **Home > File Server** in the left corner.
-
-:fa:`gear` **> Settings > Upgrade Software > AOS**
 
 #. Click **+ File Server**.
 
@@ -33,6 +31,10 @@ Creating a File Server
    - To change the configuration based on performance requirements, enter the number of *Concurrent Connections* and the throughout in Mbps. Click **Save**.
 
       .. figure:: images/4.png
+
+.. note::
+
+   For the purposes of streamlining the POC, using 1 VLAN is recommended for both storage and client networks.
 
 #. Complete the fields in the *Client Network* tab and click **Next**.
 
@@ -54,14 +56,14 @@ For Files, Shares have certain permission details. The permissions for each user
 - HOME SHARES
 
    - Domain administrator: Full access
-   - Domain User: Read only
-   - Creator Owner: Full access (inherited only)
+   - Domain User:          Read only
+   - Creator Owner:        Full access (inherited only)
 
 - GENERAL PURPOSE SHARES
 
    - Domain administrator: Full access
-   - Domain User: Full access
-   - Creator Owner: Full access (inherited only)
+   - Domain User:          Full access
+   - Creator Owner:        Full access (inherited only)
 
 #. Click **Home > File Server** in the main menu.
 
@@ -76,6 +78,7 @@ For Files, Shares have certain permission details. The permissions for each user
    - **Enable Access-Based Enumeration (ABE)**: Access-based enumeration (ABE) is a windows (SMB protocol) feature that allows the users to view only the files and folders to which they have read access when browsing content on the file server.
    - **Self Service Restore**: Allow the share users to restore files from snapshots.
 
+
 #. Click **Save**.
 
 What to do next
@@ -88,3 +91,58 @@ Map the newly created share in your directory. In the Windows client, you can ma
 #. Select the drive letter to use for the network.
 
 #. Click **Browse**.
+
+---------------
+Files Analytics
+---------------
+
+#. Go to **Support Portal > Downloads > Files** and download the File Analytics QCOW2 and JSON files.
+
+#. In Prism, go to the *File Server* view and click the **Deploy File Analytics** action link.
+
+.. figure:: images/5.png
+
+#. In the *Deploy File Analytics* window, click **Deploy**.
+
+#. Upload installation files.
+   - In the *Upload installation binary* section, click on the **upload the File Analytics binary** link to upload the File Analytics JSON and QCOW files.
+   - Under *File Analytics Metadata File (.Json)*, click **Choose File** to choose the downloaded JSON file.
+   - Under *File Analytics Instalation Binary (.Qcow2)*, click **Choose File** to choose the downloaded QCOW file.
+   - Click **Upload Now** after choosing the files.
+
+#. Do the following in the indicated fields:
+
+   - **Name**: Enter a name for the File Analytics VM (AVM).
+   - **Storage Container**: select a storage container from the dropdown. The dropdown only displays file server storage containers.
+   - **Network List**: Select a VLAN.
+
+#. (optional) Check the **Show Advanced Settings** box and do the following in the indicated fields.
+
+   - Memory (GiB): Enter the memory capacity for the Analytics VM.
+   - VCPUs: Enter the number of vCPUs.
+   - Cores: Enter the number of cores.
+   - DNS Resolver IP: Enter a coma-separated list of DNS resolver IPs.
+   - NTP Servers: Enter a coma-separated list of NTP servers.
+
+#. Click **Deploy**.
+
+Enabling Files Analytics
+++++++++++++++++++++++++
+
+#. In the *File Server* view in Prism, select the target file server.
+
+#. Click **Manage roles** to add a file server admin user.
+
+#. In the *File Server* view, select the target file server and click **File Analytics** in the tabs bar.
+
+#. In the *Data Retention* field, select a data retention period.
+
+#. In the *Enable File Analytics* dialog-box, enter the credentials as indicated:
+
+   - (For SMB users only) In the SMB Authentication section, do the following in the indicated fields to provide SMB authentication details:
+      - Username: Enter the AD username for the file server administrator, see File Analytics Prerequisites.
+      - Password: Enter the AD user password for the file server administrator.
+   - (For NFS users only) In the NFS Authentication section, do the following in the indicated fields to provide NFS authentication details:
+      - LDAP Server URI: Enter the URI of the LDAP server.
+      - Base DN: Enter the base DN for the LDAP server.
+      - Password: Enter the LDAP user password for the file server administrator.
