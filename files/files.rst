@@ -48,37 +48,33 @@ Network Requirements (Managed and Unmanaged)
 - Storage Network: N+1
 - Client Network: N
 
+.. note::
+
+   IP addresses do not need to be sequential.
+
+Ensure that the external and storage networks use a tagged VLAN. This will block client access from the storage network. The external and storage networks must have separate subnets if the networks are not the same. If the same network is used for both clients and storage, then IP addresses must be unique.
+
 Prerequisite Information
 ++++++++++++++++++++++++
 
-+------------+
-| Header 1   |
-+============+============+===========+
-| body row 1 | column 2   | column 3  |
-+------------+------------+-----------+
-| body row 2 | Cells may span columns.|
-+------------+------------+-----------+
-| body row 3 | Cells may  | - Cells   |
-+------------+ span rows. | - contain |
-| body row 4 |            | - blocks. |
-+------------+------------+-----------+
+.. list-table:: Credentials
+  :widths: 25 75
+  :header-rows: 0
 
-   +-------------+
-   | Credentials |
-   +==================+========================================================+
-   | CIFS Server Name | The host name FQDN or the Files server DNS IP address  |
-   +------------------+--------------------------------------------------------+
-   | Share Name       | Name of the share the user wants to access             |
-   +------------------+--------------------------------------------------------+
+  * - CIFS Server Name
+    - The host name FQDN or the Files server DNS IP address
+  * - Share Name
+    - Name of the share the user wants to access
 
-      +------------+
-      | AD and DNS |
-      +==================+==============================================================================================================================+
-      | Active Directory | Windows AD domain name                                                                                                       |
-      +------------------+------------------------------------------------------------------------------------------------------------------------------+
-      | AD Admin Account | Name of the share the user wants to access                                                                                   |
-      +------------------+------------------------------------------------------------------------------------------------------------------------------+
-      | NTP Server       | NTP Server name for the time synchronization between the file server and AD                                                  |
-      +------------------+------------------------------------------------------------------------------------------------------------------------------+
-      | DNS Server Names | DNS servers names are used by Files to store entries to translate Files cluster or FSVM names to corresponding IP addresses. |
-      +------------------+------------------------------------------------------------------------------------------------------------------------------+
+.. list-table:: AD and DNS
+  :widths: 25 75
+  :header-rows: 0
+
+  * - Active Directory
+    - Windows AD domain name
+  * - AD Admin Account
+    - Name of the share the user wants to access
+  * - NTP Server
+    - NTP Server name for the time synchronization between the file server and AD
+  * - DNS Server Names
+    - DNS servers names are used by Files to store entries to translate Files cluster or FSVM names to corresponding IP addresses
