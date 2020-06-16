@@ -4,77 +4,87 @@
 Files
 -----
 
-Prerequisites
-+++++++++++++
+Prerequisites and Requirements
+++++++++++++++++++++++++++++++
 
-.. note::
+Review `NUTANIX FILES GUIDE <https://portal.nutanix.com/page/documents/details/?targetId=Acropolis-File-Services-Guide-v22:Acropolis-File-Services-Guide-v22/>`_ for all details including, but not limited to, prerequities and requirements before proceeding.
 
-   Your system must meet precheck requirements when creating a file server. If your system does not meet the requirements then the file server displays a pre check window in the Prism web console. When creating a file server, you must meet the following requirements. The precheck window displays the met and remaining requirements. Complete the Precheck information which includes the following:
+Creating a File Server
+++++++++++++++++++++++
 
-- Latest Files Software
+#. In the Prism web console, go to the *File Server* page by clicking **Home > File Server** in the left corner.
 
-- Available Data Service IP Address
+:fa:`gear` **> Settings > Upgrade Software > AOS**
 
-- Available Storage and Client Networks
+#. Click **+ File Server**.
 
-Requirements
-++++++++++++
+   .. figure:: images/1.png
 
-- Configured and defined internal (storage) networks
+#. In the *New File Server* window, complete the **Name** and **File Server Storage** fields in *Basics*.
 
-- Configured and defined external (client side) networks
+   .. figure:: images/2.png
 
-- Distributed File System (DFS) enabled (on by default for Windows clients)
+#. For *Performance Configuration*, Files automatically recommends the number of file server VMs, vCPUs per VM, and memory per VM. You can also manually enter the file server configuration or select the configuration based on workload performance.
+   - If you are satisfied with the recommendation, click Next.
+   - To change the recommendation manually, click **Custom Configuration > Configure Manually** make your modifications, and click **Save**.
 
-- Network Time Protocol Server access
+      .. figure:: images/3.png
 
-- Minimum of one (1) network (two (2) networks recommended)
+   - To change the configuration based on performance requirements, enter the number of *Concurrent Connections* and the throughout in Mbps. Click **Save**.
 
-- Minimum of 4 vCPUs (per host)
+      .. figure:: images/4.png
 
-- Minimum of 12 GiB of memory (per host)
+#. Complete the fields in the *Client Network* tab and click **Next**.
 
-- Minimum domain administrator credentials access or user with delegated permissions
+#. Complete the fields in the *Storage Network* tab and click **Next**.
 
-Network Requirements (Managed and Unmanaged)
-++++++++++++++++++++++++++++++++++++++++++++
+#. Join the file server to an Active Directory domain within *Join AD Domain* tab and click **Next** to begin the installation process.
 
-.. note::
+#. The **Summary** tab displays the size and capacity information for the new file server. Files automatically creates a protection domain name for the file server.  To change the protection domain name, replace the text in *Protection Domain Name* with the name of your protection domain. Click **Save** when finished.
 
-   Files requires a set number of IP addresses for network configuration. To ensure you have the correct number of IP addresses, meet the following requirements for each network.
+Creating a File Share
++++++++++++++++++++++
 
-   For storage networks, be sure you have one more IP address than the number of FSVM nodes. For external networks, be sure you have the same number of IP addresses as the number of FS VM nodes. Consider the following examples, where N is the number of FS VM nodes.
+This task details how to create new shares using the Nutanix file server.
 
-- Storage Network: N+1
-- Client Network: N
+A home share is the repository for the user's personal files and a general purpose share is the repository shared by a group. By default, a share is created for home directories for each file server. This share is distributed at the top-level directories. Shares created after the default share are distributed across the FSVMs at the share-level. For example, share 1 contains top level directories such as User Directory 1, User Directory 2, and User Directory 3. User Directory 1 might be placed on FSVM 1, User Directory 2 might be placed on FSVM 2, and User Directory 3 might be placed on FSVM 3. These shares are not recommended for use with home directories.
 
-.. note::
+For Files, Shares have certain permission details. The permissions for each user are the following.
 
-   IP addresses do not need to be sequential.
+- HOME SHARES
 
-Ensure that the external and storage networks use a tagged VLAN. This will block client access from the storage network. The external and storage networks must have separate subnets if the networks are not the same. If the same network is used for both clients and storage, then IP addresses must be unique.
+   - Domain administrator: Full access
+   - Domain User: Read only
+   - Creator Owner: Full access (inherited only)
 
-Prerequisite Information
-++++++++++++++++++++++++
+- GENERAL PURPOSE SHARES
 
-.. list-table:: Credentials
-  :widths: 25 75
-  :header-rows: 0
+   - Domain administrator: Full access
+   - Domain User: Full access
+   - Creator Owner: Full access (inherited only)
 
-  * - CIFS Server Name
-    - The host name FQDN or the Files server DNS IP address
-  * - Share Name
-    - Name of the share the user wants to access
+#. Click **Home > File Server** in the main menu.
 
-.. list-table:: AD and DNS
-  :widths: 25 75
-  :header-rows: 0
+#. Click **+ Share** in the right corner.
 
-  * - Active Directory
-    - Windows AD domain name
-  * - AD Admin Account
-    - Name of the share the user wants to access
-  * - NTP Server
-    - NTP Server name for the time synchronization between the file server and AD
-  * - DNS Server Names
-    - DNS servers names are used by Files to store entries to translate Files cluster or FSVM names to corresponding IP addresses
+#. Complete the fields to create the file share. Click **Save**.
+
+   - **NAME**: Enter the name for the share.
+   - **FILE SERVER**: From the drop-down list, select the file server to place the shares.
+   - **MAX SHARE**: (Optional) Type the maximum size for the share (in GiB).
+   - **DESCRIPTION**: Type a description for the share for your information.
+   - **Enable Access-Based Enumeration (ABE)**: Access-based enumeration (ABE) is a windows (SMB protocol) feature that allows the users to view only the files and folders to which they have read access when browsing content on the file server.
+   - **Self Service Restore**: Allow the share users to restore files from snapshots.
+
+#. Click **Save**.
+
+What to do next
++++++++++++++++
+
+Map the newly created share in your directory. In the Windows client, you can map to the network and create folders at the top level of the file share.
+
+#. In the Windows client, go to your PC explorer and select **Map Network Drives**.
+
+#. Select the drive letter to use for the network.
+
+#. Click **Browse**.
