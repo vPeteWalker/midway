@@ -9,6 +9,11 @@ Prerequisites and Requirements
 
 Review `NUTANIX FILES GUIDE <https://portal.nutanix.com/page/documents/details/?targetId=Acropolis-File-Services-Guide-v22:Acropolis-File-Services-Guide-v22/>`_ and `FILE ANALYTICS GUIDE <https://portal.nutanix.com/page/documents/details/?targetId=File-Analytics-v2_1%3AFile-Analytics-v2_1>`_ for all details including, but not limited to, prerequities and requirements before proceeding.
 
+.. note::
+
+   To reduce time required to provision a Microsoft Active Directory (AD) server, recommend using the AutoAD VM. It can be selected as an image to deploy when reserving an HPOC, or manually downloaded and deployed.
+
+
 Creating a File Server
 ++++++++++++++++++++++
 
@@ -32,13 +37,30 @@ Creating a File Server
 
       .. figure:: images/4.png
 
+   .. note::
+
+      For the purposes of streamlining the POC, using 1 VLAN is recommended for both storage and client networks.
+
 .. note::
 
-   For the purposes of streamlining the POC, using 1 VLAN is recommended for both storage and client networks.
+   When utilizing the HPOC and 1 VLAN, recommend using .8 to .14 for the final octet for the 7 IP addresses required by the File Server VMs (FSVM) in the proceeding steps.
 
 #. Complete the fields in the *Client Network* tab and click **Next**.
 
 #. Complete the fields in the *Storage Network* tab and click **Next**.
+
+.. warning::
+
+   If you do not use the IP address for AutoAD (or whichever domain controller you configured) for the DNS server you configured Files to use, you will get the following errors.
+
+      - DNS 'NS' records not found for *domain*
+      - Failed to lookup IP address of *domain*. Please verify the domain name, DNS configuration and network connectivity.
+
+   This can be corrected after deployment, without having to start from scratch.
+      - Within the **File Server** dropdown, select the file server you deployed, and click **Update > Network Configuration**. Modify the entry for *DNS Resolver IP*, and click **Next > Save**.
+      - Click **DNS** Update this page with the domain controller IP address, administrator username and password.
+
+      .. figure:: images/10.png
 
 #. Join the file server to an Active Directory domain within *Join AD Domain* tab and click **Next** to begin the installation process.
 
@@ -65,7 +87,7 @@ For Files, Shares have certain permission details. The permissions for each user
    - Domain User:          Full access
    - Creator Owner:        Full access (inherited only)
 
-#. Click **Home > File Server** in the main menu.
+#. Click **File Server** from the dropdown.
 
 #. Click **+ Share** in the right corner.
 
