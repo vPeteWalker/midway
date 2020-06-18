@@ -7,64 +7,114 @@ Files
 Prerequisites and Requirements
 ++++++++++++++++++++++++++++++
 
-Review `NUTANIX FILES GUIDE <https://portal.nutanix.com/page/documents/details/?targetId=Acropolis-File-Services-Guide-v22:Acropolis-File-Services-Guide-v22/>`_ and `FILE ANALYTICS GUIDE <https://portal.nutanix.com/page/documents/details/?targetId=File-Analytics-v2_1%3AFile-Analytics-v2_1>`_ for all details including, but not limited to, prerequities and requirements before proceeding.
+Review `NUTANIX FILES GUIDE <https://portal.nutanix.com/page/documents/details/?targetId=Files-v35:Files-v35>`_ and `FILE ANALYTICS GUIDE <https://portal.nutanix.com/page/documents/details/?targetId=File-Analytics-v2_1%3AFile-Analytics-v2_1>`_ for all details including, but not limited to, prerequities and requirements before proceeding.
 
 .. note::
 
-   To reduce time required to provision a Microsoft Active Directory (AD) server, recommend using the AutoAD VM. It can be selected as an image to deploy when reserving an HPOC, or manually downloaded and deployed.
+   To reduce time required to provision a Microsoft Active Directory (AD) server, it is recommended to use the AutoAD VM. It can be selected as an image to deploy when reserving an HPOC, or manually downloaded and deployed.
 
+.. note::
+
+   There are many options at various stages that are available to configure Files to suit needs of our customers. This workshop will focus on the following. Refer to the *NUTANIX FILES GUIDE* linked above for additional configuration options.
+
+      - One File Server    - basic configuration, 3 File Server VMs (FSVM)
+      - One file share     - SMB
+      - One hypervisor     - AHV
+      - AD authentication  - AutoAD VM
+      - One VLAN
+      - Files Analytics
 
 Creating a File Server
 ++++++++++++++++++++++
 
-#. In the Prism web console, go to the *File Server* page by clicking **Home > File Server** in the left corner.
+#. In the Prism web console, go to the *File Server Dashboard* page by clicking **File Server** from the dropdown.
 
 #. Click **+ File Server**.
 
    .. figure:: images/1.png
 
-#. In the *New File Server* window, complete the **Name** and **File Server Storage** fields in *Basics*.
+#. In the *New File Server: Pre-Check* window, review the displayed information and address any unsatisfied prerequisites before continuing.
+
+   .. figure:: images/1a.png
+
+#. The *Create File Server* window appears and displays the *Basics* tab. Do the following in the indicated fields:
 
    .. figure:: images/2.png
 
-#. For *Performance Configuration*, Files automatically recommends the number of file server VMs, vCPUs per VM, and memory per VM. You can also manually enter the file server configuration or select the configuration based on workload performance.
-   - If you are satisfied with the recommendation, click Next.
-   - To change the recommendation manually, click **Custom Configuration > Configure Manually** make your modifications, and click **Save**.
+   - **Name**: Enter a name for the file server.
+      The file server name is used by clients to access the file server. The fully qualified name (file server name + domain) must be unique.
 
-      .. figure:: images/3.png
+   - **Domain**: **ntnxlab.local**
 
-   - To change the configuration based on performance requirements, enter the number of *Concurrent Connections* and the throughout in Mbps. Click **Save**.
+   - **File Server Storage**: Enter the file server total storage size (minimum 1 TiB).
 
-      .. figure:: images/4.png
+      - Click the **Next** button.
 
    .. note::
 
-      For the purposes of streamlining the POC, using 1 VLAN is recommended for both storage and client networks.
+      When utilizing the HPOC, it is recommended to use .8 to .14 for the last octet for the 7 IP addresses (2 if a single-FSVM deployment) required by the File Server VMs (FSVM) in the proceeding steps.
 
-.. note::
+#. In the *Client Network* tab, do the following in the indicated fields:
 
-   When utilizing the HPOC and 1 VLAN, recommend using .8 to .14 for the final octet for the 7 IP addresses required by the File Server VMs (FSVM) in the proceeding steps.
+      .. figure:: images/5.png
 
-#. Complete the fields in the *Client Network* tab and click **Next**.
+   - VLAN: Select the target VLAN for the client network from the pull-down list.
+      Once the target is selected, previously configured network parameters are displayed if the target VLAN is a managed network.
 
-#. Complete the fields in the *Storage Network* tab and click **Next**.
+      .. figure:: images/managed.png
+          :align: left
+          :scale: 50%
+
+      .. figure:: images/unmanaged.png
+          :align: left
+          :scale: 50%
+
+   - When all the entries are correct, click the **Next** button.
+
+#. In the *Storage Network* tab, do the following in the indicated fields:
+
+   - VLAN: Select the target VLAN  for the storage network from the pull-down list.
+      As with the client network, configured network parameters are displayed once the target is selected if the target is a managed network.
+
+   - When all the entries are entered, click the **Next** button.
+
+#. In the *Directory Services* tab, check the **Use SMB Protocol** box.
+
+   .. note::
+
+      You have the option to skip this step and select the protocol(s) at a later time, but you cannot use the file server until this step is complete.
+
+      .. figure:: images/7.png
+
+#. If you selected the SMB protocol, fill out the following in the indicated fields:
+
+   - **Active Directory Realm Name**: Displays the Active Directory realm name (read-only).
+
+   - **Username**: Enter the name of an Active Directory user with administrator privileges. Use the following format: *domain\username*.
+
+   - **Password**: Enter the user's password.
+
+   - **Make this user a File Server admin**: Check this box.
+
+#. In the Summary tab, review the displayed information. When all the information is correct, click **Create**.
+
+Creating the file server begins. You can monitor progress through the **Tasks** page.
 
 .. warning::
 
-   If you do not use the IP address for AutoAD (or whichever domain controller you configured) for the DNS server you configured Files to use, you will get the following errors.
+   If you accidentally did not configure Files to use the AutoAD as the DNS server, after deploying the File Server you will get the following errors.
 
       - DNS 'NS' records not found for *domain*
+
       - Failed to lookup IP address of *domain*. Please verify the domain name, DNS configuration and network connectivity.
 
    This can be corrected after deployment, without having to start from scratch.
+
       - Within the **File Server** dropdown, select the file server you deployed, and click **Update > Network Configuration**. Modify the entry for *DNS Resolver IP*, and click **Next > Save**.
-      - Click **DNS** Update this page with the domain controller IP address, administrator username and password.
+
+      - Click **DNS**. Update this page with the AutoAD FQDN - **dc.ntnxlab.local**, Username and Password of an Active Directory user with administrator privileges. Click **Submit**.
 
       .. figure:: images/10.png
-
-#. Join the file server to an Active Directory domain within *Join AD Domain* tab and click **Next** to begin the installation process.
-
-#. The **Summary** tab displays the size and capacity information for the new file server. Files automatically creates a protection domain name for the file server.  To change the protection domain name, replace the text in *Protection Domain Name* with the name of your protection domain. Click **Save** when finished.
 
 Creating a File Share
 +++++++++++++++++++++
@@ -144,14 +194,14 @@ Files Analytics
    - VCPUs: Enter the number of vCPUs.
    - Cores: Enter the number of cores.
    - DNS Resolver IP: Enter a coma-separated list of DNS resolver IPs.
-   - NTP Servers: Enter a coma-separated list of NTP servers.
+   - NTP Servers: Enter a comma-separated list of NTP servers.
 
 #. Click **Deploy**.
 
 Enabling Files Analytics
 ++++++++++++++++++++++++
 
-#. In the *File Server* view in Prism, select the target file server.
+#. Within the *File Server* view in Prism, select the target file server.
 
 #. Click **Manage roles** to add a file server admin user.
 
@@ -161,10 +211,51 @@ Enabling Files Analytics
 
 #. In the *Enable File Analytics* dialog-box, enter the credentials as indicated:
 
-   - (For SMB users only) In the SMB Authentication section, do the following in the indicated fields to provide SMB authentication details:
+   - **For SMB users only** In the SMB Authentication section, do the following in the indicated fields to provide SMB authentication details:
       - Username: Enter the AD username for the file server administrator, see File Analytics Prerequisites.
       - Password: Enter the AD user password for the file server administrator.
-   - (For NFS users only) In the NFS Authentication section, do the following in the indicated fields to provide NFS authentication details:
+   - **For NFS users only** In the NFS Authentication section, do the following in the indicated fields to provide NFS authentication details:
       - LDAP Server URI: Enter the URI of the LDAP server.
       - Base DN: Enter the base DN for the LDAP server.
       - Password: Enter the LDAP user password for the file server administrator.
+
+Testing with client PC
+++++++++++++++++++++++
+
+If you are using *AutoAD* for your Windows Active Directory Domain Controller, it is pre-populated with the following Users and Groups for your use:
+
+   .. list-table::
+      :widths: 25 35 40
+      :header-rows: 1
+
+      * - Group
+        - Username(s)
+        - Password
+      * - Administrators
+        - Administrator
+        - nutanix/4u
+      * - SSP Admins
+        - adminuser01-adminuser25
+        - nutanix/4u
+      * - SSP Developers
+        - devuser01-devuser25
+        - nutanix/4u
+      * - SSP Consumers
+        - consumer01-consumer25
+        - nutanix/4u
+      * - SSP Operators
+        - operator01-operator25
+        - nutanix/4u
+      * - SSP Custom
+        - custom01-custom25
+        - nutanix/4u
+      * - Bootcamp Users
+        - user01-user25
+        - nutanix/4u
+
+
+Deploy new Windows 10 VM
+[Optional] If you are not using a network with IPAM/DNS/domain/etc. configured, set static IP, and configure DNS to point to AutoAD
+Change the computer Name
+Join Domain
+Login to domain as test user
