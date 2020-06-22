@@ -21,7 +21,7 @@ Review `NUTANIX FILES GUIDE <https://portal.nutanix.com/page/documents/details/?
       - One file share     - SMB
       - One hypervisor     - AHV
       - AD authentication  - AutoAD VM
-      - One VLAN
+      - One VLAN           - Managed (i.e. IPAM configured)
       - Files Analytics
 
 Creating a File Server
@@ -146,7 +146,9 @@ Map the newly created share in your directory. In the Windows client, you can ma
 #. In the Windows client VM, open *File Explorer*. Right click on **This PC** and select **Map Network Drives**.
 
 #. Select the drive letter to use for the share. Enter the path to the share in the `\\`*FileServerFQDN*`\`*share* format. Click **Finish**.
-   A new window will open displaying the contents of the share. Create files and folders as you see fit.
+   A new window will open displaying the contents of the share.
+
+#. Create files and folders as you see fit.
 
 ---------------
 Files Analytics
@@ -166,28 +168,20 @@ Files Analytics
    - Under *File Analytics Instalation Binary (.Qcow2)*, click **Choose File** to choose the downloaded QCOW file.
    - Click **Upload Now** after choosing the files.
 
+#. Click **Install** once the upload has completed.
+
 #. Do the following in the indicated fields:
 
    - **Name**: Enter a name for the File Analytics VM (AVM).
-   - **Storage Container**: select a storage container from the dropdown. The dropdown only displays file server storage containers.
-   - **Network List**: Select a VLAN.
-
-#. (optional) Check the **Show Advanced Settings** box and do the following in the indicated fields.
-
-   - Memory (GiB): Enter the memory capacity for the Analytics VM.
-   - VCPUs: Enter the number of vCPUs.
-   - Cores: Enter the number of cores.
-   - DNS Resolver IP: Enter a coma-separated list of DNS resolver IPs.
-   - NTP Servers: Enter a comma-separated list of NTP servers.
+   - **Storage Container**: Select a storage container from the dropdown. The dropdown only displays file server storage containers.
+   - **Network List**: Select VLAN.
 
 #. Click **Deploy**.
 
 Enabling Files Analytics
 ++++++++++++++++++++++++
 
-#. Within the *File Server* view in Prism, select the target file server.
-
-#. Click **Manage roles** to add a file server admin user.
+#. Within the *File Server* dashboard, select the target file server.
 
 #. In the *File Server* view, select the target file server and click **File Analytics** in the tabs bar.
 
@@ -206,7 +200,7 @@ Enabling Files Analytics
 Testing with client PC
 ++++++++++++++++++++++
 
-If you are using *AutoAD* for your Windows Active Directory Domain Controller, it is pre-populated with the following Users and Groups for your use:
+AutoAD is pre-populated with the following Users and Groups for your use:
 
    .. list-table::
       :widths: 25 35 40
