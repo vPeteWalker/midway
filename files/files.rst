@@ -133,7 +133,7 @@ Creating the file server begins. You can monitor progress through the **Tasks** 
 
       - Click **DNS**. Update this page with the AutoAD FQDN - **dc.ntnxlab.local**, Username and Password of an Active Directory user with administrator privileges, and click **Submit**.
 
-      .. figure:: images/9.png
+         .. figure:: images/9.png
 
 Creating a File Share
 +++++++++++++++++++++
@@ -149,7 +149,7 @@ This task details how to create new shares using the Nutanix file server.
    - **NAME**: Enter the name for the share.
    - **FILE SERVER**: From the drop-down list, select the file server to place the share.
 
-
+|
 
 #. Click **Next > Next > Create**.
 
@@ -178,7 +178,7 @@ Files Analytics
    - **Storage Container**: Select a storage container from the dropdown. The dropdown only displays file server storage containers.
    - **Network List**: Select VLAN.
 
-   .. figure:: images/11.png
+      .. figure:: images/11.png
 
 #. Click **Deploy**.
 
@@ -209,7 +209,7 @@ Enabling Files Analytics
     - Login into File Analytics VM CLI using
       - User: nutanix
       - Password: nutanix/4u
-    - Execute the following command. Click the icon in the upper right of the window below to copy the command to your clipboard, and then paste within your SSH session.
+    - Execute the following command. Click the icon in the upper right corner of the window below to copy the command to your clipboard, and then paste within your SSH session.
 
       ::
 
