@@ -268,7 +268,7 @@ AutoAD is pre-populated with the following Users and Groups for your use:
 
    - Select the drive letter to use for the share. Enter the path to the share in the `\\`*FileServerFQDN*`\`*share* format. Click the **Reconnect at sign-in** box, and then click **Finish**.
 
-   .. figure:: images\12.png
+   .. figure:: images/12.png
 
    A new window will open displaying the contents of the share.
 
