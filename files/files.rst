@@ -1,4 +1,4 @@
-_files:
+.. _files:
 
 -----
 Files
@@ -155,9 +155,8 @@ This task details how to create new shares using the Nutanix file server.
 
    .. figure:: images/10.png
 
----------------
 Files Analytics
----------------
++++++++++++++++
 
 #. Go to **Support Portal > Downloads > Files** and download the File Analytics QCOW2 and JSON files.
 
