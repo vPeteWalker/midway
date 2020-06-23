@@ -28,7 +28,6 @@
    node_addremove/node_addremove
    aos_upgrade/aos_upgrade
    lcm/lcm
-   files/files
 
 .. toctree::
    :maxdepth: 2
