@@ -188,6 +188,10 @@ Files Analytics
 
 Verify that the deployment process has completed before proceeding.
 
+#. In the *File Server* view, select the target file server, and click **File Analytics** in the tabs bar. This will open a new browser tab.
+
+#. In the *Enable File Analytics* dialog-box, enter the AD username and password for the file server administrator, and click **Enable**.
+
 Enabling Files Analytics
 ++++++++++++++++++++++++
 
@@ -197,7 +201,24 @@ Enabling Files Analytics
 
 #. In the *SMB Authentication* section, enter the AD username and password for the file server administrator.
 
+#. Check the **Show Advanced Settings** box
+
+#. With the **DNS Resolver IP:** field, enter the AutoAD IP address.
+
 #. Click **Enable**.
+
+.. note::
+
+   To update DNS server settings on File Analytics VM after deployment:
+    - Login into File Analytics VM CLI using
+      - User: nutanix
+      - Password: nutanix/4u
+    - Execute the following command. Click the icon in the upper right of the window to copy the command to your clipboard, and paste within your SSH session.
+
+      ::
+
+         sudo bash /opt/nutanix/update_dns.sh
+
 
 Testing with client PC
 ++++++++++++++++++++++
@@ -242,6 +263,6 @@ AutoAD is pre-populated with the following Users and Groups for your use:
 
 #. Join Domain.
 
-#. Login to domain as test user.
+#. Login to domain as chosen user from above list.
 
 #. Test as appropriate.
