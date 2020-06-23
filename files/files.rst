@@ -155,18 +155,6 @@ This task details how to create new shares using the Nutanix file server.
 
    .. figure:: images/10.png
 
-Map Network Drive
-+++++++++++++++++
-
-Map the newly created share in your directory. In the Windows client, you can map to the network and create folders at the top level of the file share.
-
-#. In the Windows client VM, open *File Explorer*. Right click on **This PC** and select **Map Network Drives**.
-
-#. Select the drive letter to use for the share. Enter the path to the share in the `\\`*FileServerFQDN*`\`*share* format. Click **Finish**.
-   A new window will open displaying the contents of the share.
-
-#. Create files and folders as you see fit.
-
 ---------------
 Files Analytics
 ---------------
@@ -270,8 +258,18 @@ AutoAD is pre-populated with the following Users and Groups for your use:
 
 #. Change the computer Name.
 
-#. Join Domain.
+#. Join the *ntnxlab.local* domain.
 
 #. Login to domain as chosen user from above list.
 
-#. Test as appropriate.
+#. Map the newly created share in your directory. In the Windows client, you can map to the network and create folders at the top level of the file share.
+
+   - In the Windows client VM, open *File Explorer*. Right click on **This PC** and select **Map Network Drives**.
+
+   - Select the drive letter to use for the share. Enter the path to the share in the `\\`*FileServerFQDN*`\`*share* format. Click **Finish**.
+
+   .. figure:: images\12.png
+
+   A new window will open displaying the contents of the share.
+
+#. Create files and folders as you see fit, and run tests utilizing your predefined criteria.
