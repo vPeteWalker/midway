@@ -1,4 +1,4 @@
-.. _files:
+_files:
 
 -----
 Files
@@ -38,6 +38,7 @@ Creating a File Server
    .. figure:: images/3.png
 
    - **Name**: Enter a name for the file server.
+
       The file server name is used by clients to access the file server. The fully qualified name (file server name + domain) must be unique.
 
    - **Domain**: ntnxlab.local
@@ -50,9 +51,9 @@ Creating a File Server
 
       When utilizing the HPOC, it is recommended to use .8 to .14 for the last octet for the 7 IP addresses required by the File Server VMs (FSVM) in the proceeding steps.
 
-#. In the *Client Network* tab,
+#. In the *Client Network* tab:
 
-   - **VLAN** - Select the target VLAN for the *client network* from the pull-down list.
+   - **VLAN**: Select the target VLAN for the *client network* from the pull-down list.
 
    - **Subnet Mask**: Enter the subnet mask value.
 
@@ -70,6 +71,8 @@ Creating a File Server
 
    - When all the entries are correct, click the **Next** button.
 
+
+
 #. In the *Storage Network* tab, do the following in the indicated fields:
 
    - **VLAN** - Select the target VLAN for the *client network* from the pull-down list.
@@ -84,6 +87,8 @@ Creating a File Server
 
    - When all the entries are correct, click the **Next** button.
 
+
+
 #. In the *Directory Services* tab, check the **Use SMB Protocol** box.
 
    - **Username**: Enter the name of an Active Directory user with administrator privileges. Use the following format: domain\username. (ex. ntnxlab\administrator)
@@ -94,7 +99,7 @@ Creating a File Server
 
       .. figure:: images/7.png
 
-#. If you selected the SMB protocol, fill out the following in the indicated fields:
+#. Select the SMB protocol, and fill out the following in the indicated fields:
 
    - **Active Directory Realm Name**: Displays the Active Directory realm name (read-only).
 
@@ -105,6 +110,8 @@ Creating a File Server
    - **Make this user a File Server admin**: Check this box.
 
    - Check the box for **Show Advanced Options** and check the box for **Add File Server DNS Entries Using The Same Username And Password**. This will save you the extra steps of registering the File Server DNS entry separately.
+
+
 
 #. In the **Summary** tab, review the displayed information. When all the information is correct, click **Create**.
 
@@ -124,7 +131,7 @@ Creating the file server begins. You can monitor progress through the **Tasks** 
 
       - Within the **File Server** dropdown, select the file server you deployed, and click **Update > Network Configuration**. Modify the entry for *DNS Resolver IP*, and click **Next > Save**.
 
-      - Click **DNS**. Update this page with the AutoAD FQDN - **dc.ntnxlab.local**, Username and Password of an Active Directory user with administrator privileges. Click **Submit**.
+      - Click **DNS**. Update this page with the AutoAD FQDN - **dc.ntnxlab.local**, Username and Password of an Active Directory user with administrator privileges, and click **Submit**.
 
       .. figure:: images/9.png
 
@@ -142,12 +149,14 @@ This task details how to create new shares using the Nutanix file server.
    - **NAME**: Enter the name for the share.
    - **FILE SERVER**: From the drop-down list, select the file server to place the share.
 
+
+
 #. Click **Next > Next > Create**.
 
    .. figure:: images/10.png
 
-What to do next
-+++++++++++++++
+Map Network Drive
++++++++++++++++++
 
 Map the newly created share in your directory. In the Windows client, you can map to the network and create folders at the top level of the file share.
 
@@ -182,11 +191,11 @@ Files Analytics
    - **Storage Container**: Select a storage container from the dropdown. The dropdown only displays file server storage containers.
    - **Network List**: Select VLAN.
 
-.. figure:: images/11.png
+   .. figure:: images/11.png
 
 #. Click **Deploy**.
 
-Verify that the deployment process has completed before proceeding.
+   Verify that the deployment process has completed before proceeding.
 
 #. In the *File Server* view, select the target file server, and click **File Analytics** in the tabs bar. This will open a new browser tab.
 
@@ -213,7 +222,7 @@ Enabling Files Analytics
     - Login into File Analytics VM CLI using
       - User: nutanix
       - Password: nutanix/4u
-    - Execute the following command. Click the icon in the upper right of the window to copy the command to your clipboard, and paste within your SSH session.
+    - Execute the following command. Click the icon in the upper right of the window below to copy the command to your clipboard, and then paste within your SSH session.
 
       ::
 
