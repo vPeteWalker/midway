@@ -140,11 +140,35 @@ Creating a File Share
 
 This task details how to create new shares using the Nutanix file server.
 
+A *distributed* (home) share is the repository for the user's personal files, and a *standard* share is the repository shared by a group. A home share is distributed at the top-level directories while standard shares are located on a single file server VM (FSVM). Users have the following permissions in distributed and standard shares.
+
+.. note::
+
+   Distributed shares are only available on deployments of three or more FSVMs.
+
+   Do not use Windows Explorer to create new top level directories (folders), as you will not be able to rename any folders created with the default New Folder name (see Troubleshooting). For optimal performance, the directory structure for distributed shares must be flat.
+
+Distributed shares
+
+   Domain administrator: Full access
+
+   Domain User: Read only
+
+   Creator Owner: Full access (inherited only)
+
+Standard shares
+
+   Domain administrator: Full access
+
+   Domain User: Full access
+
+   Creator Owner: Full access (inherited only)
+
 #. Click **File Server** from the dropdown.
 
 #. Click **+ Share/Export** in the top right corner.
 
-#. Complete the fields and click **Save** to create the file share.
+#. Complete the fields and click **Save** to create a standard file share.
 
    - **NAME**: Enter the name for the share.
    - **FILE SERVER**: From the drop-down list, select the file server to place the share.
@@ -154,6 +178,8 @@ This task details how to create new shares using the Nutanix file server.
 #. Click **Next > Next > Create**.
 
    .. figure:: images/10.png
+
+#. Repeat the steps above, except this time on the *Settings* page, click the **Use "Distributed" share/export type instead of "Standard"** box. This will create a Distributed share.
 
 Files Analytics
 +++++++++++++++
