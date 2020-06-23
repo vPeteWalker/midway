@@ -148,21 +148,21 @@ A *distributed* (home) share is the repository for the user's personal files, an
 
    Do not use Windows Explorer to create new top level directories (folders), as you will not be able to rename any folders created with the default New Folder name (see Troubleshooting). For optimal performance, the directory structure for distributed shares must be flat.
 
-Distributed shares
+   **Distributed shares**
 
-   Domain administrator: Full access
+      Domain administrator: Full access
 
-   Domain User: Read only
+      Domain User: Read only
 
-   Creator Owner: Full access (inherited only)
+      Creator Owner: Full access (inherited only)
 
-Standard shares
+   **Standard shares**
 
-   Domain administrator: Full access
+      Domain administrator: Full access
 
-   Domain User: Full access
+      Domain User: Full access
 
-   Creator Owner: Full access (inherited only)
+      Creator Owner: Full access (inherited only)
 
 #. Click **File Server** from the dropdown.
 
@@ -179,7 +179,7 @@ Standard shares
 
    .. figure:: images/10.png
 
-#. Repeat the steps above, except this time on the *Settings* page, click the **Use "Distributed" share/export type instead of "Standard"** box. This will create a Distributed share.
+#. To create a Distributed share, repeat the steps above, except this time on the *Settings* page, click the **Use "Distributed" share/export type instead of "Standard"** box.
 
 Files Analytics
 +++++++++++++++
