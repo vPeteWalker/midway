@@ -36,3 +36,11 @@
    :hidden:
 
    files/files
+
+.. toctree::
+   :maxdepth: 2
+   :caption: X-Ray
+   :name: _xray
+   :hidden:
+
+   xray/xray
