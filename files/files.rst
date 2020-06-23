@@ -287,7 +287,7 @@ AutoAD is pre-populated with the following Users and Groups for your use:
 
 #. Login to domain as chosen user from above list.
 
-#. Map the newly created share in your directory. In the Windows client, you can map to the network and create folders at the top level of the file share.
+#. Map the newly created share(s) in your directory. In the Windows client, you can map to the network and create folders at the top level of the file share.
 
    - In the Windows client VM, open *File Explorer*. Right click on **This PC** and select **Map Network Drives**.
 
@@ -296,5 +296,7 @@ AutoAD is pre-populated with the following Users and Groups for your use:
    .. figure:: images/12.png
 
    A new window will open displaying the contents of the share.
+
+#. Repeat the process for any additional shares.
 
 #. Create files and folders as you see fit, and run tests utilizing your predefined criteria.
