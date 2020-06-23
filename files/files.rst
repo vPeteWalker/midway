@@ -266,7 +266,7 @@ AutoAD is pre-populated with the following Users and Groups for your use:
 
    - In the Windows client VM, open *File Explorer*. Right click on **This PC** and select **Map Network Drives**.
 
-   - Select the drive letter to use for the share. Enter the path to the share in the `\\`*FileServerFQDN*`\`*share* format. Click **Finish**.
+   - Select the drive letter to use for the share. Enter the path to the share in the `\\`*FileServerFQDN*`\`*share* format. Click the **Reconnect at sign-in** box, and then click **Finish**.
 
    .. figure:: images\12.png
 
