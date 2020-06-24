@@ -37,7 +37,7 @@ Creating a File Server
 
    .. figure:: images/3.png
 
-   - **Name**: Enter a name for the file server.
+   - **Name**: Enter **Files** as the name for the file server.
 
       The file server name is used by clients to access the file server. The fully qualified name (file server name + domain) must be unique.
 
@@ -170,7 +170,7 @@ A *distributed* (home) share is the repository for the user's personal files, an
 
 #. Complete the fields and click **Save** to create a standard file share.
 
-   - **NAME**: Enter the name for the share.
+   - **NAME**: Enter the **smb01** as the name for the share.
    - **FILE SERVER**: From the drop-down list, select the file server to place the share.
 
 #. Click **Next**.
@@ -202,7 +202,7 @@ Deploying Files Analytics
 
 #. Do the following in the indicated fields:
 
-   - **Name**: Enter a name for the File Analytics VM (AVM).
+   - **Name**: Enter **AVM** for the File Analytics VM (AVM).
    - **Storage Container**: Select a storage container from the dropdown. The dropdown only displays file server storage containers.
    - **Network List**: Select VLAN.
 
@@ -314,11 +314,9 @@ AutoAD is pre-populated with the following Users and Groups for your use:
    - operator01 - operator25
    - **Password** nutanix/4u
 
-   .. figure:: images/16.png
-
    .. note::
 
-     The Windows Tools VM has already been joined to the **NTNXLAB.local** domain. You could use any domain joined VM to complete the following steps.
+     The *Initials*\ **-WinTools** VM has already been joined to the **ntnxlab.local** domain. You could use any domain joined VM to complete the following steps.
 
 #. Open ``\\*file server*.ntnxlab.local\`` in **File Explorer**.
 
@@ -329,7 +327,7 @@ AutoAD is pre-populated with the following Users and Groups for your use:
 
 #. Extract the contents of the zip file into your file share.
 
-   - The **NTNXLAB\Administrator** user was specified as a Files Administrator during deployment of the Files cluster, giving it read/write access to all shares by default.
+   - The **NTNXLAB\\Administrator** user was specified as a Files Administrator during deployment of the Files Server, giving it read/write access to all shares by default.
    - Managing access for other users is no different than any other SMB share.
 
 ..   #. From ``\\BootcampFS.ntnxlab.local\``, right-click *Initials*\ **-FiestaShare > Properties**.
@@ -357,7 +355,7 @@ AutoAD is pre-populated with the following Users and Groups for your use:
 
    .. code-block:: PowerShell
 
-      New-Item ``\\*file server*\*share name*\*file name*.mov``
+      New-Item \\files\smb01\testfile.mov``
 
    Observe that creation of the new file is denied.
 
@@ -460,14 +458,14 @@ In this exercise you will explore the new, integrated File Analytics capabilitie
 
      .. code-block:: bash
 
-        ``cd \\*file server*.ntnxlab.local\*share*\*initials*-MyFolder``
+        cd \\files.ntnxlab.local\smb01\*initials*\ -MyFolder
 
 #. Execute the following commands:
 
      .. code-block:: bash
 
-        ``cat .\*initials*-file.txt``
-        ``rm .\*initials*-file.txt``
+        cat .\\ *initials*\ -file.txt
+        rm .\\ *initials*\ -file.txt
 
    .. figure:: images/25.png
 
