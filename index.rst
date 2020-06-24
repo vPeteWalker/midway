@@ -19,4 +19,28 @@
    clusterconfig/clusterconfig
    pcconfig/pcconfig
 
-**Welcome!** Here is some boilerplate...
+.. toctree::
+   :maxdepth: 2
+   :caption: AOS/PC
+   :name: _info
+   :hidden:
+
+   node_addremove/node_addremove
+   aos_upgrade/aos_upgrade
+   lcm/lcm
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Files
+   :name: _files
+   :hidden:
+
+   files/files
+
+.. toctree::
+   :maxdepth: 2
+   :caption: X-Ray
+   :name: _xray
+   :hidden:
+
+   xray/xray
