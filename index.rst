@@ -16,7 +16,7 @@
    :name: _info
    :hidden:
 
-   basicconfig/basicconfig
+   clusterconfig/clusterconfig
    pcconfig/pcconfig
 
 **Welcome!** Here is some boilerplate...

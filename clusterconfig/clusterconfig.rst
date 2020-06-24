@@ -1,4 +1,4 @@
-.. _basicconfig:
+.. _clusterconfig:
 
 ---------------------
 Cluster Configuration
@@ -27,3 +27,31 @@ Sub-Heading
       Pay attention to this.
 
 #. Do more stuff
+
+Pre-Checks
+++++++++++
+
+Run NCChrteskjngrewkbjaegwrkjbeagr
+
+Run Workload
+++++++++++++
+
+Hey it makes sense to run a workload during upgrade because that's more real lifekjbgsjgbewebrgjkigeraw
+
+Basic Workload
+..............
+
+Ref to Basic VM management steps if they haven't already completed those to deploy/clone VMs
+
+Steps to setup ping between 2 VMs
+
+(Recommended) X-Ray Workload
+............................
+
+Don't use this if using old hybrid cluster
+
+Ref to X-Ray deployment steps
+
+Capturing running the OLTP workload for X amount of time
+
+When using, select the Primary VLAN for worker VMs
