@@ -13,12 +13,27 @@ Review `NUTANIX FILES GUIDE <https://portal.nutanix.com/page/documents/details/?
 
    There are many options at various stages that are available to configure Files to suit the needs of our customers. This workshop will focus on the following configuration. Refer to the *NUTANIX FILES GUIDE* linked above for additional configuration options.
 
-      - One File Server    - basic configuration, 3 File Server VMs (FSVM)
-      - One file share     - SMB
-      - One hypervisor     - AHV
-      - AD authentication  - Microsoft Active Directory - via AutoAD VM
-      - One VLAN           - Unmanaged (i.e. IPAM is not configured)
+      - One File Server       - basic configuration, 3 File Server VMs (FSVM)
+      - Two SMB file shares   - smb01, smb02
+      - One NFS file shared   - nfs01
+      - One hypervisor        - AHV
+      - AD authentication     - Microsoft Active Directory - via AutoAD VM
+      - One VLAN              - Unmanaged (IPAM not configured)
       - Files Analytics
+
+Before you begin
+++++++++++++++++
+
+Please be aware that any information such as server names, IP addresses, and similar information contained within any screen shots are strictly for demonstration purposes. Do not use these values when proceeding with any of the steps contained within this workshop.
+
+This workshop was created with the following versions of Nutanix products. There may be differences - in both written steps and screen shots - between what is shown throughout this workshop, and what you experience if you are using later versions of the individual software packages listed below.
+
+   - AOS             - 5.17.0.4
+   - PC              - 5.17.0.3
+   - Files           - 3.6.4
+   - Files Analytics - 2.1.1.1
+
+Finally, while you are welcome to vary your inputs compared to the instructions listed below, please be aware that by diverting from these instructions, you may negatively impact your ability to successfully complete this workshop.
 
 Creating a File Server
 ++++++++++++++++++++++
@@ -47,9 +62,9 @@ Creating a File Server
 
    - Click the **Next** button.
 
-   .. note::
+      .. note::
 
-      When utilizing the HPOC, it is recommended to use .8 to .14 for the last octet for the 7 IP addresses required by the File Server VMs (FSVM) in the proceeding steps.
+         When utilizing the HPOC, it is recommended to use .8 to .14 for the last octet for the 7 IP addresses required by the File Server VMs (FSVM) in the proceeding steps.
 
 #. In the *Client Network* tab:
 
@@ -119,7 +134,7 @@ Creating a File Server
 
 Creating the file server begins. You can monitor progress through the **Tasks** page.
 
-.. warning::
+.. note::
 
    If you accidentally did not configure Files to use the AutoAD as the DNS server, after deploying the File Server you will get the following errors.
 
@@ -173,15 +188,22 @@ A *distributed* (home) share is the repository for the user's personal files, an
    - **NAME**: Enter the **smb01** as the name for the share.
    - **FILE SERVER**: From the drop-down list, select the file server to place the share.
 
+   .. figure:: images/10.png
+
 #. Click **Next**.
 
 #. Select **Blocked File Types** and enter **.mov**
 
+.. figure:: images/10a.png
+
+   Caption text
+
 #. Click **Next > Create**.
 
-   .. figure:: images/10.png
+#. To create a Distributed share, repeat the steps above, with two differences:
 
-#. To create a Distributed share, repeat the steps above, except this time on the *Settings* page, click the **Use "Distributed" share/export type instead of "Standard"** box.
+   - **NAME**: Enter the **smb02** as the name for the share.
+   - On the *Settings* page, click the **Use "Distributed" share/export type instead of "Standard"** box.
 
 Deploying Files Analytics
 +++++++++++++++++++++++++
@@ -205,8 +227,17 @@ Deploying Files Analytics
    - **Name**: Enter **AVM** for the File Analytics VM (AVM).
    - **Storage Container**: Select a storage container from the dropdown. The dropdown only displays file server storage containers.
    - **Network List**: Select VLAN.
+   - Enter network details in the **Subnet Mask**, **Default Gateway IP**, and **IP Address** fields as indicated.
+
+      .. note::
+
+         When utilizing the HPOC, it is recommended to use .15 for the last octet for the IP address.
 
       .. figure:: images/11.png
+
+   - Scroll down, and click the **Show Advanced Settings** box. Within the **DNS Resolver IP (Comma Separated)** field, enter the IP address of your AutoAD VM.
+
+      .. figure:: images/11a.png
 
 #. Click **Deploy**.
 
@@ -231,17 +262,17 @@ Enabling Files Analytics
 
 #. Click **Enable**.
 
-.. note::
+   .. note::
 
-   To update DNS server settings on File Analytics VM after deployment:
-    - Login into File Analytics VM CLI using
-      - User: nutanix
-      - Password: nutanix/4u
-    - Execute the following command. Click the icon in the upper right corner of the window below to copy the command to your clipboard, and then paste within your SSH session.
+      To update DNS server settings on File Analytics VM after deployment:
+       - Login into File Analytics VM CLI using
+         - User: nutanix
+         - Password: nutanix/4u
+       - Execute the following command. Click the icon in the upper right corner of the window below to copy the command to your clipboard, and then paste within your SSH session.
 
-      ::
+         ::
 
-         sudo bash /opt/nutanix/update_dns.sh
+            sudo bash /opt/nutanix/update_dns.sh
 
 
 Testing with client desktop
@@ -318,7 +349,7 @@ AutoAD is pre-populated with the following Users and Groups for your use:
 
      The *Initials*\ **-WinTools** VM has already been joined to the **ntnxlab.local** domain. You could use any domain joined VM to complete the following steps.
 
-#. Open ``\\*file server*.ntnxlab.local\`` in **File Explorer**.
+#. Open ``\\files.ntnxlab.local\`` in **File Explorer**.
 
 #. Open a browser within your *Initials*\ **-WinTools** desktop and download sample data to populate in your share: (HOW DO WE HANDLE THIS IF PHYSICAL POC? STORE IT OUTSIDE OF GITHUB, REDUCE FILE SIZE, BREAK IT INTO MULTIPLE ZIPS, OR...?)
 

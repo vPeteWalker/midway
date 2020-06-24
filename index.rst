@@ -44,3 +44,13 @@
    :hidden:
 
    xray/xray
+
+.. PUT ANY CONTENT ABOVE THIS, KEEPING FEEDBACK ENTRY AT THE END
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Feedback
+   :name: _feedback
+   :hidden:
+
+   feedback/feedback
