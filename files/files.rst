@@ -14,8 +14,8 @@ Review `NUTANIX FILES GUIDE <https://portal.nutanix.com/page/documents/details/?
    There are many options at various stages that are available to configure Files to suit the needs of our customers. This workshop will focus on the following configuration. Refer to the *NUTANIX FILES GUIDE* linked above for additional configuration options.
 
       - One File Server       - basic configuration, 3 File Server VMs (FSVM)
-      - Two SMB file shares   - smb01 (normal), smb02 (distributed)
-      - One NFS file share    - nfs01
+      - Two SMB file shares   - *Initials*\ -smb01 (normal), *Initials*\ -smb02 (distributed)
+      - One NFS export        - *Initials*\ -logs
       - One hypervisor        - AHV
       - AD authentication     - Microsoft Active Directory - via AutoAD VM
       - One VLAN              - Unmanaged (IPAM not configured)
@@ -178,7 +178,7 @@ A *distributed* (home) share is the repository for the user's personal files, an
 
 #. Complete the fields and click **Save** to create a standard file share.
 
-   - **NAME**: Enter the **smb01** as the name for the share.
+   - **NAME**: Enter the **Initials*\ -smb01** as the name for the share.
    - **FILE SERVER**: From the drop-down list, select the file server to place the share.
 
    .. figure:: images/10.png
@@ -195,7 +195,7 @@ A *distributed* (home) share is the repository for the user's personal files, an
 
 #. To create a Distributed share, repeat the steps above, with two differences:
 
-   - **NAME**: Enter the **smb02** as the name for the share.
+   - **NAME**: Enter the ***Initials*\ -smb02** as the name for the share.
    - On the *Settings* page, click the **Use "Distributed" share/export type instead of "Standard"** box.
 
 Creating an NFS export
@@ -234,61 +234,6 @@ Creating an NFS export
 #. Click **Next**.
 
 #. Review the **Summary** and click **Create**.
-
-Testing the NFS export
-++++++++++++++++++++++
-
-The following steps utilize the LinuxTools VM as a client for your Files NFS export.
-
-#. Note the IP address of the VM in Prism, and connect via SSH using the following credentials:
-
-   - **Username** - root
-   - **Password** - nutanix/4u
-
-#. Execute the following:  NEED A BETTER WAY TO DO THE DNS, SO WE DON'T OVERWRITE, YET IT RESOLVES VIA AUTOAD
-
-     .. code-block:: bash
-      sh -c "echo nameserver *IP address of AutoAD VM* > /etc/resolv.conf" #Overwrites the contents of the existing resolv.conf with the IP of your AutoAD VM to handle DNS queries. Example: sudo sh -c "echo nameserver 10.38.212.50 > /etc/resolv.conf"
-      yum install -y nfs-utils #This installs the NFSv4 client
-      mkdir /filesmnt #Creates directory named /filesmnt
-      mount.nfs4 files.ntnxlab.local:/ /filesmnt/ #Mounts the NFS export to the /filesmnt directory
-      df -kh #show disk utilization for a Linux file system.
-
-   .. note::
-
-      You will see output similar to the below.
-
-      Filesystem                      Size  Used Avail Use% Mounted on
-      /dev/mapper/centos_centos-root  8.5G  1.7G  6.8G  20% /
-      devtmpfs                        1.9G     0  1.9G   0% /dev
-      tmpfs                           1.9G     0  1.9G   0% /dev/shm
-      tmpfs                           1.9G   17M  1.9G   1% /run
-      tmpfs                           1.9G     0  1.9G   0% /sys/fs/cgroup
-      /dev/sda1                       494M  141M  353M  29% /boot
-      tmpfs                           377M     0  377M   0% /run/user/0
-      **Files.ntnxlab.local:/             1.0T  7.0M  1.0T   1% /afsmnt**
-      [root@CentOS ~]# ls -l /filesmnt/
-      total 1
-      drwxrwxrwx. 2 root root 2 Mar  9 18:53 *Initials*\ -logs
-
-#. Observe that the **logs** directory is mounted in ``/filesmnt//*Initials*\ /-logs``.
-
-#. Reboot the VM and observe the export is no longer mounted. To persist the mount, add it to ``/etc/fstab`` by executing the following:
-
-     .. code-block:: bash
-
-       echo 'files.ntnxlab.local:/ /filesmnt nfs4' >> /etc/fstab
-
-#. The following command will add 100 2MB files filled with random data to ``/filesmnt/logs``:
-
-     .. code-block:: bash
-
-       mkdir /filesmnt/*Initials*\ -logs/host1
-       for i in {1..100}; do dd if=/dev/urandom bs=8k count=256 of=/filesmnt/*Initials*\ -logs/host1/file$i; done
-
-#. Return to **Prism > File Server > Share > *Initials*\ -logs** to monitor performance and usage.
-
-   Note that the utilization data is updated every 10 minutes.
 
 Deploying Files Analytics
 +++++++++++++++++++++++++
@@ -417,6 +362,9 @@ AutoAD is pre-populated with the following Users and Groups for your use:
 ..
 .. #. Repeat the process for any additional shares.
 
+Testing "normal" SMB share
+++++++++++++++++++++++++++
+
 #. Deploy a new VM from the WinTools image named *Initials*\ **-WinTools**.
 
 #. Connect to your *Initials*\ **-WinTools** VM via VM console as a **non-Administrator NTNXLAB** domain account:
@@ -471,11 +419,71 @@ AutoAD is pre-populated with the following Users and Groups for your use:
 
    .. code-block:: PowerShell
 
-      New-Item \\files\smb01\testfile.mov``
+      New-Item \\files\\*Initials*\ -smb01\testfile.mov``
 
    Observe that creation of the new file is denied.
 
 #. Return to **Prism Element > File Server > Share/Export**, select your share. Review the **Share Details**, **Usage** and **Performance** tabs to understand the high level information available on a per share basis, including the number of files & connections, storage utilization over time, latency, throughput, and IOPS.
+
+Testing "distributed" SMB share
++++++++++++++++++++++++++++++++
+
+TO BE COMPLETED
+
+Testing the NFS export
+++++++++++++++++++++++
+
+The following steps utilize the LinuxTools VM as a client for your Files NFS export.
+
+#. Note the IP address of the VM in Prism, and connect via SSH using the following credentials:
+
+   - **Username** - root
+   - **Password** - nutanix/4u
+
+#. Execute the following:  NEED A BETTER WAY TO DO THE DNS, SO WE DON'T OVERWRITE, YET IT RESOLVES VIA AUTOAD
+
+     .. code-block:: bash
+      sh -c "echo nameserver *IP address of AutoAD VM* > /etc/resolv.conf" #Overwrites the contents of the existing resolv.conf with the IP of your AutoAD VM to handle DNS queries. Example: sudo sh -c "echo nameserver 10.38.212.50 > /etc/resolv.conf"
+      yum install -y nfs-utils #This installs the NFSv4 client
+      mkdir /filesmnt #Creates directory named /filesmnt
+      mount.nfs4 files.ntnxlab.local:/ /filesmnt/ #Mounts the NFS export to the /filesmnt directory
+      df -kh #show disk utilization for a Linux file system.
+
+   .. note::
+
+      You will see output similar to the below.
+
+      Filesystem                      Size  Used Avail Use% Mounted on
+      /dev/mapper/centos_centos-root  8.5G  1.7G  6.8G  20% /
+      devtmpfs                        1.9G     0  1.9G   0% /dev
+      tmpfs                           1.9G     0  1.9G   0% /dev/shm
+      tmpfs                           1.9G   17M  1.9G   1% /run
+      tmpfs                           1.9G     0  1.9G   0% /sys/fs/cgroup
+      /dev/sda1                       494M  141M  353M  29% /boot
+      tmpfs                           377M     0  377M   0% /run/user/0
+      **Files.ntnxlab.local:/             1.0T  7.0M  1.0T   1% /afsmnt**
+      [root@CentOS ~]# ls -l /filesmnt/
+      total 1
+      drwxrwxrwx. 2 root root 2 Mar  9 18:53 *Initials*\ -logs
+
+#. Observe that the **logs** directory is mounted in ``/filesmnt//*Initials*\ /-logs``.
+
+#. Reboot the VM and observe the export is no longer mounted. To persist the mount, add it to ``/etc/fstab`` by executing the following:
+
+     .. code-block:: bash
+
+       echo 'files.ntnxlab.local:/ /filesmnt nfs4' >> /etc/fstab
+
+#. The following command will add 100 2MB files filled with random data to ``/filesmnt/logs``:
+
+     .. code-block:: bash
+
+       mkdir /filesmnt/*Initials*\ -logs/host1
+       for i in {1..100}; do dd if=/dev/urandom bs=8k count=256 of=/filesmnt/*Initials*\ -logs/host1/file$i; done
+
+#. Return to **Prism > File Server > Share > *Initials*\ -logs** to monitor performance and usage.
+
+   Note that the utilization data is updated every 10 minutes.
 
 Testing with File Analytics
 +++++++++++++++++++++++++++
@@ -574,7 +582,7 @@ In this exercise you will explore the new, integrated File Analytics capabilitie
 
      .. code-block:: bash
 
-        cd \\files.ntnxlab.local\smb01\*initials*\ -MyFolder
+        cd \\files.ntnxlab.local\\*Initials*\ -smb01\*initials*\ -MyFolder
 
 #. Execute the following commands:
 
