@@ -245,7 +245,7 @@ The following steps utilize the LinuxTools VM as a client for your Files NFS exp
    - **Username** - root
    - **Password** - nutanix/4u
 
-#. Execute the following:
+#. Execute the following:  NEED A BETTER WAY TO DO THE DNS, SO WE DON'T OVERWRITE, YET IT RESOLVES VIA AUTOAD
 
      .. code-block:: bash
       sh -c "echo nameserver *IP address of AutoAD VM* > /etc/resolv.conf" #Overwrites the contents of the existing resolv.conf with the IP of your AutoAD VM to handle DNS queries. Example: sudo sh -c "echo nameserver 10.38.212.50 > /etc/resolv.conf"
