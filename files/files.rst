@@ -127,21 +127,21 @@ Creating a File Server
 
 Creating the file server begins. You can monitor progress through the **Tasks** page.
 
-.. note::
+   .. note::
 
-   If you accidentally did not configure Files to use the AutoAD as the DNS server, after deploying the File Server you will get the following errors.
+      If you accidentally did not configure Files to use the AutoAD as the DNS server, after deploying the File Server you will get the following errors.
 
-      - DNS 'NS' records not found for *domain*
+         - DNS 'NS' records not found for *domain*
 
-      - Failed to lookup IP address of *domain*. Please verify the domain name, DNS configuration and network connectivity.
+         - Failed to lookup IP address of *domain*. Please verify the domain name, DNS configuration and network connectivity.
 
-   This can easily be corrected after deployment, without having to delete and redeploy the Files Server.
+      This can easily be corrected after deployment, without having to delete and redeploy the Files Server.
 
-      - Within the **File Server** dropdown, select the file server you deployed, and click **Update > Network Configuration**. Modify the entry for *DNS Resolver IP*, and click **Next > Save**.
+         - Within the **File Server** dropdown, select the file server you deployed, and click **Update > Network Configuration**. Modify the entry for *DNS Resolver IP*, and click **Next > Save**.
 
-      - Click **DNS**. Update this page with the AutoAD FQDN - **dc.ntnxlab.local**, Username and Password of an Active Directory user with administrator privileges, and click **Submit**.
+         - Click **DNS**. Update this page with the AutoAD FQDN - **dc.ntnxlab.local**, Username and Password of an Active Directory user with administrator privileges, and click **Submit**.
 
-         .. figure:: images/9.png
+            .. figure:: images/9.png
 
 Creating an SMB File Share
 ++++++++++++++++++++++++++
@@ -150,27 +150,27 @@ This task details how to create new shares using the Nutanix file server.
 
 A *distributed* (home) share is the repository for the user's personal files, and a *standard* share is the repository shared by a group. A home share is distributed at the top-level directories while standard shares are located on a single file server VM (FSVM). Users have the following permissions in distributed and standard shares.
 
-.. note::
+   .. note::
 
-   Distributed shares are only available on deployments of three or more FSVMs.
+      Distributed shares are only available on deployments of three or more FSVMs.
 
-   Do not use Windows Explorer to create new top level directories (folders), as you will not be able to rename any folders created with the default New Folder name (see Troubleshooting). For optimal performance, the directory structure for distributed shares must be flat.
+      Do not use Windows Explorer to create new top level directories (folders), as you will not be able to rename any folders created with the default New Folder name (see Troubleshooting). For optimal performance, the directory structure for distributed shares must be flat.
 
-   **Distributed shares**
+      **Distributed shares**
 
-      Domain administrator: Full access
+         Domain administrator: Full access
 
-      Domain User: Read only
+         Domain User: Read only
 
-      Creator Owner: Full access (inherited only)
+         Creator Owner: Full access (inherited only)
 
-   **Standard shares**
+      **Standard shares**
 
-      Domain administrator: Full access
+         Domain administrator: Full access
 
-      Domain User: Full access
+         Domain User: Full access
 
-      Creator Owner: Full access (inherited only)
+         Creator Owner: Full access (inherited only)
 
 #. Click **File Server** from the dropdown.
 
@@ -187,9 +187,7 @@ A *distributed* (home) share is the repository for the user's personal files, an
 
 #. Select **Blocked File Types** and enter **.mov**
 
-.. figure:: images/10a.png
-
-   Caption text
+   .. figure:: images/10a.png
 
 #. Click **Next > Create**.
 
