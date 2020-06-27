@@ -46,7 +46,8 @@
 
    xray/xray
 
-Nutanix SE POC Guide (AHV)
+==========================
+NUTANIX SE POC GUIDE (AHV)
 ==========================
 
 What Is This?

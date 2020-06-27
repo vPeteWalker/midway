@@ -13,12 +13,28 @@ Review `NUTANIX FILES GUIDE <https://portal.nutanix.com/page/documents/details/?
 
    There are many options at various stages that are available to configure Files to suit the needs of our customers. This workshop will focus on the following configuration. Refer to the *NUTANIX FILES GUIDE* linked above for additional configuration options.
 
-      - One File Server    - basic configuration, 3 File Server VMs (FSVM)
-      - One file share     - SMB
-      - One hypervisor     - AHV
-      - AD authentication  - Microsoft Active Directory - via AutoAD VM
-      - One VLAN           - Unmanaged (i.e. IPAM is not configured)
+      - One File Server       - basic configuration, 3 File Server VMs (FSVM)
+      - Two SMB file shares   - *Initials*\ -smb01 (normal), *Initials*\ -smb02 (distributed)
+      - One NFS export        - *Initials*\ -logs
+      - One hypervisor        - AHV
+      - AD authentication     - Microsoft Active Directory - via AutoAD VM
+      - One VLAN              - Unmanaged (IPAM not configured)
       - Files Analytics
+      - Two VMS               - WinTools, LinuxTools
+
+Before you begin
+++++++++++++++++
+
+Please be aware that any information such as server names, IP addresses, and similar information contained within any screen shots are strictly for demonstration purposes. Do not use these values when proceeding with any of the steps contained within this workshop.
+
+This workshop was created with the following versions of Nutanix products. There may be differences - in both written steps and screen shots - between what is shown throughout this workshop, and what you experience if you are using later versions of the individual software packages listed below.
+
+   - AOS             - 5.17.0.4
+   - PC              - 5.17.0.3
+   - Files           - 3.6.4
+   - Files Analytics - 2.1.1.1
+
+Finally, while you are welcome to vary your inputs compared to the instructions listed below, please be aware that by diverting from these instructions, you may negatively impact your ability to successfully complete this workshop.
 
 Creating a File Server
 ++++++++++++++++++++++
@@ -47,9 +63,9 @@ Creating a File Server
 
    - Click the **Next** button.
 
-   .. note::
+      .. note::
 
-      When utilizing the HPOC, it is recommended to use .8 to .14 for the last octet for the 7 IP addresses required by the File Server VMs (FSVM) in the proceeding steps.
+         When utilizing the HPOC, it is recommended to use .8 to .14 for the last octet for the 7 IP addresses required by the File Server VMs (FSVM) in the proceeding steps.
 
 #. In the *Client Network* tab:
 
@@ -71,8 +87,6 @@ Creating a File Server
 
    - When all the entries are correct, click the **Next** button.
 
-
-
 #. In the *Storage Network* tab, do the following in the indicated fields:
 
    - **VLAN** - Select the target VLAN for the *client network* from the pull-down list.
@@ -87,11 +101,11 @@ Creating a File Server
 
    - When all the entries are correct, click the **Next** button.
 
+#. In the *Directory Services* tab:
 
+   - Check the **Use SMB Protocol** box.
 
-#. In the *Directory Services* tab, check the **Use SMB Protocol** box.
-
-   - **Username**: Enter the name of an Active Directory user with administrator privileges. Use the following format: domain\username. (ex. ntnxlab\administrator)
+   - **Username**: Enter the name of an Active Directory user with administrator privileges.
 
    - **Password**: Enter the user's password.
 
@@ -99,19 +113,13 @@ Creating a File Server
 
       .. figure:: images/7.png
 
-#. Select the SMB protocol, and fill out the following in the indicated fields:
+   - Check the box for **Show Advanced Options**, and then the box for **Add File Server DNS Entries Using The Same Username And Password**. This will save you the extra steps of registering the File Server DNS entry separately.
 
-   - **Active Directory Realm Name**: Displays the Active Directory realm name (read-only).
+   - Check the **Use NFS Protocol** box.
 
-   - **Username**: Enter the name of an Active Directory user with administrator privileges. Use the following format: *domain\username*.
+   - From within the **User Management And Authentication** dropdown, choose **Unmanaged**.
 
-   - **Password**: Enter the user's password.
-
-   - **Make this user a File Server admin**: Check this box.
-
-   - Check the box for **Show Advanced Options** and check the box for **Add File Server DNS Entries Using The Same Username And Password**. This will save you the extra steps of registering the File Server DNS entry separately.
-
-
+   - When all the entries are correct, click the **Next** button.
 
 #. In the **Summary** tab, review the displayed information. When all the information is correct, click **Create**.
 
@@ -119,50 +127,50 @@ Creating a File Server
 
 Creating the file server begins. You can monitor progress through the **Tasks** page.
 
-.. warning::
+   .. note::
 
-   If you accidentally did not configure Files to use the AutoAD as the DNS server, after deploying the File Server you will get the following errors.
+      If you accidentally did not configure Files to use the AutoAD as the DNS server, after deploying the File Server you will get the following errors.
 
-      - DNS 'NS' records not found for *domain*
+         - DNS 'NS' records not found for *domain*
 
-      - Failed to lookup IP address of *domain*. Please verify the domain name, DNS configuration and network connectivity.
+         - Failed to lookup IP address of *domain*. Please verify the domain name, DNS configuration and network connectivity.
 
-   This can easily be corrected after deployment, without having to delete and redeploy the Files Server.
+      This can easily be corrected after deployment, without having to delete and redeploy the Files Server.
 
-      - Within the **File Server** dropdown, select the file server you deployed, and click **Update > Network Configuration**. Modify the entry for *DNS Resolver IP*, and click **Next > Save**.
+         - Within the **File Server** dropdown, select the file server you deployed, and click **Update > Network Configuration**. Modify the entry for *DNS Resolver IP*, and click **Next > Save**.
 
-      - Click **DNS**. Update this page with the AutoAD FQDN - **dc.ntnxlab.local**, Username and Password of an Active Directory user with administrator privileges, and click **Submit**.
+         - Click **DNS**. Update this page with the AutoAD FQDN - **dc.ntnxlab.local**, Username and Password of an Active Directory user with administrator privileges, and click **Submit**.
 
-         .. figure:: images/9.png
+            .. figure:: images/9.png
 
-Creating a File Share
-+++++++++++++++++++++
+Creating an SMB File Share
+++++++++++++++++++++++++++
 
 This task details how to create new shares using the Nutanix file server.
 
 A *distributed* (home) share is the repository for the user's personal files, and a *standard* share is the repository shared by a group. A home share is distributed at the top-level directories while standard shares are located on a single file server VM (FSVM). Users have the following permissions in distributed and standard shares.
 
-.. note::
+   .. note::
 
-   Distributed shares are only available on deployments of three or more FSVMs.
+      Distributed shares are only available on deployments of three or more FSVMs.
 
-   Do not use Windows Explorer to create new top level directories (folders), as you will not be able to rename any folders created with the default New Folder name (see Troubleshooting). For optimal performance, the directory structure for distributed shares must be flat.
+      Do not use Windows Explorer to create new top level directories (folders), as you will not be able to rename any folders created with the default New Folder name (see Troubleshooting). For optimal performance, the directory structure for distributed shares must be flat.
 
-   **Distributed shares**
+      **Distributed shares**
 
-      Domain administrator: Full access
+         Domain administrator: Full access
 
-      Domain User: Read only
+         Domain User: Read only
 
-      Creator Owner: Full access (inherited only)
+         Creator Owner: Full access (inherited only)
 
-   **Standard shares**
+      **Standard shares**
 
-      Domain administrator: Full access
+         Domain administrator: Full access
 
-      Domain User: Full access
+         Domain User: Full access
 
-      Creator Owner: Full access (inherited only)
+         Creator Owner: Full access (inherited only)
 
 #. Click **File Server** from the dropdown.
 
@@ -170,18 +178,60 @@ A *distributed* (home) share is the repository for the user's personal files, an
 
 #. Complete the fields and click **Save** to create a standard file share.
 
-   - **NAME**: Enter the **smb01** as the name for the share.
+   - **NAME**: Enter the **Initials*\ -smb01** as the name for the share.
    - **FILE SERVER**: From the drop-down list, select the file server to place the share.
+
+   .. figure:: images/10.png
 
 #. Click **Next**.
 
 #. Select **Blocked File Types** and enter **.mov**
 
+   .. figure:: images/10a.png
+
 #. Click **Next > Create**.
 
-   .. figure:: images/10.png
+#. To create a Distributed share, repeat the steps above, with two differences:
 
-#. To create a Distributed share, repeat the steps above, except this time on the *Settings* page, click the **Use "Distributed" share/export type instead of "Standard"** box.
+   - **NAME**: Enter the ***Initials*\ -smb02** as the name for the share.
+   - On the *Settings* page, click the **Use "Distributed" share/export type instead of "Standard"** box.
+
+Creating an NFS export
+++++++++++++++++++++++
+
+#. In the Prism web console, go to the *File Server Dashboard* page by clicking **File Server** from the dropdown.
+
+#. Click **+ Share/Export** action link.
+
+#. Fill out the following fields:
+
+   - **Name** - *Initials*\ -logs
+   - **Description (Optional)** - File share for system logs
+   - **File Server** - **Files**
+   - **Share Path (Optional)** - Leave blank
+   - **Max Size (Optional)** - Leave blank
+   - **Select Protocol** - **NFS**
+
+   .. figure:: images/24b.png
+
+#. Click **Next**.
+
+#. Fill out the following fields:
+
+   - Select **Enable Self Service Restore**.
+      These snapshots appear as a .snapshot directory for NFS clients.
+   - **Authentication** - System
+   - **Default Access (For All Clients)** - No Access
+   - Select **+ Add exceptions**.
+   - **Clients with Read-Write Access** - *The first 3 octets of your cluster network*\ .* (e.g. 10.38.1.\*)
+
+   .. figure:: images/25b.png
+
+   By default an NFS export will allow read/write access to any host that mounts the export, but this can be restricted to specific IPs or IP ranges.
+
+#. Click **Next**.
+
+#. Review the **Summary** and click **Create**.
 
 Deploying Files Analytics
 +++++++++++++++++++++++++
@@ -205,8 +255,17 @@ Deploying Files Analytics
    - **Name**: Enter **AVM** for the File Analytics VM (AVM).
    - **Storage Container**: Select a storage container from the dropdown. The dropdown only displays file server storage containers.
    - **Network List**: Select VLAN.
+   - Enter network details in the **Subnet Mask**, **Default Gateway IP**, and **IP Address** fields as indicated.
+
+      .. note::
+
+         When utilizing the HPOC, it is recommended to use .15 for the last octet for the IP address.
 
       .. figure:: images/11.png
+
+   - Scroll down, and click the **Show Advanced Settings** box. Within the **DNS Resolver IP (Comma Separated)** field, enter the IP address of your AutoAD VM.
+
+      .. figure:: images/11a.png
 
 #. Click **Deploy**.
 
@@ -231,17 +290,17 @@ Enabling Files Analytics
 
 #. Click **Enable**.
 
-.. note::
+   .. note::
 
-   To update DNS server settings on File Analytics VM after deployment:
-    - Login into File Analytics VM CLI using
-      - User: nutanix
-      - Password: nutanix/4u
-    - Execute the following command. Click the icon in the upper right corner of the window below to copy the command to your clipboard, and then paste within your SSH session.
+      To update DNS server settings on File Analytics VM after deployment:
+       - Login into File Analytics VM CLI using
+         - User: nutanix
+         - Password: nutanix/4u
+       - Execute the following command. Click the icon in the upper right corner of the window below to copy the command to your clipboard, and then paste within your SSH session.
 
-      ::
+         ::
 
-         sudo bash /opt/nutanix/update_dns.sh
+            sudo bash /opt/nutanix/update_dns.sh
 
 
 Testing with client desktop
@@ -301,6 +360,9 @@ AutoAD is pre-populated with the following Users and Groups for your use:
 ..
 .. #. Repeat the process for any additional shares.
 
+Testing "normal" SMB share
+++++++++++++++++++++++++++
+
 #. Deploy a new VM from the WinTools image named *Initials*\ **-WinTools**.
 
 #. Connect to your *Initials*\ **-WinTools** VM via VM console as a **non-Administrator NTNXLAB** domain account:
@@ -318,7 +380,7 @@ AutoAD is pre-populated with the following Users and Groups for your use:
 
      The *Initials*\ **-WinTools** VM has already been joined to the **ntnxlab.local** domain. You could use any domain joined VM to complete the following steps.
 
-#. Open ``\\*file server*.ntnxlab.local\`` in **File Explorer**.
+#. Open ``\\files.ntnxlab.local\`` in **File Explorer**.
 
 #. Open a browser within your *Initials*\ **-WinTools** desktop and download sample data to populate in your share: (HOW DO WE HANDLE THIS IF PHYSICAL POC? STORE IT OUTSIDE OF GITHUB, REDUCE FILE SIZE, BREAK IT INTO MULTIPLE ZIPS, OR...?)
 
@@ -355,11 +417,71 @@ AutoAD is pre-populated with the following Users and Groups for your use:
 
    .. code-block:: PowerShell
 
-      New-Item \\files\smb01\testfile.mov``
+      New-Item \\files\\*Initials*\ -smb01\testfile.mov``
 
    Observe that creation of the new file is denied.
 
 #. Return to **Prism Element > File Server > Share/Export**, select your share. Review the **Share Details**, **Usage** and **Performance** tabs to understand the high level information available on a per share basis, including the number of files & connections, storage utilization over time, latency, throughput, and IOPS.
+
+Testing "distributed" SMB share
++++++++++++++++++++++++++++++++
+
+TO BE COMPLETED
+
+Testing the NFS export
+++++++++++++++++++++++
+
+The following steps utilize the LinuxTools VM as a client for your Files NFS export.
+
+#. Note the IP address of the VM in Prism, and connect via SSH using the following credentials:
+
+   - **Username** - root
+   - **Password** - nutanix/4u
+
+#. Execute the following:  NEED A BETTER WAY TO DO THE DNS, SO WE DON'T OVERWRITE, YET IT RESOLVES VIA AUTOAD
+
+     .. code-block:: bash
+      sh -c "echo nameserver *IP address of AutoAD VM* > /etc/resolv.conf" #Overwrites the contents of the existing resolv.conf with the IP of your AutoAD VM to handle DNS queries. Example: sudo sh -c "echo nameserver 10.38.212.50 > /etc/resolv.conf"
+      yum install -y nfs-utils #This installs the NFSv4 client
+      mkdir /filesmnt #Creates directory named /filesmnt
+      mount.nfs4 files.ntnxlab.local:/ /filesmnt/ #Mounts the NFS export to the /filesmnt directory
+      df -kh #show disk utilization for a Linux file system.
+
+   .. note::
+
+      You will see output similar to the below.
+
+      Filesystem                      Size  Used Avail Use% Mounted on
+      /dev/mapper/centos_centos-root  8.5G  1.7G  6.8G  20% /
+      devtmpfs                        1.9G     0  1.9G   0% /dev
+      tmpfs                           1.9G     0  1.9G   0% /dev/shm
+      tmpfs                           1.9G   17M  1.9G   1% /run
+      tmpfs                           1.9G     0  1.9G   0% /sys/fs/cgroup
+      /dev/sda1                       494M  141M  353M  29% /boot
+      tmpfs                           377M     0  377M   0% /run/user/0
+      **Files.ntnxlab.local:/             1.0T  7.0M  1.0T   1% /afsmnt**
+      [root@CentOS ~]# ls -l /filesmnt/
+      total 1
+      drwxrwxrwx. 2 root root 2 Mar  9 18:53 *Initials*\ -logs
+
+#. Observe that the **logs** directory is mounted in ``/filesmnt//*Initials*\ /-logs``.
+
+#. Reboot the VM and observe the export is no longer mounted. To persist the mount, add it to ``/etc/fstab`` by executing the following:
+
+     .. code-block:: bash
+
+       echo 'files.ntnxlab.local:/ /filesmnt nfs4' >> /etc/fstab
+
+#. The following command will add 100 2MB files filled with random data to ``/filesmnt/logs``:
+
+     .. code-block:: bash
+
+       mkdir /filesmnt/*Initials*\ -logs/host1
+       for i in {1..100}; do dd if=/dev/urandom bs=8k count=256 of=/filesmnt/*Initials*\ -logs/host1/file$i; done
+
+#. Return to **Prism > File Server > Share > *Initials*\ -logs** to monitor performance and usage.
+
+   Note that the utilization data is updated every 10 minutes.
 
 Testing with File Analytics
 +++++++++++++++++++++++++++
@@ -458,7 +580,7 @@ In this exercise you will explore the new, integrated File Analytics capabilitie
 
      .. code-block:: bash
 
-        cd \\files.ntnxlab.local\smb01\*initials*\ -MyFolder
+        cd \\files.ntnxlab.local\\*Initials*\ -smb01\*initials*\ -MyFolder
 
 #. Execute the following commands:
 
