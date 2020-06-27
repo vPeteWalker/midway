@@ -4,41 +4,61 @@
 Physical Foundation
 -------------------
 
-Introduction... anything!
-
-**What are we going to do in this section?**
+If doing an on-premises POC, you will need to perform a fresh Foundation on your hardware. Many SEs opt to test Foundation on the cluster at home to identify any potential issues (bad SATADOM, loose memory, etc.) before bringing the block to a customer site. The SE would then typically run Foundation again on-site as the installation process is often a part of POC test plans, allowing us to demonstrate how fast and simple it is to deploy Nutanix.
 
 Pre-Foundation Discovery
 ++++++++++++++++++++++++
 
-Cover discovery questions for POC install
-  - checklist sheet for IPs
-  - Power (cables/outlets)
-  - Network (cables/ports/etc.)
+To ensure a physical POC deployment is successful, please ensure that these typical requirements are considered before the day of install, including which components will be supplied by Nutanix or the customer:
 
- Install media - DO NOT use latest AOS/AHV
+- **Rackspace**
+
+   - 1-2 rack unit (RU) per block, depending on the form factor of the block(s) being utilized.
+
+- **Power**
+
+   - 1-2 power connections per node, 2 required for full redundancy.  This can either be a C-13 to C-14 cable, or a C-13 to NEMA 5-15P and is dependent on the type of Power Distribution Unit (PDU) the customer is intending to use.
+   - Sufficient power capacity available.  Ex. NX-3060-G7 has a typical power usage of 1700 Watts.
+   - 200-240V power is required to run a 2U4N block from a single power supply
+
+- **Network**
+
+   - Network switch ports availability per node - (1+) 10 g/bit connections (SFP+ or BASE-T), 2 required for full redundancy.  (1) 100/1000 m/bit for lights out management (IPMI, ILO, iDRAC).
+   - Network cables available per node, ensuring the proper lengths to not only traverse the distance between the node(s) and the network switch(es), but to confirm you aren't exceeded the cable or transceiver specification you are using.  For customers with SFP+ network switches, you may either use TwinAx or fiber cables with SFP+ transceivers on each end. (1+) 10 g/bit connections (SFP+ or BASE-T), 2 required for full redundancy.  (1) 100/1000 m/bit for lights out management (IPMI, ILO, iDRAC).  Verify with the customer/partner who will be providing the network cables. Nutanix can supply generic TwinAx cables but these will not work will all switch brands (Cisco, HPE, etc.).
+   - Network switch configuration - Ensure all network switch ports are properly configured, including VLAN tagging, and that both the ports to be used and VLANs are already created and identified.  Typical installs utilize a single VLAN for CVM, Hypervisor, and user VMs.  However, this should be discussed and agreed upon with the customer prior to install.
+   - `Pre-Install Survey <https://docs.google.com/spreadsheets/d/15r8Q1kCIJY4ErwL1CaHHwv4Q7gmCbLOz5IaR51t9se0/edit#gid=8195649>`_ completed *and reviewed* prior to on-site arrival. This spreadsheet outlines required IPs and VLANs for a deployment.
+
+
+- **Software**
+
+   - A downloaded version of AOS from https://portal.nutanix.com - Do **NOT** use the very latest version of AOS/AHV as you will be unable to show 1-Click upgrades as part of your POC.
+   - `Nutanix KB2340 <https://portal.nutanix.com/#/page/kbs/details?targetId=kA032000000TT1HCAW>`_ provides instruction on how to download previous versions of Nutanix software that are no longer available through http://portal.nutanix.com
+Refer to https://portal.nutanix.com/#/page/compatibilitymatrix/software to ensure you are utilizing the correct version of AOS, hypervisor, and guest OS.
+Operating system templates (optional), ISOs for operating systems and applications.
 
 Setting Up Your Foundation Environment
 ++++++++++++++++++++++++++++++++++++++
 
-App vs VM?
+Currently, there are two options for performing baremetal Foundation of a Nutanix block, Portable Foundation and the Foundation VM. The full **Foundation Use Case Matrix** can be found `here <https://portal.nutanix.com/page/documents/details/?targetId=Field-Installation-Guide-v4-5%3Av45-features-compatibility-matrix-r.html>`_.
 
-Setting Up Foundation VM
-........................
+(Recommended) Portable Foundation
+.................................
 
-Reference to existing field install guide on how to set up your Foundation VM (including relevant tips) - https://portal.nutanix.com/#/page/docs/details?targetId=Field-Installation-Guide-v4-5:v45-cluster-environment-foundation-t.html
+- Portable Foundation is a native application that runs on Windows 10+ or macOS 10.13.1+
+- Only supports Nutanix G4 and above, Dell, HPE, and Lenovo Cascade Lake and above
 
-Setting Up Foundation App
-........................
+Complete instructions for setting up Portable Foundation can be found `here <https://portal.nutanix.com/#/page/docs/details?targetId=Field-Installation-Guide-v4-5:v45-cluster-environment-foundation-t.html>`_
 
-Reference to existing field install guide on how to set up your Foundation App (including relevant tips) - https://portal.nutanix.com/#/page/docs/details?targetId=Field-Installation-Guide-v4-5:v45-portable-foundation-app-c.html
+Foundation VM
+.............
+
+- The Foundation VM needs to be deployed as a VM on VirtualBox, VMware Fusion, Workstation, etc.
+- Supports all NX, OEM, and software only HCL models
+
+Complete instructions for setting up the standalone Foundation VM can be found `here <https://portal.nutanix.com/#/page/docs/details?targetId=Field-Installation-Guide-v4-5:v45-portable-foundation-app-c.html>`_
 
 Cabling Your Hardware
 +++++++++++++++++++++
-
-.. note::
-
-  The following lab will be performed with a cluster in the Nutanix Hosted POC environment. The information on cabling below is for reference when performing a physical, baremetal Nutanix installation.
 
 Foundation requires connectivity to **both** the standard network interface of a node and the Baseboard Management Controller (BMC) network interface. The BMC, called **IPMI** on Nutanix NX nodes, is a dedicated system present in every enterprise server platform used for out of band management. Other supported platforms use different names for IPMI, such as iDRAC on Dell, IMM on Lenovo, and iLO on HPE.
 
@@ -64,11 +84,11 @@ Refer to the appropriate `manufacturer's hardware documentation <https://portal.
 Creating Install Configuration File
 +++++++++++++++++++++++++++++++++++
 
-Note on pre-configuring Foundation using https://install.nutanix.com/
+To save time entering IP/MAC Address information when on-site with the customer, you can pre-populate and export the configuration as a JSON file using `this tool <https://install.nutanix.com>`_.
 
 Imaging Your Cluster
 ++++++++++++++++++++
 
-Reference existing Foundation documentation for CURRENT install procedure - https://portal.nutanix.com/#/page/docs/details?targetId=Field-Installation-Guide-v4-5:v45-foundation-configure-nodes-with-foundation-t.html
+Complete instructions for using Foundation to perform a baremetal installation can be found `here <https://portal.nutanix.com/#/page/docs/details?targetId=Field-Installation-Guide-v4-5:v45-foundation-configure-nodes-with-foundation-t.html>`_.
 
-Oh hey if you want to practice in the HPOC you can use this lab: :ref:`diyfoundation_lab`.
+If you do not have access to a physical block, and wish to practice using Foundation, and can do so with a HPOC reservation and the :ref:`diyfoundation_lab` lab.
