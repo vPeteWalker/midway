@@ -6,6 +6,9 @@ Physical Foundation
 
 If doing an on-premises POC, you will need to perform a fresh Foundation on your hardware. Many SEs opt to test Foundation on the cluster at home to identify any potential issues (bad SATADOM, loose memory, etc.) before bringing the block to a customer site. The SE would then typically run Foundation again on-site as the installation process is often a part of POC test plans, allowing us to demonstrate how fast and simple it is to deploy Nutanix.
 
+**Expected Module Duration:** 150 minutes (Including racking, cabling, Foundation, and transition to customer network)
+**Covered Test IDs:** Core-001, Core-002
+
 Pre-Foundation Discovery
 ++++++++++++++++++++++++
 

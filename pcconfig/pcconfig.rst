@@ -4,7 +4,10 @@
 Prism Central Configuration
 ---------------------------
 
-Similar to Prism Element, you'll want to configure and verify a few settings before diving in with all of the various operations that can be performed in Prism Central. In this exercise you'll validate network settings, configure Active Directory integration, and upload the additional disk images used in the POC guide.
+Similar to Prism Element, you'll want to configure and verify a few settings before diving in with all of the various operations that can be performed in Prism Central. In this module you'll validate network settings, configure Active Directory integration, and upload the additional disk images used throughout the POC guide.
+
+**Expected Module Duration:** 15 minutes
+**Covered Test IDs:** N/A
 
 You will have considerable amounts of time to walk the customer through Prism Central menus and features, but can still begin with a high level overview of the **Main Dashboard**.
 

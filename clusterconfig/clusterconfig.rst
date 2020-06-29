@@ -4,9 +4,12 @@
 Cluster Configuration
 ---------------------
 
-This initial configuration needs to be completed for both a Hosted or on-prem POC. These steps could be performed without the customer present, but there is opportunity throughout to call out Nutanix differentiators and to highlight the simplicity of the deployment process.
+In this module you will perform initial cluster configuration, including Pulse, network settings, alerting, deploying storage, and optionally deploying the AutoAD VM.
 
-While this looks like several steps to get to the point of deploying your first VM, in reality this can be completed in < 30 minutes.
+**Expected Module Duration:** 60 minutes
+**Covered Test IDs:** Core-003, Core-004, Core-005, Core-006, Core-008
+
+This initial configuration needs to be completed for both a Hosted or on-prem POC. These steps could be performed without the customer present, but there is opportunity throughout to call out Nutanix differentiators and to highlight the simplicity of the deployment process.
 
 **FEEDBACK** ?
 
@@ -145,11 +148,15 @@ Storage Configuration
 
    .. figure:: images/10.png
 
+   **FEEDBACK** - *What would you typically share about the different types of storage efficiency options offered?*
+
 #. Click **Save**.
 
 #. Select the newly created container.
 
-   *Through Prism you can see your storage utilization, performance, and alerting on a per container basis. Later we'll see this for individual VMs as well.*
+   *Through Prism you can see your storage utilization, performance, and alerting on a per container basis. Within the Storage Container Details you'll find information on the effective free storage, which takes into account savings from compression, erasure coding, and deduplication. Overall efficiency ratio accounts for compression, erasure coding, deduplication, AND savings from data avoidance such as snapshots and cloning.*
+
+   .. figure:: images/10b.png
 
 #. (Optional) Create an additional Storage Container with a **Reserved Capacity** equal to available capacity of 1 node. This will ensure that in the event of a node failure, you are guaranteed to have enough capacity to re-protect all data on the cluster.
 

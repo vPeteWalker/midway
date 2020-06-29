@@ -29,6 +29,8 @@
    node_addremove/node_addremove
    aos_upgrade/aos_upgrade
    lcm/lcm
+   pcapimanage/pcapimanage
+   climanage/climanage
 
 .. toctree::
    :maxdepth: 2
@@ -57,7 +59,7 @@ The purpose of this guide is to provide detailed guidance to Nutanix or partner 
 
 This guide can also be used in conjunction with the standard `Nutanix POC Test Plan Tracker <https://docs.google.com/spreadsheets/d/15r8Q1kCIJY4ErwL1CaHHwv4Q7gmCbLOz5IaR51t9se0/edit#gid=0>`_ spreadsheet.
 
-Every successful POC has a well-defined test plan. While this guide will want you through common uses and scenarios for Nutanix products, many POCs will also include workload or application specific requirements. When working with the customer to add these additional items to your test plan, keep in mind that: **Test items should identify success criteria (faster, simpler, provides new and required functionality, etc.) which should be measurable (less time to complete, less steps to configure, successfully automates process).**
+Every successful POC has a well-defined test plan. While this guide will want you through common uses and scenarios for Nutanix products, many POCs will also include workload or application specific requirements. When working with the customer to add these additional items to your test plan, keep in mind that: **Test items should identify success criteria (faster, simpler, provides new and required functionality, etc.) which are ideally measurable (less time to complete, less steps to configure), but may also be verification that a feature functions as expected (true/false).**
 
 When Should I Do A POC?
 +++++++++++++++++++++++
