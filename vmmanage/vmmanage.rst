@@ -7,6 +7,7 @@ Basic VM Management
 In this module you will use Prism Central to perform basic AHV VM management tasks including creation, power operations, cloning, live migration, monitoring, Nutanix Guest Tools installation, and category assignment.
 
 **Expected Module Duration:** 60 minutes
+
 **Covered Test IDs:** Core-007, Core-012, Core-013
 
 **FEEDBACK** ?

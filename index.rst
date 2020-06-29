@@ -34,6 +34,14 @@
 
 .. toctree::
    :maxdepth: 2
+   :caption: Flow
+   :name: _flow
+   :hidden:
+
+   flow/flowbasic/flowbasic
+
+.. toctree::
+   :maxdepth: 2
    :caption: Files
    :name: _files
    :hidden:
