@@ -28,7 +28,7 @@ To deploy the X-Ray, be sure to have the minimum following requirements availabl
    Disk  - 100GB
    Nutanix provides a QCOW2 X-Ray image for AHV.
 
-Installation and configuration of X-RAY
+Installation and configuration of X-Ray
 =======================================
 
 #. Log into Prism. Click :fa:`gear`. In the sidebar that appears, select **Image Configuration > Upload Image**.
