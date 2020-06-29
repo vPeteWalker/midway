@@ -1,5 +1,10 @@
 .. _node_addremove:
 
+Prerequisites and Requirements
+++++++++++++++++++++++++++++++
+
+POINT TO INITIAL CLUSTER CONFIG SECTION
+
 --------------------
 Add or Remove a node
 --------------------
