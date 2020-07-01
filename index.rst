@@ -69,6 +69,14 @@
 
    xray/xray
 
+.. toctree::
+   :maxdepth: 2
+   :caption: Files
+   :name: _files
+   :hidden:
+
+   failure/failure
+
 ==========================
 NUTANIX SE POC GUIDE (AHV)
 ==========================
