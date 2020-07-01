@@ -13,9 +13,9 @@ Choosing Between HPOC and Physical
 
 The first determination to make is whether to use a Hosted POC cluster or an on-premises Nutanix cluster. The following considerations should be taken into account when making this decision:
 
-- **Network and Data:** Does the customer need to integrate with any applications on their network or use their own data sets as part of the POC? If so, choose an on-premises POC.
+- **Network and Data** - Does the customer need to integrate with any applications on their network or use their own data sets as part of the POC? If so, choose an on-premises POC.
 - **Installation and Integration** - Is the installation process part of the POC test plan? If so, an on-premises POC is likely required (although there are ways to demonstrate Foundation within the HPOC).
-- **Lead Time:** What is the timeline for beginning the POC? Typically you can secure a HPOC cluster 7 days out from the current date. Sourcing on-premises gear can vary significantly, depending on whether or not there is available gear already in your territory. Begin by asking in your regional Slack channel(s) about available POC blocks and their specs.
+- **Lead Time** - What is the timeline for beginning the POC? Typically you can secure a HPOC cluster 7 days out from the current date. Sourcing on-premises gear can vary significantly, depending on whether or not there is available gear already in your territory. Begin by asking in your regional Slack channel(s) about available POC blocks and their specs.
 - **POC Length** - A HPOC cluster can be reserved for up to 14 days if it is associated with a POC record in Salesforce. On-premises POCs should last for no more than 45 days (although blocks can remain on-site longer if new use cases are identified and a new Salesforce POC record is created).
 
 HPOC Pre-requisites

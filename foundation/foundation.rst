@@ -96,3 +96,8 @@ Imaging Your Cluster
 Complete instructions for using Foundation to perform a baremetal installation can be found `here <https://portal.nutanix.com/#/page/docs/details?targetId=Field-Installation-Guide-v4-5:v45-foundation-configure-nodes-with-foundation-t.html>`_.
 
 If you do not have access to a physical block, and wish to practice using Foundation, and can do so with a HPOC reservation and the :ref:`diyfoundation_lab` lab.
+
+Moving to Customer Network
+++++++++++++++++++++++++++
+
+**FEEDBACK** - Any current best practices for doing this cutover? Are you using Foundation to set CVM/hypervisor VLAN and then just moving the cables over? Stopping/starting the cluster?

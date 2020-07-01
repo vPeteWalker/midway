@@ -35,7 +35,7 @@ Network Settings
 
 #. (Optional) To configure SNMP based alerting for the cluster, see complete instructions in the `Prism Central Guide <https://portal.nutanix.com/page/documents/details/?targetId=Prism-Central-Guide-Prism-v5_17:mul-snmp-configure-pc-t.html#ntask_jqd_fd4_kbb>`_.
 
-#. (Optional) If the customer has an available Syslog server, you can enable Audit, API Audit, and Flow logging under **Alerts and Notifications > Syslog Server**. See complete instructions in the `Prism Central Guide <https://portal.nutanix.com/#/page/docs/details?targetId=Prism-Central-Guide-Prism-v5_17:mul-syslog-server-configure-pc-t.html>`_.
+#. (Optional) If the customer has an available Syslog server, you can enable Audit, API Audit, and Flow logging under **Alerts and Notifications > Syslog Server**. See complete instructions in the `Prism Central Guide <https://portal.nutanix.com/#/page/docs/details?targetId=Prism-Central-Guide-Prism-v5_17:mul-syslog-server-configure-pc-t.html>`_. See :ref:`deploygraylog` for instructions on how to deploy a GrayLog virtual appliance to use for Syslog during your POC.
 
 Disk Images
 +++++++++++
@@ -79,7 +79,7 @@ Disk Images
    - Click **Next**.
    - Verify **All clusters** is selected, and click **Save** to begin the file upload.
 
-   *For complex environments, where Prism Central manages multiple clusters, you can leverage Categories to tag images and define policies that control which image categories and provisioned on which clusters. This provides fine grained control from a centralized location, ensuring that only required images are sent over the WAN to remote sites.
+   *For complex environments, where Prism Central manages multiple clusters, you can leverage Categories to tag images and define policies that control which image categories and provisioned on which clusters. This provides fine grained control from a centralized location, ensuring that only required images are sent over the WAN to remote sites.*
 
 Active Directory
 ++++++++++++++++

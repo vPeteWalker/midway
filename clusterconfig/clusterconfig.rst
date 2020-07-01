@@ -7,6 +7,7 @@ Cluster Configuration
 In this module you will perform initial cluster configuration, including Pulse, network settings, alerting, deploying storage, and optionally deploying the AutoAD VM.
 
 **Expected Module Duration:** 60 minutes
+
 **Covered Test IDs:** Core-003, Core-004, Core-005, Core-006, Core-008
 
 This initial configuration needs to be completed for both a Hosted or on-prem POC. These steps could be performed without the customer present, but there is opportunity throughout to call out Nutanix differentiators and to highlight the simplicity of the deployment process.

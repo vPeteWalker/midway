@@ -8,6 +8,8 @@ In this module you will enable Flow within Prism Central and create a simple iso
 
 **Pre-requisites:** Completion of :ref:`vmmanage`
 
+**(Optional) Pre-requisite:** Completion of :ref:`deploygraylog`
+
 **Expected Module Duration:** 30 minutes
 
 **Covered Test IDs:** N/A
@@ -38,7 +40,7 @@ Enabling Flow
 Isolation Policy
 ++++++++++++++++
 
-   *To show you how easy it is to get started with Flow, we'll begin with a very simple policy that isolates sets of VMs from one another, using the previously created WinServer VMs.*
+*To show you how easy it is to get started with Flow, we'll begin with a very simple policy that isolates sets of VMs from one another, using the previously created WinServer VMs.*
 
 #. Select :fa:`bars` **> Virtual Infrastructure > VMs**.
 
@@ -77,6 +79,8 @@ Isolation Policy
    - Click **Apply the isolation only within a subset of the data center**
 
       - Search for **AppType:Microsoft_SQL**
+
+   - (Optional, if **Syslog** configured for cluster) Enable **Policy Hit Logs**
 
    .. figure:: images/2.png
 
