@@ -39,6 +39,19 @@
    :hidden:
 
    flow/flowbasic/flowbasic
+   flow/flowappsec/flowappsec
+   calm/deploygraylog/deploygraylog
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Calm
+   :name: _calm
+   :hidden:
+
+   calm/calmenable/calmenable
+   calm/singlevmwin/singlevmwin
+   calm/deploypocapp/deploypocapp
+
 
 .. toctree::
    :maxdepth: 2
@@ -82,6 +95,7 @@ No two POCs are the same, and as such, much of this guide is meant to be used mo
 - To begin, review the **Planning & Deployment** section prior to your POC.
 - The **Initial Configuration** section covers exercises that are common to all AHV POCs, and should be completed in order.
 - Following that, additional module can be completed in almost any order. If applicable, specific pre-requisites will be noted at the beginning of each module.
+- Each module provides an approximate **Duration** to complete. Take these into account when planning time to spend in front of the customer working through test cases.
 
 How Do I Get Support?
 +++++++++++++++++++++
