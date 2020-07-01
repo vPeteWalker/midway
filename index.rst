@@ -71,8 +71,8 @@
 
 .. toctree::
    :maxdepth: 2
-   :caption: Files
-   :name: _files
+   :caption: Failure
+   :name: _failure
    :hidden:
 
    failure/failure
