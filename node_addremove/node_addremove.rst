@@ -1,10 +1,19 @@
 .. _node_addremove:
 
+Prerequisites and Requirements
+++++++++++++++++++++++++++++++
+
+POINT TO INITIAL CLUSTER CONFIG SECTION
+
 --------------------
 Add or Remove a node
 --------------------
 
 A cluster is a collection of nodes. You can add new nodes to a cluster at any time after physically installing and connecting them to the network on the same subnet as the cluster. The cluster expansion process compares the AOS version on the existing and new nodes and performs any upgrades necessary for all nodes to have the same AOS version.
+
+Why does this matter to our customers?
+
+A customer may choose to add a node or nodes to account for a new workloads such as VDI, or increase performance, capacity, or resiliency. Additionally, a customer may elect to remove nodes if those nodes are past their usable life, and may not be meeting the customer's performance needs, or the nodes are no longer supported.
 
 .. note::
 
