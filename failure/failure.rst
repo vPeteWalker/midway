@@ -1,0 +1,158 @@
+.. _failure:
+
+-------
+Failure
+-------
+
+Prerequisites and Requirements
+++++++++++++++++++++++++++++++
+
+POINT TO INITIAL CLUSTER CONFIG SECTION
+
+
+Before you begin
+++++++++++++++++
+
+Please be aware that any information such as server names, IP addresses, and similar information contained within any screen shots are strictly for demonstration purposes. Do not use these values when proceeding with any of the steps contained within this workshop.
+
+This workshop was created with the following versions of Nutanix products. There may be differences - in both written steps and screen shots - between what is shown throughout this workshop, and what you experience if you are using later versions of the individual software packages listed below.
+
+   - AOS             - 5.17.0.4
+   - PC              - 5.17.0.3
+
+Finally, while you are welcome to vary your inputs compared to the instructions listed below, please be aware that by diverting from these instructions, you may negatively impact your ability to successfully complete this workshop.
+
+CVM Failure
++++++++++++
+
+*In this section, we will be simulating a Controller Virtual Machine (CVM) failure by executing a command that will shut off the CVM unexpectedly (versus a gradual shutdown for maintenance). This test demonstrates the ability of Nutanix's AOS to immediately failover storage I/O operations to another CVM in the cluster without interruption to any VMs running on that host. This is all done while running a continuous ping and/or workload simulation via X-Ray or similar to illustrate a real world failure scenario.*
+
+#. There are two example scenarios you can run to demonstrate the cluster resiliency during this event:
+   - BASIC: Create two VMs, one on the host that is running the CVM you are shutting down, one on a host that will remain untouched. Begin a continuous ping between these VMs prior to issuing the shutdown command via SSH, and observe that there are no lost pings or X-Ray VM interruption post-CVM shutdown.
+   - RECOMMENDED: Use X-ray to run OLTP or VDI workload. While normally not recommended to run X-Ray on the same cluster during performance tests, X-Ray can be run on the cluster for this purpose.
+
+.# SSH into any host (not CVM) within the cluster using the *root* username and password, and run the following commands to shut down the CVM running on that host.
+
+   - **virsh list** - This command will *list all VMs* running on the host.
+   - **virsh shutdown `*CVM name*`** - This command will *shut down* the CVM.
+   - **virsh start `*CVM name*`** - This command will *start* the CVM.
+
+   .. figure:: images/1.png
+
+      Sample output of all commands
+
+#. Login to Prism, and observe that the VMs on the same host are still running without interruption. Additionally, demonstrate the result of either the **BASIC** or **RECOMMENDED** scenarios.
+
+   .. figure:: images/2.png
+
+#.
+
+HDD Failure
++++++++++++
+
+*In this section, we will be simulating a Hard Disk Drive (HDD) failure by executing a command that will instantly simulate a real world degredation event for a hard disk that normally happens over time. This is preferable to performing a "drive pull" test, as that is a very unlikely scenario. What is more likely, is a HDD to develop bad sectors or similar issues gradually, and it's critical to data protection that Nutanix handles this gracefully, and without interruption.  This test demonstrates the ability of Nutanix's AOS to immediately begin rebuilding additional copies of data on the surviving drives, as a high priority event, utilizing all nodes in the cluster to aid in that rebuild. This results in a restoration to full redundancy in a very short amount of time. Internal tests show that using several generation old equipment, Nutanix can rebuild 5TB worth of data within 45 minutes. This differs between other platforms, as we don't have a default wait period before rebuilding data, and as Nutanix doesn't operate in a paired fashion, we can take advantage of the distributed nature of Nutanix and the combined performance of the entire cluster to rebuild missing data. Data rebuild time decreases with each additional node added to the cluster.
+
+TO BE ADDED - TESTING IN PROGRESS
+
+NIC Failure
++++++++++++
+
+*In this section, we will be simulating a Network Interface Card (NIC) failure by executing a command that will shut down one NIC port at a time, and observe the behavior of the cluster. This demonstration also shows what would happen in the event of a switch failure that was supplying a connection to the cluster. By default, the configuration is setup in an active/passive mode.*
+
+**TO BE COMPLETED** - CLI example showing how to identify 10gb NICs, command to disable/enable one at a time, but show both NICs failing (1 at a time)
+
+There are two example scenarios you can run to demonstrate the cluster resiliency during this event:
+   - BASIC: Create two VMs, one on the host with the NIC you will be shutting down, one on a host that will remain untouched. Begin a continuous ping between these VMs prior to issuing the shutdown command via SSH, and observe that there are no lost pings or X-Ray VM interruption during NIC failover.
+   - RECOMMENDED: Use X-ray to run OLTP or VDI workload. While normally not recommended to run X-Ray on the same cluster during performance tests, X-Ray can be run on the cluster for this purpose.
+
+Viewing AHV Host Network Configuration in Prism
+===============================================
+
+This will display a visual representation of the network layout of the selected host.
+
+#. Click **Network** from the dropdown.
+
+   .. figure:: images/3.png
+
+#. Click on the action link for the host you intend to use for this test. We've chosen the host *PHX-POC212-1* in this example.
+
+   .. figure:: images/4.png
+
+#. You will now be presented with a diagram of the links between the CVM and the physical NIC ports. Select a network connection to view the details. We've chosen the *eth3* port. Ensure the port you choose is active. At the right, the details of that port are now displayed. This includes *MTU (bytes)*, *Link Capacity*, *MAC Address*, *Port Name*, and *Link Status*.
+
+   .. figure:: images/5.png
+
+For more details, please view `Network Visualization <https://portal.nutanix.com/page/documents/details/?targetId=Web-Console-Guide-Prism-v5_16%3Awc-network-visualization-intro-c.html/>`_ portion of the .`Prism Web Console Guide <https://portal.nutanix.com/page/documents/details/?targetId=Web-Console-Guide-Prism-v5_17%3AWeb-Console-Guide-Prism-v5_17>`_
+
+View AHV Host Network Configuration in the CLI
+==============================================
+
+.. note::
+
+   For better security and a single point of management, avoid connecting directly to the AHV hosts. All AHV host operations can be performed from the CVM by connecting to 192.168.5.1, the internal management address of the AHV host.
+
+#. SSH to the CVM on the host using the *nutanix* username and password.
+
+#. To verify the names, speed, and connectivity status of all AHV host interfaces, use the `manage_ovs show_uplinks` command, followed by the `manage_ovs show_interfaces` command.
+
+   .. code-block:: bash
+
+      manage_ovs --bridge_name br0 show_uplinks
+
+      .. figure:: images/6.png
+
+         Sample output of `manage_ovs show_uplinks` command
+
+   .. code-block:: bash
+
+      manage_ovs show_interfaces
+
+      .. figure:: images/7.png
+
+         Sample output of `manage_ovs show_interfaces` command
+
+In our example, eth0 and eth1 report **False** under *link* as there is no physical connection to those ports. Ports eth2 and eth3 report **True** under link, as both are physically connected. We now need to identify the active port in this bridge.
+
+#. Execute the command `ovs-appctl bond/show`
+
+   .. figure:: path
+
+      Sample output of the `ovs-appctl bond/show` command
+
+Again, we see that eth0 and eth1 are  disabled, as they have no physical link. They both list “may_enable; false” as activating these ports would be pointless without a physical connection.
+
+
+
+Disable AHV Host Network Port in the CLI
+========================================
+
+IN PROGRESS
+
+#. SSH to the internal management address of the AHV host. This step does not require additional authentication.
+
+   .. code-block:: bash
+
+      ssh root@192.168.5.1
+
+
+
+Node Failure
+++++++++++++
+
+*In this section, we will be simulating a node failure by leveraging the IPMI (commonly referred to out-of-band or "lights out") management to power off the node unexpectedly, and observe the behavior of the cluster. In a 2+ node configuration, Nutanix can tolarate the unavailability of a single node - whether due to a failure, or scheduled maintenance.*
+
+TO BE ADDED
+
+Power Supply Failure
+++++++++++++++++++++
+
+*In this section, we will be simulating a node failure by leveraging the IPMI (commonly referred to out-of-band or "lights out") management to power off the node unexpectedly, and observe the behavior of the cluster. In a 2+ node configuration, Nutanix can tolarate the unavailability of a single node - whether due to a failure, or scheduled maintenance.*
+
+TO BE ADDED
+
+Complete Power Failure
+++++++++++++++++++++++
+
+*In this section, we will be simulating a node failure by leveraging the IPMI (commonly referred to out-of-band or "lights out") management to power off all nodes simultaneously, and observe the behavior of the cluster once the simulated power is restored.*
+
+TO BE ADDED
