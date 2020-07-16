@@ -32,7 +32,7 @@ Performing Inventory with LCM
 
 #. To take an inventory, click **Perform Inventory**.
 
-   - If you do not have auto-update enabled, and a new version of the LCM framework is available, LCM shows the following warning message:
+   If you do not have auto-update enabled, and a new version of the LCM framework is available, LCM shows the following warning message:
 
    .. figure:: images/3.png
        :align: center

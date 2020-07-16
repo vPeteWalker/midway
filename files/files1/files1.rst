@@ -1,31 +1,33 @@
-.. _files:
+.. _files1:
 
------
-Files
------
+-------------------
+Starting with Files
+-------------------
+
+Nutanix Files (Files) lets you to share files across user workstations in a centralized and protected location to eliminate the requirement for a third-party file server.
+
+Files uses a scale-out architecture that provides file services to clients through the Server Message Block (SMB) or Network File System (NFS) protocol. Files consists of one or more file server VMs (FSVMs) combined into a logical file server instance sometimes referred to as a Files cluster. Files supports creating multiple file server instances within a single Nutanix cluster.
 
 Prerequisites and Requirements
 ++++++++++++++++++++++++++++++
 
-POINT TO INITIAL CLUSTER CONFIG SECTION
+- Complete the steps outlined in the :ref:`clusterconfig` section
 
-Review `NUTANIX FILES GUIDE <https://portal.nutanix.com/page/documents/details/?targetId=Files-v35:Files-v35>`_ and `FILE ANALYTICS GUIDE <https://portal.nutanix.com/page/documents/details/?targetId=File-Analytics-v2_1%3AFile-Analytics-v2_1>`_ for all details including, but not limited to, prerequities, requirements, and recommendations before proceeding.
+- Review `NUTANIX FILES GUIDE <https://portal.nutanix.com/page/documents/details/?targetId=Files-v35:Files-v35>`_ and `FILE ANALYTICS GUIDE <https://portal.nutanix.com/page/documents/details/?targetId=File-Analytics-v2_1%3AFile-Analytics-v2_1>`_ for all details including, but not limited to, prerequities, requirements, and recommendations before proceeding.
 
 .. note::
 
-   There are many options at various stages that are available to configure Files to suit the needs of our customers. This workshop will focus on the following configuration. Refer to the *NUTANIX FILES GUIDE* linked above for additional configuration options.
+   There are many options at various stages that are available to configure Files to suit the needs of our customers. This workshop will focus on the following configuration.
 
       - One File Server       - basic configuration, 3 File Server VMs (FSVM)
-      - Two SMB file shares   - *Initials*\ -smb01 (normal), *Initials*\ -smb02 (distributed)
+      - Two SMB file shares   - *Initials*\ -smb01 (normal)
+                              - *Initials*\ -smb02 (distributed)
       - One NFS export        - *Initials*\ -logs
       - One hypervisor        - AHV
       - AD authentication     - Microsoft Active Directory - via AutoAD VM
+                              - Customer provided Active Directory
       - One VLAN              - Unmanaged (IPAM not configured)
       - Files Analytics
-      - Two VMS               - WinTools, LinuxTools
-
-Before you begin
-++++++++++++++++
 
 Please be aware that any information such as server names, IP addresses, and similar information contained within any screen shots are strictly for demonstration purposes. Do not use these values when proceeding with any of the steps contained within this workshop.
 
@@ -145,58 +147,6 @@ Creating the file server begins. You can monitor progress through the **Tasks** 
 
             .. figure:: images/9.png
 
-Creating an SMB File Share
-++++++++++++++++++++++++++
-
-This task details how to create new shares using the Nutanix file server.
-
-A *distributed* (home) share is the repository for the user's personal files, and a *standard* share is the repository shared by a group. A home share is distributed at the top-level directories while standard shares are located on a single file server VM (FSVM). Users have the following permissions in distributed and standard shares.
-
-   .. note::
-
-      Distributed shares are only available on deployments of three or more FSVMs.
-
-      Do not use Windows Explorer to create new top level directories (folders), as you will not be able to rename any folders created with the default New Folder name (see Troubleshooting). For optimal performance, the directory structure for distributed shares must be flat.
-
-      **Distributed shares**
-
-         Domain administrator: Full access
-
-         Domain User: Read only
-
-         Creator Owner: Full access (inherited only)
-
-      **Standard shares**
-
-         Domain administrator: Full access
-
-         Domain User: Full access
-
-         Creator Owner: Full access (inherited only)
-
-#. Click **File Server** from the dropdown.
-
-#. Click **+ Share/Export** in the top right corner.
-
-#. Complete the fields and click **Save** to create a standard file share.
-
-   - **NAME**: Enter the **Initials*\ -smb01** as the name for the share.
-   - **FILE SERVER**: From the drop-down list, select the file server to place the share.
-
-   .. figure:: images/10.png
-
-#. Click **Next**.
-
-#. Select **Blocked File Types** and enter **.mov**
-
-   .. figure:: images/10a.png
-
-#. Click **Next > Create**.
-
-#. To create a Distributed share, repeat the steps above, with two differences:
-
-   - **NAME**: Enter the ***Initials*\ -smb02** as the name for the share.
-   - On the *Settings* page, click the **Use "Distributed" share/export type instead of "Standard"** box.
 
 Creating an NFS export
 ++++++++++++++++++++++
