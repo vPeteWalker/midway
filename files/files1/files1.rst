@@ -30,25 +30,25 @@ Files uses a scale-out architecture that provides file services to clients throu
       - One VLAN              - Unmanaged (IPAM not configured)
       - Files Analytics
 
-   .. list-table::
-      :widths: 25 35 45
-      :header-rows: 0
+.. list-table::
+   :widths: 25 35 45
+   :header-rows: 0
 
-      * - One File Server
-        - basic configuration, 3 File Server VMs (FSVM)
-      * - Two SMB file shares
-        - *Initials*\ -smb01 (normal)
-        - *Initials*\ -smb02 (distributed)
-      * - One NFS export
-        - *Initials*\ -logs
-      * - One hypervisor
-        - AHV
-      * - Authentication
-        - Microsoft Active Directory - via AutoAD VM
-        - Customer provided Active Directory
-      * - One VLAN
-        - Unmanaged (IPAM not configured)  THIS MUST CHANGE BASED ON MATT'S CONFIG
-      * - Files Analytics
+   * - One File Server
+     - basic configuration, 3 File Server VMs (FSVM)
+   * - Two SMB file shares
+     - *Initials*\ -smb01 (normal)
+     - *Initials*\ -smb02 (distributed)
+   * - One NFS export
+     - *Initials*\ -logs
+   * - One hypervisor
+     - AHV
+   * - Authentication
+     - Microsoft Active Directory - via AutoAD VM
+     - Customer provided Active Directory
+   * - One VLAN
+     - Unmanaged (IPAM not configured)  THIS MUST CHANGE BASED ON MATT'S CONFIG
+   * - Files Analytics
 
 Please be aware that any information such as server names, IP addresses, and similar information contained within any screen shots are strictly for demonstration purposes. Do not use these values when proceeding with any of the steps contained within this workshop.
 
