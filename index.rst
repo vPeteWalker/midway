@@ -58,9 +58,9 @@
    :name: _files1
    :hidden:
 
-   files/files1
-   files/files2
-   files/files3
+   files/files1/files1
+   files/files2/files2
+   files/files3/files3
 
 .. toctree::
    :maxdepth: 2
