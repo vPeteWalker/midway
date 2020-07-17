@@ -8,10 +8,11 @@ Nutanix Files (Files) lets you to share files across user workstations in a cent
 
 Files uses a scale-out architecture that provides file services to clients through the Server Message Block (SMB) or Network File System (NFS) protocol. Files consists of one or more file server VMs (FSVMs) combined into a logical file server instance sometimes referred to as a Files cluster. Files supports creating multiple file server instances within a single Nutanix cluster.
 
-Prerequisites and Requirements
-++++++++++++++++++++++++++++++
+**Pre-requisites:** Completion of :ref:`vmmanage`
 
-- Complete the steps outlined in the :ref:`clusterconfig` section
+**Expected Module Duration:** XX minutes
+
+**Covered Test IDs:** N/A
 
 - Review `NUTANIX FILES GUIDE <https://portal.nutanix.com/page/documents/details/?targetId=Files-v35:Files-v35>`_ and `FILE ANALYTICS GUIDE <https://portal.nutanix.com/page/documents/details/?targetId=File-Analytics-v2_1%3AFile-Analytics-v2_1>`_ for all details including, but not limited to, prerequities, requirements, and recommendations before proceeding.
 
@@ -29,6 +30,26 @@ Prerequisites and Requirements
       - One VLAN              - Unmanaged (IPAM not configured)
       - Files Analytics
 
+   .. list-table::
+      :widths: 25 35 45
+      :header-rows: 0
+
+      * - One File Server
+        - basic configuration, 3 File Server VMs (FSVM)
+      * - Two SMB file shares
+        - *Initials*\ -smb01 (normal)
+        - *Initials*\ -smb02 (distributed)
+      * - One NFS export
+        - *Initials*\ -logs
+      * - One hypervisor
+        - AHV
+      * - Authentication
+        - Microsoft Active Directory - via AutoAD VM
+        - Customer provided Active Directory
+      * - One VLAN
+        - Unmanaged (IPAM not configured)  THIS MUST CHANGE BASED ON MATT'S CONFIG
+      * - Files Analytics
+
 Please be aware that any information such as server names, IP addresses, and similar information contained within any screen shots are strictly for demonstration purposes. Do not use these values when proceeding with any of the steps contained within this workshop.
 
 This workshop was created with the following versions of Nutanix products. There may be differences - in both written steps and screen shots - between what is shown throughout this workshop, and what you experience if you are using later versions of the individual software packages listed below.
@@ -41,7 +62,7 @@ This workshop was created with the following versions of Nutanix products. There
 Finally, while you are welcome to vary your inputs compared to the instructions listed below, please be aware that by diverting from these instructions, you may negatively impact your ability to successfully complete this workshop.
 
 Creating a File Server
-++++++++++++++++++++++
+......................
 
 #. In the Prism web console, go to the *File Server Dashboard* page by clicking **File Server** from the dropdown.
 
@@ -149,7 +170,7 @@ Creating the file server begins. You can monitor progress through the **Tasks** 
 
 
 Creating an NFS export
-++++++++++++++++++++++
+......................
 
 #. In the Prism web console, go to the *File Server Dashboard* page by clicking **File Server** from the dropdown.
 
@@ -186,7 +207,7 @@ Creating an NFS export
 #. Review the **Summary** and click **Create**.
 
 Deploying Files Analytics
-+++++++++++++++++++++++++
+.........................
 
 #. Go to **Support Portal > Downloads > Files** and download the File Analytics QCOW2 and JSON files.
 
@@ -228,7 +249,7 @@ Deploying Files Analytics
 #. In the *Enable File Analytics* dialog-box, enter the AD username and password for the file server administrator, and click **Enable**.
 
 Enabling Files Analytics
-++++++++++++++++++++++++
+........................
 
 #. In the *File Server* view, select the target file server and click **File Analytics** in the tabs bar.
 
@@ -256,7 +277,7 @@ Enabling Files Analytics
 
 
 Testing with client desktop
-+++++++++++++++++++++++++++
+...........................
 
 AutoAD is pre-populated with the following Users and Groups for your use:
 
@@ -313,7 +334,7 @@ AutoAD is pre-populated with the following Users and Groups for your use:
 .. #. Repeat the process for any additional shares.
 
 Testing "normal" SMB share
-++++++++++++++++++++++++++
+..........................
 
 #. Deploy a new VM from the WinTools image named *Initials*\ **-WinTools**.
 
@@ -376,12 +397,12 @@ Testing "normal" SMB share
 #. Return to **Prism Element > File Server > Share/Export**, select your share. Review the **Share Details**, **Usage** and **Performance** tabs to understand the high level information available on a per share basis, including the number of files & connections, storage utilization over time, latency, throughput, and IOPS.
 
 Testing "distributed" SMB share
-+++++++++++++++++++++++++++++++
+...............................
 
 TO BE COMPLETED
 
 Testing the NFS export
-++++++++++++++++++++++
+......................
 
 The following steps utilize the LinuxTools VM as a client for your Files NFS export.
 
@@ -436,7 +457,7 @@ The following steps utilize the LinuxTools VM as a client for your Files NFS exp
    Note that the utilization data is updated every 10 minutes.
 
 Testing with File Analytics
-+++++++++++++++++++++++++++
+...........................
 
 In this exercise you will explore the new, integrated File Analytics capabilities available in Nutanix Files, including scanning existing shares, creating anomaly alerts, and reviewing audit details. File Analytics is deployed in minutes as a standalone VM through an automated, One Click operation in Prism Element. This VM has already been deployed and enabled in your environment.
 

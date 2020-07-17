@@ -1,7 +1,7 @@
 .. _files3:
 
 Creating an NFS export
-++++++++++++++++++++++
+......................
 
 #. In the Prism web console, go to the *File Server Dashboard* page by clicking **File Server** from the dropdown.
 
@@ -38,7 +38,7 @@ Creating an NFS export
 #. Review the **Summary** and click **Create**.
 
 Testing with client desktop
-+++++++++++++++++++++++++++
+...........................
 
 AutoAD is pre-populated with the following Users and Groups for your use:
 
@@ -95,7 +95,7 @@ AutoAD is pre-populated with the following Users and Groups for your use:
 .. #. Repeat the process for any additional shares.
 
 Testing the NFS export
-++++++++++++++++++++++
+......................
 
 The following steps utilize the LinuxTools VM as a client for your Files NFS export.
 

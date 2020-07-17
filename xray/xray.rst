@@ -5,7 +5,7 @@ X-RAY
 -----
 
 Deploying X-Ray
-+++++++++++++++
+...............
 
 X-Ray is an automated testing framework and benchmarking application for enterprise-grade datacenters. The X-Ray application is a downloadable virtual machine (VM) with a user interface and complete documentation. Once installed, X-Ray can test and analyze several different systems and report comparable information for your use.
 
@@ -13,10 +13,7 @@ X-Ray provides test scenarios for hyperconverged platforms that demonstrate vari
 
 This guide will step you through installing and configuring X-Ray on AHV, using a single VLAN. Please refer to the `X-Ray Guide <https://portal.nutanix.com/page/documents/details/?targetId=X-Ray-Guide-v3_8%3AX-Ray-Guide-v3_8>`_ for detailed information on other configurations.
 
-Prerequisites and Requirements
-==============================
 
-POINT TO INITIAL CLUSTER CONFIG SECTION
 
 .. note::
 

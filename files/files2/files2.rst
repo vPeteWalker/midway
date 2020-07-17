@@ -1,7 +1,7 @@
 .. _files2:
 
 Creating an SMB File Share
-++++++++++++++++++++++++++
+..........................
 
 This task details how to create new shares using the Nutanix file server.
 
@@ -54,7 +54,7 @@ A *distributed* (home) share is the repository for the user's personal files, an
    - On the *Settings* page, click the **Use "Distributed" share/export type instead of "Standard"** box.
 
 Testing with client desktop
-+++++++++++++++++++++++++++
+...........................
 
 AutoAD is pre-populated with the following Users and Groups for your use:
 
@@ -111,7 +111,7 @@ AutoAD is pre-populated with the following Users and Groups for your use:
 .. #. Repeat the process for any additional shares.
 
 Testing "normal" SMB share
-++++++++++++++++++++++++++
+..........................
 
 #. Deploy a new VM from the WinTools image named *Initials*\ **-WinTools**.
 
@@ -174,12 +174,12 @@ Testing "normal" SMB share
 #. Return to **Prism Element > File Server > Share/Export**, select your share. Review the **Share Details**, **Usage** and **Performance** tabs to understand the high level information available on a per share basis, including the number of files & connections, storage utilization over time, latency, throughput, and IOPS.
 
 Testing "distributed" SMB share
-+++++++++++++++++++++++++++++++
+...............................
 
 TO BE COMPLETED
 
 Testing with File Analytics
-+++++++++++++++++++++++++++
+...........................
 
 In this exercise you will explore the new, integrated File Analytics capabilities available in Nutanix Files, including scanning existing shares, creating anomaly alerts, and reviewing audit details. File Analytics is deployed in minutes as a standalone VM through an automated, One Click operation in Prism Element. This VM has already been deployed and enabled in your environment.
 
