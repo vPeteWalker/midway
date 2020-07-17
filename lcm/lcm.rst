@@ -50,6 +50,7 @@ Performing Inventory with LCM
 
 #. Click **OK**.
 
+
    .. figure:: images/4.png
        :align: center
 
