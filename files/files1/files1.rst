@@ -30,6 +30,8 @@ Files uses a scale-out architecture that provides file services to clients throu
       - One VLAN              - Unmanaged (IPAM not configured)
       - Files Analytics
 
+|
+
 .. list-table::
    :widths: 25 35 45
    :header-rows: 0
