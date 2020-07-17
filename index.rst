@@ -9,6 +9,7 @@
    prereqs/prereqs
    hpoc/hpoc
    foundation/foundation
+   diyfoundation/diyfoundation
 
 .. toctree::
    :maxdepth: 2
@@ -112,7 +113,7 @@ How Do I Get Support?
 
 If you're experiencing product issues during a POC, you can engage Nutanix Support directly by creating a case at https://portal.nutanix.com or calling 1-855-NUTANIX, Option 3. The full list of international support phone numbers can be found `here <https://www.nutanix.com/support-services/product-support/support-phone-numbers>`_.
 
-For non-blocking issues, you can also try to engage Support in #sre in Slack.
+For non-blocking issues, you can also try to engage Support in `#sre <slack://channel?team=T0252CLM8&id=C07SH5139>`_ in Slack.
 
 Feedback
 ++++++++
