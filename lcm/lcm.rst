@@ -24,7 +24,7 @@ Performing Inventory with LCM
 
    Some entities are local to Prism Central, such as Calm, Epsilon, and Karbon. To manage these entities, you must log on to **Prism Central**.
 
-   Other entities, such as component firmware, are local to Prism Element. To manage these entities, you must log on to **Prism Element**.
+   Other entities, such as AOS, AHV, and component firmware, are local to Prism Element. To manage these entities, you must log on to **Prism Element**.
 
 #. From the drop-down menu, select **LCM**.
 
@@ -32,7 +32,7 @@ Performing Inventory with LCM
 
 #. To take an inventory, click **Perform Inventory**.
 
-   - If you do not have auto-update enabled, and a new version of the LCM framework is available, LCM shows the following warning message:
+   If you do not have auto-update enabled, and a new version of the LCM framework is available, LCM shows the following warning message:
 
    .. figure:: images/3.png
        :align: center

@@ -60,7 +60,9 @@
    :name: _files
    :hidden:
 
-   files/files
+   files/files1
+   files/files2
+   files/files3
 
 .. toctree::
    :maxdepth: 2
@@ -72,8 +74,8 @@
 
 .. toctree::
    :maxdepth: 2
-   :caption: Files
-   :name: _files
+   :caption: Failure
+   :name: _failure
    :hidden:
 
    failure/failure

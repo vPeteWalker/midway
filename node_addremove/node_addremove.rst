@@ -25,7 +25,7 @@ A customer may choose to add a node or nodes to account for a new workloads such
       Rack awareness is not in use.
 
 Add node(s)
-+++++++++++
+...........
 
 #. Either click :fa:`gear` **> Settings > Expand Cluster**, or from the dropdown menu choose **Hardware > +Expand Cluster**.
 
@@ -76,7 +76,7 @@ Add node(s)
          :scale: 60%
 
 Remove node
-+++++++++++
+...........
 
 #. From the dropdown, choose the **Hardware** dashboard, then click the **Diagram** or **Table** tab.
 
