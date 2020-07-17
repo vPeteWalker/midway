@@ -52,11 +52,10 @@
    calm/singlevmwin/singlevmwin
    calm/deploypocapp/deploypocapp
 
-
 .. toctree::
    :maxdepth: 2
    :caption: Files
-   :name: _files
+   :name: _files1
    :hidden:
 
    files/files1
