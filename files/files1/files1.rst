@@ -10,7 +10,7 @@ Files uses a scale-out architecture that provides file services to clients throu
 
 **Pre-requisites:** Completion of :ref:`vmmanage`
 
-**Expected Module Duration:** XX minutes
+**Expected Module Duration:** 60 minutes
 
 **Covered Test IDs:** N/A
 
@@ -33,8 +33,8 @@ Files uses a scale-out architecture that provides file services to clients throu
          - Microsoft Active Directory - via AutoAD VM
          - Customer provided Active Directory
       - One VLAN
-         - Unmanaged (IPAM not configured)
-      - **Files Analytics**
+         - Managed (IPAM configured)
+      - Files Analytics
 
 Please be aware that any information such as server names, IP addresses, and similar information contained within any screen shots are strictly for demonstration purposes. Do not use these values when proceeding with any of the steps contained within this workshop.
 
@@ -42,10 +42,14 @@ This workshop was created with the following versions of Nutanix products. There
 
    - AOS             - 5.17.0.4
    - PC              - 5.17.0.3
-   - Files           - 3.6.4
+   - Files           - 3.6.5
    - Files Analytics - 2.1.1.1
 
 Finally, while you are welcome to vary your inputs compared to the instructions listed below, please be aware that by diverting from these instructions, you may negatively impact your ability to successfully complete this workshop.
+
+   .. note::
+
+      Refer to :ref:`ntnxlab` for details on AD Security Groups, user accounts, and passwords when using the AutoAD VM.
 
 Creating a File Server
 ......................
@@ -68,7 +72,7 @@ Creating a File Server
 
       The file server name is used by clients to access the file server. The fully qualified name (file server name + domain) must be unique.
 
-   - **Domain**: ntnxlab.local
+   - **Domain**: ntnxlab.local if using AutoAD, otherwise customer provided Active Directory domain.
 
    - **File Server Storage**: Enter the file server total storage size (minimum 1 TiB).
 
@@ -82,19 +86,21 @@ Creating a File Server
 
    - **VLAN**: Select the target VLAN for the *client network* from the pull-down list.
 
-   - **Subnet Mask**: Enter the subnet mask value.
+.. - **Subnet Mask**: Enter the subnet mask value.
+..
+.. - **Gateway**: Enter the gateway IP address.
+..
+..    .. figure:: images/4.png
+..
+.. - **# IP addresses required**: Click **+IP Addresses**. Enter the starting IP address in the *From* field and the ending IP address in the *To* field (if it is not populated automatically), and then click **Save**. A single line assumes a consecutive set of IP addresses. To use a non-consecutive set, select the + IP Addresses link to open a new line. Add as many lines as necessary to complete the list of IP addresses.
 
-   - **Gateway**: Enter the gateway IP address.
+   - **DNS Resolver IP**: Enter IP address for your AutoAD VM or customer-provided domain controller.
 
-      .. figure:: images/4.png
+.. - **NTP Servers**: Enter the server name(s) or IP address(es) for the NTP server(s). Use a comma separated list for multiple entries.
+..
+..    .. figure:: images/5.png
 
-   - **# IP addresses required**: Click **+IP Addresses**. Enter the starting IP address in the *From* field and the ending IP address in the *To* field (if it is not populated automatically), and then click **Save**. A single line assumes a consecutive set of IP addresses. To use a non-consecutive set, select the + IP Addresses link to open a new line. Add as many lines as necessary to complete the list of IP addresses.
-
-   - **DNS Resolver IP**: Enter IP address for your AutoAD VM.
-
-   - **NTP Servers**: Enter the server name(s) or IP address(es) for the NTP server(s). Use a comma separated list for multiple entries.
-
-      .. figure:: images/5.png
+   .. figure:: images/4m.png
 
    - When all the entries are correct, click the **Next** button.
 
@@ -102,13 +108,13 @@ Creating a File Server
 
    - **VLAN** - Select the target VLAN for the *client network* from the pull-down list.
 
-   - **Subnet Mask**: Enter the subnet mask value.
+.. - **Subnet Mask**: Enter the subnet mask value.
+..
+.. - **Gateway**: Enter the gateway IP address.
+..
+.. - **# IP addresses required**: Click **+ IP Addresses**. Enter the starting IP address in the *From* field and the ending IP address in the *To* field (if it is not populated automatically), and then click **Save**. A single line assumes a consecutive set of IP addresses. To use a non-consecutive set, select the + IP Addresses link to open a new line. Add as many lines as necessary to complete the list of IP addresses.
 
-   - **Gateway**: Enter the gateway IP address.
-
-   - **# IP addresses required**: Click **+ IP Addresses**. Enter the starting IP address in the *From* field and the ending IP address in the *To* field (if it is not populated automatically), and then click **Save**. A single line assumes a consecutive set of IP addresses. To use a non-consecutive set, select the + IP Addresses link to open a new line. Add as many lines as necessary to complete the list of IP addresses.
-
-      .. figure:: images/6.png
+      .. figure:: images/6m.png
 
    - When all the entries are correct, click the **Next** button.
 
@@ -212,17 +218,19 @@ Deploying Files Analytics
 #. Do the following in the indicated fields:
 
    - **Name**: Enter **AVM** for the File Analytics VM (AVM).
-   - **Storage Container**: Select a storage container from the dropdown. The dropdown only displays file server storage containers.
-   - **Network List**: Select VLAN.
-   - Enter network details in the **Subnet Mask**, **Default Gateway IP**, and **IP Address** fields as indicated.
+   - **Network List**: Select the **Primary - Managed** VLAN.
+   - **Storage Capacity**: Adjust as necessary, depending on available storage capacity - minimum 2 TiB.
+.. - Enter network details in the **Subnet Mask**, **Default Gateway IP**, and **IP Address** fields as indicated.
+..
+..    .. note::
+..
+..       When utilizing the HPOC, it is recommended to use .15 for the last octet for the IP address.
+..
+   .. figure:: images/11.png
 
-      .. note::
+      .. figure:: images/11m.png
 
-         When utilizing the HPOC, it is recommended to use .15 for the last octet for the IP address.
-
-      .. figure:: images/11.png
-
-   - Scroll down, and click the **Show Advanced Settings** box. Within the **DNS Resolver IP (Comma Separated)** field, enter the IP address of your AutoAD VM.
+   - Scroll down, and click the **Show Advanced Settings** box. Within the **DNS Resolver IP (Comma Separated)** field, enter the IP address of your AutoAD VM or customer-provided domain controller.
 
       .. figure:: images/11a.png
 
@@ -322,22 +330,18 @@ AutoAD is pre-populated with the following Users and Groups for your use:
 Testing "normal" SMB share
 ..........................
 
-#. Deploy a new VM from the WinTools image named *Initials*\ **-WinTools**.
+#. We will be utilizing the **WinServer-2** VM previously created in the :ref:`vmmanage` section. Launch the console for **WinServer-2** and login.
 
-#. Connect to your *Initials*\ **-WinTools** VM via VM console as a **non-Administrator NTNXLAB** domain account:
+#. Rename server, Join to domain, reboot - check to make sure you can connect to \\files.ntnxlab.local\
 
-   .. note::
-
-      You will not be able to connect using these accounts via RDP.
-
-   - user01 - user25
-   - devuser01 - devuser25
-   - operator01 - operator25
-   - **Password** nutanix/4u
-
-   .. note::
-
-     The *Initials*\ **-WinTools** VM has already been joined to the **ntnxlab.local** domain. You could use any domain joined VM to complete the following steps.
+.. .. note::
+..
+..    You will not be able to connect using these accounts via RDP.
+..
+.. - user01 - user25
+.. - devuser01 - devuser25
+.. - operator01 - operator25
+.. - **Password** nutanix/4u
 
 #. Open ``\\files.ntnxlab.local\`` in **File Explorer**.
 
