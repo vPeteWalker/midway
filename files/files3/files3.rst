@@ -13,7 +13,7 @@ Creating an NFS export
 
 #. Fill out the following fields:
 
-   - **Name** - *Initials*\ -logs
+   - **Name** - logs
    - **Description (Optional)** - File share for system logs
    - **File Server** - **Files**
    - **Share Path (Optional)** - Leave blank
@@ -134,7 +134,7 @@ The following steps utilize the LinuxTools VM as a client for your Files NFS exp
       total 1
       drwxrwxrwx. 2 root root 2 Mar  9 18:53 *Initials*\ -logs
 
-#. Observe that the **logs** directory is mounted in ``/filesmnt//*Initials*\ /-logs``.
+#. Observe that the **logs** directory is mounted in ``/filesmnt/logs``.
 
 #. Reboot the VM and observe the export is no longer mounted. To persist the mount, add it to ``/etc/fstab`` by executing the following:
 
@@ -146,9 +146,9 @@ The following steps utilize the LinuxTools VM as a client for your Files NFS exp
 
      .. code-block:: bash
 
-       mkdir /filesmnt/*Initials*\ -logs/host1
-       for i in {1..100}; do dd if=/dev/urandom bs=8k count=256 of=/filesmnt/*Initials*\ -logs/host1/file$i; done
+       mkdir /filesmnt/logs/host1
+       for i in {1..100}; do dd if=/dev/urandom bs=8k count=256 of=/filesmnt/logs/host1/file$i; done
 
-#. Return to **Prism > File Server > Share > *Initials*\ -logs** to monitor performance and usage.
+#. Return to **Prism > File Server > Share > logs** to monitor performance and usage.
 
    Note that the utilization data is updated every 10 minutes.

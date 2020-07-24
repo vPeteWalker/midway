@@ -80,7 +80,7 @@ Creating a File Server
 
 #. In the *Client Network* tab:
 
-   - **VLAN**: Select the target VLAN for the *client network* from the pull-down list.
+   - **VLAN**: Select the **Primary** VLAN for the *client network* from the pull-down list.
 
 .. - **Subnet Mask**: Enter the subnet mask value.
 ..

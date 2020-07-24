@@ -116,13 +116,13 @@ Testing "normal" SMB share
 
 #. Remote Desktop into **WinServer-2** and log in as the **NTNXLAB\\Administrator** account.
 
-#. Recommend that you open a command prompt and ping both your domain controller (AutoAD=**dc**) and **Files** by name, to confirm DNS resolution is working correctly before proceeding.
+#. Recommend that you open a command prompt and ping both your domain controller (e.g. **dc** and **Files**) by name, to confirm DNS resolution is working correctly before proceeding.
 
 #. Map the newly created share(s) in your directory. In the Windows client, you can map to the network and create folders at the top level of the file share.
 
    - In the Windows client VM, open *File Explorer*. Right click on **This PC** and select **Map Network Drives**.
 
-   - Select the drive letter to use for the share. Enter the path to the share in the `\\`*FileServerFQDN*`\`*share* format (e.g. \\\files.ntnxlab.local\\smb01). Click the **Reconnect at sign-in** box, and then click **Finish**.
+   - Select the drive letter to use for the share. Enter the path to the share in the `\\\ *server* \\ *share* format (e.g. \\\files.ntnxlab.local\\smb01). Click the **Reconnect at sign-in** box, and then click **Finish**.
 
    .. figure:: images/12.png
 
@@ -140,7 +140,7 @@ Testing "normal" SMB share
    - The **NTNXLAB\\Administrator** user was specified as a Files Administrator during deployment of the Files Server, giving it read/write access to all shares by default.
    - Managing access for other users is no different than any other SMB share.
 
-  #. Using *File Explorer* navigate to ``\\files.ntnxlab.local\``, right-click **smb01 > Properties**.
+#. Using *File Explorer* navigate to **\\files.ntnxlab.local\**, right-click **smb01 > Properties**.
 
    - Select the **Security** tab and click **Advanced**.
 
@@ -165,7 +165,7 @@ Testing "normal" SMB share
 
    .. code-block:: PowerShell
 
-      New-Item \\files.ntnxlab.local\\smb01\\testfile.mov``
+      ``New-Item \\files.ntnxlab.local\\smb01\\testfile.mov``
 
    Observe that creation of the new file is denied.
 
