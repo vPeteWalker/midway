@@ -1,5 +1,9 @@
 .. _files2:
 
+--------------
+SMB File Share
+--------------
+
 Creating an SMB File Share
 ..........................
 
@@ -35,8 +39,7 @@ A *distributed* (home) share is the repository for the user's personal files, an
 
 #. Complete the fields and click **Save** to create a standard file share.
 
-   - **NAME**: Enter the **Initials*\ -smb01** as the name for the share.
-   - **FILE SERVER**: From the drop-down list, select the file server to place the share.
+   - **NAME**: Enter the **smb01** as the name for the share.
 
    .. figure:: images/10.png
 
@@ -50,42 +53,46 @@ A *distributed* (home) share is the repository for the user's personal files, an
 
 #. To create a Distributed share, repeat the steps above, with two differences:
 
-   - **NAME**: Enter the ***Initials*\ -smb02** as the name for the share.
+   - **NAME**: Enter the **smb02** as the name for the share.
    - On the *Settings* page, click the **Use "Distributed" share/export type instead of "Standard"** box.
 
-Testing with client desktop
-...........................
+   .. note::
 
-AutoAD is pre-populated with the following Users and Groups for your use:
+      Best suited for home directories, user profiles and application folders. This option distributes top-level directories across FileServer VMs and allows for increased capacity and user connections. Note that only folders can be created at the root and these top-level folders must be managed using Nutanix Files MMC plugin and can be downloaded from `HERE <http://download.nutanix.com/misc/MMC/Latest/Files_MMC_TLD_setup.msi>`_. Once created, a distributed share/export cannot be downgraded to standard.
 
-   .. list-table::
-      :widths: 25 35 40
-      :header-rows: 1
-
-      * - Group
-        - Username(s)
-        - Password
-      * - Administrators
-        - Administrator
-        - nutanix/4u
-      * - SSP Admins
-        - adminuser01-adminuser25
-        - nutanix/4u
-      * - SSP Developers
-        - devuser01-devuser25
-        - nutanix/4u
-      * - SSP Consumers
-        - consumer01-consumer25
-        - nutanix/4u
-      * - SSP Operators
-        - operator01-operator25
-        - nutanix/4u
-      * - SSP Custom
-        - custom01-custom25
-        - nutanix/4u
-      * - Bootcamp Users
-        - user01-user25
-        - nutanix/4u
+.. Testing with client desktop
+.. ...........................
+..
+.. AutoAD is pre-populated with the following Users and Groups for your use:
+..
+..    .. list-table::
+..       :widths: 25 35 40
+..       :header-rows: 1
+..
+..       * - Group
+..         - Username(s)
+..         - Password
+..       * - Administrators
+..         - Administrator
+..         - nutanix/4u
+..       * - SSP Admins
+..         - adminuser01-adminuser25
+..         - nutanix/4u
+..       * - SSP Developers
+..         - devuser01-devuser25
+..         - nutanix/4u
+..       * - SSP Consumers
+..         - consumer01-consumer25
+..         - nutanix/4u
+..       * - SSP Operators
+..         - operator01-operator25
+..         - nutanix/4u
+..       * - SSP Custom
+..         - custom01-custom25
+..         - nutanix/4u
+..       * - Bootcamp Users
+..         - user01-user25
+..         - nutanix/4u
 ..
 ..
 .. #. Deploy new Windows 10 VM.
@@ -97,52 +104,43 @@ AutoAD is pre-populated with the following Users and Groups for your use:
 .. #. Join the *ntnxlab.local* domain.
 ..
 .. #. Login to domain as chosen user from above list.
-..
-.. #. Map the newly created share(s) in your directory. In the Windows client, you can map to the network and create folders at the top level of the file share.
-..
-..    - In the Windows client VM, open *File Explorer*. Right click on **This PC** and select **Map Network Drives**.
-..
-..    - Select the drive letter to use for the share. Enter the path to the share in the `\\`*FileServerFQDN*`\`*share* format. Click the **Reconnect at sign-in** box, and then click **Finish**.
-..
-..    .. figure:: images/12.png
-..
-..    A new window will open displaying the contents of the share. You may close this window.
-..
-.. #. Repeat the process for any additional shares.
 
 Testing "normal" SMB share
 ..........................
 
-#. Deploy a new VM from the WinTools image named *Initials*\ **-WinTools**.
+#. We will be utilizing the **WinServer-2** VM previously created in the :ref:`vmmanage` section. Launch the console for **WinServer-2**, and log in as the **NTNXLAB\\Administrator** account.
 
-#. Connect to your *Initials*\ **-WinTools** VM via VM console as a **non-Administrator NTNXLAB** domain account:
+#. Modify the Window Server's DNS entry to utilize the IP for your domain controller.
 
-   .. note::
+#. Change the computer name to **WinServer-2**, join it to the domain, and reboot when prompted.
 
-      You will not be able to connect using these accounts via RDP.
+#. Remote Desktop into **WinServer-2** and log in as the **NTNXLAB\\Administrator** account.
 
-   - user01 - user25
-   - devuser01 - devuser25
-   - operator01 - operator25
-   - **Password** nutanix/4u
+#. Recommend that you open a command prompt and ping both your domain controller (AutoAD=**dc**) and **Files** by name, to confirm DNS resolution is working correctly before proceeding.
 
-   .. note::
+#. Map the newly created share(s) in your directory. In the Windows client, you can map to the network and create folders at the top level of the file share.
 
-     The *Initials*\ **-WinTools** VM has already been joined to the **ntnxlab.local** domain. You could use any domain joined VM to complete the following steps.
+   - In the Windows client VM, open *File Explorer*. Right click on **This PC** and select **Map Network Drives**.
 
-#. Open ``\\files.ntnxlab.local\`` in **File Explorer**.
+   - Select the drive letter to use for the share. Enter the path to the share in the `\\`*FileServerFQDN*`\`*share* format (e.g. \\\files.ntnxlab.local\\smb01). Click the **Reconnect at sign-in** box, and then click **Finish**.
 
-#. Open a browser within your *Initials*\ **-WinTools** desktop and download sample data to populate in your share: (HOW DO WE HANDLE THIS IF PHYSICAL POC? STORE IT OUTSIDE OF GITHUB, REDUCE FILE SIZE, BREAK IT INTO MULTIPLE ZIPS, OR...?)
+   .. figure:: images/12.png
+
+   A new window will open displaying the contents of the share.
+
+#. Repeat the process for any additional shares.
+
+#. Open a browser within your **WinServer-2** desktop and download sample data to populate in your share: (MATT WILL HOST EXTERNALLY)
 
    - **If using a PHX cluster** - http://10.42.194.11/workshop_staging/peer/SampleData_Small.zip
    - **If using a RTP cluster** - http://10.55.251.38/workshop_staging/peer/SampleData_Small.zip
 
-#. Extract the contents of the zip file into your file share.
+#. Extract the contents of the zip file into your file share. This should take approximately 3-5 minutes.
 
    - The **NTNXLAB\\Administrator** user was specified as a Files Administrator during deployment of the Files Server, giving it read/write access to all shares by default.
    - Managing access for other users is no different than any other SMB share.
 
-..   #. From ``\\BootcampFS.ntnxlab.local\``, right-click *Initials*\ **-FiestaShare > Properties**.
+  #. Using *File Explorer* navigate to ``\\files.ntnxlab.local\``, right-click **smb01 > Properties**.
 
    - Select the **Security** tab and click **Advanced**.
 
@@ -150,7 +148,7 @@ Testing "normal" SMB share
 
    - Click **Select a principal** and specify **Everyone** in the **Object Name** field. Click **OK**.
 
-   #. Fill out the following fields and click **OK**:
+   - Fill out the following fields and click **OK**:
 
       - **Type** - Allow
       - **Applies to** - This folder only
@@ -159,7 +157,7 @@ Testing "normal" SMB share
       - Select **Read**
       - Select **Write**
 
-   #. Click **OK > OK > OK** to save the permission changes.
+   - Click **OK > OK > OK** to save the permission changes.
 
    All users will now be able to create folders and files within the share.
 
@@ -167,9 +165,19 @@ Testing "normal" SMB share
 
    .. code-block:: PowerShell
 
-      New-Item \\files\\*Initials*\ -smb01\testfile.mov``
+      New-Item \\files.ntnxlab.local\\smb01\\testfile.mov``
 
    Observe that creation of the new file is denied.
+
+#. Create a file that isn't on the blocked list.
+
+   .. code-block:: PowerShell
+
+      New-Item \\files.ntnxlab.local\\smb01\\testfile.txt``
+
+   Observe that creation of the new file suceeded.
+
+.. figure:: images/13.png
 
 #. Return to **Prism Element > File Server > Share/Export**, select your share. Review the **Share Details**, **Usage** and **Performance** tabs to understand the high level information available on a per share basis, including the number of files & connections, storage utilization over time, latency, throughput, and IOPS.
 
@@ -195,11 +203,7 @@ In this exercise you will explore the new, integrated File Analytics capabilitie
 
    .. figure:: images/15.png
 
-#. From your *Initials*\ **-WinTools** VM, create some audit trail activity by opening several of the files under **Sample Data**.
-
-   .. note::
-
-      You may need to complete a short wizard for OpenOffice if using that application to open a file.
+#. From your **WinServer-2** VM, create some audit trail activity by opening several of the files under **Sample Data** (e.g. Graphics, Pictures, Documents).
 
 #. Refresh the **Dashboard** page in your browser to see the **Top 5 Active Users**, **Top 5 Accessed Files** and **File Operations** panels update.
 
@@ -215,7 +219,7 @@ In this exercise you will explore the new, integrated File Analytics capabilitie
 
    .. note::
 
-      You can use wildcards for your search, for example **.doc**
+      You can use wildcards for your search, for example **.docx**
 
 #. Next, we will create rules to detect anomalous behavior on the File Server. From the toolbar, click :fa:`gear` **> Define Anomaly Rules**.
 
@@ -247,7 +251,7 @@ In this exercise you will explore the new, integrated File Analytics capabilitie
 
 #. Click **Save** to exit the **Define Anomaly Rules** window.
 
-#. To test the anomaly alerts, return to your *Initials*\ **-WinTools** VM and make a second copy of the sample data (via copy/paste) within your share.
+#. To test the anomaly alerts, return to your **WinServer-2** VM and make a second copy of the sample data (via copy/paste) within your share.
 
 #. Delete the original sample data folders.
 
@@ -257,13 +261,13 @@ In this exercise you will explore the new, integrated File Analytics capabilitie
 
    .. note:: The Anomaly engine runs every 30 minutes.  While this setting is configurable from the File Analytics VM, modifying this variable is outside the scope of this workshop.
 
-#. Create a new directory called *Initials*\ **-MyFolder** in the share.
+#. Create a new directory called **MyFolder** in the share.
 
-#. Create a text file in the *Initials*\ **-MyFolder** directory and enter some sample text to populate the file. Save the file as *Initials*\ **-file.txt**.
+#. Create a text file in the **MyFolder** directory and enter some sample text to populate the file. Save the file as **file.txt**.
 
    .. figure:: images/22.png
 
-#. Right-click *Initials*\ **-MyFolder > Properties**. Select the **Security** tab and click **Advanced**. Observe that **Users (BootcampFS\\Users)** lack the **Full Control** permission, meaning that they would be unable to delete files owned by other users.
+#. Right-click **MyFolder > Properties**. Select the **Security** tab and click **Advanced**. Observe that **Users (NTNXLAB\\Users)** lack the **Full Control** permission, meaning that they would be unable to delete files owned by other users.
 
    .. figure:: images/23.png
 

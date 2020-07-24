@@ -23,10 +23,10 @@ Files uses a scale-out architecture that provides file services to clients throu
       - One File Server
          - Basic configuration - 3 File Server VMs (FSVM)
       - Two SMB file shares
-         - *Initials*\ -smb01 (normal)
-         - *Initials*\ -smb02 (distributed)
+         - smb01 (normal)
+         - smb02 (distributed)
       - One NFS export
-         - *Initials*\ -logs
+         - logs
       - One hypervisor
          - AHV
       - Authentication
@@ -72,15 +72,11 @@ Creating a File Server
 
       The file server name is used by clients to access the file server. The fully qualified name (file server name + domain) must be unique.
 
-   - **Domain**: ntnxlab.local if using AutoAD, otherwise customer provided Active Directory domain.
+   - **Domain**: **ntnxlab.local** if using AutoAD, otherwise customer provided Active Directory domain.
 
    - **File Server Storage**: Enter the file server total storage size (minimum 1 TiB).
 
    - Click the **Next** button.
-
-      .. note::
-
-         When utilizing the HPOC, it is recommended to use .8 to .14 for the last octet for the 7 IP addresses required by the File Server VMs (FSVM) in the proceeding steps.
 
 #. In the *Client Network* tab:
 
@@ -106,7 +102,7 @@ Creating a File Server
 
 #. In the *Storage Network* tab, do the following in the indicated fields:
 
-   - **VLAN** - Select the target VLAN for the *client network* from the pull-down list.
+   - **VLAN** - Select the **Primary** VLAN for the *client network* from the pull-down list.
 
 .. - **Subnet Mask**: Enter the subnet mask value.
 ..
@@ -160,44 +156,6 @@ Creating the file server begins. You can monitor progress through the **Tasks** 
 
             .. figure:: images/9.png
 
-
-Creating an NFS export
-......................
-
-#. In the Prism web console, go to the *File Server Dashboard* page by clicking **File Server** from the dropdown.
-
-#. Click **+ Share/Export** action link.
-
-#. Fill out the following fields:
-
-   - **Name** - *Initials*\ -logs
-   - **Description (Optional)** - File share for system logs
-   - **File Server** - **Files**
-   - **Share Path (Optional)** - Leave blank
-   - **Max Size (Optional)** - Leave blank
-   - **Select Protocol** - **NFS**
-
-   .. figure:: images/24b.png
-
-#. Click **Next**.
-
-#. Fill out the following fields:
-
-   - Select **Enable Self Service Restore**.
-      These snapshots appear as a .snapshot directory for NFS clients.
-   - **Authentication** - System
-   - **Default Access (For All Clients)** - No Access
-   - Select **+ Add exceptions**.
-   - **Clients with Read-Write Access** - *The first 3 octets of your cluster network*\ .* (e.g. 10.38.1.\*)
-
-   .. figure:: images/25b.png
-
-   By default an NFS export will allow read/write access to any host that mounts the export, but this can be restricted to specific IPs or IP ranges.
-
-#. Click **Next**.
-
-#. Review the **Summary** and click **Create**.
-
 Deploying Files Analytics
 .........................
 
@@ -219,7 +177,7 @@ Deploying Files Analytics
 
    - **Name**: Enter **AVM** for the File Analytics VM (AVM).
    - **Network List**: Select the **Primary - Managed** VLAN.
-   - **Storage Capacity**: Adjust as necessary, depending on available storage capacity - minimum 2 TiB.
+   - **Storage Capacity**: Adjust as necessary, depending on available storage capacity (minimum 2 TiB).
 .. - Enter network details in the **Subnet Mask**, **Default Gateway IP**, and **IP Address** fields as indicated.
 ..
 ..    .. note::
@@ -247,13 +205,7 @@ Enabling Files Analytics
 
 #. In the *File Server* view, select the target file server and click **File Analytics** in the tabs bar.
 
-#. In the *Enable File Analytics* dialog-box, enter the credentials as indicated:
-
-#. In the *SMB Authentication* section, enter the AD username and password for the file server administrator.
-
-#. Check the **Show Advanced Settings** box
-
-#. With the **DNS Resolver IP:** field, enter the AutoAD IP address.
+#. In the *Enable File Analytics* dialog-box, in the *SMB Authentication* section, enter the AD username and password for the file server administrator (e.g. ntnxlab\\Administrator).
 
 #. Click **Enable**.
 
@@ -268,302 +220,3 @@ Enabling Files Analytics
          ::
 
             sudo bash /opt/nutanix/update_dns.sh
-
-
-Testing with client desktop
-...........................
-
-AutoAD is pre-populated with the following Users and Groups for your use:
-
-   .. list-table::
-      :widths: 25 35 40
-      :header-rows: 1
-
-      * - Group
-        - Username(s)
-        - Password
-      * - Administrators
-        - Administrator
-        - nutanix/4u
-      * - SSP Admins
-        - adminuser01-adminuser25
-        - nutanix/4u
-      * - SSP Developers
-        - devuser01-devuser25
-        - nutanix/4u
-      * - SSP Consumers
-        - consumer01-consumer25
-        - nutanix/4u
-      * - SSP Operators
-        - operator01-operator25
-        - nutanix/4u
-      * - SSP Custom
-        - custom01-custom25
-        - nutanix/4u
-      * - Bootcamp Users
-        - user01-user25
-        - nutanix/4u
-..
-..
-.. #. Deploy new Windows 10 VM.
-..
-.. #. Configure static IP, and configure DNS to point to AutoAD.
-..
-.. #. Change the computer Name.
-..
-.. #. Join the *ntnxlab.local* domain.
-..
-.. #. Login to domain as chosen user from above list.
-..
-.. #. Map the newly created share(s) in your directory. In the Windows client, you can map to the network and create folders at the top level of the file share.
-..
-..    - In the Windows client VM, open *File Explorer*. Right click on **This PC** and select **Map Network Drives**.
-..
-..    - Select the drive letter to use for the share. Enter the path to the share in the `\\`*FileServerFQDN*`\`*share* format. Click the **Reconnect at sign-in** box, and then click **Finish**.
-..
-..    .. figure:: images/12.png
-..
-..    A new window will open displaying the contents of the share. You may close this window.
-..
-.. #. Repeat the process for any additional shares.
-
-Testing "normal" SMB share
-..........................
-
-#. We will be utilizing the **WinServer-2** VM previously created in the :ref:`vmmanage` section. Launch the console for **WinServer-2** and login.
-
-#. Rename server, Join to domain, reboot - check to make sure you can connect to \\files.ntnxlab.local\
-
-.. .. note::
-..
-..    You will not be able to connect using these accounts via RDP.
-..
-.. - user01 - user25
-.. - devuser01 - devuser25
-.. - operator01 - operator25
-.. - **Password** nutanix/4u
-
-#. Open ``\\files.ntnxlab.local\`` in **File Explorer**.
-
-#. Open a browser within your *Initials*\ **-WinTools** desktop and download sample data to populate in your share: (HOW DO WE HANDLE THIS IF PHYSICAL POC? STORE IT OUTSIDE OF GITHUB, REDUCE FILE SIZE, BREAK IT INTO MULTIPLE ZIPS, OR...?)
-
-   - **If using a PHX cluster** - http://10.42.194.11/workshop_staging/peer/SampleData_Small.zip
-   - **If using a RTP cluster** - http://10.55.251.38/workshop_staging/peer/SampleData_Small.zip
-
-#. Extract the contents of the zip file into your file share.
-
-   - The **NTNXLAB\\Administrator** user was specified as a Files Administrator during deployment of the Files Server, giving it read/write access to all shares by default.
-   - Managing access for other users is no different than any other SMB share.
-
-..   #. From ``\\BootcampFS.ntnxlab.local\``, right-click *Initials*\ **-FiestaShare > Properties**.
-
-   - Select the **Security** tab and click **Advanced**.
-
-   - Click **Add**.
-
-   - Click **Select a principal** and specify **Everyone** in the **Object Name** field. Click **OK**.
-
-   #. Fill out the following fields and click **OK**:
-
-      - **Type** - Allow
-      - **Applies to** - This folder only
-      - Select **Read & execute**
-      - Select **List folder contents**
-      - Select **Read**
-      - Select **Write**
-
-   #. Click **OK > OK > OK** to save the permission changes.
-
-   All users will now be able to create folders and files within the share.
-
-#. Open **PowerShell** and create a file with a blocked file type by executing the following command:
-
-   .. code-block:: PowerShell
-
-      New-Item \\files\\*Initials*\ -smb01\testfile.mov``
-
-   Observe that creation of the new file is denied.
-
-#. Return to **Prism Element > File Server > Share/Export**, select your share. Review the **Share Details**, **Usage** and **Performance** tabs to understand the high level information available on a per share basis, including the number of files & connections, storage utilization over time, latency, throughput, and IOPS.
-
-Testing "distributed" SMB share
-...............................
-
-TO BE COMPLETED
-
-Testing the NFS export
-......................
-
-The following steps utilize the LinuxTools VM as a client for your Files NFS export.
-
-#. Note the IP address of the VM in Prism, and connect via SSH using the following credentials:
-
-   - **Username** - root
-   - **Password** - nutanix/4u
-
-#. Execute the following:  NEED A BETTER WAY TO DO THE DNS, SO WE DON'T OVERWRITE, YET IT RESOLVES VIA AUTOAD
-
-     .. code-block:: bash
-      sh -c "echo nameserver *IP address of AutoAD VM* > /etc/resolv.conf" #Overwrites the contents of the existing resolv.conf with the IP of your AutoAD VM to handle DNS queries. Example: sudo sh -c "echo nameserver 10.38.212.50 > /etc/resolv.conf"
-      yum install -y nfs-utils #This installs the NFSv4 client
-      mkdir /filesmnt #Creates directory named /filesmnt
-      mount.nfs4 files.ntnxlab.local:/ /filesmnt/ #Mounts the NFS export to the /filesmnt directory
-      df -kh #show disk utilization for a Linux file system.
-
-   .. note::
-
-      You will see output similar to the below.
-
-      Filesystem                      Size  Used Avail Use% Mounted on
-      /dev/mapper/centos_centos-root  8.5G  1.7G  6.8G  20% /
-      devtmpfs                        1.9G     0  1.9G   0% /dev
-      tmpfs                           1.9G     0  1.9G   0% /dev/shm
-      tmpfs                           1.9G   17M  1.9G   1% /run
-      tmpfs                           1.9G     0  1.9G   0% /sys/fs/cgroup
-      /dev/sda1                       494M  141M  353M  29% /boot
-      tmpfs                           377M     0  377M   0% /run/user/0
-      **Files.ntnxlab.local:/             1.0T  7.0M  1.0T   1% /afsmnt**
-      [root@CentOS ~]# ls -l /filesmnt/
-      total 1
-      drwxrwxrwx. 2 root root 2 Mar  9 18:53 *Initials*\ -logs
-
-#. Observe that the **logs** directory is mounted in ``/filesmnt//*Initials*\ /-logs``.
-
-#. Reboot the VM and observe the export is no longer mounted. To persist the mount, add it to ``/etc/fstab`` by executing the following:
-
-     .. code-block:: bash
-
-       echo 'files.ntnxlab.local:/ /filesmnt nfs4' >> /etc/fstab
-
-#. The following command will add 100 2MB files filled with random data to ``/filesmnt/logs``:
-
-     .. code-block:: bash
-
-       mkdir /filesmnt/*Initials*\ -logs/host1
-       for i in {1..100}; do dd if=/dev/urandom bs=8k count=256 of=/filesmnt/*Initials*\ -logs/host1/file$i; done
-
-#. Return to **Prism > File Server > Share > *Initials*\ -logs** to monitor performance and usage.
-
-   Note that the utilization data is updated every 10 minutes.
-
-Testing with File Analytics
-...........................
-
-In this exercise you will explore the new, integrated File Analytics capabilities available in Nutanix Files, including scanning existing shares, creating anomaly alerts, and reviewing audit details. File Analytics is deployed in minutes as a standalone VM through an automated, One Click operation in Prism Element. This VM has already been deployed and enabled in your environment.
-
-#. In **Prism Element > File Server > File Server**, select *File Server* and click **File Analytics**.
-
-#. To scan your newly created share, click :fa:`gear` **> Scan File System**. Select your share and click **Scan**.
-
-   .. figure:: images/14.png
-
-#. Close the **Scan File System** window and refresh your browser.
-
-#. You should see the **Data Age**, **File Distribution by Size** and **File Distribution by Type** dashboard panels update.
-
-   .. figure:: images/15.png
-
-#. From your *Initials*\ **-WinTools** VM, create some audit trail activity by opening several of the files under **Sample Data**.
-
-   .. note::
-
-      You may need to complete a short wizard for OpenOffice if using that application to open a file.
-
-#. Refresh the **Dashboard** page in your browser to see the **Top 5 Active Users**, **Top 5 Accessed Files** and **File Operations** panels update.
-
-   .. figure:: images/17.png
-
-#. To access the audit trail for your user account, click on your user under **Top 5 Active Users**.
-
-   .. figure:: images/17b.png
-
-#. Alternatively, you can select **Audit Trails** from the toolbar and search for your user or a given file.
-
-   .. figure:: images/18.png
-
-   .. note::
-
-      You can use wildcards for your search, for example **.doc**
-
-#. Next, we will create rules to detect anomalous behavior on the File Server. From the toolbar, click :fa:`gear` **> Define Anomaly Rules**.
-
-      .. figure:: images/19.png
-
-#. Click **Define Anomaly Rules** and create a rule with the following settings:
-
-      - **Events:** Delete
-      - **Minimum Operation %:** 1
-      - **Minimum Operation Count:** 10
-      - **User:** All Users
-      - **Type:** Hourly
-      - **Interval:** 1
-
-#. Under **Actions**, click **Save**.
-
-#. Choose **+ Configure new anomaly** and create an additional rule with the following settings:
-
-   - **Events**: Create
-   - **Minimum Operation %**: 1
-   - **Minimum Operation Count**: 10
-   - **User**: All Users
-   - **Type**: Hourly
-   - **Interval**: 1
-
-#. Under **Actions**, click **Save**.
-
-   .. figure:: images/20.png
-
-#. Click **Save** to exit the **Define Anomaly Rules** window.
-
-#. To test the anomaly alerts, return to your *Initials*\ **-WinTools** VM and make a second copy of the sample data (via copy/paste) within your share.
-
-#. Delete the original sample data folders.
-
-   .. figure:: images/21.png
-
-   While waiting for the Anomaly Alerts to populate, next we’ll create a permission denial.
-
-   .. note:: The Anomaly engine runs every 30 minutes.  While this setting is configurable from the File Analytics VM, modifying this variable is outside the scope of this workshop.
-
-#. Create a new directory called *Initials*\ **-MyFolder** in the share.
-
-#. Create a text file in the *Initials*\ **-MyFolder** directory and enter some sample text to populate the file. Save the file as *Initials*\ **-file.txt**.
-
-   .. figure:: images/22.png
-
-#. Right-click *Initials*\ **-MyFolder > Properties**. Select the **Security** tab and click **Advanced**. Observe that **Users (BootcampFS\\Users)** lack the **Full Control** permission, meaning that they would be unable to delete files owned by other users.
-
-   .. figure:: images/23.png
-
-#. Open a PowerShell window as another non-Administrator user account by holding **Shift** and right-clicking the **PowerShell** icon in the taskbar and selecting **Run as different user**.
-
-   .. figure:: images/24.png
-
-#. Change Directories to *Initials*\ **-MyFolder** in the *Initials*\ **-FiestaShare** share.
-
-     .. code-block:: bash
-
-        cd \\files.ntnxlab.local\\*Initials*\ -smb01\*initials*\ -MyFolder
-
-#. Execute the following commands:
-
-     .. code-block:: bash
-
-        cat .\\ *initials*\ -file.txt
-        rm .\\ *initials*\ -file.txt
-
-   .. figure:: images/25.png
-
-#. Return to **Analytics > Dashboard** and note the **Permission Denials** and **Anomaly Alerts** widgets have updated.
-
-   .. figure:: images/26.png
-
-#. Under **Permission Denials**, select your user account to view the full **Audit Trail** and observe that the specific file you tried to removed is recorded, along with IP address and timestamp.
-
-   .. figure:: images/27.png
-
-#. Select **Anomalies** from the toolbar for an overview of detected anomalies.
-
-   .. figure:: images/28.png
-
-File Analytics puts simple, yet powerful information in the hands of storage administrators, allowing them to understand and audit both utilization and access within a Nutanix Files environment.
