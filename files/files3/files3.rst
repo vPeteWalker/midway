@@ -4,6 +4,8 @@
 NFS export
 ----------
 
+STILL WORK IN PROGRESS - PW
+
 Creating an NFS export
 ......................
 
@@ -16,8 +18,6 @@ Creating an NFS export
    - **Name** - logs
    - **Description (Optional)** - File share for system logs
    - **File Server** - **Files**
-   - **Share Path (Optional)** - Leave blank
-   - **Max Size (Optional)** - Leave blank
    - **Select Protocol** - **NFS**
 
    .. figure:: images/24b.png
@@ -41,39 +41,39 @@ Creating an NFS export
 
 #. Review the **Summary** and click **Create**.
 
-Testing with client desktop
-...........................
-
-AutoAD is pre-populated with the following Users and Groups for your use:
-
-   .. list-table::
-      :widths: 25 35 40
-      :header-rows: 1
-
-      * - Group
-        - Username(s)
-        - Password
-      * - Administrators
-        - Administrator
-        - nutanix/4u
-      * - SSP Admins
-        - adminuser01-adminuser25
-        - nutanix/4u
-      * - SSP Developers
-        - devuser01-devuser25
-        - nutanix/4u
-      * - SSP Consumers
-        - consumer01-consumer25
-        - nutanix/4u
-      * - SSP Operators
-        - operator01-operator25
-        - nutanix/4u
-      * - SSP Custom
-        - custom01-custom25
-        - nutanix/4u
-      * - Bootcamp Users
-        - user01-user25
-        - nutanix/4u
+.. Testing with client desktop
+.. ...........................
+..
+.. AutoAD is pre-populated with the following Users and Groups for your use:
+..
+..    .. list-table::
+..       :widths: 25 35 40
+..       :header-rows: 1
+..
+..       * - Group
+..         - Username(s)
+..         - Password
+..       * - Administrators
+..         - Administrator
+..         - nutanix/4u
+..       * - SSP Admins
+..         - adminuser01-adminuser25
+..         - nutanix/4u
+..       * - SSP Developers
+..         - devuser01-devuser25
+..         - nutanix/4u
+..       * - SSP Consumers
+..         - consumer01-consumer25
+..         - nutanix/4u
+..       * - SSP Operators
+..         - operator01-operator25
+..         - nutanix/4u
+..       * - SSP Custom
+..         - custom01-custom25
+..         - nutanix/4u
+..       * - Bootcamp Users
+..         - user01-user25
+..         - nutanix/4u
 ..
 ..
 .. #. Deploy new Windows 10 VM.
@@ -101,7 +101,11 @@ AutoAD is pre-populated with the following Users and Groups for your use:
 Testing the NFS export
 ......................
 
-The following steps utilize the LinuxTools VM as a client for your Files NFS export.
+In the following exercise you will:
+
+   - Utilize a Linux VM as a client for your Files NFS export.
+   - Create random data within the NFS export.
+   - Monitor performance and usage of the NFS export.
 
 #. Note the IP address of the VM in Prism, and connect via SSH using the following credentials:
 
@@ -151,4 +155,4 @@ The following steps utilize the LinuxTools VM as a client for your Files NFS exp
 
 #. Return to **Prism > File Server > Share > logs** to monitor performance and usage.
 
-   Note that the utilization data is updated every 10 minutes.
+Note that the utilization data is updated every 10 minutes.
