@@ -43,7 +43,7 @@ A *distributed* (home) share is the repository for the user's personal files, an
 
 #. Click **Next**.
 
-#. Select **Blocked File Types** and enter **.mov**
+#. Select **Blocked File Types** and within field, enter **.mov**
 
    .. figure:: images/10a.png
 

@@ -31,17 +31,17 @@ Files uses a scale-out architecture that provides file services to clients throu
          - AHV
       - Authentication
          - Microsoft Active Directory - via AutoAD VM
-         - Customer provided Active Directory
+         - Customer-provided Active Directory
       - One VLAN
          - Managed (IPAM configured)
-      - Files Analytics
+      - **Files Analytics**
 
 Please be aware that any information such as server names, IP addresses, and similar information contained within any screen shots are strictly for demonstration purposes. Do not use these values when proceeding with any of the steps contained within this workshop.
 
 This workshop was created with the following versions of Nutanix products. There may be differences - in both written steps and screen shots - between what is shown throughout this workshop, and what you experience if you are using later versions of the individual software packages listed below.
 
-   - AOS             - 5.17.0.4
-   - PC              - 5.17.0.3
+   - AOS             - 5.17.1.1
+   - PC              - 5.17.1.1
    - Files           - 3.6.5
    - Files Analytics - 2.1.1.1
 
@@ -72,7 +72,7 @@ Creating a File Server
 
       The file server name is used by clients to access the file server. The fully qualified name (file server name + domain) must be unique.
 
-   - **Domain**: **ntnxlab.local** if using AutoAD, otherwise customer provided Active Directory domain.
+   - **Domain**: **ntnxlab.local** if using AutoAD, otherwise customer-provided Active Directory domain.
 
    - **File Server Storage**: Enter the file server total storage size (minimum 1 TiB).
 
@@ -82,33 +82,15 @@ Creating a File Server
 
    - **VLAN**: Select the **Primary** VLAN for the *client network* from the pull-down list.
 
-.. - **Subnet Mask**: Enter the subnet mask value.
-..
-.. - **Gateway**: Enter the gateway IP address.
-..
-..    .. figure:: images/4.png
-..
-.. - **# IP addresses required**: Click **+IP Addresses**. Enter the starting IP address in the *From* field and the ending IP address in the *To* field (if it is not populated automatically), and then click **Save**. A single line assumes a consecutive set of IP addresses. To use a non-consecutive set, select the + IP Addresses link to open a new line. Add as many lines as necessary to complete the list of IP addresses.
-
    - **DNS Resolver IP**: Enter IP address for your AutoAD VM or customer-provided domain controller.
 
-.. - **NTP Servers**: Enter the server name(s) or IP address(es) for the NTP server(s). Use a comma separated list for multiple entries.
-..
-..    .. figure:: images/5.png
-
-   .. figure:: images/4m.png
+      .. figure:: images/4m.png
 
    - When all the entries are correct, click the **Next** button.
 
 #. In the *Storage Network* tab, do the following in the indicated fields:
 
    - **VLAN** - Select the **Primary** VLAN for the *client network* from the pull-down list.
-
-.. - **Subnet Mask**: Enter the subnet mask value.
-..
-.. - **Gateway**: Enter the gateway IP address.
-..
-.. - **# IP addresses required**: Click **+ IP Addresses**. Enter the starting IP address in the *From* field and the ending IP address in the *To* field (if it is not populated automatically), and then click **Save**. A single line assumes a consecutive set of IP addresses. To use a non-consecutive set, select the + IP Addresses link to open a new line. Add as many lines as necessary to complete the list of IP addresses.
 
       .. figure:: images/6m.png
 
@@ -132,6 +114,8 @@ Creating a File Server
 
    - From within the **User Management And Authentication** dropdown, choose **Unmanaged**.
 
+   .. figure:: images/nfs-unmanaged.png
+
    - When all the entries are correct, click the **Next** button.
 
 #. In the **Summary** tab, review the displayed information. When all the information is correct, click **Create**.
@@ -142,7 +126,7 @@ Creating the file server begins. You can monitor progress through the **Tasks** 
 
    .. note::
 
-      If you accidentally did not configure Files to use the AutoAD as the DNS server, after deploying the File Server you will get the following errors.
+      If you accidentally did not configure Files to use the Active Director domain controller (AutoAD or customer-provided) as the DNS server, after deploying the File Server you will get the following errors.
 
          - DNS 'NS' records not found for *domain*
 
@@ -152,7 +136,7 @@ Creating the file server begins. You can monitor progress through the **Tasks** 
 
          - Within the **File Server** dropdown, select the file server you deployed, and click **Update > Network Configuration**. Modify the entry for *DNS Resolver IP*, and click **Next > Save**.
 
-         - Click **DNS**. Update this page with the AutoAD FQDN - **dc.ntnxlab.local**, Username and Password of an Active Directory user with administrator privileges, and click **Submit**.
+         - Click **DNS**. Update this page with the AutoAD FQDN - **dc.ntnxlab.local** (or customer-provided), Username and Password of an Active Directory user with administrator privileges, and click **Submit**.
 
             .. figure:: images/9.png
 
@@ -161,14 +145,18 @@ Deploying Files Analytics
 
 #. Go to **Support Portal > Downloads > Files** and download the File Analytics QCOW2 and JSON files.
 
-#. In Prism, go to the *File Server* view and click the **Deploy File Analytics** action link.
+#. In Prism, go to the *File Server* view, and click the **Deploy File Analytics** action link.
 
 #. In the *Deploy File Analytics* window, click **Deploy**.
 
 #. Upload installation files.
+
    - In the *Upload installation binary* section, click on the **upload the File Analytics binary** link to upload the File Analytics JSON and QCOW files.
+
    - Under *File Analytics Metadata File (.Json)*, click **Choose File** to choose the downloaded JSON file.
+
    - Under *File Analytics Instalation Binary (.Qcow2)*, click **Choose File** to choose the downloaded QCOW file.
+
    - Click **Upload Now** after choosing the files.
 
 #. Click **Install** once the upload has completed.
@@ -178,13 +166,6 @@ Deploying Files Analytics
    - **Name**: Enter **AVM** for the File Analytics VM (AVM).
    - **Network List**: Select the **Primary - Managed** VLAN.
    - **Storage Capacity**: Adjust as necessary, depending on available storage capacity (minimum 2 TiB).
-.. - Enter network details in the **Subnet Mask**, **Default Gateway IP**, and **IP Address** fields as indicated.
-..
-..    .. note::
-..
-..       When utilizing the HPOC, it is recommended to use .15 for the last octet for the IP address.
-..
-   .. figure:: images/11.png
 
       .. figure:: images/11m.png
 
@@ -212,9 +193,13 @@ Enabling Files Analytics
    .. note::
 
       To update DNS server settings on File Analytics VM after deployment:
+
        - Login into File Analytics VM CLI using
+
          - User: nutanix
+
          - Password: nutanix/4u
+
        - Execute the following command. Click the icon in the upper right corner of the window below to copy the command to your clipboard, and then paste within your SSH session.
 
          ::
