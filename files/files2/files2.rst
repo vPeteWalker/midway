@@ -43,7 +43,7 @@ A *distributed* (home) share is the repository for the user's personal files, an
 
 #. Click **Next**.
 
-#. Select **Blocked File Types** and within field, enter **.mov**
+#. Select **Blocked File Types** and within the field, enter **.mov**
 
    .. figure:: images/10a.png
 
@@ -201,7 +201,7 @@ During this exercise, you will:
    - The **NTNXLAB\\Administrator** user was specified as a Files Administrator during deployment of the Files Server, giving it read/write access to all shares by default.
    - Managing access for other users is no different than any other SMB share.
 
-#. Using *File Explorer* navigate to **\\files.ntnxlab.local\**, right-click **smb01 > Properties**.
+#. Using *File Explorer* navigate to **\\\files.ntnxlab.local\\**, right-click **smb01 > Properties**.
 
    - Select the **Security** tab and click **Advanced**.
 
@@ -226,7 +226,7 @@ During this exercise, you will:
 
    .. code-block:: PowerShell
 
-      ``New-Item \\files.ntnxlab.local\\smb01\\testfile.mov``
+      New-Item \\files.ntnxlab.local\smb01\testfile.mov
 
    Observe that creation of the new file is denied.
 
@@ -234,11 +234,11 @@ During this exercise, you will:
 
    .. code-block:: PowerShell
 
-      New-Item \\files.ntnxlab.local\\smb01\\testfile.txt``
+      New-Item \\files.ntnxlab.local\smb01\testfile.txt
 
    Observe that creation of the new file suceeded.
 
-.. figure:: images/13.png
+   .. figure:: images/13.png
 
 #. Return to **Prism Element > File Server > Share/Export**, select your share. Review the **Share Details**, **Usage** and **Performance** tabs to understand the high level information available on a per share basis, including the number of files & connections, storage utilization over time, latency, throughput, and IOPS.
 
@@ -271,15 +271,15 @@ During this exercise, you will:
 
 #. Click **Quick Access**, and then the **Documents** folder.
 
-#. Click the **Home** tab on the Ribbon, and then **Properties**.
+#. Click the **Home** tab on the *Ribbon*, and then **Properties**.
 
    .. figure:: images/distributed1.png
-             :align: left
-             :scale: 50%
+       :align: left
+       :scale: 50%
 
    .. figure:: images/distributed2.png
-             :align: right
-             :scale: 50%
+       :align: right
+       :scale: 50%
 
 #. In the *Folder Properties* window, click the **Location** tab.
 

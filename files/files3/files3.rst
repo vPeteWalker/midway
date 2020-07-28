@@ -15,13 +15,13 @@ Creating an NFS export
 
 #. Fill out the following fields:
 
-   - **Name** - logs
+   - **Name** - `logs`
 
-   - **Description (Optional)** - File share for system logs
+   - **Description (Optional)** - `File share for system logs`
 
-   - **File Server** - Files
+   - **File Server** - `Files`
 
-   - **Select Protocol** - NFS
+   - **Select Protocol** - `NFS`
 
    .. figure:: images/24b.png
 
@@ -39,7 +39,7 @@ Creating an NFS export
 
    - Select **+ Add exceptions**.
 
-   - **Clients with Read-Write Access** - *The first 3 octets of your cluster network*\ .* (e.g. 10.38.1.\*)
+   - **Clients with Read-Write Access** - *The first 3 octets of your cluster network*\\ .* (e.g. 10.38.1.\*)
 
       .. figure:: images/25b.png
 
@@ -115,38 +115,38 @@ In the following exercise you will:
    - Create random data within the NFS export.
    - Monitor performance and usage of the NFS export.
 
-#. Note the IP address of the VM in Prism, and connect via SSH using the following credentials:
+#. Note the IP address of the previously created CentOS VM within Prism, and connect via SSH using the following credentials:
 
    - **Username** - root
    - **Password** - nutanix/4u
 
-#. Execute the following:  NEED A BETTER WAY TO DO THE DNS, SO WE DON'T OVERWRITE, YET IT RESOLVES VIA AUTOAD
+#. Execute the following:
 
-     .. code-block:: bash
-      sh -c "echo nameserver *IP address of AutoAD VM* > /etc/resolv.conf" #Overwrites the contents of the existing resolv.conf with the IP of your AutoAD VM to handle DNS queries. Example: sudo sh -c "echo nameserver 10.38.212.50 > /etc/resolv.conf"
-      yum install -y nfs-utils #This installs the NFSv4 client
-      mkdir /filesmnt #Creates directory named /filesmnt
-      mount.nfs4 files.ntnxlab.local:/ /filesmnt/ #Mounts the NFS export to the /filesmnt directory
-      df -kh #show disk utilization for a Linux file system.
+   .. code-block:: bash
+    sh -c "echo nameserver *IP address of AutoAD VM or customer-provided domain controller* > /etc/resolv.conf" #Overwrites the contents of the existing resolv.conf with the IP of your AutoAD VM to handle DNS queries. Example: sudo sh -c "echo nameserver 10.38.212.50 > /etc/resolv.conf"
+    yum install -y nfs-utils #This installs the NFSv4 client
+    mkdir /filesmnt #Creates directory named /filesmnt
+    mount.nfs4 files.ntnxlab.local:/ /filesmnt/ #Mounts the NFS export to the /filesmnt directory
+    df -kh #show disk utilization for a Linux file system.
 
    .. note::
 
       You will see output similar to the below.
 
-   .. code-block:: bash
+      .. code-block:: bash
 
-      Filesystem                      Size  Used Avail Use% Mounted on
-      /dev/mapper/centos_centos-root  8.5G  1.7G  6.8G  20% /
-      devtmpfs                        1.9G     0  1.9G   0% /dev
-      tmpfs                           1.9G     0  1.9G   0% /dev/shm
-      tmpfs                           1.9G   17M  1.9G   1% /run
-      tmpfs                           1.9G     0  1.9G   0% /sys/fs/cgroup
-      /dev/sda1                       494M  141M  353M  29% /boot
-      tmpfs                           377M     0  377M   0% /run/user/0
-      **Files.ntnxlab.local:/             1.0T  7.0M  1.0T   1% /afsmnt**
-      [root@CentOS ~]# ls -l /filesmnt/
-      total 1
-      drwxrwxrwx. 2 root root 2 Mar  9 18:53 *Initials*\ -logs
+       Filesystem                      Size  Used Avail Use% Mounted on
+       /dev/mapper/centos_centos-root  8.5G  1.7G  6.8G  20% /
+       devtmpfs                        1.9G     0  1.9G   0% /dev
+       tmpfs                           1.9G     0  1.9G   0% /dev/shm
+       tmpfs                           1.9G   17M  1.9G   1% /run
+       tmpfs                           1.9G     0  1.9G   0% /sys/fs/cgroup
+       /dev/sda1                       494M  141M  353M  29% /boot
+       tmpfs                           377M     0  377M   0% /run/user/0
+       **Files.ntnxlab.local:/             1.0T  7.0M  1.0T   1% /afsmnt**
+       [root@CentOS ~]# ls -l /filesmnt/
+       total 1
+       drwxrwxrwx. 2 root root 2 Mar  9 18:53 *Initials*\ -logs
 
 #. Observe that the **logs** directory is mounted in ``/filesmnt/logs``.
 
