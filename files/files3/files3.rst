@@ -16,9 +16,12 @@ Creating an NFS export
 #. Fill out the following fields:
 
    - **Name** - logs
+
    - **Description (Optional)** - File share for system logs
-   - **File Server** - **Files**
-   - **Select Protocol** - **NFS**
+
+   - **File Server** - Files
+
+   - **Select Protocol** - NFS
 
    .. figure:: images/24b.png
 
@@ -26,14 +29,19 @@ Creating an NFS export
 
 #. Fill out the following fields:
 
-   - Select **Enable Self Service Restore**.
+   - Select **Enable Self Service Restore**
+
       These snapshots appear as a .snapshot directory for NFS clients.
+
    - **Authentication** - System
+
    - **Default Access (For All Clients)** - No Access
+
    - Select **+ Add exceptions**.
+
    - **Clients with Read-Write Access** - *The first 3 octets of your cluster network*\ .* (e.g. 10.38.1.\*)
 
-   .. figure:: images/25b.png
+      .. figure:: images/25b.png
 
    By default an NFS export will allow read/write access to any host that mounts the export, but this can be restricted to specific IPs or IP ranges.
 
@@ -124,6 +132,8 @@ In the following exercise you will:
    .. note::
 
       You will see output similar to the below.
+
+   .. code-block:: bash
 
       Filesystem                      Size  Used Avail Use% Mounted on
       /dev/mapper/centos_centos-root  8.5G  1.7G  6.8G  20% /

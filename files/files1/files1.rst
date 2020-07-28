@@ -82,7 +82,7 @@ Creating a File Server
 
    - **VLAN**: Select the **Primary** VLAN for the *client network* from the pull-down list.
 
-   - **DNS Resolver IP**: Enter IP address for your AutoAD VM or customer-provided domain controller.
+   - **DNS Resolver IP**: Enter IP address for your AutoAD VM, or customer-provided domain controller.
 
       .. figure:: images/4m.png
 
@@ -114,7 +114,7 @@ Creating a File Server
 
    - From within the **User Management And Authentication** dropdown, choose **Unmanaged**.
 
-   .. figure:: images/nfs-unmanaged.png
+      .. figure:: images/nfs-unmanaged.png
 
    - When all the entries are correct, click the **Next** button.
 
@@ -169,7 +169,7 @@ Deploying Files Analytics
 
       .. figure:: images/11m.png
 
-   - Scroll down, and click the **Show Advanced Settings** box. Within the **DNS Resolver IP (Comma Separated)** field, enter the IP address of your AutoAD VM or customer-provided domain controller.
+   - Scroll down, and click the **Show Advanced Settings** box. Within the **DNS Resolver IP (Comma Separated)** field, enter the IP address of your AutoAD VM, or customer-provided domain controller.
 
       .. figure:: images/11a.png
 
