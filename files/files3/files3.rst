@@ -114,31 +114,31 @@ In the following exercise you will:
 
 #. Execute the following:
 
-   Overwrites the contents of the existing resolv.conf with the IP of your AutoAD VM to handle DNS queries. Example: sudo sh -c "echo nameserver 10.38.212.50 > /etc/resolv.conf"
+   Overwrite the contents of the existing resolv.conf with the IP of your AutoAD VM to handle DNS queries. Example: sudo sh -c "echo nameserver 10.38.212.50 > /etc/resolv.conf":
 
    .. code-block:: bash
 
-      sh -c "echo nameserver *IP address of AutoAD VM or customer-provided domain controller* > /etc/resolv.conf"
+      sh -c "echo nameserver *AutoAD VM or customer-provided domain controller IP* > /etc/resolv.conf"
 
-   This installs the NFSv4 client
+   Install the NFSv4 client:
 
    .. code-block:: bash
 
       yum install -y nfs-utils
 
-   Creates directory named /filesmnt
+   Create a directory named /filesmnt:
 
    .. code-block:: bash
 
       mkdir /filesmnt
 
-   Mounts the NFS export to the /filesmnt directory
+   Mount the NFS export to the /filesmnt directory:
 
    .. code-block:: bash
 
       mount.nfs4 files.ntnxlab.local:/ /filesmnt/
 
-   Shows disk utilization for a Linux file system. Observe that the **logs** directory is mounted in ``/filesmnt/logs``.
+   Show disk utilization for a Linux file system. Observe that the **logs** directory is mounted in ``/filesmnt/logs``:
 
    .. code-block:: bash
 
@@ -148,12 +148,12 @@ In the following exercise you will:
 
    .. figure:: images/29.png
 
-#. The following command will add 100 2MB files filled with random data to ``/filesmnt/logs``:
+   Add 100 2MB files filled with random data to ``/filesmnt/logs``:
 
-     .. code-block:: bash
+   .. code-block:: bash
 
-       mkdir /filesmnt/logs/host1
-       for i in {1..100}; do dd if=/dev/urandom bs=8k count=256 of=/filesmnt/logs/host1/file$i; done
+      mkdir /filesmnt/logs/host1
+      for i in {1..100}; do dd if=/dev/urandom bs=8k count=256 of=/filesmnt/logs/host1/file$i; done
 
 #. Return to **Prism > File Server > Share > logs** to monitor performance and usage.
 
