@@ -183,9 +183,9 @@ During this exercise, you will:
 
    - In the Windows client VM, open *File Explorer*. Right click on **This PC** and select **Map Network Drives**.
 
-   - Select the drive letter to use for the share. Enter the path to the share in the `\\\ *server* \\ *share* format (e.g. \\\files.ntnxlab.local\\smb01). Click the **Reconnect at sign-in** box, and then click **Finish**.
+   - Select the drive letter to use for the share. Enter the path to the share in the \\\ *server* \\ *share* format (e.g. ``\\files.ntnxlab.local\smb01``). Click the **Reconnect at sign-in** box, and then click **Finish**.
 
-   .. figure:: images/12.png
+      .. figure:: images/12.png
 
    A new window will open displaying the contents of the share.
 
