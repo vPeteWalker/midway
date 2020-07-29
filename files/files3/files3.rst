@@ -13,13 +13,13 @@ Creating an NFS export
 
 #. Fill out the following fields:
 
-   - **Name** - `logs`
+   - **Name** - logs
 
-   - **Description (Optional)** - `File share for system logs`
+   - **Description (Optional)** - File share for system logs
 
-   - **File Server** - `Files`
+   - **File Server** - Files
 
-   - **Select Protocol** - `NFS`
+   - **Select Protocol** - NFS
 
    .. figure:: images/24b.png
 
@@ -27,15 +27,11 @@ Creating an NFS export
 
 #. Fill out the following fields:
 
-   - Select **Enable Self Service Restore**
-
-      These snapshots appear as a .snapshot directory for NFS clients.
-
    - **Default Access (For All Clients)** - No Access
 
    - Select **+ Add exceptions**.
 
-   - **Clients with Read-Write Access** - *The first 3 octets of your cluster network*\\ .* (e.g. 10.38.1.\*)
+   - **Clients with Read-Write Access** - *The first 3 octets of your cluster network*\ .* (e.g. 10.38.1.\*)
 
       .. figure:: images/25b.png
 
