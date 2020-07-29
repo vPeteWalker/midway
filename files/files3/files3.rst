@@ -4,8 +4,6 @@
 NFS export
 ----------
 
-STILL WORK IN PROGRESS - PW
-
 Creating an NFS export
 ......................
 
@@ -32,8 +30,6 @@ Creating an NFS export
    - Select **Enable Self Service Restore**
 
       These snapshots appear as a .snapshot directory for NFS clients.
-
-   - **Authentication** - System
 
    - **Default Access (For All Clients)** - No Access
 
@@ -122,39 +118,41 @@ In the following exercise you will:
 
 #. Execute the following:
 
+   .. code-block:: language
+
    .. code-block:: bash
-    sh -c "echo nameserver *IP address of AutoAD VM or customer-provided domain controller* > /etc/resolv.conf" #Overwrites the contents of the existing resolv.conf with the IP of your AutoAD VM to handle DNS queries. Example: sudo sh -c "echo nameserver 10.38.212.50 > /etc/resolv.conf"
-    yum install -y nfs-utils #This installs the NFSv4 client
-    mkdir /filesmnt #Creates directory named /filesmnt
-    mount.nfs4 files.ntnxlab.local:/ /filesmnt/ #Mounts the NFS export to the /filesmnt directory
-    df -kh #show disk utilization for a Linux file system.
 
-   .. note::
+      sh -c "echo nameserver *IP address of AutoAD VM or customer-provided domain controller* > /etc/resolv.conf"
 
-      You will see output similar to the below.
+      Overwrites the contents of the existing resolv.conf with the IP of your AutoAD VM to handle DNS queries. Example: sudo sh -c "echo nameserver 10.38.212.50 > /etc/resolv.conf"
 
-      .. code-block:: bash
+   .. code-block:: bash
 
-       Filesystem                      Size  Used Avail Use% Mounted on
-       /dev/mapper/centos_centos-root  8.5G  1.7G  6.8G  20% /
-       devtmpfs                        1.9G     0  1.9G   0% /dev
-       tmpfs                           1.9G     0  1.9G   0% /dev/shm
-       tmpfs                           1.9G   17M  1.9G   1% /run
-       tmpfs                           1.9G     0  1.9G   0% /sys/fs/cgroup
-       /dev/sda1                       494M  141M  353M  29% /boot
-       tmpfs                           377M     0  377M   0% /run/user/0
-       **Files.ntnxlab.local:/             1.0T  7.0M  1.0T   1% /afsmnt**
-       [root@CentOS ~]# ls -l /filesmnt/
-       total 1
-       drwxrwxrwx. 2 root root 2 Mar  9 18:53 *Initials*\ -logs
+      yum install -y nfs-utils
 
-#. Observe that the **logs** directory is mounted in ``/filesmnt/logs``.
+      This installs the NFSv4 client
 
-#. Reboot the VM and observe the export is no longer mounted. To persist the mount, add it to ``/etc/fstab`` by executing the following:
+   .. code-block:: bash
 
-     .. code-block:: bash
+      mkdir /filesmnt
 
-       echo 'files.ntnxlab.local:/ /filesmnt nfs4' >> /etc/fstab
+      Creates directory named /filesmnt
+
+   .. code-block:: bash
+
+      mount.nfs4 files.ntnxlab.local:/ /filesmnt/
+
+      Mounts the NFS export to the /filesmnt directory
+
+   .. code-block:: bash
+
+      df -kh
+
+      Shows disk utilization for a Linux file system. Observe that the **logs** directory is mounted in ``/filesmnt/logs``.
+
+   You will see output similar to the below.
+
+   .. figure:: images/29.png
 
 #. The following command will add 100 2MB files filled with random data to ``/filesmnt/logs``:
 
