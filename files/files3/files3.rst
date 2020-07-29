@@ -118,37 +118,35 @@ In the following exercise you will:
 
 #. Execute the following:
 
-   .. code-block:: language
+   Overwrites the contents of the existing resolv.conf with the IP of your AutoAD VM to handle DNS queries. Example: sudo sh -c "echo nameserver 10.38.212.50 > /etc/resolv.conf"
 
    .. code-block:: bash
 
       sh -c "echo nameserver *IP address of AutoAD VM or customer-provided domain controller* > /etc/resolv.conf"
 
-      Overwrites the contents of the existing resolv.conf with the IP of your AutoAD VM to handle DNS queries. Example: sudo sh -c "echo nameserver 10.38.212.50 > /etc/resolv.conf"
+   This installs the NFSv4 client
 
    .. code-block:: bash
 
       yum install -y nfs-utils
 
-      This installs the NFSv4 client
+   Creates directory named /filesmnt
 
    .. code-block:: bash
 
       mkdir /filesmnt
 
-      Creates directory named /filesmnt
+   Mounts the NFS export to the /filesmnt directory
 
    .. code-block:: bash
 
       mount.nfs4 files.ntnxlab.local:/ /filesmnt/
 
-      Mounts the NFS export to the /filesmnt directory
+   Shows disk utilization for a Linux file system. Observe that the **logs** directory is mounted in ``/filesmnt/logs``.
 
    .. code-block:: bash
 
       df -kh
-
-      Shows disk utilization for a Linux file system. Observe that the **logs** directory is mounted in ``/filesmnt/logs``.
 
    You will see output similar to the below.
 
