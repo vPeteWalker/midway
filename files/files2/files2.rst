@@ -183,7 +183,7 @@ During this exercise, you will:
 
    - In the Windows client VM, open *File Explorer*. Right click on **This PC** and select **Map Network Drives**.
 
-   - Select the drive letter to use for the share. Enter the path to the share in the \\\ *server* \\ *share* format (e.g. ``\\files.ntnxlab.local\smb01``). Click the **Reconnect at sign-in** box, and then click **Finish**.
+   - Select the drive letter to use for the share. Enter the path to the share in the \\ /*server* \ /*share* format (e.g. ``\\files.ntnxlab.local\smb01``). Click the **Reconnect at sign-in** box, and then click **Finish**.
 
       .. figure:: images/12.png
 
@@ -201,7 +201,7 @@ During this exercise, you will:
    - The **NTNXLAB\\Administrator** user was specified as a Files Administrator during deployment of the Files Server, giving it read/write access to all shares by default.
    - Managing access for other users is no different than any other SMB share.
 
-#. Using *File Explorer* navigate to **\\\files.ntnxlab.local\\**, right-click **smb01 > Properties**.
+#. Using *File Explorer* navigate to **\\ / files.ntnxlab.local \\ /**, right-click **smb01 > Properties**.
 
    - Select the **Security** tab and click **Advanced**.
 
@@ -357,9 +357,6 @@ In this exercise you will explore the new, integrated File Analytics capabilitie
       - **Events:** Delete
       - **Minimum Operation %:** 1
       - **Minimum Operation Count:** 10
-      - **User:** All Users
-      - **Type:** Hourly
-      - **Interval:** 1
 
 #. Under **Actions**, click **Save**.
 
@@ -368,9 +365,6 @@ In this exercise you will explore the new, integrated File Analytics capabilitie
    - **Events**: Create
    - **Minimum Operation %**: 1
    - **Minimum Operation Count**: 10
-   - **User**: All Users
-   - **Type**: Hourly
-   - **Interval**: 1
 
 #. Under **Actions**, click **Save**.
 
@@ -394,26 +388,32 @@ In this exercise you will explore the new, integrated File Analytics capabilitie
 
    .. figure:: images/22.png
 
-#. Right-click **MyFolder > Properties**. Select the **Security** tab and click **Advanced**. Observe that **Users (NTNXLAB\\Users)** lack the **Full Control** permission, meaning that they would be unable to delete files owned by other users.
+#. Right-click *MyFolder* and choose **Properties**. Select the **Security** tab and click the **Advanced** button.
 
-   .. figure:: images/23.png
+#. Choose **Disable inheritance > Convert inherited permissions into explicit permissions on this object.**
 
-#. Open a PowerShell window as another non-Administrator user account by holding **Shift** and right-clicking the **PowerShell** icon in the taskbar and selecting **Run as different user**.
+#. Highlight the **Users** principal, and choose **Remove**.
+
+#. Click **Add > Select a principal**. Enter **Everyone** in the *Enter the object name to select* field, and click **OK > OK > OK**.
+
+#. Click **Add** the Everyone permissions with the following:
+
+#. Open a PowerShell window as another non-Administrator user account by holding **Shift** and right-clicking the **PowerShell** icon in the start menu and selecting **More > Run as a different user**.
 
    .. figure:: images/24.png
 
-#. Change Directories to *Initials*\ **-MyFolder** in the *Initials*\ **-FiestaShare** share.
+#. Change Directories to **MyFolder** in the **smb01** share.
 
      .. code-block:: bash
 
-        cd \\files.ntnxlab.local\\*Initials*\ -smb01\*initials*\ -MyFolder
+        cd \\ /files.ntnxlab.local \\ /smb01\ /MyFolder
 
 #. Execute the following commands:
 
      .. code-block:: bash
 
-        cat .\\ *initials*\ -file.txt
-        rm .\\ *initials*\ -file.txt
+        cat file.txt
+        rm file.txt
 
    .. figure:: images/25.png
 
@@ -425,8 +425,6 @@ In this exercise you will explore the new, integrated File Analytics capabilitie
 
    .. figure:: images/27.png
 
-#. Select **Anomalies** from the toolbar for an overview of detected anomalies.
-
-   .. figure:: images/28.png
+#. Close the Audit details screen, and select **Anomalies** from the toolbar for an overview of detected anomalies.
 
 File Analytics puts simple, yet powerful information in the hands of storage administrators, allowing them to understand and audit both utilization and access within a Nutanix Files environment.
