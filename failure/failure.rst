@@ -51,7 +51,7 @@ HDD Failure
 
 .. raw:: html
 
-  <strong><font color="red">Proceed with extreme caution, and only if the POC you are performing absolutely requires this. These instructions will guide you with how to properly identify a disk with certainty, but be aware that you are using commands that if not entered correctly could negatively impact your POC, and require involving support to rectify the issue.</font></strong>
+  <strong><font color="red">Proceed with caution. Recommend you only perform these steps if the POC absolutely requires this. These instructions will guide you with how to properly identify a disk with certainty, but be aware that you are using commands that if not entered correctly, could negatively impact your POC, and require involving support to rectify the issue.</font></strong>
 
 In this section, we will be simulating a Hard Disk Drive (HDD) failure by executing a command that will instantly simulate degredation event for a hard disk that would normally happens over time under real world conditions. This is preferable to performing a "drive pull" test, as that is a very unlikely scenario. What is more likely, is a HDD to develop bad sectors or similar issues gradually over time, and as protecting customer data is vital, any infrastructure must handle this gracefully, and without interruption or loss.
 
@@ -244,9 +244,11 @@ Node Failure
 
 In this section, we will be simulating a node failure by leveraging the IPMI (commonly referred to out-of-band or "lights out" management) to power off the node unexpectedly, and observe the behavior of the cluster. In a 2+ node configuration, Nutanix can tolarate the unavailability of a single node - whether due to a failure, or scheduled maintenance.
 
-.. note::
+There are two example scenarios you can run to demonstrate the cluster resiliency during this event:
 
-   Ensure you are running the BASIC or RECOMMENDED workload tests on the selected host before proceeding.
+   - BASIC: Create two VMs, one on the host that is running the CVM you are shutting down, one on a host that will remain untouched. Begin a continuous ping between these VMs prior to issuing the shutdown command via SSH, and observe that there are no lost pings or X-Ray VM interruption post-CVM shutdown.
+
+   - RECOMMENDED: Use X-ray to run OLTP or VDI workload.
 
 #. Login to the IPMI interface of the selected node to participate in the simulated node failure test.
 
@@ -265,11 +267,13 @@ In this section, we will be simulating a node failure by leveraging the IPMI (co
 Complete Power Failure
 ======================
 
-*In this section, we will be simulating a cluster failure by leveraging the IPMI (commonly referred to out-of-band or "lights out" management) to power off all nodes simultaneously, and observe the behavior of the cluster once the simulated power is restored.*
+In this section, we will be simulating a cluster failure by leveraging the IPMI (commonly referred to out-of-band or "lights out" management) to power off all nodes simultaneously, and observe the behavior of the cluster once the simulated power is restored.
 
-.. note::
+There are two example scenarios you can run to demonstrate the cluster resiliency during this event:
 
-   Ensure you are running the BASIC or RECOMMENDED workload tests on the selected host before proceeding.
+   - BASIC: Create two VMs, one on the host that is running the CVM you are shutting down, one on a host that will remain untouched. Begin a continuous ping between these VMs prior to issuing the shutdown command via SSH, and observe that there are no lost pings or X-Ray VM interruption post-CVM shutdown.
+
+   - RECOMMENDED: Use X-ray to run OLTP or VDI workload.
 
 #. Open a separate browser tab for each, and within each tab, login to the IPMI interface of each node. This will allow you to quickly and easily power off all nodes.
 
@@ -287,9 +291,9 @@ Complete Power Failure
 
       cluster status
 
-      .. figure:: images/12.png
+   .. figure:: images/12.png
 
-         Sample output of the ``cluster status`` command for a one node
+      Sample output of the ``cluster status`` command for a one node
 
 #. Wait for all services on all nodes in the cluster to be up before you attempt to log in to Prism.
 
@@ -298,8 +302,22 @@ Complete Power Failure
 Power Supply Failure
 ====================
 
-*In this section, we will be simulating a power failure by removing power from one of the power supplies on the cluster, and observe the behavior of the cluster.*
+In this section, we will be simulating a power failure by removing power from one of the power supplies on the cluster, and observe the behavior of the cluster.
 
 .. note::
 
    This applies to a physical POC only.
+
+There are two example scenarios you can run to demonstrate the cluster resiliency during this event:
+
+   - BASIC: Create two VMs, one on the host that is running the CVM you are shutting down, one on a host that will remain untouched. Begin a continuous ping between these VMs prior to issuing the shutdown command via SSH, and observe that there are no lost pings or X-Ray VM interruption post-CVM shutdown.
+
+   - RECOMMENDED: Use X-ray to run OLTP or VDI workload.
+
+#. Identify the physical power supply on the node you wish to remove as a part of this test. This can also be performed remotely if the customer has network capacity for their Power Distribution Unit (PDU).
+
+#. Disconnect or otherwise shut power to one power supply.
+
+#. Observe that no interruption has occurred. If SMTP was configured on this cluster, a support ticket may be generated for a power supply failure.
+
+#. Reconnect the previously removed power supply cable to the cluster.
