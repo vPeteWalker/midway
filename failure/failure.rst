@@ -10,7 +10,7 @@ Prerequisites and Requirements
 It is recommended you complete the :ref:`clusterconfig` section before proceeding.
 
 Before you begin
-----------------
+================
 
 Please be aware that any information such as server names, IP addresses, and similar information contained within any screen shots are strictly for demonstration purposes. Do not use these values when proceeding with any of the steps contained within this workshop.
 
@@ -31,6 +31,10 @@ There are two example scenarios you can run to demonstrate the cluster resilienc
    - BASIC: Create two VMs, one on the host that is running the CVM you are shutting down, one on a host that will remain untouched. Begin a continuous ping between these VMs prior to issuing the shutdown command via SSH, and observe that there are no lost pings or X-Ray VM interruption post-CVM shutdown.
 
    - RECOMMENDED: Use X-ray to run OLTP or VDI workload.
+
+.. note::
+
+   If you choose to run X-Ray on the same cluster you are performing failures on, it is recommended to avoid simulating the CVM failure on the same host that is running X-Ray.
 
 #. SSH into any host (not CVM) within the cluster using the *root* username and password, and run the following commands to shut down the CVM running on that host.
 
@@ -57,17 +61,19 @@ In this section, we will be simulating a Hard Disk Drive (HDD) failure by execut
 
 This test demonstrates the ability of Nutanix's AOS to immediately begin rebuilding additional copies of data on the surviving drives, as a high priority event, utilizing all nodes in the cluster to aid in that rebuild. This results in a restoration to full redundancy in a very short amount of time. Internal tests show that using several generation old equipment, Nutanix can rebuild 5TB worth of data within 45 minutes. This differs between other platforms in two major ways. One, we don't have a default wait period before rebuilding data, and two, Nutanix doesn't operate in a paired fashion, so we can take advantage of the distributed nature and combined performance of an entire Nutanix cluster to rebuild missing data quickly. In a nutshell, the rebuild is both very fast and the workload per node is minimized to avoid bottlenecks and to reduce the impact to running workload. Data rebuild time decreases with each additional node added to the cluster, as a result of our MapReduce Framework which leverages the full power of the cluster to perform these types of activities concurrently.
 
-There are two example scenarios you can run to demonstrate the cluster resiliency during this event:
+.. note::
 
-   - BASIC: Create two VMs, one on the host that is running the CVM you are shutting down, one on a host that will remain untouched. Begin a continuous ping between these VMs prior to issuing the shutdown command via SSH, and observe that there are no lost pings or X-Ray VM interruption post-CVM shutdown.
-
-   - RECOMMENDED: Use X-ray to run OLTP or VDI workload.
+   If you choose to run X-Ray on the same cluster you are performing failures on, it is recommended to avoid simulating the HDD failure on the same host that is running X-Ray.
 
 #. Identify the host you are planning to simulate the HDD drive failure on.
 
 #. Within Prism, choose **Hardware** from the dropdown. Click on **Diagram**, and then on the selected host for testing.
 
-#. Scroll down. On the left hand side, you will see a summary screen for the host itself, similar to the below. Use this to identify how many and what type (SSD or HDD) of drives the host contains.
+#. Click through all the disks associated with the host, and observe the *Disk Details* window in the lower left. Identify a drive that lists **HDD** as *Storage Tier*, optionally one with the lowest amount of disk usage, to reduce the time required to remove the drive. Lastly, make note of the drive's serial number. This will aid in identifying the drive from the CLI.
+
+   .. figure:: images/hdd0.png
+
+#. Click on the host, then scroll down. On the left hand side, you will see a summary screen for the host itself, similar to the below. Use this to identify how many and what type (SSD or HDD) of drives the host contains.
 
    .. figure:: images/hdd1.png
 
@@ -95,13 +101,23 @@ There are two example scenarios you can run to demonstrate the cluster resilienc
 
       This is an example of a HDD
 
-#. Now that we have identified our HDD that we wish to use in our failure test, we can run ``disk_operator mark_disks_unusable /dev/sdX`` where X is the identified disk. In our example, we ran ``disk_operator mark_disks_unusable /dev/sdb``, and the output is below. **You will run this command four times.**
+#. Now that we have identified our HDD that we wish to use in our failure test, we can run ``disk_operator mark_disks_unusable /dev/sdX`` where X corresponds to the ID of the identified disk. In our example, we ran ``disk_operator mark_disks_unusable /dev/sdb``, and the output is below. **You will run this command four times.** This is required to trigger Curator to mark the drive as failed.
 
    .. figure:: images/hdd6.png
 
 #. Return to Prism and observe that the disk is in the process of being removed, and shows a failure state. Make note of the disk serial number at this time. Do not proceed until the disk removal task has completed.
 
    .. figure:: images/hdd7.png
+
+#. Run the command ``links <CVM IP>:2010`` (e.g. ``links 10.42.91.31:2010``). You will be presented with the *Rebuild Estimator* interface similar to the below.
+
+   .. figure:: images/hdd7a.png
+
+#. Hit **Enter** on the *Curator Master* IP address.
+
+#. Scroll down, and highlight **Rebuild Info**. Hit **Enter**. You will be presented with a screen similar to the below.
+
+
 
 #. Enable hidden commands in ncli by running ``ncli -h=true``.
 
@@ -144,9 +160,13 @@ In this section, we will be simulating a Network Interface Card (NIC), and obser
 
 There are two example scenarios you can run to demonstrate the cluster resiliency during this event:
 
-   - BASIC: Create two VMs, one on the host that is running the CVM you are shutting down, one on a host that will remain untouched. Begin a continuous ping between these VMs prior to issuing the shutdown command via SSH, and observe that there are no lost pings or X-Ray VM interruption post-CVM shutdown.
+   - BASIC: Create two VMs, one on the host that is running on the host you are simulating the NIC failure on, one on a host that will remain untouched. Begin a continuous ping between these VMs prior to issuing the failover command via SSH, and observe that there are no lost pings or X-Ray VM interruption post-NIC failover.
 
    - RECOMMENDED: Use X-ray to run OLTP or VDI workload.
+
+.. note::
+
+   If you choose to run X-Ray on the same cluster you are performing failures on, it is recommended to avoid simulating the NIC failure on the same host that is running X-Ray.
 
 Viewing AHV Host Network Configuration in Prism
 -----------------------------------------------
@@ -248,9 +268,15 @@ In this section, we will be simulating a node failure by leveraging the IPMI (co
 
 There are two example scenarios you can run to demonstrate the cluster resiliency during this event:
 
-   - BASIC: Create two VMs, one on the host that is running the CVM you are shutting down, one on a host that will remain untouched. Begin a continuous ping between these VMs prior to issuing the shutdown command via SSH, and observe that there are no lost pings or X-Ray VM interruption post-CVM shutdown.
+   - BASIC: Create two VMs, one on the host that is running on the host you are shutting down, one on a host that will remain untouched. Begin a continuous ping between these VMs prior to issuing the shutdown command via IPMI, and observe that pings are lost once the host is powered off, and the VM resumes operation after the HA event.
 
-   - RECOMMENDED: Use X-ray to run OLTP or VDI workload.
+   - RECOMMENDED: Use X-Ray to run OLTP or VDI workload.
+
+   - MORE RECOMMENDED: Use X-Ray to run Extended Node Failure text (estimated time of completion: 11 hours)
+
+.. note::
+
+   If you choose to run X-Ray on the same cluster you are performing failures on, you must avoid simulating the node failure on the same host that is running X-Ray.
 
 #. Login to the IPMI interface of the selected node to participate in the simulated node failure test.
 
@@ -260,22 +286,28 @@ There are two example scenarios you can run to demonstrate the cluster resilienc
 
 #. Observe that the test VM(s) on the selected host are now powered off, and a High Availability (HA) event has occurred. The cluster will automatically attempt to restart the VM(s) on the remaining hosts.
 
-#. Login to Prism.
+#. Log into Prism.
 
 #. From the dropdown, select **Hardware**. Click on the selected host. Observe that the host is offline.
 
 #. From the dropdown, select **VM**. Monitor the VM(s) that were previously running on the test host, now will boot up on the remaining hosts. This process should take approximately 3-5 minutes from power off to the VM(s) being up and running once again.
 
+#. Return to the IPMI interface for the selected node, and click **Power On**
+
 Complete Power Failure
 ======================
 
-In this section, we will be simulating a cluster failure by leveraging the IPMI (commonly referred to out-of-band or "lights out" management) to power off all nodes simultaneously, and observe the behavior of the cluster once the simulated power is restored.
-
 There are two example scenarios you can run to demonstrate the cluster resiliency during this event:
 
-   - BASIC: Create two VMs, one on the host that is running the CVM you are shutting down, one on a host that will remain untouched. Begin a continuous ping between these VMs prior to issuing the shutdown command via SSH, and observe that there are no lost pings or X-Ray VM interruption post-CVM shutdown.
+   - BASIC: Follow the instructions below.
 
-   - RECOMMENDED: Use X-ray to run OLTP or VDI workload.
+   - RECOMMENDED: Use X-Ray to run Total Power Loss test (estimated time of completion: 2 hours).
+
+.. note::
+
+   You must run X-Ray on a different cluster than the cluster you are performing the power failure on.
+
+In this section, we will be simulating a cluster failure by leveraging the IPMI (commonly referred to out-of-band or "lights out" management) to power off all nodes simultaneously, and observe the behavior of the cluster once the simulated power is restored.
 
 #. Open a separate browser tab for each, and within each tab, login to the IPMI interface of each node. This will allow you to quickly and easily power off all nodes.
 
@@ -287,15 +319,11 @@ There are two example scenarios you can run to demonstrate the cluster resilienc
 
 #. After a few minutes, click the **Power On** button within the IPMI console for each node. Wait approximately 15-20 minutes.
 
-#. SSH into any CVM, and run the following command:
-
-   .. code-block:: bash
-
-      cluster status
+#. SSH into any CVM, and run the ``cluster status`` command.
 
    .. figure:: images/12.png
 
-      Sample output of the ``cluster status`` command for a one node
+      Sample output of the ``cluster status`` command
 
 #. Wait for all services on all nodes in the cluster to be up before you attempt to log in to Prism.
 
@@ -339,8 +367,8 @@ There are two example scenarios you can run to demonstrate the cluster resilienc
 
 #. Identify the physical power supply cord on the node you wish to remove as a part of this test. This can also be performed remotely if the customer has the ability to control individual sockets on their Power Distribution Unit (PDU), and you've confirmed the associated sockets connected to the node being tested.
 
-#. Disconnect power cord or otherwise shut power to one power supply.
+#. Disconnect power cord or otherwise remove power from one power supply.
 
-#. Observe that no interruption has occurred, and an error was generated in Prism. If SMTP was configured on this cluster, a support ticket may be generated for a power supply failure.
+#. Observe that no cluster interruption has occurred, and an error was generated in Prism. If SMTP was configured on this cluster, a support ticket may be generated for a power supply failure.
 
 #. Reconnect the previously removed power supply cable to the cluster. Acknowledge and resolve the associated alert.
