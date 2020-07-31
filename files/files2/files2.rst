@@ -274,12 +274,12 @@ During this exercise, you will:
 #. Click the **Home** tab on the *Ribbon*, and then **Properties**.
 
    .. figure:: images/distributed1.png
-       :align: left
-       :scale: 50%
+      :align: left
+      :scale: 50%
 
    .. figure:: images/distributed2.png
-       :align: right
-       :scale: 50%
+      :align: right
+      :scale: 50%
 
 #. In the *Folder Properties* window, click the **Location** tab.
 

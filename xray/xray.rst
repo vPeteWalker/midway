@@ -30,17 +30,17 @@ Installation and configuration of X-Ray
 #. Log into Prism. Click :fa:`gear`. In the sidebar that appears, select **Image Configuration > Upload Image**.
 
    .. figure:: images/1.png
-       :align: left
+      :align: left
 
    .. figure:: images/2.png
-       :align: right
+      :align: right
 
 #. Give the image a name in the *Name* field, set the image type to **DISK**, and specify the upload location.
    - If you are retrieving the image directly from the link provided by Nutanix, enter the URL in the *From URL* field.
    - If you have saved the image on your own system and want to upload it from there, select the **Upload a file** option and click **Choose File** to specify the image location.
 
    .. figure:: images/3.png
-       :align: left
+      :align: left
 
 #. Click **Save** to upload the image.
 
@@ -147,12 +147,12 @@ Creating an X-Ray Test Target
 #. Click **Run Validation**. This can take up to 10 minutes. Once complete, click **Done**.
 
    .. figure:: images/14.png
-       :align: left
-       :scale: 50%
+      :align: left
+      :scale: 50%
 
    .. figure:: images/15.png
-       :align: right
-       :scale: 50%
+      :align: right
+      :scale: 50%
 
 Executing an X-Ray Test
 -----------------------
@@ -178,10 +178,10 @@ To view detailed information about each test scenario, click **View & Run Test**
 #. Otherwise, click **Results** and then click anywhere within the test entry itself to open the *Results* page for your test.
 
    .. figure:: images/19.png
-       :align: left
+      :align: left
 
    .. figure:: images/18.png
-       :align: right
+      :align: right
 
 #. For other options, select the check box next to the test and click one of the option buttons.
 

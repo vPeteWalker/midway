@@ -81,21 +81,21 @@ There are two example scenarios you can run to demonstrate the cluster resilienc
 
    .. figure:: images/hdd3.png
 
-#. Run the command ``sudo parted /dev/sdX p`` **FOUR TIMES** replacing X with the letter that corresponds to the disks contained within your host. This command will only display information about the drive, and no changes are made at this stage. We are using this command to confirm which drives are SSDs and which are HDDs. In our example, we ran ``sudo parted /dev/sda p`` which identified an SSD - the only one in this host, since this is a single SSD configuration. Recommend you repeat this command, substituting the letter corresponding to each drive in your host.
+#. Run the command ``sudo parted /dev/sdX p`` replacing X with the letter that corresponds to the disks contained within your host. This command will only display information about the drive, and no changes are made at this stage. We are using this command to confirm which drives are SSDs and which are HDDs. In our example, we ran ``sudo parted /dev/sda p`` which identified an SSD - the only one in this host, since this is a single SSD configuration. Recommend you repeat this command, substituting the letter corresponding to each drive in your host.
 
    .. figure:: images/hdd4.png
-       :align: left
-       :scale: 50%
+      :align: left
+      :scale: 50%
 
       This is an example of an SSD
 
    .. figure:: images/hdd5.png
-       :align: right
-       :scale: 50%
+      :align: right
+      :scale: 50%
 
       This is an example of a HDD
 
-#. Now that we have identified our HDD that we wish to use in our failure test, we can run ``disk_operator mark_disks_unusable /dev/sdX`` where X is the identified disk. In our example, we ran ``disk_operator mark_disks_unusable /dev/sdb``, and the output is below.
+#. Now that we have identified our HDD that we wish to use in our failure test, we can run ``disk_operator mark_disks_unusable /dev/sdX`` where X is the identified disk. In our example, we ran ``disk_operator mark_disks_unusable /dev/sdb``, and the output is below. **You will run this command four times.**
 
    .. figure:: images/hdd6.png
 
@@ -115,17 +115,17 @@ There are two example scenarios you can run to demonstrate the cluster resilienc
 
 #. Run the command ``edit-hades``. This will open the *vi* text editor, enabling you to remove the necessary entries to bring the disk back online. Recommend to take a screen shot to document the existing settings.
 
-#. Hit **Insert** to begin editing. Remove any main sections entitled **is_bad** or **disk_diagnostics** as shown below. Once complete, hit **ESC** to stop editing, followed by **:wq** and **Enter**.
+#. Hit **Insert** to begin editing. Remove anything entitled **is_bad** or **disk_diagnostics**, including anything within those sections, as shown below. Once complete, hit **ESC** to stop editing, followed by **:wq** and **Enter** to exit the file editor.
 
    .. figure:: images/hdd9.png
-       :align: left
-       :scale: 50%
+      :align: left
+      :scale: 50%
 
       Before
 
    .. figure:: images/hdd10.png
-       :align: right
-       :scale: 50%
+      :align: right
+      :scale: 50%
 
       After
 
@@ -134,6 +134,8 @@ There are two example scenarios you can run to demonstrate the cluster resilienc
 #. Return to Prism, and select **+ Repartition and Add > Yes**.
 
    .. figure:: images/hdd11.png
+
+#. The previously removed disk will now be reincorporated into the cluster, and perform as normal.
 
 NIC Failure
 ===========

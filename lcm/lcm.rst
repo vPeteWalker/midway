@@ -43,8 +43,8 @@ Performing Inventory with LCM
    If you do not have auto-update enabled, and a new version of the LCM framework is available, LCM shows the following warning message:
 
    .. figure:: images/3.png
-       :align: center
-       :scale: 50%
+      :align: center
+      :scale: 50%
 
 #. To enable auto-inventory, click **Settings** and select the **Enable LCM Auto Inventory** checkbox in the dialog box that appears.
 
@@ -52,7 +52,7 @@ Performing Inventory with LCM
 
 
    .. figure:: images/4.png
-       :align: center
+      :align: center
 
       Use the Focus button to switch between a general display and a component-by-component display.
 
