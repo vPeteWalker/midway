@@ -301,14 +301,35 @@ There are two example scenarios you can run to demonstrate the cluster resilienc
 
 #. Perform a short demo, ensure all VMs are now back up and running, and for a few VMs or services, show the customer that all is up and running without problems.
 
-Power Supply Failure
-====================
+Power Supply Failure (Physical POC only)
+========================================
+
+.. PW - Asked Scott Ellis for other hardware guide similar to the NX PSU redundancy guide.
+      - Rewrite below to have tables in the doc vs. pictures?
 
 In this section, we will be simulating a power failure by removing power from one of the power supplies on the cluster, and observe the behavior of the cluster.
 
 .. note::
 
-   This applies to a physical POC only.
+   Nutanix recommends that you carefully plan your AC power source needs, especially in cases where the cluster consists of mixed models. Nutanix recommends that you use 180 V ~ 240 V AC power source to secure PSU redundancy. However, according to the below tables, and depending on the number of nodes in the chassis, some NX platforms can work with redundant 100 V ~ 210 V AC power supply units. If using non-NX hardware, refer to their respective manufacturer's platform guides.
+
+.. figure:: images/psug5.png
+   :align: left
+   :scale: 50%
+
+   `PSU Redundancy and Node Configuration - G5 <>`_
+
+.. figure:: images/psug6.png
+   :align: right
+   :scale: 50%
+
+   `PSU Redundancy and Node Configuration - G6 <https://portal.nutanix.com/page/documents/details?targetId=System-Specs-G6-Multinode:har-psu-redundancy-table-g6-r.html>`_
+
+.. figure:: images/psug7.png
+   :align: center
+   :scale: 50%
+
+   `PSU Redundancy and Node Configuration - G7 <https://portal.nutanix.com/page/documents/details?targetId=System-Specs-G7-Multinode:har-psu-redundancy-table-r.html>`_
 
 There are two example scenarios you can run to demonstrate the cluster resiliency during this event:
 
@@ -316,10 +337,10 @@ There are two example scenarios you can run to demonstrate the cluster resilienc
 
    - RECOMMENDED: Use X-ray to run OLTP or VDI workload.
 
-#. Identify the physical power supply on the node you wish to remove as a part of this test. This can also be performed remotely if the customer has network capacity for their Power Distribution Unit (PDU).
+#. Identify the physical power supply cord on the node you wish to remove as a part of this test. This can also be performed remotely if the customer has the ability to control individual sockets on their Power Distribution Unit (PDU), and you've confirmed the associated sockets connected to the node being tested.
 
-#. Disconnect or otherwise shut power to one power supply.
+#. Disconnect power cord or otherwise shut power to one power supply.
 
-#. Observe that no interruption has occurred. If SMTP was configured on this cluster, a support ticket may be generated for a power supply failure.
+#. Observe that no interruption has occurred, and an error was generated in Prism. If SMTP was configured on this cluster, a support ticket may be generated for a power supply failure.
 
-#. Reconnect the previously removed power supply cable to the cluster.
+#. Reconnect the previously removed power supply cable to the cluster. Acknowledge and resolve the associated alert.
