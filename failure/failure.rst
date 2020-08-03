@@ -4,13 +4,10 @@
 Failure
 -------
 
-Prerequisites and Requirements
-++++++++++++++++++++++++++++++
-
-It is recommended you complete the :ref:`clusterconfig` section before proceeding.
-
 Before you begin
 ================
+
+It is recommended you complete the :ref:`clusterconfig` section before proceeding.
 
 Please be aware that any information such as server names, IP addresses, and similar information contained within any screen shots are strictly for demonstration purposes. Do not use these values when proceeding with any of the steps contained within this workshop.
 
@@ -24,11 +21,11 @@ Finally, while you are welcome to vary your inputs compared to the instructions 
 CVM Failure
 ===========
 
-In this section, we will be simulating a Controller Virtual Machine (CVM) failure by executing a command that will shut off the CVM unexpectedly (versus a gradual shutdown for maintenance). This test demonstrates the ability of Nutanix's AOS to immediately failover storage I/O operations to another CVM in the cluster without interruption to any VMs running on that host. This is all done while running a continuous ping and/or workload simulation via X-Ray or similar to illustrate a real world failure scenario.
+In this section, we will be simulating a Controller Virtual Machine (CVM) failure by executing a command that will shut off the CVM unexpectedly (versus a gradual shutdown for maintenance). This test demonstrates the ability of Nutanix's AOS to immediately failover storage I/O operations to another CVM in the cluster without interruption to any VMs running on that host.
 
 There are two example scenarios you can run to demonstrate the cluster resiliency during this event:
 
-   - BASIC: Create two VMs, one on the host that is running the CVM you are shutting down, one on a host that will remain untouched. Begin a continuous ping between these VMs prior to issuing the shutdown command via SSH, and observe that there are no lost pings or X-Ray VM interruption post-CVM shutdown.
+   - BASIC: Create two VMs, one on the host that is running the CVM you are shutting down, one on a host that will remain untouched. Begin a continuous ping between these VMs prior to issuing the shutdown command via SSH, and observe that there are no lost pings.
 
    - RECOMMENDED: Use X-ray to run OLTP or VDI workload.
 
@@ -36,11 +33,11 @@ There are two example scenarios you can run to demonstrate the cluster resilienc
 
    If you choose to run X-Ray on the same cluster you are performing failures on, it is recommended to avoid simulating the CVM failure on the same host that is running X-Ray.
 
-#. SSH into any host (not CVM) within the cluster using the *root* username and password, and run the following commands to shut down the CVM running on that host.
+#. SSH into any host within the cluster using the *root* username and password, and run the following commands to shut down the CVM running on that host.
 
-   - **virsh list** - This command will *list all VMs* running on the host.
-   - **virsh shutdown `*CVM name*`** - This command will *shut down* the CVM.
-   - **virsh start `*CVM name*`** - This command will *start* the CVM.
+   - ``virsh list`` - This command will *list all VMs* running on the host. Make note of the entry in the *Name* column for the CVM.
+   - ``virsh shutdown (CVM name)`` - This command will *shut down* the CVM.
+   - ``virsh start (CVM name)`` - This command will *start* the CVM.
 
    .. figure:: images/1.png
 
@@ -97,25 +94,25 @@ This test demonstrates the ability of Nutanix's AOS to immediately begin rebuild
 
    .. figure:: images/hdd4.png
       :align: left
-      :scale: 50%
+      :scale: 75%
 
       This is an example of an SSD
 
    .. figure:: images/hdd5.png
       :align: right
-      :scale: 50%
+      :scale: 75%
 
       This is an example of a HDD
 
-#. Now that we have identified our HDD that we wish to use in our failure test, we can run ``disk_operator mark_disks_unusable /dev/sdX`` where X corresponds to the ID of the identified disk. In our example, we ran ``disk_operator mark_disks_unusable /dev/sdb``, and the output is below. **You will repeat this command until you observe a failure within Prism** This is required to trigger Curator to mark the drive as failed.
+#. Now that we have identified our HDD that we wish to use in our failure test, we can run ``disk_operator mark_disks_unusable /dev/sdX`` where X corresponds to the ID of the identified disk. In our example, we ran ``disk_operator mark_disks_unusable /dev/sdb``, and the output is below. **You will repeat this command until you observe a failure within Prism**. This is required to trigger Curator to mark the drive as failed.
 
    .. figure:: images/hdd6.png
 
-#. Return to Prism and observe that the disk is in the process of being removed, and shows a failure state. Make note of the disk serial number at this time.
+#. Within Prism, observe that the disk is in the process of being removed, and shows a failure state. Make note of the disk serial number at this time.
 
    .. figure:: images/hdd7.png
 
-#. Run the command ``links http://0:2010``. You will be presented with the *Rebuild Estimator* interface similar to the below.
+#. Within the SSH session, run the command ``links http://0:2010``. You will be presented with the *Rebuild Estimator* interface similar to the below.
 
    .. figure:: images/hdd7a.png
 
@@ -127,7 +124,7 @@ This test demonstrates the ability of Nutanix's AOS to immediately begin rebuild
 
       To refresh the screen hit CTRL+R
 
-#. Hit CTRL+C to exit the *Rebuild Estimator* and proceed once the disk has been successfully removed.
+#. Once the disk has been successfully removed, hit CTRL+C to exit the *Rebuild Estimator*.
 
 #. Enable hidden commands in ncli by running ``ncli -h=true``.
 
@@ -139,7 +136,7 @@ This test demonstrates the ability of Nutanix's AOS to immediately begin rebuild
 
       Sample output of all commands
 
-#. Run the command ``edit-hades``. This will open the text editor, enabling you to remove the necessary entries to bring the disk back online. Recommend to take a screen shot to document the existing settings before making changes.
+#. Run the command ``edit-hades``. This will open the text editor, enabling you to remove the necessary entries to bring the disk back online. It is recommended to take a screen shot to document the existing settings before making changes.
 
 #. Hit **Insert** to begin editing. Remove anything with the main heading **is_bad** or **disk_diagnostics**, including anything within those sections, as shown below. Once complete, hit **ESC** to stop editing, followed by **:wq** and **Enter** to exit the file editor.
 
@@ -208,39 +205,27 @@ View AHV Host Network Configuration in the CLI
 
 #. To verify the names, speed, and connectivity status of all AHV host interfaces, use the `manage_ovs show_uplinks` command, followed by the `manage_ovs show_interfaces` command. Since in previous steps we've identified that there is only a single bridge, with a single bond. If we had multiple bridges, use the command `manage_ovs --bridge_name <bridge name> show_uplinks`.
 
-   .. code-block:: bash
-
-      manage_ovs show_uplinks
+   ``manage_ovs show_uplinks``
 
    .. figure:: images/6.png
 
-      Sample output of ``manage_ovs show_uplinks`` command
+      Sample output of manage_ovs show_uplinks command
 
-   .. code-block:: bash
-
-      manage_ovs show_interfaces
+   ``manage_ovs show_interfaces``
 
    .. figure:: images/7.png
 
-      Sample output of ``manage_ovs show_interfaces`` command
+      Sample output of manage_ovs show_interfaces command
 
 In our example, eth0 and eth1 report **False** under *link* as there is no physical connection to those ports. Ports eth2 and eth3 report **True** under link, as both are physically connected. We now need to identify the active port in this bridge.
 
-#. SSH to the internal management address of the AHV host. This step does not require additional authentication.
+#. SSH to the internal management address of the AHV host by entering ``ssh root@192.168.5.1``. This step does not require additional authentication.
 
-   .. code-block:: bash
-
-      ssh root@192.168.5.1
-
-#. Execute the command:
-
-   .. code-block:: bash
-
-      ovs-appctl bond/show
+#. Execute the command ``ovs-appctl bond/show``
 
    .. figure:: images/8.png
 
-      Sample output of the ``ovs-appctl bond/show`` command
+      Sample output of the ovs-appctl bond/show command
 
 As we've previously seen, eth0 and eth1 are disabled, as they have no physical link. They both list *may_enable: false* as enabling these ports would be pointless without a physical connection.
 
@@ -255,19 +240,17 @@ Initiate failover within the CLI
 
 #. Execute the following command, specifying the bond, and the interface that you are going to make active. In our example, the bond is *br0-up* and the interfaces is *eth2*
 
-   .. code-block:: bash
-
-      ovs-appctl bond/set-active-slave <bond name> <interface name>
+   ``ovs-appctl bond/set-active-slave <bond name> <interface name>``
 
    .. figure:: images/9.png
 
-      Sample output of the ``ovs-appctl bond/set-active-slave`` command
+      Sample output of the ovs-appctl bond/set-active-slave command
 
-#. Now let's look at the output of the `ovs-appctl bond/show` command now that we've modified the active interface to be *eth2* in our example.
+#. Now let's look at the output of the ```ovs-appctl bond/show`` command now that we've modified the active interface to be *eth2* in our example.
 
    .. figure:: images/10.png
 
-      Sample output of the ``ovs-appctl bond/show`` command
+      Sample output of the ovs-appctl bond/show command
 
 #. You have now successfully forced a failover between interfaces.
 
@@ -351,11 +334,11 @@ In this section, we will be simulating a power failure by removing power from on
 
    Nutanix recommends that you carefully plan your AC power source needs, especially in cases where the cluster consists of mixed models. Nutanix recommends that you use 180 V ~ 240 V AC power source to secure PSU redundancy. However, according to the below tables, and depending on the number of nodes in the chassis, some NX platforms can work with redundant 100 V ~ 210 V AC power supply units. If using non-NX hardware, refer to their respective manufacturer's platform guides.
 
-.. figure:: images/psug5.png
-   :align: left
-   :scale: 50%
-
-   `PSU Redundancy and Node Configuration - G5 <>`_
+.. .. figure:: images/psug5.png
+..    :align: left
+..    :scale: 50%
+..
+..    `PSU Redundancy and Node Configuration - G5 <>`_
 
 .. figure:: images/psug6.png
    :align: right
