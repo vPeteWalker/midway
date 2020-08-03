@@ -152,7 +152,9 @@ This test demonstrates the ability of Nutanix's AOS to immediately begin rebuild
 
       After
 
-#. Run the command ``genesis restart``. You may now exit your SSH session. This will refresh Prism, and you will now see that the disk is available to add and repartition.
+#. You may now exit your SSH session.
+
+#. Run the command ``genesis restart``. This will refresh Prism, and you will now see that the disk is available to add and repartition.
 
 #. Return to Prism, select the disk, and choose **+ Repartition and Add > Yes**.
 
