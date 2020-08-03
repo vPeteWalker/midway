@@ -36,8 +36,8 @@ There are two example scenarios you can run to demonstrate the cluster resilienc
 #. SSH into any host within the cluster using the *root* username and password, and run the following commands to shut down the CVM running on that host.
 
    - ``virsh list`` - This command will *list all VMs* running on the host. Make note of the entry in the *Name* column for the CVM.
-   - ``virsh shutdown (CVM name)`` - This command will *shut down* the CVM.
-   - ``virsh start (CVM name)`` - This command will *start* the CVM.
+   - ``virsh shutdown <CVM-NAME>`` - This command will *shut down* the CVM.
+   - ``virsh start <CVM-NAME>`` - This command will *start* the CVM.
 
    .. figure:: images/1.png
 
@@ -94,13 +94,11 @@ This test demonstrates the ability of Nutanix's AOS to immediately begin rebuild
 
    .. figure:: images/hdd4.png
       :align: left
-      :scale: 75%
 
       This is an example of an SSD
 
    .. figure:: images/hdd5.png
       :align: right
-      :scale: 75%
 
       This is an example of a HDD
 
@@ -142,13 +140,11 @@ This test demonstrates the ability of Nutanix's AOS to immediately begin rebuild
 
    .. figure:: images/hdd9.png
       :align: left
-      :scale: 75%
 
       Before
 
    .. figure:: images/hdd10.png
       :align: right
-      :scale: 75%
 
       After
 
