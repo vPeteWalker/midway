@@ -53,9 +53,15 @@ There are two example scenarios you can run to demonstrate the cluster resilienc
 HDD Failure
 ===========
 
+.. note::
+
+   This section describes a method to simulate a HDD failure that, while it works correctly using our testing, is not recommended by engineering. There will be a future version to simulate this using another method.
+
 .. raw:: html
 
-  <strong><font color="red">Proceed with caution. Recommend you only perform these steps if the POC absolutely requires this. These instructions will guide you with how to properly identify a disk with certainty, but be aware that you are using commands that if not entered correctly, could negatively impact your POC, and require involving support to rectify the issue.</font></strong>
+  <strong><font color="red">Proceed with caution. It is recommended that you perform the steps within this section only if the POC absolutely requires this. These instructions will guide you with how to properly identify a disk with certainty, to simulate its failure, and add it back to the cluster once complete. However, be aware that you are using commands that if not entered correctly, could negatively impact your POC, and require involving support to rectify the issue.</font></strong>
+
+**CREATE A VIDEO STEPPING THROUGH THIS BECAUSE THERE COULD BE DRAGONS HERE?**
 
 In this section, we will be simulating a Hard Disk Drive (HDD) failure by executing a command that will instantly simulate degredation event for a hard disk that would normally happens over time under real world conditions. This is preferable to performing a "drive pull" test, as that is a very unlikely scenario. What is more likely, is a HDD to develop bad sectors or similar issues gradually over time, and as protecting customer data is vital, any infrastructure must handle this gracefully, and without interruption or loss.
 
@@ -67,7 +73,7 @@ This test demonstrates the ability of Nutanix's AOS to immediately begin rebuild
 
 #. Identify the host you are planning to simulate the HDD drive failure on.
 
-#. Within Prism, choose **Hardware** from the dropdown. Click on **Diagram**, and then on the selected host for testing.
+#. Within Prism, choose **Hardware** from the dropdown. Click on **Diagram**, and then click on the selected host containing the HDD you'll be using for testing.
 
 #. Click through all the disks associated with the host, and observe the *Disk Details* window in the lower left. Identify a drive that lists **HDD** as *Storage Tier*, optionally one with the lowest amount of disk usage, to reduce the time required to remove the drive. Lastly, make note of the drive's serial number. This will aid in identifying the drive from the CLI.
 
@@ -101,23 +107,27 @@ This test demonstrates the ability of Nutanix's AOS to immediately begin rebuild
 
       This is an example of a HDD
 
-#. Now that we have identified our HDD that we wish to use in our failure test, we can run ``disk_operator mark_disks_unusable /dev/sdX`` where X corresponds to the ID of the identified disk. In our example, we ran ``disk_operator mark_disks_unusable /dev/sdb``, and the output is below. **You will run this command four times.** This is required to trigger Curator to mark the drive as failed.
+#. Now that we have identified our HDD that we wish to use in our failure test, we can run ``disk_operator mark_disks_unusable /dev/sdX`` where X corresponds to the ID of the identified disk. In our example, we ran ``disk_operator mark_disks_unusable /dev/sdb``, and the output is below. **You will repeat this command until you observe a failure within Prism** This is required to trigger Curator to mark the drive as failed.
 
    .. figure:: images/hdd6.png
 
-#. Return to Prism and observe that the disk is in the process of being removed, and shows a failure state. Make note of the disk serial number at this time. Do not proceed until the disk removal task has completed.
+#. Return to Prism and observe that the disk is in the process of being removed, and shows a failure state. Make note of the disk serial number at this time.
 
    .. figure:: images/hdd7.png
 
-#. Run the command ``links <CVM IP>:2010`` (e.g. ``links 10.42.91.31:2010``). You will be presented with the *Rebuild Estimator* interface similar to the below.
+#. Run the command ``links http://0:2010``. You will be presented with the *Rebuild Estimator* interface similar to the below.
 
    .. figure:: images/hdd7a.png
 
 #. Hit **Enter** on the *Curator Master* IP address.
 
-#. Scroll down, and highlight **Rebuild Info**. Hit **Enter**. You will be presented with a screen similar to the below.
+#. Scroll down, and highlight **Rebuild Info**. Hit **Enter**. You will be presented with a screen similar to the below, which displays the estimated time remaining to rebuild the data from the removed disk.
 
+   .. figure:: images/hdd7b.png
 
+      To refresh the screen hit CTRL+R
+
+#. Hit CTRL+C to exit the *Rebuild Estimator* and proceed once the disk has been successfully removed.
 
 #. Enable hidden commands in ncli by running ``ncli -h=true``.
 
@@ -129,25 +139,25 @@ This test demonstrates the ability of Nutanix's AOS to immediately begin rebuild
 
       Sample output of all commands
 
-#. Run the command ``edit-hades``. This will open the *vi* text editor, enabling you to remove the necessary entries to bring the disk back online. Recommend to take a screen shot to document the existing settings.
+#. Run the command ``edit-hades``. This will open the text editor, enabling you to remove the necessary entries to bring the disk back online. Recommend to take a screen shot to document the existing settings before making changes.
 
-#. Hit **Insert** to begin editing. Remove anything entitled **is_bad** or **disk_diagnostics**, including anything within those sections, as shown below. Once complete, hit **ESC** to stop editing, followed by **:wq** and **Enter** to exit the file editor.
+#. Hit **Insert** to begin editing. Remove anything with the main heading **is_bad** or **disk_diagnostics**, including anything within those sections, as shown below. Once complete, hit **ESC** to stop editing, followed by **:wq** and **Enter** to exit the file editor.
 
    .. figure:: images/hdd9.png
       :align: left
-      :scale: 50%
+      :scale: 75%
 
       Before
 
    .. figure:: images/hdd10.png
       :align: right
-      :scale: 50%
+      :scale: 75%
 
       After
 
-#. Run the command ``genesis restart``. You may now exist your SSH session.  This will refresh Prism, and you will now see that the disk is available to add and repartition.
+#. Run the command ``genesis restart``. You may now exit your SSH session. This will refresh Prism, and you will now see that the disk is available to add and repartition.
 
-#. Return to Prism, and select **+ Repartition and Add > Yes**.
+#. Return to Prism, select the disk, and choose **+ Repartition and Add > Yes**.
 
    .. figure:: images/hdd11.png
 
