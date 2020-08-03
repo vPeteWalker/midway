@@ -56,6 +56,8 @@ Performing Inventory with LCM
 
       Use the Focus button to switch between a general display and a component-by-component display.
 
+#. **BLURB ABOUT WHAT IT'S DOING, SOME CONTEXT FOR THE CUSTOMER, ETC. TO BE ADDED**
+
 Performing Updates with the Life Cycle Manager
 ..............................................
 
