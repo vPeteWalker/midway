@@ -332,23 +332,29 @@ In this section, we will be simulating a power failure by removing power from on
 
    Nutanix recommends that you carefully plan your AC power source needs, especially in cases where the cluster consists of mixed models. Nutanix recommends that you use 180 V ~ 240 V AC power source to secure PSU redundancy. However, according to the below tables, and depending on the number of nodes in the chassis, some NX platforms can work with redundant 100 V ~ 210 V AC power supply units. If using non-NX hardware, refer to their respective manufacturer's platform guides.
 
-.. .. figure:: images/psug5.png
-..    :align: left
-..    :scale: 50%
-..
-..    `PSU Redundancy and Node Configuration - G5 <>`_
+.. figure:: images/psug4.png
+   :align: left
+   :scale: 50%
 
-.. figure:: images/psug6.png
+   `Power Supply Unit (PSU) Redundancy and Node Configuration for G4 platforms <https://portal.nutanix.com/page/documents/details?targetId=System-Specs-G4-Multinode:har-psu-redundancy-table-r.html>`_
+
+.. figure:: images/psug5.png
    :align: right
    :scale: 50%
 
-   `PSU Redundancy and Node Configuration - G6 <https://portal.nutanix.com/page/documents/details?targetId=System-Specs-G6-Multinode:har-psu-redundancy-table-g6-r.html>`_
+   `Power Supply Unit (PSU) Redundancy and Node Configuration for G5 platforms <https://portal.nutanix.com/page/documents/details?targetId=System-Specs-G5-Single-Node:har-psu-redundancy-table-r.html>`_
 
-.. figure:: images/psug7.png
-   :align: center
+.. figure:: images/psug6.png
+   :align: left
    :scale: 50%
 
-   `PSU Redundancy and Node Configuration - G7 <https://portal.nutanix.com/page/documents/details?targetId=System-Specs-G7-Multinode:har-psu-redundancy-table-r.html>`_
+   `Power Supply Unit (PSU) Redundancy and Node Configuration for G6 platforms <https://portal.nutanix.com/page/documents/details?targetId=System-Specs-G6-Multinode:har-psu-redundancy-table-g6-r.html>`_
+
+.. figure:: images/psug7.png
+   :align: right
+   :scale: 50%
+
+   `Power Supply Unit (PSU) Redundancy and Node Configuration for G7 platforms <https://portal.nutanix.com/page/documents/details?targetId=System-Specs-G7-Multinode:har-psu-redundancy-table-r.html>`_
 
 There are two example scenarios you can run to demonstrate the cluster resiliency during this event:
 

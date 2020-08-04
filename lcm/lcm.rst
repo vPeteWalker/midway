@@ -56,7 +56,15 @@ Performing Inventory with LCM
 
       Use the Focus button to switch between a general display and a component-by-component display.
 
-#. **BLURB ABOUT WHAT IT'S DOING, SOME CONTEXT FOR THE CUSTOMER, ETC. TO BE ADDED**
+.. note::
+
+   A bit of context on what LCM is actually doing during the inventory process, as it could take up to 20 minutes to perform on a 4-node cluster, and up to 40 minutes on a 32-node cluster.
+
+   - Use our master manifest to determine which modules are applicable on each host based on the hardware family.
+   - Download these modules (note only the control logic, no images needed) onto the catalog service.
+   - Execute these modules on their respective environment - host or CVM.
+   - We pull these modules from the catalog service into the respective environment, run their detect logic, and determine current versions.
+   - These processes are distributed to the LCM service running on all nodes. Each node picks up the work items, and runs the 2 scripts - one for CVM and another for the host.
 
 Performing Updates with the Life Cycle Manager
 ..............................................
