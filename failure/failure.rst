@@ -21,13 +21,13 @@ Finally, while you are welcome to vary your inputs compared to the instructions 
 CVM Failure
 ===========
 
-In this section, we will be simulating a Controller Virtual Machine (CVM) failure by executing a command that will shut off the CVM unexpectedly (versus a gradual shutdown for maintenance). This test demonstrates the ability of Nutanix's AOS to immediately failover storage I/O operations to another CVM in the cluster without interruption to any VMs running on that host.
+In this section, we will be simulating a Controller Virtual Machine (CVM) failure by executing a command that will shut off the CVM unexpectedly (versus a gradual shutdown for maintenance). This test demonstrates the ability of Nutanix's AOS to immediately failover storage I/O operations to another CVM wjthin the cluster without interruption to any VMs running on that host.
 
 There are two example scenarios you can run to demonstrate the cluster resiliency during this event:
 
-   - BASIC: Create two VMs, one on the host that is running the CVM you are shutting down, one on a host that will remain untouched. Begin a continuous ping between these VMs prior to issuing the shutdown command via SSH, and observe that there are no lost pings.
+   - BASIC: Create two VMs, one on the host that is running the CVM you are shutting down, one on a host that will remain untouched. Begin a continuous ping between these VMs prior to issuing the shutdown command via SSH, and observe that there are no lost pings. Creating VMs is oulined in :ref:`vmmanage`
 
-   - RECOMMENDED: Use X-ray to run OLTP or VDI workload.
+   - RECOMMENDED: Use X-ray to run OLTP or VDI workload. Setup of X-Ray is oulined in :ref:`xray`
 
 .. note::
 
@@ -63,6 +63,10 @@ HDD Failure
 In this section, we will be simulating a Hard Disk Drive (HDD) failure by executing a command that will instantly simulate degredation event for a hard disk that would normally happens over time under real world conditions. This is preferable to performing a "drive pull" test, as that is a very unlikely scenario. What is more likely, is a HDD to develop bad sectors or similar issues gradually over time, and as protecting customer data is vital, any infrastructure must handle this gracefully, and without interruption or loss.
 
 This test demonstrates the ability of Nutanix's AOS to immediately begin rebuilding additional copies of data on the surviving drives, as a high priority event, utilizing all nodes in the cluster to aid in that rebuild. This results in a restoration to full redundancy in a very short amount of time. Internal tests show that using several generation old equipment, Nutanix can rebuild 5TB worth of data within 45 minutes. This differs between other platforms in two major ways. One, we don't have a default wait period before rebuilding data, and two, Nutanix doesn't operate in a paired fashion, so we can take advantage of the distributed nature and combined performance of an entire Nutanix cluster to rebuild missing data quickly. In a nutshell, the rebuild is both very fast and the workload per node is minimized to avoid bottlenecks and to reduce the impact to running workload. Data rebuild time decreases with each additional node added to the cluster, as a result of our MapReduce Framework which leverages the full power of the cluster to perform these types of activities concurrently.
+
+   - BASIC: Create two VMs, one on the host that contains the HDD that the simulated failure will be performed on, one on a host that will remain untouched. Begin a continuous ping between these VMs prior to issuing the HDD failure commands, and observe that there are no lost pings. Creating VMs is oulined in :ref:`vmmanage`
+
+   - RECOMMENDED: Use X-ray to run OLTP or VDI workload. Setup of X-Ray is oulined in :ref:`xray`
 
 .. note::
 
@@ -156,7 +160,7 @@ This test demonstrates the ability of Nutanix's AOS to immediately begin rebuild
 
    .. figure:: images/hdd11.png
 
-#. The previously removed disk will now be reincorporated into the cluster, and perform as normal.
+#. The previously removed disk will now be reincorporated into the cluster, and perform as normal. Additionally, demonstrate the result of either the **BASIC** or **RECOMMENDED** scenarios.
 
 NIC Failure
 ===========
@@ -165,9 +169,9 @@ In this section, we will be simulating a Network Interface Card (NIC), and obser
 
 There are two example scenarios you can run to demonstrate the cluster resiliency during this event:
 
-   - BASIC: Create two VMs, one on the host that is running on the host you are simulating the NIC failure on, one on a host that will remain untouched. Begin a continuous ping between these VMs prior to issuing the failover command via SSH, and observe that there are no lost pings or X-Ray VM interruption post-NIC failover.
+   - BASIC: Create two VMs, one on the host that is running on the host you are simulating the NIC failure on, one on a host that will remain untouched. Begin a continuous ping between these VMs prior to issuing the shutdown command via SSH, and observe that there are no lost pings. Creating VMs is oulined in :ref:`vmmanage`
 
-   - RECOMMENDED: Use X-ray to run OLTP or VDI workload.
+   - RECOMMENDED: Use X-ray to run OLTP or VDI workload. Setup of X-Ray is oulined in :ref:`xray`
 
 .. note::
 
@@ -244,13 +248,13 @@ Initiate failover within the CLI
 
       Sample output of the ovs-appctl bond/set-active-slave command
 
-#. Now let's look at the output of the ```ovs-appctl bond/show`` command now that we've modified the active interface to be *eth2* in our example.
+#. Now let's look at the output of the ``ovs-appctl bond/show`` command now that we've modified the active interface to be *eth2* in our example.
 
    .. figure:: images/10.png
 
       Sample output of the ovs-appctl bond/show command
 
-#. You have now successfully forced a failover between interfaces.
+#. You have now successfully forced a failover between interfaces. Additionally, demonstrate the result of either the **BASIC** or **RECOMMENDED** scenarios.
 
 Node Failure
 ============
@@ -259,11 +263,11 @@ In this section, we will be simulating a node failure by leveraging the IPMI (co
 
 There are two example scenarios you can run to demonstrate the cluster resiliency during this event:
 
-   - BASIC: Create two VMs, one on the host that is running on the host you are shutting down, one on a host that will remain untouched. Begin a continuous ping between these VMs prior to issuing the shutdown command via IPMI, and observe that pings are lost once the host is powered off, and the VM resumes operation after the HA event.
+   - BASIC: Create two VMs, one on the host that is running on the host you are shutting down, one on a host that will remain untouched. Begin a continuous ping between these VMs prior to issuing the shutdown command via IPMI, and observe that pings are lost once the host is powered off, and the VM resumes operation after the HA event. Creating VMs is oulined in :ref:`vmmanage`
 
-   - RECOMMENDED: Use X-Ray to run OLTP or VDI workload.
+   - RECOMMENDED: Use X-ray to run OLTP or VDI workload. Setup of X-Ray is oulined in :ref:`xray`
 
-   - MORE RECOMMENDED: Use X-Ray to run Extended Node Failure text (estimated time of completion: 11 hours)
+   - MORE RECOMMENDED: Use X-Ray to run Extended Node Failure test (estimated time of completion: 11 hours)
 
 .. note::
 
@@ -281,9 +285,11 @@ There are two example scenarios you can run to demonstrate the cluster resilienc
 
 #. From the dropdown, select **Hardware**. Click on the selected host. Observe that the host is offline.
 
-#. From the dropdown, select **VM**. Monitor the VM(s) that were previously running on the test host, now will boot up on the remaining hosts. This process should take approximately 3-5 minutes from power off to the VM(s) being up and running once again.
+#. From the dropdown, select **VM**. Monitor the VM(s) that were previously running on the test host, now will boot up on the remaining hosts. This process should take approximately 3-5 minutes between the time you power off the host, and the VM(s) being up and running once again.
 
-#. Return to the IPMI interface for the selected node, and click **Power On**
+#. Return to the IPMI interface for the selected node, and click **Power On**. This will take approximately 10-15 minutes to boot up, and be available within the cluster.
+
+#. Perform a short demo, ensure all VMs are now back up and running, and for a few VMs or services, show the customer that all is up and running without problems. Additionally, demonstrate the result of either the **BASIC** or **RECOMMENDED** scenarios.
 
 Complete Power Failure
 ======================
@@ -292,7 +298,7 @@ There are two example scenarios you can run to demonstrate the cluster resilienc
 
    - BASIC: Follow the instructions below.
 
-   - RECOMMENDED: Use X-Ray to run Total Power Loss test (estimated time of completion: 2 hours).
+   - RECOMMENDED: Use X-Ray to run Total Power Loss test (estimated time of completion: 2 hours). Setup of X-Ray is oulined in :ref:`xray`
 
 .. note::
 
@@ -306,7 +312,7 @@ In this section, we will be simulating a cluster failure by leveraging the IPMI 
 
    .. figure:: images/11.png
 
-#. Demonstrate that both the test VM(s) on the selected host are now powered off, but all hosts themselves are powered off.
+#. Demonstrate that all test VM(s) on the selected host are now powered off, as all hosts themselves are powered off.
 
 #. After a few minutes, click the **Power On** button within the IPMI console for each node. Wait approximately 15-20 minutes.
 
@@ -362,10 +368,14 @@ There are two example scenarios you can run to demonstrate the cluster resilienc
 
    - RECOMMENDED: Use X-ray to run OLTP or VDI workload.
 
+   - BASIC: Create as many VMs as there are hosts. Begin a continuous ping between each VM to another VM, prior to issuing the shutdown command via SSH, and observe that there are no lost pings. Creating VMs is oulined in :ref:`vmmanage`
+
+   - RECOMMENDED: Use X-ray to run OLTP or VDI workload. Setup of X-Ray is oulined in :ref:`xray`
+
 #. Identify the physical power supply cord on the node you wish to remove as a part of this test. This can also be performed remotely if the customer has the ability to control individual sockets on their Power Distribution Unit (PDU), and you've confirmed the associated sockets connected to the node being tested.
 
 #. Disconnect power cord or otherwise remove power from one power supply.
 
 #. Observe that no cluster interruption has occurred, and an error was generated in Prism. If SMTP was configured on this cluster, a support ticket may be generated for a power supply failure.
 
-#. Reconnect the previously removed power supply cable to the cluster. Acknowledge and resolve the associated alert.
+#. Reconnect the previously removed power supply cable to the cluster. Acknowledge and resolve the associated alert. Additionally, demonstrate the result of either the **BASIC** or **RECOMMENDED** scenarios.

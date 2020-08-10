@@ -4,7 +4,7 @@
 Lifecycle Manager (LCM)
 -----------------------
 
-In this module we will demonstrate how to perform an inventory, followed by updates with LCM.
+In this module we will demonstrate how to perform an inventory, followed by performing updates with LCM.
 
 What is LCM?
 ............
@@ -12,12 +12,12 @@ What is LCM?
 - LCM aims to enable administrators to take inventory of the firmware and software in their Nutanix environment and perform updates in a simple, cluster-aware, fashion.
 - LCM is an industry-unique solution - providing the same 1-click operational upgrade simplicity for 7 (and growing) different hardware vendor appliances running Nutanix software.
 - LCM just offers a management layer that will allow users to deploy firmware upgrades simply without having to worry about upgrade paths or conflicts between versions. Customers should not require a manual to upgrade their environment - LCM aims to solve this at scale.
-- Once a customer performs an Inventory of their cluster, all the firmware is downloaded and staged. From there, users can deploy the updates with as much or as little granularity as they desire. You can either select individual entities for upgrade or do the entire cluster at once (subject to what the actual component being upgraded allows).
+- Once a customer performs an inventory of their cluster, all the firmware is downloaded and staged. From there, users can deploy the updates with as much or as little granularity as they desire. You can either select individual entities for upgrade or do the entire cluster at once (subject to what the actual component being upgraded allows).
 - A Dark Site LCM version is available
 
 .. note::
 
-   For detailed information about LCM, please refer to the `Life Cycle Manager Guide v2.2 <https://portal.nutanix.com/page/documents/details/?targetId=Life-Cycle-Manager-Guide-v22%3ALife-Cycle-Manager-Guide-v22>`_
+   For detailed information about LCM, please refer to the `Life Cycle Manager Guide v2.2 <https://portal.nutanix.com/page/documents/details?targetId=Life-Cycle-Manager-Guide-v2_3:Life-Cycle-Manager-Guide-v2_3>`_
 
 **Pre-requisites:** Completion of :ref:`vmmanage`
 

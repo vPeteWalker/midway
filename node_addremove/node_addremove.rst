@@ -10,7 +10,7 @@ A cluster is a collection of nodes. You can add new nodes to a cluster at any ti
 
 Why does this matter to our customers?
 
-A customer may choose to add a node or nodes to account for a new workloads such as VDI, or increase performance, capacity, or resiliency. Additionally, a customer may elect to remove nodes if those nodes are past their usable life, and may not be meeting the customer's performance needs, or the nodes are no longer supported.
+A customer may choose to add a node to account for a new workloads such as VDI, or increase performance, capacity, or resiliency. Additionally, a customer may elect to remove a node if that node is past their usable life, and may not be meeting the customer's performance needs, or the node is no longer supported.
 
 **Pre-requisites:** Completion of :ref:`vmmanage`
 
@@ -27,8 +27,8 @@ A customer may choose to add a node or nodes to account for a new workloads such
       Data-at-rest encryption is not in use.
       Rack awareness is not in use.
 
-Add node(s)
-...........
+Add node
+........
 
 #. Either click :fa:`gear` **> Settings > Expand Cluster**, or from the dropdown menu choose **Hardware > +Expand Cluster**.
 
