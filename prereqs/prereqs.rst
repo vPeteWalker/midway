@@ -1,7 +1,7 @@
 .. _prereqs:
 
 --------------
-Pre-Requisites
+Prerequisites
 --------------
 
 In order for an easy POC experience using this guide, it is important to ensure the environment your testing is has met all of the pre-requisites. While the guide is applicable to both on-premises and Hosted POC (HPOC) environments, the pre-requisites differ slightly.
@@ -18,7 +18,7 @@ The first determination to make is whether to use a Hosted POC cluster or an on-
 - **Lead Time** - What is the timeline for beginning the POC? Typically you can secure a HPOC cluster 7 days out from the current date. Sourcing on-premises gear can vary significantly, depending on whether or not there is available gear already in your territory. Begin by asking in your regional Slack channel(s) about available POC blocks and their specs.
 - **POC Length** - A HPOC cluster can be reserved for up to 14 days if it is associated with a POC record in Salesforce. On-premises POCs should last for no more than 45 days (although blocks can remain on-site longer if new use cases are identified and a new Salesforce POC record is created).
 
-HPOC Pre-requisites
+HPOC Prerequisites
 +++++++++++++++++++
 
 Pre-requisites for a Nutanix Hosted POC environment are simple, as you will have a predictable network topology and use a pre-created Domain Controller image.
@@ -39,7 +39,7 @@ You'll need the following:
 
    .. note:: The disk images do not need to be downloaded in advance of the POC, as they can be uploaded directly to the cluster using the links above.
 
-On-premises Pre-requisites
+On-premises Prerequisites
 ++++++++++++++++++++++++++
 
 Pre-requisites for an on-premises POC are more involved, as we need to ensure the provided networks and Active Directory are suitable.
