@@ -4,6 +4,12 @@
 X-RAY
 -----
 
+**Pre-requisites:** Completion of :ref:`vmmanage`
+
+**Expected Module Duration:** Varies depending on updates performed
+
+**Covered Test IDs:** `Core-019, Core-020, VSAN-001, VSAN-002, VSAN-003, VSAN-004, HF-001, HF-002, HF-003, HF-004 <https://confluence.eng.nutanix.com:8443/display/SEW/Official+Nutanix+POC+Guide+-+INTERNAL>`_
+
 Deploying X-Ray
 ---------------
 
@@ -20,8 +26,11 @@ This guide will step you through installing and configuring X-Ray on AHV, using 
 To deploy the X-Ray, be sure to have the minimum following requirements available:
 
    - vCPU  - 8
+
    - RAM   - 8GB
+
    - Disk  - 100GB
+
    - Nutanix provides a QCOW2 X-Ray image for AHV. This may be downloaded from the Nutanix portal to a local drive (ex. dark site), or directly from the portal via a URL link within Prism.
 
 Installation and configuration of X-Ray
@@ -36,7 +45,9 @@ Installation and configuration of X-Ray
       :align: right
 
 #. Give the image a name in the *Name* field, set the image type to **DISK**, and specify the upload location.
+
    - If you are retrieving the image directly from the link provided by Nutanix, enter the URL in the *From URL* field.
+
    - If you have saved the image on your own system and want to upload it from there, select the **Upload a file** option and click **Choose File** to specify the image location.
 
    .. figure:: images/3.png
@@ -46,9 +57,9 @@ Installation and configuration of X-Ray
 
 #. From the Prism dropdown, select **VM** from the dropdown.
 
-#. Click **+ Create VM**. In the *Create VM* dialog box, specify the following:
+#. Create a new VM using the X-Ray disk image, specifying the following values:
 
-   - **Name** - X-Ray3.8
+   - **Name** - X-Ray
 
    - **vCPU(s)** - 8
 
@@ -56,39 +67,13 @@ Installation and configuration of X-Ray
 
    .. figure:: images/4.png
 
-#. Scroll further down in the *Create VM* dialog box, and click **Add New Disk** to open the *Add Disk* dialog box
+#. Define a second network interface on the X-Ray VM. The second interface controls zero-configuration access from the X-Ray VM to the test VMs. For zero-configuration purposes, configure the second interface to use the same *Primary* VLAN.
 
-   .. figure:: images/5.png
-
-#. Set the *Operation* field to **Clone from Image Service**.
-
-#. In the *Image* field, specify the X-Ray image you previously uploaded.
-
-#. Click **Add** to add the disk, and return to the Create VM dialog box.
-
-   .. figure:: images/6.png
-
-#. Scroll further down in the *Create VM* dialog box and click **+ Add New NIC** to open the *Create NIC* dialog box.
-
-#. Confirm **Primary** is selected, and click **Add** to create the NIC and return to the *Create VM* dialog box.
-
-   .. figure:: images/7.png
-
-#. Repeat the preceeding two steps to define a second network interface on the X-Ray VM. The second interface controls zero-configuration access from the X-Ray VM to the test VMs. For zero-configuration purposes, configure the second interface to use the same *Primary* VLAN.
-
-#. Click **Save** to create the VM.
-
-#. In Prism, click **Table** to display a tabular view of all VMs, and highlight the VM you just created.
-
-#. Click **Power On** to start the VM.
-
-   .. figure:: images/8.png
-
-#. Click **Launch Console** to watch the VM start.
+#. Power on the new X-Ray VM, and open its console.
 
 .. note::
 
-   The following steps are optional, as all VMs will receive a DHCP address by default by the IPAM configuration.
+   The following steps are optional, as all VMs will receive a DHCP address by default when using an IPAM configuration.
 
 #. Within the X-Ray VM, click **Application > System Tools > Settings**.
 
@@ -123,11 +108,13 @@ Creating an X-Ray Test Target
 #. Complete the *General Config* fields.
 
    - **Name**: Type the name for the new test target.
+
    - **Manager Type**: Click the drop-down and select **Prism** if not already selected.
 
 #. Complete the *Power Management Configuration* fields.
 
    - From the *Type* dropdown, choose **IPMI**
+
    - Enter **ADMIN** (all caps) for both *USERNAME* and *PASSWORD* fields.
 
 #. Complete the *Prism Config* fields.
@@ -148,11 +135,9 @@ Creating an X-Ray Test Target
 
    .. figure:: images/14.png
       :align: left
-      :scale: 50%
 
    .. figure:: images/15.png
       :align: right
-      :scale: 50%
 
 Executing an X-Ray Test
 -----------------------
@@ -186,6 +171,7 @@ To view detailed information about each test scenario, click **View & Run Test**
 #. For other options, select the check box next to the test and click one of the option buttons.
 
    - For the raw data, click **Export Raw Results**.
+
    - To have X-Ray return a report with a description, summary tests results, and high level information about each target in the test, click **Generate Report**.
 
    .. figure:: images/20.png

@@ -27,6 +27,21 @@ A customer may choose to add a node to account for a new workloads such as VDI, 
       Data-at-rest encryption is not in use.
       Rack awareness is not in use.
 
+Remove node
+...........
+
+#. From the dropdown, choose the **Hardware** dashboard, then click the **Diagram** or **Table** tab.
+
+#. Select the target host, and click the **Remove Host** link on the right of the *Summary* line. A dialog box appears to verify the action. Click the **OK** button.
+
+   .. figure:: images/6.png
+      :align: center
+
+
+   Removing a host takes some time because data on that host must be migrated to other hosts before it can be removed from the cluster. You can monitor progress through the dashboard messages. Removing a host automatically removes all the disks in that host. Only one host can be removed at a time. If you want to remove multiple hosts, you must wait until the first host is removed completely before attempting to remove the next host.
+
+   After a node is removed, it goes into an unconfigured state. You can add such a node back into the cluster through the Add Node(s) workflow.
+
 Add node
 ........
 
@@ -75,18 +90,3 @@ Add node
       .. figure:: images/5.png
          :align: right
          :scale: 60%
-
-Remove node
-...........
-
-#. From the dropdown, choose the **Hardware** dashboard, then click the **Diagram** or **Table** tab.
-
-#. Select the target host, and click the **Remove Host** link on the right of the *Summary* line. A dialog box appears to verify the action. Click the **OK** button.
-
-   .. figure:: images/6.png
-      :align: center
-
-
-   Removing a host takes some time because data on that host must be migrated to other hosts before it can be removed from the cluster. You can monitor progress through the dashboard messages. Removing a host automatically removes all the disks in that host. Only one host can be removed at a time. If you want to remove multiple hosts, you must wait until the first host is removed completely before attempting to remove the next host.
-
-   After a node is removed, it goes into an unconfigured state. You can add such a node back into the cluster through the Add Node(s) workflow.

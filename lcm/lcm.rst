@@ -4,26 +4,30 @@
 Lifecycle Manager (LCM)
 -----------------------
 
+**Pre-requisites:** Completion of :ref:`vmmanage`
+
+**Expected Module Duration:** Varies depending on number of updates performed
+
+**Covered Test IDs:** N/A
+
 In this module we will demonstrate how to perform an inventory, followed by performing updates with LCM.
 
 What is LCM?
 ............
 
 - LCM aims to enable administrators to take inventory of the firmware and software in their Nutanix environment and perform updates in a simple, cluster-aware, fashion.
-- LCM is an industry-unique solution - providing the same 1-click operational upgrade simplicity for 7 (and growing) different hardware vendor appliances running Nutanix software.
-- LCM just offers a management layer that will allow users to deploy firmware upgrades simply without having to worry about upgrade paths or conflicts between versions. Customers should not require a manual to upgrade their environment - LCM aims to solve this at scale.
+
+- LCM is an industry-unique solution, providing the same 1-click operational upgrade simplicity for 7 (and growing) different hardware vendor appliances running Nutanix software.
+
+- LCM just offers a management layer that will allow users to deploy firmware upgrades simply without having to worry about upgrade paths or conflicts between versions. Customers should not require a manual to upgrade their environment. LCM aims to solve this at scale.
+
 - Once a customer performs an inventory of their cluster, all the firmware is downloaded and staged. From there, users can deploy the updates with as much or as little granularity as they desire. You can either select individual entities for upgrade or do the entire cluster at once (subject to what the actual component being upgraded allows).
+
 - A Dark Site LCM version is available
 
 .. note::
 
    For detailed information about LCM, please refer to the `Life Cycle Manager Guide v2.2 <https://portal.nutanix.com/page/documents/details?targetId=Life-Cycle-Manager-Guide-v2_3:Life-Cycle-Manager-Guide-v2_3>`_
-
-**Pre-requisites:** Completion of :ref:`vmmanage`
-
-**Expected Module Duration:** Varies depending on updates performed
-
-**Covered Test IDs:** N/A
 
 Performing Inventory with LCM
 .............................
@@ -44,7 +48,6 @@ Performing Inventory with LCM
 
    .. figure:: images/3.png
       :align: center
-      :scale: 50%
 
 #. To enable auto-inventory, click **Settings** and select the **Enable LCM Auto Inventory** checkbox in the dialog box that appears.
 
@@ -61,10 +64,14 @@ Performing Inventory with LCM
    A bit of context on what LCM is actually doing during the inventory process, as it could take up to 20 minutes to perform on a 4-node cluster, and up to 40 minutes on a 32-node cluster.
 
    - Use our master manifest to determine which modules are applicable on each host based on the hardware family.
+
    - Download these modules (note only the control logic, no images needed) onto the catalog service.
-   - Execute these modules on their respective environment - host or CVM.
+
+   - Execute these modules on their respective environment, host or CVM.
+
    - We pull these modules from the catalog service into the respective environment, run their detect logic, and determine current versions.
-   - These processes are distributed to the LCM service running on all nodes. Each node picks up the work items, and runs the 2 scripts - one for CVM and another for the host.
+
+   - These processes are distributed to the LCM service running on all nodes. Each node picks up the work items, and runs the 2 scripts (one for CVM and another for the host).
 
 Performing Updates with the Life Cycle Manager
 ..............................................
@@ -76,6 +83,7 @@ Performing Updates with the Life Cycle Manager
 #. Select the updates you want to perform.
 
    - Select the checkbox for the node you want to update, or select All to update the entire cluster.
+
    - Select the components you want to update. When you select a node, LCM selects the checkboxes for all updateable components by default. Clear the checkbox of any component you do not want to update.
 
 #. Click **NCC Check**.  In the dialog box that appears, specify which prechecks you want LCM to run before updating.

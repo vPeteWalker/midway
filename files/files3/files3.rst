@@ -4,8 +4,18 @@
 NFS export
 ----------
 
+**Pre-requisites:** Completion of :ref:`vmmanage`
+
+**(Optional) Pre-requisite:** N/A
+
+**Expected Module Duration:** 45 minutes
+
+**Covered Test IDs:** N/A
+
 Creating an NFS export
 ......................
+
+During this exercise, you will create an NFS export.
 
 #. In the Prism web console, go to the *File Server Dashboard* page by clicking **File Server** from the dropdown.
 
