@@ -18,7 +18,9 @@ There are two example scenarios you can run to demonstrate the cluster resilienc
 #. SSH into any host within the cluster using the *root* username and password, and run the following commands to shut down the CVM running on that host.
 
    - ``virsh list`` - This command will *list all VMs* running on the host. Make note of the entry in the *Name* column for the CVM.
+
    - ``virsh shutdown <CVM-NAME>`` - This command will *shut down* the CVM.
+
    - ``virsh start <CVM-NAME>`` - This command will *start* the CVM.
 
    .. figure:: images/1.png

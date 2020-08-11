@@ -93,3 +93,8 @@ Initiate failover within the CLI
       Sample output of the ovs-appctl bond/show command
 
 #. You have now successfully forced a failover between interfaces. Additionally, demonstrate the result of either the **BASIC** or **RECOMMENDED** scenarios.
+
+Remove physical network cable
+-----------------------------
+
+**How to consistently identify physical to logical across form factors and hardware vendors?**

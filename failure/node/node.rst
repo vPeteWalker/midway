@@ -84,25 +84,21 @@ In this section, we will be simulating a power failure by removing power from on
 
 .. figure:: images/psug4.png
    :align: left
-   :scale: 50%
 
    `Power Supply Unit (PSU) Redundancy and Node Configuration for G4 platforms <https://portal.nutanix.com/page/documents/details?targetId=System-Specs-G4-Multinode:har-psu-redundancy-table-r.html>`_
 
 .. figure:: images/psug5.png
    :align: right
-   :scale: 50%
 
    `Power Supply Unit (PSU) Redundancy and Node Configuration for G5 platforms <https://portal.nutanix.com/page/documents/details?targetId=System-Specs-G5-Single-Node:har-psu-redundancy-table-r.html>`_
 
 .. figure:: images/psug6.png
    :align: left
-   :scale: 50%
 
    `Power Supply Unit (PSU) Redundancy and Node Configuration for G6 platforms <https://portal.nutanix.com/page/documents/details?targetId=System-Specs-G6-Multinode:har-psu-redundancy-table-g6-r.html>`_
 
 .. figure:: images/psug7.png
    :align: right
-   :scale: 50%
 
    `Power Supply Unit (PSU) Redundancy and Node Configuration for G7 platforms <https://portal.nutanix.com/page/documents/details?targetId=System-Specs-G7-Multinode:har-psu-redundancy-table-r.html>`_
 
