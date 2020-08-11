@@ -39,7 +39,7 @@ There are many options at various stages that are available to configure Files t
       - Customer-provided Active Directory
    - One VLAN
       - Managed (IPAM configured)
-   - Files Analytics
+   - **Files Analytics**
 
 .. note::
 
@@ -216,5 +216,9 @@ Enabling Files Analytics
          ::
 
             sudo bash /opt/nutanix/update_dns.sh
+
+         .. code-block:: bash
+
+            (test) sudo bash /opt/nutanix/update_dns.sh
 
 You may wish to proceed to the :ref:`files3` section, which outlines creating and testing an NFS export.
