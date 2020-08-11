@@ -1,7 +1,11 @@
 .. _files3:
 
+----------
+NFS export
+----------
+
 Creating an NFS export
-++++++++++++++++++++++
+......................
 
 #. In the Prism web console, go to the *File Server Dashboard* page by clicking **File Server** from the dropdown.
 
@@ -9,12 +13,13 @@ Creating an NFS export
 
 #. Fill out the following fields:
 
-   - **Name** - *Initials*\ -logs
+   - **Name** - logs
+
    - **Description (Optional)** - File share for system logs
-   - **File Server** - **Files**
-   - **Share Path (Optional)** - Leave blank
-   - **Max Size (Optional)** - Leave blank
-   - **Select Protocol** - **NFS**
+
+   - **File Server** - Files
+
+   - **Select Protocol** - NFS
 
    .. figure:: images/24b.png
 
@@ -22,14 +27,13 @@ Creating an NFS export
 
 #. Fill out the following fields:
 
-   - Select **Enable Self Service Restore**.
-      These snapshots appear as a .snapshot directory for NFS clients.
-   - **Authentication** - System
    - **Default Access (For All Clients)** - No Access
+
    - Select **+ Add exceptions**.
+
    - **Clients with Read-Write Access** - *The first 3 octets of your cluster network*\ .* (e.g. 10.38.1.\*)
 
-   .. figure:: images/25b.png
+      .. figure:: images/25b.png
 
    By default an NFS export will allow read/write access to any host that mounts the export, but this can be restricted to specific IPs or IP ranges.
 
@@ -37,39 +41,39 @@ Creating an NFS export
 
 #. Review the **Summary** and click **Create**.
 
-Testing with client desktop
-+++++++++++++++++++++++++++
-
-AutoAD is pre-populated with the following Users and Groups for your use:
-
-   .. list-table::
-      :widths: 25 35 40
-      :header-rows: 1
-
-      * - Group
-        - Username(s)
-        - Password
-      * - Administrators
-        - Administrator
-        - nutanix/4u
-      * - SSP Admins
-        - adminuser01-adminuser25
-        - nutanix/4u
-      * - SSP Developers
-        - devuser01-devuser25
-        - nutanix/4u
-      * - SSP Consumers
-        - consumer01-consumer25
-        - nutanix/4u
-      * - SSP Operators
-        - operator01-operator25
-        - nutanix/4u
-      * - SSP Custom
-        - custom01-custom25
-        - nutanix/4u
-      * - Bootcamp Users
-        - user01-user25
-        - nutanix/4u
+.. Testing with client desktop
+.. ...........................
+..
+.. AutoAD is pre-populated with the following Users and Groups for your use:
+..
+..    .. list-table::
+..       :widths: 25 35 40
+..       :header-rows: 1
+..
+..       * - Group
+..         - Username(s)
+..         - Password
+..       * - Administrators
+..         - Administrator
+..         - nutanix/4u
+..       * - SSP Admins
+..         - adminuser01-adminuser25
+..         - nutanix/4u
+..       * - SSP Developers
+..         - devuser01-devuser25
+..         - nutanix/4u
+..       * - SSP Consumers
+..         - consumer01-consumer25
+..         - nutanix/4u
+..       * - SSP Operators
+..         - operator01-operator25
+..         - nutanix/4u
+..       * - SSP Custom
+..         - custom01-custom25
+..         - nutanix/4u
+..       * - Bootcamp Users
+..         - user01-user25
+..         - nutanix/4u
 ..
 ..
 .. #. Deploy new Windows 10 VM.
@@ -95,56 +99,62 @@ AutoAD is pre-populated with the following Users and Groups for your use:
 .. #. Repeat the process for any additional shares.
 
 Testing the NFS export
-++++++++++++++++++++++
+......................
 
-The following steps utilize the LinuxTools VM as a client for your Files NFS export.
+In the following exercise you will:
 
-#. Note the IP address of the VM in Prism, and connect via SSH using the following credentials:
+   - Utilize a Linux VM as a client for your Files NFS export.
+   - Create random data within the NFS export.
+   - Monitor performance and usage of the NFS export.
+
+#. Note the IP address of the previously created CentOS VM within Prism, and connect via SSH using the following credentials:
 
    - **Username** - root
    - **Password** - nutanix/4u
 
-#. Execute the following:  NEED A BETTER WAY TO DO THE DNS, SO WE DON'T OVERWRITE, YET IT RESOLVES VIA AUTOAD
+#. Execute the following:
 
-     .. code-block:: bash
-      sh -c "echo nameserver *IP address of AutoAD VM* > /etc/resolv.conf" #Overwrites the contents of the existing resolv.conf with the IP of your AutoAD VM to handle DNS queries. Example: sudo sh -c "echo nameserver 10.38.212.50 > /etc/resolv.conf"
-      yum install -y nfs-utils #This installs the NFSv4 client
-      mkdir /filesmnt #Creates directory named /filesmnt
-      mount.nfs4 files.ntnxlab.local:/ /filesmnt/ #Mounts the NFS export to the /filesmnt directory
-      df -kh #show disk utilization for a Linux file system.
+   Overwrite the contents of the existing resolv.conf with the IP of your AutoAD VM to handle DNS queries. Example: sudo sh -c "echo nameserver 10.38.212.50 > /etc/resolv.conf":
 
-   .. note::
+   .. code-block:: bash
 
-      You will see output similar to the below.
+      sh -c "echo nameserver *AutoAD VM or customer-provided domain controller IP* > /etc/resolv.conf"
 
-      Filesystem                      Size  Used Avail Use% Mounted on
-      /dev/mapper/centos_centos-root  8.5G  1.7G  6.8G  20% /
-      devtmpfs                        1.9G     0  1.9G   0% /dev
-      tmpfs                           1.9G     0  1.9G   0% /dev/shm
-      tmpfs                           1.9G   17M  1.9G   1% /run
-      tmpfs                           1.9G     0  1.9G   0% /sys/fs/cgroup
-      /dev/sda1                       494M  141M  353M  29% /boot
-      tmpfs                           377M     0  377M   0% /run/user/0
-      **Files.ntnxlab.local:/             1.0T  7.0M  1.0T   1% /afsmnt**
-      [root@CentOS ~]# ls -l /filesmnt/
-      total 1
-      drwxrwxrwx. 2 root root 2 Mar  9 18:53 *Initials*\ -logs
+   Install the NFSv4 client:
 
-#. Observe that the **logs** directory is mounted in ``/filesmnt//*Initials*\ /-logs``.
+   .. code-block:: bash
 
-#. Reboot the VM and observe the export is no longer mounted. To persist the mount, add it to ``/etc/fstab`` by executing the following:
+      yum install -y nfs-utils
 
-     .. code-block:: bash
+   Create a directory named /filesmnt:
 
-       echo 'files.ntnxlab.local:/ /filesmnt nfs4' >> /etc/fstab
+   .. code-block:: bash
 
-#. The following command will add 100 2MB files filled with random data to ``/filesmnt/logs``:
+      mkdir /filesmnt
 
-     .. code-block:: bash
+   Mount the NFS export to the /filesmnt directory:
 
-       mkdir /filesmnt/*Initials*\ -logs/host1
-       for i in {1..100}; do dd if=/dev/urandom bs=8k count=256 of=/filesmnt/*Initials*\ -logs/host1/file$i; done
+   .. code-block:: bash
 
-#. Return to **Prism > File Server > Share > *Initials*\ -logs** to monitor performance and usage.
+      mount.nfs4 files.ntnxlab.local:/ /filesmnt/
 
-   Note that the utilization data is updated every 10 minutes.
+   Show disk utilization for a Linux file system. Observe that the **logs** directory is mounted in ``/filesmnt/logs``:
+
+   .. code-block:: bash
+
+      df -kh
+
+   You will see output similar to the below.
+
+   .. figure:: images/29.png
+
+   Add 100 2MB files filled with random data to ``/filesmnt/logs``:
+
+   .. code-block:: bash
+
+      mkdir /filesmnt/logs/host1
+      for i in {1..100}; do dd if=/dev/urandom bs=8k count=256 of=/filesmnt/logs/host1/file$i; done
+
+#. Return to **Prism > File Server > Share > logs** to monitor performance and usage.
+
+Note that the utilization data is updated every 10 minutes.

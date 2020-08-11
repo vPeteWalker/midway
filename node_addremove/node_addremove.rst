@@ -1,19 +1,22 @@
 .. _node_addremove:
 
-Prerequisites and Requirements
-++++++++++++++++++++++++++++++
-
-POINT TO INITIAL CLUSTER CONFIG SECTION
-
 --------------------
 Add or Remove a node
 --------------------
+
+In this module we will demonstrate how to add a node to a cluster, and remove a node from a cluster.
 
 A cluster is a collection of nodes. You can add new nodes to a cluster at any time after physically installing and connecting them to the network on the same subnet as the cluster. The cluster expansion process compares the AOS version on the existing and new nodes and performs any upgrades necessary for all nodes to have the same AOS version.
 
 Why does this matter to our customers?
 
-A customer may choose to add a node or nodes to account for a new workloads such as VDI, or increase performance, capacity, or resiliency. Additionally, a customer may elect to remove nodes if those nodes are past their usable life, and may not be meeting the customer's performance needs, or the nodes are no longer supported.
+A customer may choose to add a node to account for a new workloads such as VDI, or increase performance, capacity, or resiliency. Additionally, a customer may elect to remove a node if that node is past their usable life, and may not be meeting the customer's performance needs, or the node is no longer supported.
+
+**Pre-requisites:** Completion of :ref:`vmmanage`
+
+**Expected Module Duration:** 30 minutes
+
+**Covered Test IDs:** N/A
 
 .. note::
 
@@ -24,15 +27,13 @@ A customer may choose to add a node or nodes to account for a new workloads such
       Data-at-rest encryption is not in use.
       Rack awareness is not in use.
 
-Add node(s)
-...........
+Add node
+........
 
 #. Either click :fa:`gear` **> Settings > Expand Cluster**, or from the dropdown menu choose **Hardware > +Expand Cluster**.
 
 
    The network is searched for Nutanix nodes and then the **Expand Cluster** dialog box appears (on the *Select Host* screen) with a graphical list of the discovered blocks and nodes. Discovered blocks are blocks with one or more unassigned factory-prepared nodes (hypervisor and Controller VM installed) residing on the same subnet as the cluster. Discovery requires that IPv6 multicast packets are allowed through the physical switch. A lack of IPv6 multicast support might prevent node discovery and successful cluster expansion.
-
-
 
 #. Select the check box for each block to be added to the cluster. All nodes within a checked block are also checked automatically; uncheck any nodes you do not want added to the cluster.
 
