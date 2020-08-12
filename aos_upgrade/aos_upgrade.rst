@@ -14,7 +14,7 @@ In this module you will upgrade AOS within Prism, and demonstrate no interruptio
 
 **Covered Test IDs:** `Core-011 <https://confluence.eng.nutanix.com:8443/display/SEW/Official+Nutanix+POC+Guide+-+INTERNAL>`_
 
-**FEEDBACK** ?
+**FEEDBACK** :ref:`feedback`
 
 Each node in a cluster runs AOS. When commencing an upgrade, every node will be upgraded to that version. Nutanix provides a live upgrade mechanism that allows the cluster to run continuously while a rolling upgrade of the nodes is initiated in the background. Controller VMs in the cluster reboot one-at-a-time onto the new AOS version. Storage traffic from user VMs will be redirected to a neighboring CVM while the local one is upgrading. Examples of what's included with AOS upgrades are improvements and enhancements to our scalability, performance, resiliency, business continuity, security, and user interface (Prism).
 
@@ -61,7 +61,6 @@ Each node in a cluster runs AOS. When commencing an upgrade, every node will be 
 
       .. figure:: images/4.png
 
-|
    - Upgrading AOS by uploading binary and metadata files
 
       - Log on to the Nutanix Support Portal, and select the AOS release from the `Downloads <https://portal.nutanix.com/#/page/releases/nosDetails/>`_ page.
@@ -80,6 +79,8 @@ Each node in a cluster runs AOS. When commencing an upgrade, every node will be 
          :align: right
 
    The Upgrade Software dialog box shows the progress of your selection, including pre-installation and cluster health checks. After the upgrade process is completed on a Controller VM, the Controller VM restarts. This restart is not disruptive to node operations.
+
+#. If you were running an X-Ray workload during this test, you may wish to
 
 WHAT TO DO NEXT
 +++++++++++++++

@@ -16,7 +16,9 @@ A customer may choose to add a node to account for a new workloads such as VDI, 
 
 **Expected Module Duration:** 45-60 minutes
 
-**Covered Test IDs:** Core-009, Core-010
+**Covered Test IDs:** `Core-009, Core-010 <https://confluence.eng.nutanix.com:8443/display/SEW/Official+Nutanix+POC+Guide+-+INTERNAL>`_
+
+**FEEDBACK** :ref:`feedback`
 
 .. note::
 

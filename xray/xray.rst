@@ -10,6 +10,8 @@ X-RAY
 
 **Covered Test IDs:** `Core-019, Core-020, VSAN-001, VSAN-002, VSAN-003, VSAN-004, HF-001, HF-002, HF-003, HF-004 <https://confluence.eng.nutanix.com:8443/display/SEW/Official+Nutanix+POC+Guide+-+INTERNAL>`_
 
+**FEEDBACK** :ref:`feedback`
+
 Deploying X-Ray
 +++++++++++++++
 
@@ -21,7 +23,7 @@ This guide will step you through installing and configuring X-Ray on AHV, using 
 
 .. note::
 
-   It is not recommended to install the X-Ray VM on cluster that is also an X-Ray test target. This applies not only to performance-related tests, but resiliency and scalability tests.
+   It is not recommended to install the X-Ray VM on cluster that is also an X-Ray test target. This doesn't just apply to performance-related tests, but resiliency and scalability tests as well.
 
 To deploy the X-Ray, be sure to have the minimum following requirements available:
 
@@ -36,27 +38,6 @@ To deploy the X-Ray, be sure to have the minimum following requirements availabl
 Installation and configuration of X-Ray
 ---------------------------------------
 
-#. Log into Prism. Click :fa:`gear`. In the sidebar that appears, select **Image Configuration > Upload Image**.
-
-   .. figure:: images/1.png
-      :align: left
-
-   .. figure:: images/2.png
-      :align: right
-
-#. Give the image a name in the *Name* field, set the image type to **DISK**, and specify the upload location.
-
-   - If you are retrieving the image directly from the link provided by Nutanix, enter the URL in the *From URL* field.
-
-   - If you have saved the image on your own system and want to upload it from there, select the **Upload a file** option and click **Choose File** to specify the image location.
-
-   .. figure:: images/3.png
-      :align: left
-
-#. Click **Save** to upload the image.
-
-#. From the Prism dropdown, select **VM** from the dropdown.
-
 #. Create a new VM using the X-Ray disk image, specifying the following values:
 
    - **Name** - X-Ray
@@ -67,13 +48,13 @@ Installation and configuration of X-Ray
 
    .. figure:: images/4.png
 
-#. Define a second network interface on the X-Ray VM. The second interface controls zero-configuration access from the X-Ray VM to the test VMs. For zero-configuration purposes, configure the second interface to use the same *Primary* VLAN.
+#. Define a second NIC on the X-Ray VM. The second interface controls zero-configuration access from the X-Ray VM to the test VMs. For zero-configuration purposes, configure the second interface to use the same *Primary* VLAN.
 
 #. Power on the new X-Ray VM, and open its console.
 
 .. note::
 
-   The following steps are optional, as all VMs will receive a DHCP address by default when using an IPAM configuration.
+   The following steps may be optional depending on your individual setup and network. When using an IPAM configuration, all VMs will receive a DHCP address by default.
 
 #. Within the X-Ray VM, click **Application > System Tools > Settings**.
 
@@ -100,6 +81,12 @@ Connecting to the X-Ray Interface
 
 Creating an X-Ray Test Target
 +++++++++++++++++++++++++++++
+
+.. note::
+
+   Be aware that you will receive an error if you are attempting to add a cluster as a target if it's not operating normally. For example, during an AHV upgrade you may see an error similar to the below.
+
+   .. figure:: images\22.png
 
 #. You will be presented with the *Tests* dashboard in X-Ray. Click the **View and Run Test** button on the test you wish to run.
 
@@ -138,57 +125,3 @@ Creating an X-Ray Test Target
 
    .. figure:: images/15.png
       :align: right
-
-Executing an X-Ray Test
-+++++++++++++++++++++++
-
-The X-Ray test scenarios offer predefined test cases that consist of multiple events and predefined parameters. X-Ray executes scenarios against test targets to produce results for analysis. X-Ray scenarios simulate real-world workloads on test targets. Effective virtualized data center solutions delegate resources so that workloads do not monopolize resources from other workloads. Running different workloads in this manner helps evaluate how multiple workloads interact with one another.
-
-X-Ray uses the open-source Flexible I/O (FIO) benchmark tool to generate an I/O workload. FIO files define the characteristics of the FIO workload. Each FIO file contains defined parameters and job descriptions involved in the file.
-
-The test scenarios simulate Online Transaction Processing (OLTP), Virtual Desktop Infrastructure (VDI), and Decision Support System (DSS) workloads.
-
-To view detailed information about each test scenario, click **View & Run Test** within the *Tests* dashboard to display the details of the selected test.
-
-#. In the *Choose test target* dropdown, choose your cluster.
-
-   .. figure:: images/16.png
-
-#. Review the test requirements in the left pane before proceeding. Modify the entries within *Choose the test variant*. Once finished, click **Run Test**.
-
-#. You will be presented with the following message. Click **View** within it, if you wish to view the test in progress.
-
-   .. figure:: images/17.png
-
-#. Otherwise, click **Results** and then click anywhere within the test entry itself to open the *Results* page for your test.
-
-   .. figure:: images/19.png
-      :align: left
-
-   .. figure:: images/18.png
-      :align: right
-
-#. For other options, select the check box next to the test and click one of the option buttons.
-
-   - For the raw data, click **Export Raw Results**.
-
-   - To have X-Ray return a report with a description, summary tests results, and high level information about each target in the test, click **Generate Report**.
-
-   .. figure:: images/20.png
-
-Creating Comparisons
-++++++++++++++++++++
-
-Compare the results of multiple tests.
-
-#. In the *Results* dashboard, select two or more sets of results for comparison. The results you select must be from the same test scenario and variant.
-
-   .. figure:: images/21.png
-
-#. Click **Create Comparison**. X-Ray compares the results of the selected tests.
-
-#. Select the **My Comparisons** heading to see a list of all comparisons you have created.
-
-#. To generate a comparison report, click **Generate Report**.
-
-#. To delete the comparison, click **Delete**.

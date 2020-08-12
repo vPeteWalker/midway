@@ -10,6 +10,8 @@ Lifecycle Manager (LCM)
 
 **Covered Test IDs:** N/A
 
+**FEEDBACK** :ref:`feedback`
+
 In this module we will demonstrate how to perform an inventory, followed by performing updates with LCM.
 
 What is LCM?

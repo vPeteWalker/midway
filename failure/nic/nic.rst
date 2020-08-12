@@ -80,7 +80,7 @@ Initiate failover within the CLI
 
 #. Execute the following command, specifying the bond, and the interface that you are going to make active. In our example, the bond is *br0-up* and the interfaces is *eth2*
 
-   ``ovs-appctl bond/set-active-slave <bond name> <interface name>``
+   ``ovs-appctl bond/set-active-slave <BOND-NAME> <INTERFACE-NAME>``
 
    .. figure:: images/9.png
 
@@ -94,7 +94,9 @@ Initiate failover within the CLI
 
 #. You have now successfully forced a failover between interfaces. Additionally, demonstrate the result of either the **BASIC** or **RECOMMENDED** scenarios.
 
-Remove physical network cable
-+++++++++++++++++++++++++++++
+Remove physical network cable (Physical POC only)
++++++++++++++++++++++++++++++++++++++++++++++++++
 
-#. There is no single standard between all hardware vendors to consistently identify how physical network ports are represented within Nutanix. For example, on one vendor the numbering may start from the left as you observe the physical NIC, some from right, etc. This may also vary in between form factors from the same hardware vendor. Lastly, it could vary based on what manufacturer's NIC is being used. With all this understood, it is therefore recommended that if you intend on performing this test during your POC, to plan ahead and remove one physical cable at a time, and document which port that corresponds to within Nutanix (e.g. eth0 is the left-most port, eth1 is the second from the left, etc.) during the initial setup phase. Then during the test with the customer, you can be confident that when you remove the cable, you'll know the result ahead of time.
+There is no single standard between all hardware vendors to consistently identify how physical network ports are represented within Nutanix. For example, on one vendor the numbering may start from the left as you observe the physical NIC, some from right, etc. This may also vary in between form factors from the same hardware vendor. Lastly, it could vary based on what manufacturer's NIC is being used.
+
+With all this understood, it is therefore recommended that if you intend on performing this test during your POC, to plan ahead and remove one physical cable at a time, and document which port that corresponds to within Nutanix (e.g. eth0 is the left-most port, eth1 is the second from the left, etc.) during the initial setup phase. Then during the test with the customer, you can be confident that when you remove the cable, you'll know the result ahead of time.
