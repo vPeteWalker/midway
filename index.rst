@@ -78,6 +78,12 @@
    :hidden:
 
    failure/failure
+   failure/cvm/cvm
+   failure/hdd/hdd
+   failure/nic/nic
+   failure/node/node
+   failure/power/power
+   failure/psu/psu
 
 ==========================
 NUTANIX SE POC GUIDE (AHV)

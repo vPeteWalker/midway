@@ -8,7 +8,11 @@ Nutanix Files (Files) lets you to share files across user workstations in a cent
 
 Files uses a scale-out architecture that provides file services to clients through the Server Message Block (SMB) or Network File System (NFS) protocol. Files consists of one or more file server VMs (FSVMs) combined into a logical file server instance sometimes referred to as a Files cluster. Files supports creating multiple file server instances within a single Nutanix cluster.
 
+In this module you will deploy Files and Files analytics, providing the foundation for creating, configuring, and testing SMB shares and NFS exports.
+
 **Pre-requisites:** Completion of :ref:`vmmanage`
+
+**(Optional) Pre-requisite:** N/A
 
 **Expected Module Duration:** 60 minutes
 
@@ -16,43 +20,44 @@ Files uses a scale-out architecture that provides file services to clients throu
 
 - Review `NUTANIX FILES GUIDE <https://portal.nutanix.com/page/documents/details/?targetId=Files-v35:Files-v35>`_ and `FILE ANALYTICS GUIDE <https://portal.nutanix.com/page/documents/details/?targetId=File-Analytics-v2_1%3AFile-Analytics-v2_1>`_ for all details including, but not limited to, prerequities, requirements, and recommendations before proceeding.
 
+Environment
++++++++++++
+
+There are many options at various stages that are available to configure Files to suit the needs of our customers. This workshop will focus on the following configuration.
+
+   - One File Server
+      - Basic configuration - 3 File Server VMs (FSVM)
+   - Two SMB file shares
+      - smb01 (normal)
+      - smb02 (distributed)
+   - One NFS export
+      - logs
+   - One hypervisor
+      - AHV
+   - Authentication
+      - Microsoft Active Directory - via AutoAD VM
+      - Customer-provided Active Directory
+   - One VLAN
+      - Managed (IPAM configured)
+   - **Files Analytics**
+
 .. note::
 
-   There are many options at various stages that are available to configure Files to suit the needs of our customers. This workshop will focus on the following configuration.
+   Please be aware that any information such as server names, IP addresses, and similar information contained within any screen shots are strictly for demonstration purposes. Do not use these values when proceeding with any of the steps contained within this workshop.
 
-      - One File Server
-         - Basic configuration - 3 File Server VMs (FSVM)
-      - Two SMB file shares
-         - smb01 (normal)
-         - smb02 (distributed)
-      - One NFS export
-         - logs
-      - One hypervisor
-         - AHV
-      - Authentication
-         - Microsoft Active Directory - via AutoAD VM
-         - Customer-provided Active Directory
-      - One VLAN
-         - Managed (IPAM configured)
-      - **Files Analytics**
-
-Please be aware that any information such as server names, IP addresses, and similar information contained within any screen shots are strictly for demonstration purposes. Do not use these values when proceeding with any of the steps contained within this workshop.
-
-This workshop was created with the following versions of Nutanix products. There may be differences - in both written steps and screen shots - between what is shown throughout this workshop, and what you experience if you are using later versions of the individual software packages listed below.
+   This workshop was created with the following versions of Nutanix products. There may be differences - in both written steps and screen shots - between what is shown throughout this workshop, and what you experience if you are using later versions of the individual software packages listed below.
 
    - AOS             - 5.17.1.1
    - PC              - 5.17.1.1
    - Files           - 3.6.5
    - Files Analytics - 2.1.1.1
 
-Finally, while you are welcome to vary your inputs compared to the instructions listed below, please be aware that by diverting from these instructions, you may negatively impact your ability to successfully complete this workshop.
+   Finally, while you are welcome to vary your inputs compared to the instructions listed below, please be aware that by diverting from these instructions, you may negatively impact your ability to successfully complete this workshop.
 
-   .. note::
-
-      Refer to :ref:`ntnxlab` for details on AD Security Groups, user accounts, and passwords when using the AutoAD VM.
+   Refer to :ref:`ntnxlab` for details on AD Security Groups, user accounts, and passwords when using the AutoAD VM.
 
 Creating a File Server
-......................
+++++++++++++++++++++++
 
 #. In the Prism web console, go to the *File Server Dashboard* page by clicking **File Server** from the dropdown.
 
@@ -136,12 +141,16 @@ Creating the file server begins. You can monitor progress through the **Tasks** 
 
          - Within the **File Server** dropdown, select the file server you deployed, and click **Update > Network Configuration**. Modify the entry for *DNS Resolver IP*, and click **Next > Save**.
 
-         - Click **DNS**. Update this page with the AutoAD FQDN - **dc.ntnxlab.local** (or customer-provided), Username and Password of an Active Directory user with administrator privileges, and click **Submit**.
+         - Click **DNS**. Update this page with the AutoAD FQDN **dc.ntnxlab.local** (or customer-provided), Username and Password of an Active Directory user with administrator privileges, and click **Submit**.
 
             .. figure:: images/9.png
 
 Deploying Files Analytics
-.........................
++++++++++++++++++++++++++
+
+.. note::
+
+   As of Files Analytics version 2.1.1.1, only SMB file shares are supported. If you are only testing using NFS exports, you may skip this section.
 
 #. Go to **Support Portal > Downloads > Files** and download the File Analytics QCOW2 and JSON files.
 
@@ -164,7 +173,9 @@ Deploying Files Analytics
 #. Do the following in the indicated fields:
 
    - **Name**: Enter **AVM** for the File Analytics VM (AVM).
+
    - **Network List**: Select the **Primary - Managed** VLAN.
+
    - **Storage Capacity**: Adjust as necessary, depending on available storage capacity (minimum 2 TiB).
 
       .. figure:: images/11m.png
@@ -182,7 +193,7 @@ Deploying Files Analytics
 #. In the *Enable File Analytics* dialog-box, enter the AD username and password for the file server administrator, and click **Enable**.
 
 Enabling Files Analytics
-........................
+++++++++++++++++++++++++
 
 #. In the *File Server* view, select the target file server and click **File Analytics** in the tabs bar.
 
@@ -205,3 +216,9 @@ Enabling Files Analytics
          ::
 
             sudo bash /opt/nutanix/update_dns.sh
+
+         .. code-block:: bash
+
+            (test) sudo bash /opt/nutanix/update_dns.sh
+
+You may wish to proceed to the :ref:`files3` section, which outlines creating and testing an NFS export.

@@ -8,7 +8,7 @@ See something you loved? Hated? Perhaps something in between?
 
 **We need to know!**
 
-Have an idea for a workshop that doesn't exist, that you just *know* in your gut could help you, or the global team sell a particular product more effectively?
+Have an idea for a workshop that doesn't exist, that you just *know* in your gut could help you, or your global peers sell a particular product more effectively?
 
 **We need to know!**
 

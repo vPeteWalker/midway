@@ -4,10 +4,18 @@
 SMB File Share
 --------------
 
-Creating an SMB File Share
-..........................
+**Pre-requisites:** Completion of :ref:`vmmanage`
 
-This section details how to create new shares using the Nutanix file server.
+**(Optional) Pre-requisite:** N/A
+
+**Expected Module Duration:** 45 minutes
+
+**Covered Test IDs:** N/A
+
+Creating an SMB File Share
+++++++++++++++++++++++++++
+
+During this exercise, you will learn how to create a new SMB share using Nutanix Files.
 
 A *distributed* (home) share is the repository for the user's personal files, and a *standard* share is the repository shared by a group. A home share is distributed at the top-level directories while standard shares are located on a single file server VM (FSVM). Users have the following permissions in distributed and standard shares.
 
@@ -104,7 +112,7 @@ A *distributed* (home) share is the repository for the user's personal files, an
 .. #. Login to domain as chosen user from above list.
 
 Testing "normal" SMB share
-..........................
+--------------------------
 
 During this exercise, you will:
 
@@ -183,7 +191,7 @@ During this exercise, you will:
 
    - In the Windows client VM, open *File Explorer*. Right click on **This PC** and select **Map Network Drives**.
 
-   - Select the drive letter to use for the share. Enter the path to the share in the \\ /*server* \ /*share* format (e.g. ``\\files.ntnxlab.local\smb01``). Click the **Reconnect at sign-in** box, and then click **Finish**.
+   - Select the drive letter to use for the share. Enter the path to the share in the ``\\server\share`` format (e.g. ``\\files.ntnxlab.local\smb01``). Click the **Reconnect at sign-in** box, and then click **Finish**.
 
       .. figure:: images/12.png
 
@@ -201,7 +209,7 @@ During this exercise, you will:
    - The **NTNXLAB\\Administrator** user was specified as a Files Administrator during deployment of the Files Server, giving it read/write access to all shares by default.
    - Managing access for other users is no different than any other SMB share.
 
-#. Using *File Explorer* navigate to **\\ / files.ntnxlab.local \\ /**, right-click **smb01 > Properties**.
+#. Using *File Explorer* navigate to ``files.ntnxlab.local``, right-click **smb01 > Properties**.
 
    - Select the **Security** tab and click **Advanced**.
 
@@ -243,7 +251,7 @@ During this exercise, you will:
 #. Return to **Prism Element > File Server > Share/Export**, select your share. Review the **Share Details**, **Usage** and **Performance** tabs to understand the high level information available on a per share basis, including the number of files & connections, storage utilization over time, latency, throughput, and IOPS.
 
 Testing "distributed" SMB share
-...............................
+-------------------------------
 
 During this exercise, you will:
 
@@ -275,11 +283,9 @@ During this exercise, you will:
 
    .. figure:: images/distributed1.png
       :align: left
-      :scale: 50%
 
    .. figure:: images/distributed2.png
       :align: right
-      :scale: 50%
 
 #. In the *Folder Properties* window, click the **Location** tab.
 
@@ -314,9 +320,9 @@ During this exercise, you will:
 #. Observe that the file you created is on the mapped drive, and you have successfully migrated the user's local documents directory to a mapped *Home* directory stored within Files.
 
 Testing with File Analytics
-...........................
+---------------------------
 
-In this exercise you will explore the new, integrated File Analytics capabilities available in Nutanix Files, including scanning existing shares, creating anomaly alerts, and reviewing audit details. File Analytics is deployed in minutes as a standalone VM through an automated, One Click operation in Prism Element. This VM has already been deployed and enabled in your environment.
+During this exercise, you will explore the new, integrated File Analytics capabilities available in Nutanix Files, including scanning existing shares, creating anomaly alerts, and reviewing audit details. File Analytics is deployed in minutes as a standalone VM through an automated, One Click operation in Prism Element. This VM has already been deployed and enabled in your environment.
 
 #. In **Prism Element > File Server > File Server**, select *File Server* and click **File Analytics**.
 
@@ -406,7 +412,7 @@ In this exercise you will explore the new, integrated File Analytics capabilitie
 
      .. code-block:: bash
 
-        cd \\ /files.ntnxlab.local \\ /smb01\ /MyFolder
+        cd /files.ntnxlab.local/smb01/MyFolder
 
 #. Execute the following commands:
 

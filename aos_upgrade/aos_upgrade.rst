@@ -4,77 +4,84 @@
 AOS Upgrade
 -----------
 
+In this module you will upgrade AOS within Prism, and demonstrate no interruption to user VMs during this process.
+
+**Pre-requisites:** Completion of :ref:`vmmanage`
+
+**(Optional) Pre-requisite:** N/A
+
+**Expected Module Duration:** 45-60 minutes
+
+**Covered Test IDs:** `Core-011 <https://confluence.eng.nutanix.com:8443/display/SEW/Official+Nutanix+POC+Guide+-+INTERNAL>`_
+
+**FEEDBACK** ?
+
+Each node in a cluster runs AOS. When commencing an upgrade, every node will be upgraded to that version. Nutanix provides a live upgrade mechanism that allows the cluster to run continuously while a rolling upgrade of the nodes is initiated in the background. Controller VMs in the cluster reboot one-at-a-time onto the new AOS version. Storage traffic from user VMs will be redirected to a neighboring CVM while the local one is upgrading. Examples of what's included with AOS upgrades are improvements and enhancements to our scalability, performance, resiliency, business continuity, security, and user interface (Prism).
+
 .. note::
 
    - Before performing the procedure below, make sure you are running the latest version of the Nutanix Cluster Check (NCC) health checks and upgrade NCC if necessary.  Run all NCC checks, and check the Health Dashboard. If any health checks are failing, resolve them to ensure that the cluster is healthy before continuing.
+
    - If you use Prism Central to manage your Nutanix clusters, upgrade Prism Central first, then upgrade AOS on the clusters managed by Prism Central.
 
-Guidelines and Requirements
-+++++++++++++++++++++++++++
-
-Each node in a cluster runs AOS. When commencing an upgrade, every node will be upgraded to that version. Nutanix provides a live upgrade mechanism that allows the cluster to run continuously while a rolling upgrade of the nodes is initiated in the background.
-
-AOS supports upgrades that you can apply through the Prism web console Upgrade Software feature (also known as 1-click upgrade).
-
-You can view the available upgrade options, start an upgrade, and monitor upgrade progress through the web console.
-
-Procedure
-+++++++++
+   - Depending on the version of AOS and LCM, upgrading AOS may also be performed in LCM, or exclusively availabile in LCM. Utilizing is the recommended method to upgrade software and firmware on Nutanix. Please see the :ref:`lcm` section to learn more about performing upgrades using LCM. Otherwise, proceed with the following steps.
 
 #. Log on to the web console for any node in the cluster.
-
-#. Depending on the version of AOS and LCM, upgrading AOS may also be performed in LCM, or exclusively availabile in LCM. This is the recommended method to upgrade software and firmware on Nutanix. Please see the :ref:`lcm` section to learn more about performing upgrades using LCM. Otherwise, proceed with the following steps.
 
 #. Click the :fa:`gear` **> Settings > Upgrade Software > AOS**, or from the dropdown menu choose **Settings > Upgrade Software > AOS** to display the current status of your software versions (and start an upgrade if available and desired).
 
 .. figure:: images/1.png
    :align: right
-   :scale: 60%
 
    - *CURRENT VERSION* displays the version running currently in the cluster.
+
    - *AVAILABLE COMPATIBLE VERSIONS* displays any versions to which the cluster can be upgraded.
+
    - The upload the AOS base software binary link enables you to install from binary and metadata files, which might be helpful for updating isolated (dark-site) clusters not connected to the Internet.
 
 #. *Optional* To run the pre-upgrade installation checks only on the Controller VM where you are logged on without upgrading, click **Upgrade > Pre-upgrade**. These checks also run as part of the upgrade procedure.
 
 #. Before executing upgrade, we recommend performing one of the following to illustrate that workloads will continue to run without interruption while the AOS upgrade proceeds.
+
    - BASIC: Create two VMs, one on the host that is running the CVM you are shutting down, one on a host that will remain untouched. Begin a continuous ping between these VMs prior to issuing the shutdown command via SSH, and observe that there are no lost pings. Creating VMs is oulined in :ref:`vmmanage`
 
    - RECOMMENDED: Use X-ray to run OLTP or VDI workload. Setup of X-Ray is oulined in :ref:`xray`
 
 #. Do one of the following:
+
    - If you previously selected Enable Automatic Download and the desired software package has been downloaded, click **Upgrade > Upgrade Now**, then click **Yes** to confirm.
+
    - If Enable Automatic Download is cleared, click **Download** next to the desired software package. When the download task is completed, click **Upgrade > Upgrade Now**, then click **Yes** to confirm.
 
       .. figure:: images/2.png
          :align: left
-         :scale: 40%
+
       .. figure:: images/3.png
          :align: center
-         :scale: 40%
+
       .. figure:: images/4.png
-         :align: right
-         :scale: 40%
 
 |
    - Upgrading AOS by uploading binary and metadata files
+
       - Log on to the Nutanix Support Portal, and select the AOS release from the `Downloads <https://portal.nutanix.com/#/page/releases/nosDetails/>`_ page.
+
       - Download the AOS binary and metadata .JSON files on your local media. You can also copy these files to a USB stick, CD, or other media.
+
       - Click the *upload an AOS binary* link. Click **Choose File** for the AOS metadata and binary files, respectively, browse to the file locations, and click **Upload Now**.  Once the software package has been uploaded, click **Upgrade > Upgrade Now**, then click **Yes** to confirm.
 
       .. figure:: images/6.png
          :align: left
-         :scale: 40%
+
       .. figure:: images/7.png
          :align: center
-         :scale: 40%
+
       .. figure:: images/5.png
          :align: right
-         :scale: 40%
 
    The Upgrade Software dialog box shows the progress of your selection, including pre-installation and cluster health checks. After the upgrade process is completed on a Controller VM, the Controller VM restarts. This restart is not disruptive to node operations.
 
-What to do next
+WHAT TO DO NEXT
 +++++++++++++++
 
-After upgrading AOS and before upgrading your hypervisor on each cluster, perform a Life Cycle Manager (LCM) inventory, update LCM, and upgrade any recommended firmware.  **LINK TO LCM SECTION**
+After upgrading AOS and before upgrading your hypervisor on each cluster, you may wish to visit :ref:`lcm` for details on how to perform a Life Cycle Manager (LCM) inventory (which will optionally update LCM itself), and demonstrate how easy it is to upgrade any recommended firmware, or software, and all within a single location.

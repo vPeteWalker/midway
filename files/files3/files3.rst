@@ -4,8 +4,18 @@
 NFS export
 ----------
 
+**Pre-requisites:** Completion of :ref:`vmmanage`
+
+**(Optional) Pre-requisite:** N/A
+
+**Expected Module Duration:** 45 minutes
+
+**Covered Test IDs:** N/A
+
 Creating an NFS export
-......................
+++++++++++++++++++++++
+
+During this exercise, you will create an NFS export.
 
 #. In the Prism web console, go to the *File Server Dashboard* page by clicking **File Server** from the dropdown.
 
@@ -41,65 +51,8 @@ Creating an NFS export
 
 #. Review the **Summary** and click **Create**.
 
-.. Testing with client desktop
-.. ...........................
-..
-.. AutoAD is pre-populated with the following Users and Groups for your use:
-..
-..    .. list-table::
-..       :widths: 25 35 40
-..       :header-rows: 1
-..
-..       * - Group
-..         - Username(s)
-..         - Password
-..       * - Administrators
-..         - Administrator
-..         - nutanix/4u
-..       * - SSP Admins
-..         - adminuser01-adminuser25
-..         - nutanix/4u
-..       * - SSP Developers
-..         - devuser01-devuser25
-..         - nutanix/4u
-..       * - SSP Consumers
-..         - consumer01-consumer25
-..         - nutanix/4u
-..       * - SSP Operators
-..         - operator01-operator25
-..         - nutanix/4u
-..       * - SSP Custom
-..         - custom01-custom25
-..         - nutanix/4u
-..       * - Bootcamp Users
-..         - user01-user25
-..         - nutanix/4u
-..
-..
-.. #. Deploy new Windows 10 VM.
-..
-.. #. Configure static IP, and configure DNS to point to AutoAD.
-..
-.. #. Change the computer Name.
-..
-.. #. Join the *ntnxlab.local* domain.
-..
-.. #. Login to domain as chosen user from above list.
-..
-.. #. Map the newly created share(s) in your directory. In the Windows client, you can map to the network and create folders at the top level of the file share.
-..
-..    - In the Windows client VM, open *File Explorer*. Right click on **This PC** and select **Map Network Drives**.
-..
-..    - Select the drive letter to use for the share. Enter the path to the share in the `\\`*FileServerFQDN*`\`*share* format. Click the **Reconnect at sign-in** box, and then click **Finish**.
-..
-..    .. figure:: images/12.png
-..
-..    A new window will open displaying the contents of the share. You may close this window.
-..
-.. #. Repeat the process for any additional shares.
-
 Testing the NFS export
-......................
+++++++++++++++++++++++
 
 In the following exercise you will:
 

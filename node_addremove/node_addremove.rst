@@ -4,7 +4,7 @@
 Add or Remove a node
 --------------------
 
-In this module we will demonstrate how to add a node to a cluster, and remove a node from a cluster.
+In this module we will demonstrate how to remove a node from a cluster, and add a node to a cluster.
 
 A cluster is a collection of nodes. You can add new nodes to a cluster at any time after physically installing and connecting them to the network on the same subnet as the cluster. The cluster expansion process compares the AOS version on the existing and new nodes and performs any upgrades necessary for all nodes to have the same AOS version.
 
@@ -14,9 +14,9 @@ A customer may choose to add a node to account for a new workloads such as VDI, 
 
 **Pre-requisites:** Completion of :ref:`vmmanage`
 
-**Expected Module Duration:** 30 minutes
+**Expected Module Duration:** 45-60 minutes
 
-**Covered Test IDs:** N/A
+**Covered Test IDs:** Core-009, Core-010
 
 .. note::
 
@@ -27,11 +27,24 @@ A customer may choose to add a node to account for a new workloads such as VDI, 
       Data-at-rest encryption is not in use.
       Rack awareness is not in use.
 
+Remove node
++++++++++++
+
+#. From the dropdown, choose the **Hardware** dashboard, then click the **Diagram** or **Table** tab.
+
+#. Select the target host, and click the **Remove Host** link on the right of the *Summary* line. A dialog box appears to verify the action. Click the **OK** button.
+
+   .. figure:: images/6.png
+      :align: center
+
+   Removing a host takes some time because data on that host must be migrated to other hosts before it can be removed from the cluster. You can monitor progress through the dashboard messages. Removing a host automatically removes all the disks in that host. Only one host can be removed at a time. If you want to remove multiple hosts, you must wait until the first host is removed completely before attempting to remove the next host.
+
+   After a node is removed, it goes into an unconfigured state. You can add such a node back into the cluster through the Add Node(s) workflow.
+
 Add node
-........
+++++++++
 
 #. Either click :fa:`gear` **> Settings > Expand Cluster**, or from the dropdown menu choose **Hardware > +Expand Cluster**.
-
 
    The network is searched for Nutanix nodes and then the **Expand Cluster** dialog box appears (on the *Select Host* screen) with a graphical list of the discovered blocks and nodes. Discovered blocks are blocks with one or more unassigned factory-prepared nodes (hypervisor and Controller VM installed) residing on the same subnet as the cluster. Discovery requires that IPv6 multicast packets are allowed through the physical switch. A lack of IPv6 multicast support might prevent node discovery and successful cluster expansion.
 
@@ -39,7 +52,6 @@ Add node
 
    .. figure:: images/1.png
       :align: center
-      :scale: 75%
 
    When a block is checked, more fields appear below the block diagram. A separate line for each node (host) in the block appears under each field name.
 
@@ -55,7 +67,6 @@ Add node
 
          .. figure:: images/2.png
             :align: center
-            :scale: 75%
 
 #. When all the node values are correct, click the **Next** button.
 
@@ -63,7 +74,6 @@ Add node
 
       .. figure:: images/3.png
          :align: center
-         :scale: 75%
 
 #. When all the fields are correct, click the **Expand Cluster** button.
 
@@ -71,22 +81,6 @@ Add node
 
       .. figure:: images/4.png
          :align: left
-         :scale: 60%
+
       .. figure:: images/5.png
          :align: right
-         :scale: 60%
-
-Remove node
-...........
-
-#. From the dropdown, choose the **Hardware** dashboard, then click the **Diagram** or **Table** tab.
-
-#. Select the target host, and click the **Remove Host** link on the right of the *Summary* line. A dialog box appears to verify the action. Click the **OK** button.
-
-   .. figure:: images/6.png
-      :align: center
-
-
-   Removing a host takes some time because data on that host must be migrated to other hosts before it can be removed from the cluster. You can monitor progress through the dashboard messages. Removing a host automatically removes all the disks in that host. Only one host can be removed at a time. If you want to remove multiple hosts, you must wait until the first host is removed completely before attempting to remove the next host.
-
-   After a node is removed, it goes into an unconfigured state. You can add such a node back into the cluster through the Add Node(s) workflow.
