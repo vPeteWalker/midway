@@ -1,7 +1,7 @@
 .. _nic:
 
 NIC Failure
-===========
++++++++++++
 
 In this section, we will be simulating a Network Interface Card (NIC), and observe the behavior of the cluster. This demonstration also shows what would happen in the event of a switch failure that was supplying a connection to the cluster. By default, Nutanix clusters' network connections are configured in an active/passive mode.
 
@@ -16,7 +16,7 @@ There are two example scenarios you can run to demonstrate the cluster resilienc
    If you choose to run X-Ray on the same cluster you are performing failures on, it is recommended to avoid simulating the NIC failure on the same host that is running X-Ray.
 
 Viewing AHV Host Network Configuration in Prism
------------------------------------------------
+...............................................
 
 This will display a visual representation of the network layout of the selected host.
 
@@ -35,7 +35,7 @@ This will display a visual representation of the network layout of the selected 
 For more details, please view `Network Visualization <https://portal.nutanix.com/page/documents/details/?targetId=Web-Console-Guide-Prism-v5_16%3Awc-network-visualization-intro-c.html/>`_ portion of the `Prism Web Console Guide <https://portal.nutanix.com/page/documents/details/?targetId=Web-Console-Guide-Prism-v5_17%3AWeb-Console-Guide-Prism-v5_17>`_
 
 View AHV Host Network Configuration in the CLI
-----------------------------------------------
+..............................................
 
 .. note::
 
@@ -72,7 +72,7 @@ As we've previously seen, eth0 and eth1 are disabled, as they have no physical l
 What we're looking for is the port that states *active slave*. This is the active port for this bond.
 
 Initiate failover within the CLI
---------------------------------
+................................
 
 .. note::
 
@@ -95,6 +95,6 @@ Initiate failover within the CLI
 #. You have now successfully forced a failover between interfaces. Additionally, demonstrate the result of either the **BASIC** or **RECOMMENDED** scenarios.
 
 Remove physical network cable
------------------------------
++++++++++++++++++++++++++++++
 
-**How to consistently identify physical to logical across form factors and hardware vendors?**
+#. There is no single standard between all hardware vendors to consistently identify how physical network ports are represented within Nutanix. For example, on one vendor the numbering may start from the left as you observe the physical NIC, some from right, etc. This may also vary in between form factors from the same hardware vendor. Lastly, it could vary based on what manufacturer's NIC is being used. With all this understood, it is therefore recommended that if you intend on performing this test during your POC, to plan ahead and remove one physical cable at a time, and document which port that corresponds to within Nutanix (e.g. eth0 is the left-most port, eth1 is the second from the left, etc.) during the initial setup phase. Then during the test with the customer, you can be confident that when you remove the cable, you'll know the result ahead of time.

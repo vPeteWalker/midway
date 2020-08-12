@@ -1,7 +1,7 @@
 .. _psu:
 
 Power Supply Failure (Physical POC only)
-========================================
+++++++++++++++++++++++++++++++++++++++++
 
 .. PW - Asked Scott Ellis for other hardware guide similar to the NX PSU redundancy guide.
       - Rewrite below to have tables in the doc vs. pictures?

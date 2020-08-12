@@ -1,7 +1,7 @@
 .. _power:
 
 Complete Power Failure
-======================
+++++++++++++++++++++++
 
 There are two example scenarios you can run to demonstrate the cluster resiliency during this event:
 

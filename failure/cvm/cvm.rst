@@ -1,7 +1,7 @@
 .. _cvm:
 
 CVM Failure
-===========
++++++++++++
 
 In this section, we will be simulating a Controller Virtual Machine (CVM) failure by executing a command that will shut off the CVM unexpectedly (versus a gradual shutdown for maintenance). This test demonstrates the ability of Nutanix's AOS to immediately failover storage I/O operations to another CVM wjthin the cluster without interruption to any VMs running on that host.
 

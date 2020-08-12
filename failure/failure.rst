@@ -17,7 +17,7 @@ In this module you will be provided with multiple methods to test the redundancy
 **FEEDBACK** ?
 
 Before you begin
-================
+++++++++++++++++
 
 It is recommended you complete the :ref:`clusterconfig` section before proceeding.
 
