@@ -16,7 +16,7 @@ There are two example scenarios you can run to demonstrate the cluster resilienc
    If you choose to run X-Ray on the same cluster you are performing failures on, it is recommended to avoid simulating the NIC failure on the same host that is running X-Ray.
 
 Viewing AHV Host Network Configuration in Prism
-...............................................
+-----------------------------------------------
 
 This will display a visual representation of the network layout of the selected host.
 
@@ -35,7 +35,7 @@ This will display a visual representation of the network layout of the selected 
 For more details, please view `Network Visualization <https://portal.nutanix.com/page/documents/details/?targetId=Web-Console-Guide-Prism-v5_16%3Awc-network-visualization-intro-c.html/>`_ portion of the `Prism Web Console Guide <https://portal.nutanix.com/page/documents/details/?targetId=Web-Console-Guide-Prism-v5_17%3AWeb-Console-Guide-Prism-v5_17>`_
 
 View AHV Host Network Configuration in the CLI
-..............................................
+----------------------------------------------
 
 .. note::
 
@@ -72,7 +72,7 @@ As we've previously seen, eth0 and eth1 are disabled, as they have no physical l
 What we're looking for is the port that states *active slave*. This is the active port for this bond.
 
 Initiate failover within the CLI
-................................
+--------------------------------
 
 .. note::
 

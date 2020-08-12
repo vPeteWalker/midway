@@ -21,7 +21,7 @@ In this module you will deploy Files and Files analytics, providing the foundati
 - Review `NUTANIX FILES GUIDE <https://portal.nutanix.com/page/documents/details/?targetId=Files-v35:Files-v35>`_ and `FILE ANALYTICS GUIDE <https://portal.nutanix.com/page/documents/details/?targetId=File-Analytics-v2_1%3AFile-Analytics-v2_1>`_ for all details including, but not limited to, prerequities, requirements, and recommendations before proceeding.
 
 Environment
-...........
++++++++++++
 
 There are many options at various stages that are available to configure Files to suit the needs of our customers. This workshop will focus on the following configuration.
 
@@ -57,7 +57,7 @@ There are many options at various stages that are available to configure Files t
    Refer to :ref:`ntnxlab` for details on AD Security Groups, user accounts, and passwords when using the AutoAD VM.
 
 Creating a File Server
-......................
+++++++++++++++++++++++
 
 #. In the Prism web console, go to the *File Server Dashboard* page by clicking **File Server** from the dropdown.
 
@@ -146,7 +146,7 @@ Creating the file server begins. You can monitor progress through the **Tasks** 
             .. figure:: images/9.png
 
 Deploying Files Analytics
-.........................
++++++++++++++++++++++++++
 
 .. note::
 
@@ -193,7 +193,7 @@ Deploying Files Analytics
 #. In the *Enable File Analytics* dialog-box, enter the AD username and password for the file server administrator, and click **Enable**.
 
 Enabling Files Analytics
-........................
+++++++++++++++++++++++++
 
 #. In the *File Server* view, select the target file server and click **File Analytics** in the tabs bar.
 

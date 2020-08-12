@@ -26,9 +26,6 @@ Each node in a cluster runs AOS. When commencing an upgrade, every node will be 
 
    - Depending on the version of AOS and LCM, upgrading AOS may also be performed in LCM, or exclusively availabile in LCM. Utilizing is the recommended method to upgrade software and firmware on Nutanix. Please see the :ref:`lcm` section to learn more about performing upgrades using LCM. Otherwise, proceed with the following steps.
 
-Procedure
-+++++++++
-
 #. Log on to the web console for any node in the cluster.
 
 #. Click the :fa:`gear` **> Settings > Upgrade Software > AOS**, or from the dropdown menu choose **Settings > Upgrade Software > AOS** to display the current status of your software versions (and start an upgrade if available and desired).
@@ -87,4 +84,4 @@ Procedure
 WHAT TO DO NEXT
 +++++++++++++++
 
-After upgrading AOS and before upgrading your hypervisor on each cluster, perform a Life Cycle Manager (LCM) inventory, update LCM, and upgrade any recommended firmware.
+After upgrading AOS and before upgrading your hypervisor on each cluster, you may wish to visit :ref:`lcm` for details on how to perform a Life Cycle Manager (LCM) inventory (which will optionally update LCM itself), and demonstrate how easy it is to upgrade any recommended firmware, or software, and all within a single location.

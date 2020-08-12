@@ -13,7 +13,7 @@ SMB File Share
 **Covered Test IDs:** N/A
 
 Creating an SMB File Share
-..........................
+++++++++++++++++++++++++++
 
 During this exercise, you will learn how to create a new SMB share using Nutanix Files.
 
@@ -112,7 +112,7 @@ A *distributed* (home) share is the repository for the user's personal files, an
 .. #. Login to domain as chosen user from above list.
 
 Testing "normal" SMB share
-..........................
+--------------------------
 
 During this exercise, you will:
 
@@ -251,7 +251,7 @@ During this exercise, you will:
 #. Return to **Prism Element > File Server > Share/Export**, select your share. Review the **Share Details**, **Usage** and **Performance** tabs to understand the high level information available on a per share basis, including the number of files & connections, storage utilization over time, latency, throughput, and IOPS.
 
 Testing "distributed" SMB share
-...............................
+-------------------------------
 
 During this exercise, you will:
 
@@ -320,7 +320,7 @@ During this exercise, you will:
 #. Observe that the file you created is on the mapped drive, and you have successfully migrated the user's local documents directory to a mapped *Home* directory stored within Files.
 
 Testing with File Analytics
-...........................
+---------------------------
 
 During this exercise, you will explore the new, integrated File Analytics capabilities available in Nutanix Files, including scanning existing shares, creating anomaly alerts, and reviewing audit details. File Analytics is deployed in minutes as a standalone VM through an automated, One Click operation in Prism Element. This VM has already been deployed and enabled in your environment.
 

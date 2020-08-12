@@ -13,7 +13,7 @@ Lifecycle Manager (LCM)
 In this module we will demonstrate how to perform an inventory, followed by performing updates with LCM.
 
 What is LCM?
-............
+++++++++++++
 
 - LCM aims to enable administrators to take inventory of the firmware and software in their Nutanix environment and perform updates in a simple, cluster-aware, fashion.
 
@@ -30,7 +30,7 @@ What is LCM?
    For detailed information about LCM, please refer to the `Life Cycle Manager Guide v2.2 <https://portal.nutanix.com/page/documents/details?targetId=Life-Cycle-Manager-Guide-v2_3:Life-Cycle-Manager-Guide-v2_3>`_
 
 Performing Inventory with LCM
-.............................
++++++++++++++++++++++++++++++
 
 .. note::
 
@@ -73,8 +73,8 @@ Performing Inventory with LCM
 
    - These processes are distributed to the LCM service running on all nodes. Each node picks up the work items, and runs the 2 scripts (one for CVM and another for the host).
 
-Performing Updates with the Life Cycle Manager
-..............................................
+Performing Updates with LCM
++++++++++++++++++++++++++++
 
 #. From the drop-down menu, select **LCM**.
 

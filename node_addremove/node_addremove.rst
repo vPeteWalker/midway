@@ -28,7 +28,7 @@ A customer may choose to add a node to account for a new workloads such as VDI, 
       Rack awareness is not in use.
 
 Remove node
-...........
++++++++++++
 
 #. From the dropdown, choose the **Hardware** dashboard, then click the **Diagram** or **Table** tab.
 
@@ -42,10 +42,9 @@ Remove node
    After a node is removed, it goes into an unconfigured state. You can add such a node back into the cluster through the Add Node(s) workflow.
 
 Add node
-........
+++++++++
 
 #. Either click :fa:`gear` **> Settings > Expand Cluster**, or from the dropdown menu choose **Hardware > +Expand Cluster**.
-
 
    The network is searched for Nutanix nodes and then the **Expand Cluster** dialog box appears (on the *Select Host* screen) with a graphical list of the discovered blocks and nodes. Discovered blocks are blocks with one or more unassigned factory-prepared nodes (hypervisor and Controller VM installed) residing on the same subnet as the cluster. Discovery requires that IPv6 multicast packets are allowed through the physical switch. A lack of IPv6 multicast support might prevent node discovery and successful cluster expansion.
 

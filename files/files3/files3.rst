@@ -13,7 +13,7 @@ NFS export
 **Covered Test IDs:** N/A
 
 Creating an NFS export
-......................
+++++++++++++++++++++++
 
 During this exercise, you will create an NFS export.
 
@@ -52,7 +52,7 @@ During this exercise, you will create an NFS export.
 #. Review the **Summary** and click **Create**.
 
 Testing the NFS export
-......................
+++++++++++++++++++++++
 
 In the following exercise you will:
 

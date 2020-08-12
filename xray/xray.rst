@@ -11,7 +11,7 @@ X-RAY
 **Covered Test IDs:** `Core-019, Core-020, VSAN-001, VSAN-002, VSAN-003, VSAN-004, HF-001, HF-002, HF-003, HF-004 <https://confluence.eng.nutanix.com:8443/display/SEW/Official+Nutanix+POC+Guide+-+INTERNAL>`_
 
 Deploying X-Ray
----------------
++++++++++++++++
 
 X-Ray is an automated testing framework and benchmarking application for enterprise-grade datacenters. The X-Ray application is a downloadable virtual machine (VM) with a user interface and complete documentation. Once installed, X-Ray can test and analyze several different systems and report comparable information for your use.
 
@@ -99,7 +99,7 @@ Connecting to the X-Ray Interface
 #. Agree to the EULA that appears, and (optionally) to collection of Pulse metadata.
 
 Creating an X-Ray Test Target
------------------------------
++++++++++++++++++++++++++++++
 
 #. You will be presented with the *Tests* dashboard in X-Ray. Click the **View and Run Test** button on the test you wish to run.
 
@@ -140,7 +140,7 @@ Creating an X-Ray Test Target
       :align: right
 
 Executing an X-Ray Test
------------------------
++++++++++++++++++++++++
 
 The X-Ray test scenarios offer predefined test cases that consist of multiple events and predefined parameters. X-Ray executes scenarios against test targets to produce results for analysis. X-Ray scenarios simulate real-world workloads on test targets. Effective virtualized data center solutions delegate resources so that workloads do not monopolize resources from other workloads. Running different workloads in this manner helps evaluate how multiple workloads interact with one another.
 
@@ -177,7 +177,7 @@ To view detailed information about each test scenario, click **View & Run Test**
    .. figure:: images/20.png
 
 Creating Comparisons
---------------------
+++++++++++++++++++++
 
 Compare the results of multiple tests.
 
