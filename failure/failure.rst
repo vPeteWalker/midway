@@ -8,8 +8,6 @@ In this module you will be provided with multiple methods to test the redundancy
 
 **Pre-requisites:** Completion of :ref:`vmmanage`
 
-**(Optional) Pre-requisite:** N/A
-
 **Expected Module Duration:** 15 minutes - 11+ hours (varies depends on type and number of tests)
 
 **Covered Test IDs:** `Core-015, Core-016, Core-017, Core-018 <https://confluence.eng.nutanix.com:8443/display/SEW/Official+Nutanix+POC+Guide+-+INTERNAL>`_

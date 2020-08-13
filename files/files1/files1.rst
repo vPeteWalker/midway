@@ -12,8 +12,6 @@ In this module you will deploy Files and Files analytics, providing the foundati
 
 **Pre-requisites:** Completion of :ref:`vmmanage`
 
-**(Optional) Pre-requisite:** N/A
-
 **Expected Module Duration:** 60 minutes
 
 **Covered Test IDs:** N/A
