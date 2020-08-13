@@ -32,6 +32,11 @@ A customer may choose to add a node to account for a new workloads such as VDI, 
 Remove node
 +++++++++++
 
+#. From the dropdown, choose the **Home** dashboard. Observe the **Hosts** count within the *Hardware Sumnmary*, and the total **Storage** **CPU** and **Memory** values before and after proceeding with the instructions below.
+
+   .. figure:: images/7.png
+      :align: center
+
 #. From the dropdown, choose the **Hardware** dashboard, then click the **Diagram** or **Table** tab.
 
 #. Select the target host, and click the **Remove Host** link on the right of the *Summary* line. A dialog box appears to verify the action. Click the **OK** button.
