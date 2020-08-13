@@ -1,15 +1,17 @@
 .. _xray3:
 
-Executing an X-Ray Test
+Executing the OLTP Test
 +++++++++++++++++++++++
 
 The X-Ray test scenarios offer predefined test cases that consist of multiple events and predefined parameters. X-Ray executes scenarios against test targets to produce results for analysis. X-Ray scenarios simulate real-world workloads on test targets. Effective virtualized data center solutions delegate resources so that workloads do not monopolize resources from other workloads. Running different workloads in this manner helps evaluate how multiple workloads interact with one another.
 
 X-Ray uses the open-source Flexible I/O (FIO) benchmark tool to generate an I/O workload. FIO files define the characteristics of the FIO workload. Each FIO file contains defined parameters and job descriptions involved in the file.
 
-The test scenarios simulate Online Transaction Processing (OLTP), Virtual Desktop Infrastructure (VDI), and Decision Support System (DSS) workloads.
+The test scenarios simulate Online Transaction Processing (OLTP), Virtual Desktop Infrastructure (VDI), and Decision Support System (DSS) workloads. For this exercise, we will be running the OLTP Simulator.
 
 To view detailed information about each test scenario, click **View & Run Test** within the *Tests* dashboard to display the details of the selected test.
+
+#. Within the *Application Performance* section, click **View & Run Test** under *OLTP Simulator*.
 
 #. In the *Choose test target* dropdown, choose your cluster.
 

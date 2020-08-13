@@ -69,6 +69,9 @@
    :hidden:
 
    xray/xray
+   xray/xray1/xray1
+   xray/xray2/xray2
+   xray/xray3/xray3
 
 .. toctree::
    :maxdepth: 2

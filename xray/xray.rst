@@ -6,11 +6,16 @@ X-RAY
 
 **Pre-requisites:** Completion of :ref:`vmmanage`
 
-**Expected Module Duration:** Varies depending on updates performed
+**Expected Module Duration:** Varies depending on tests performed
 
 **Covered Test IDs:** `Core-019, Core-020, VSAN-001, VSAN-002, VSAN-003, VSAN-004, HF-001, HF-002, HF-003, HF-004 <https://confluence.eng.nutanix.com:8443/display/SEW/Official+Nutanix+POC+Guide+-+INTERNAL>`_
 
 **FEEDBACK** :ref:`feedback`
+
+Before you begin
+++++++++++++++++
+
+If you are competing against VSAN or VXRAIL, it is highly recommended that you view this series before beginning a POC where VSAN or VXRAIL is one of your competitors. `MicroLRN: Whiteboard Warriors - Using X-Ray Against VSAN <https://nutanix.mindtickle.com/#/courses/series/1232012167626956869?series=1232012167626956869>`_
 
 Deploying X-Ray
 +++++++++++++++
