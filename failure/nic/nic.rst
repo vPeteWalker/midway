@@ -69,14 +69,14 @@ In our example, eth0 and eth1 report **False** under *link* as there is no physi
 
 As we've previously seen, eth0 and eth1 are disabled, as they have no physical link. They both list *may_enable: false* as enabling these ports would be pointless without a physical connection.
 
-What we're looking for is the port that states *active slave*. This is the active port for this bond.
+We're looking for the port which states *active slave*. This is the active port for this bond.
 
 Initiate failover within the CLI
---------------------------------
+++++++++++++++++++++++++++++++++
 
 .. note::
 
-   Ensure you are running the BASIC or RECOMMENDED workload tests on the selected host before proceeding.
+   This method is required for a hosted POC. For a physical POC, you have the option to proceed with these instructions, or proceed to the *Remove physical network cable* section below.
 
 #. Execute the following command, specifying the bond, and the interface that you are going to make active. In our example, the bond is *br0-up* and the interfaces is *eth2*
 
@@ -94,9 +94,13 @@ Initiate failover within the CLI
 
 #. You have now successfully forced a failover between interfaces. Additionally, demonstrate the result of either the **BASIC** or **RECOMMENDED** scenarios.
 
-Remove physical network cable (Physical POC only)
-+++++++++++++++++++++++++++++++++++++++++++++++++
+Simulate physical NIC or switchport failure (Physical POC only)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-There is no single standard between all hardware vendors to consistently identify how physical network ports are represented within Nutanix. For example, on one vendor the numbering may start from the left as you observe the physical NIC, some from right, etc. This may also vary in between form factors from the same hardware vendor. Lastly, it could vary based on what manufacturer's NIC is being used.
+There is no single standard between all hardware vendors to consistently identify how physical network ports are represented within Nutanix. For example, on one vendor the numbering may start from the left as you observe the physical NIC, some from right, etc. This may also vary in between form factors from the same hardware vendorm, or even based on which manufacturer's NIC is being utilized.
 
-With all this understood, it is therefore recommended that if you intend on performing this test during your POC, to plan ahead and remove one physical cable at a time, and document which port that corresponds to within Nutanix (e.g. eth0 is the left-most port, eth1 is the second from the left, etc.) during the initial setup phase. Then during the test with the customer, you can be confident that when you remove the cable, you'll know the result ahead of time.
+With all this understood, it is therefore recommended that if you intend on performing this test during your POC, to plan ahead and remove one physical cable at a time, and document which port that corresponds to within Nutanix (e.g. eth0 is the left-most port, eth1 is the second from the left, etc.) during the initial setup phase. Then during the test with the customer or prospect, you can be confident that when you remove the cable, you'll know the result ahead of time, avoiding any surprises.
+
+#. Now that you have identified the physical port that is active for the bond, by completing the *Viewing AHV Host Network Configuration in Prism* and *View AHV Host Network Configuration in the CLI* sections above, you can proceed with removing the physical network cable from the NIC port that corresponds to the active interface. The failover will occur completely automatically, and without interruption to user VMs.
+
+#. You have now successfully simulated a NIC or switchport failure. Additionally, demonstrate the result of either the **BASIC** or **RECOMMENDED** scenarios.
