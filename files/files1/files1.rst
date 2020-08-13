@@ -18,7 +18,9 @@ In this module you will deploy Files and Files analytics, providing the foundati
 
 **FEEDBACK** :ref:`feedback`
 
-- Review `NUTANIX FILES GUIDE <https://portal.nutanix.com/page/documents/details/?targetId=Files-v35:Files-v35>`_ and `FILE ANALYTICS GUIDE <https://portal.nutanix.com/page/documents/details/?targetId=File-Analytics-v2_1%3AFile-Analytics-v2_1>`_ for all details including, but not limited to, prerequities, requirements, and recommendations before proceeding.
+.. note::
+
+   Review `NUTANIX FILES GUIDE <https://portal.nutanix.com/page/documents/details/?targetId=Files-v35:Files-v35>`_ and `FILE ANALYTICS GUIDE <https://portal.nutanix.com/page/documents/details/?targetId=File-Analytics-v2_1%3AFile-Analytics-v2_1>`_ for all details including, but not limited to, prerequities, requirements, and recommendations before proceeding.
 
 Environment
 +++++++++++
@@ -221,4 +223,7 @@ Enabling Files Analytics
 
             (test) sudo bash /opt/nutanix/update_dns.sh
 
-You may wish to proceed to the :ref:`files3` section, which outlines creating and testing an NFS export.
+WHAT TO DO NEXT
++++++++++++++++
+
+You may wish to continue to the next section :ref:`files2`, which outlines creating and testing an SMB share, and includes File Analytics. Otherwise, you can proceed to the :ref:`files3` section, which outlines creating and testing an NFS export.

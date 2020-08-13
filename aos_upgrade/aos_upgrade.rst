@@ -24,6 +24,13 @@ Each node in a cluster runs AOS. When commencing an upgrade, every node will be 
 
    - Depending on the version of AOS and LCM, upgrading AOS may also be performed in LCM, or exclusively availabile in LCM. Utilizing is the recommended method to upgrade software and firmware on Nutanix. Please see the :ref:`lcm` section to learn more about performing upgrades using LCM. Otherwise, proceed with the following steps.
 
+   - Visit the `Upgrade Paths <https://portal.nutanix.com/page/documents/upgrade-paths>`_ page, and choose **AOS** from the *Software Types* section. Input the *Current Release Version* and *Target Release Version* to confirm the upgrade you are attempting is supported.
+
+   - If you encounter errors with the upgrade procedure as outlined below (ex. install hang) contact support to assist. A failure on the initial node will prevent the process proceeding on subsequent nodes to ensure multiple nodes aren’t taken offline from the same issue.
+
+Legacy AOS upgrade
+++++++++++++++++++
+
 #. Log on to the web console for any node in the cluster.
 
 #. Click the :fa:`gear` **> Settings > Upgrade Software > AOS**, or from the dropdown menu choose **Settings > Upgrade Software > AOS** to display the current status of your software versions (and start an upgrade if available and desired).
@@ -78,9 +85,8 @@ Each node in a cluster runs AOS. When commencing an upgrade, every node will be 
 
    The Upgrade Software dialog box shows the progress of your selection, including pre-installation and cluster health checks. After the upgrade process is completed on a Controller VM, the Controller VM restarts. This restart is not disruptive to node operations.
 
-#. If you were running an X-Ray workload during this test, you may wish to
+#. Return to :fa:`gear` **> Settings > Upgrade Software > AOS** once the upgrade has completed to verify the version of AOS has been upgraded as expected.
 
-WHAT TO DO NEXT
-+++++++++++++++
+#. Demonstrate the result of either the **BASIC** or **RECOMMENDED** scenarios.
 
-After upgrading AOS and before upgrading your hypervisor on each cluster, you may wish to visit :ref:`lcm` for details on how to perform a Life Cycle Manager (LCM) inventory (which will optionally update LCM itself), and demonstrate how easy it is to upgrade any recommended firmware, or software, and all within a single location.
+Congratulations! You’ve upgraded AOS, to upgrade additional components, including AHV, Calm, and others, see :ref:`lcm`
