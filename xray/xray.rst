@@ -1,8 +1,8 @@
 .. _xray:
 
------
-X-RAY
------
+-------------------
+Starting with X-Ray
+-------------------
 
 **Pre-requisites:** Completion of :ref:`vmmanage`
 
@@ -51,8 +51,6 @@ Installation and configuration of X-Ray
 
    - **Memory** - 8
 
-   .. figure:: images/4.png
-
 #. Define a second NIC on the X-Ray VM. The second interface controls zero-configuration access from the X-Ray VM to the test VMs. For zero-configuration purposes, configure the second interface to use the same *Primary* VLAN.
 
 #. Power on the new X-Ray VM, and open its console.
@@ -63,15 +61,17 @@ Installation and configuration of X-Ray
 
 #. Within the X-Ray VM, click **Application > System Tools > Settings**.
 
-#. Click the :fa:`gear` within the *eth0* section.
+#. Click on **Network** and then the :fa:`gear` within the *eth0* section.
 
-   .. figure:: images/10.png
+   .. figure:: images/9.png
 
 #. Click on the **IPv4** heading.
 
-   .. figure:: images/11.png
+   .. figure:: images/10.png
 
-#. Under *IPv4 Method* choose **Manual**. Enter the appropriate network information within the **Addresses** and **DNS** sections only. Click **Apply**.
+#. Under *IPv4 Method* choose **Manual**. Enter the appropriate network information within the **Addresses** and **DNS** sections only. Switch the *Automatic* slider in the *DNS* section to **OFF**. Click **Apply**.
+
+   .. figure:: images/10a.png
 
 #. You may now exit the console.
 
@@ -130,3 +130,5 @@ Creating an X-Ray Test Target
 
    .. figure:: images/15.png
       :align: right
+
+You've now successfully added a target from which to run X-Ray tests. You may continue to the :ref:`xray1` where you may run a variety of tests, or straight to :ref:`xray3`. Once you've completed either section, you should visit the :ref:`xray2` section.

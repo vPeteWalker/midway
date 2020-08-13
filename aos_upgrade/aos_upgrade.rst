@@ -22,11 +22,11 @@ Each node in a cluster runs AOS. When commencing an upgrade, every node will be 
 
    - If you use Prism Central to manage your Nutanix clusters, upgrade Prism Central first, then upgrade AOS on the clusters managed by Prism Central.
 
-   - Depending on the version of AOS and LCM, upgrading AOS may also be performed in LCM, or exclusively availabile in LCM. Utilizing is the recommended method to upgrade software and firmware on Nutanix. Please see the :ref:`lcm` section to learn more about performing upgrades using LCM. Otherwise, proceed with the following steps.
+   - Depending on the version of AOS and LCM, upgrading AOS may also be performed in LCM, or exclusively availabile in LCM. Utilizing LCM is the recommended method to upgrade software and firmware on Nutanix, and will eventually become to sole mechanism for all software and firmware upgrades. Please see the :ref:`lcm` section to learn more about performing upgrades using LCM. Otherwise, proceed with the following steps labeled *Legacy AOS Upgrade*.
 
    - Visit the `Upgrade Paths <https://portal.nutanix.com/page/documents/upgrade-paths>`_ page, and choose **AOS** from the *Software Types* section. Input the *Current Release Version* and *Target Release Version* to confirm the upgrade you are attempting is supported.
 
-   - If you encounter errors with the upgrade procedure as outlined below (ex. install hang) contact support to assist. A failure on the initial node will prevent the process proceeding on subsequent nodes to ensure multiple nodes aren’t taken offline from the same issue.
+   - If you encounter errors with the upgrade procedure as outlined below (ex. install hang) contact support to assist. A failure on the initial node will prevent the upgrade process proceeding on subsequent nodes to ensure multiple nodes aren’t taken offline from the same issue.
 
 Legacy AOS upgrade
 ++++++++++++++++++
@@ -35,8 +35,8 @@ Legacy AOS upgrade
 
 #. Click the :fa:`gear` **> Settings > Upgrade Software > AOS**, or from the dropdown menu choose **Settings > Upgrade Software > AOS** to display the current status of your software versions (and start an upgrade if available and desired).
 
-.. figure:: images/1.png
-   :align: right
+   .. figure:: images/1.png
+      :align: right
 
    - *CURRENT VERSION* displays the version running currently in the cluster.
 
@@ -44,7 +44,7 @@ Legacy AOS upgrade
 
    - The upload the AOS base software binary link enables you to install from binary and metadata files, which might be helpful for updating isolated (dark-site) clusters not connected to the Internet.
 
-#. *Optional* To run the pre-upgrade installation checks only on the Controller VM where you are logged on without upgrading, click **Upgrade > Pre-upgrade**. These checks also run as part of the upgrade procedure.
+#. *Optional* To run the pre-upgrade installation checks only on the Controller VM where you are logged on without upgrading, click **Upgrade > Pre-upgrade**. These checks will also run as part of the upgrade procedure, and is not required to run separately.
 
 #. Before executing upgrade, we recommend performing one of the following to illustrate that workloads will continue to run without interruption while the AOS upgrade proceeds.
 
@@ -65,6 +65,7 @@ Legacy AOS upgrade
          :align: center
 
       .. figure:: images/4.png
+         :align: right
 
    - Upgrading AOS by uploading binary and metadata files
 

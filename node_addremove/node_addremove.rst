@@ -25,14 +25,14 @@ A customer may choose to add a node to account for a new workloads, or perhaps i
    Before performing the procedure below, make sure you are running the latest version of the Nutanix Cluster Check (NCC) health checks and upgrade NCC if necessary.  Run all NCC checks, and check the Health Dashboard. If any health checks are failing, resolve them to ensure that the cluster is healthy before continuing.
 
    These instuctions assume:
-      All nodes have the same hardware configuration, AOS/AHV versions, and passwords.
-      Data-at-rest encryption is not in use.
-      Rack awareness is not in use.
+      - All nodes have the same hardware configuration, AOS/AHV versions, and passwords.
+      - Data-at-rest encryption is not in use.
+      - Rack awareness is not in use.
 
 Remove node
 +++++++++++
 
-#. From the dropdown, choose the **Home** dashboard. Observe the **Hosts** count within the *Hardware Sumnmary*, and the total **Storage** **CPU** and **Memory** values before and after proceeding with the instructions below.
+#. From the dropdown, choose the **Home** dashboard. Observe the **Hosts** count within the *Hardware Sumnmary*, and the total **Storage**, **CPU**, and **Memory** values before and after proceeding with the instructions below.
 
    .. figure:: images/7.png
       :align: center
@@ -46,12 +46,12 @@ Remove node
 
    Removing a host takes some time because data on that host must be migrated to other hosts before it can be removed from the cluster. You can monitor progress through the dashboard messages. Removing a host automatically removes all the disks in that host. Only one host can be removed at a time. If you want to remove multiple hosts, you must wait until the first host is removed completely before attempting to remove the next host.
 
-   After a node is removed, it goes into an unconfigured state. You can add such a node back into the cluster through the Add Node(s) workflow.
+   After a node is removed, it goes into an unconfigured state. You can add such a node back into the cluster through the Add Node(s) workflow below.
 
 Add node
 ++++++++
 
-#. From the dropdown, choose the **Home** dashboard. Observe the **Hosts** count within the *Hardware Sumnmary*, and the total **Storage** **CPU** and **Memory** values before and after proceeding with the instructions below.
+#. From the dropdown, choose the **Home** dashboard. Observe the **Hosts** count within the *Hardware Sumnmary*, and the total **Storage**, **CPU**, and **Memory** values before and after proceeding with the instructions below.
 
    .. figure:: images/7.png
       :align: center

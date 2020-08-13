@@ -25,11 +25,11 @@ What is LCM?
 
 - Once a customer performs an inventory of their cluster, all the firmware is downloaded and staged. From there, users can deploy the updates with as much or as little granularity as they desire. You can either select individual entities for upgrade or do the entire cluster at once (subject to what the actual component being upgraded allows).
 
-- A Dark Site LCM version is available
+- A Dark Site LCM version is available.
 
 .. note::
 
-   For detailed information about LCM, please refer to the `Life Cycle Manager Guide v2.2 <https://portal.nutanix.com/page/documents/details?targetId=Life-Cycle-Manager-Guide-v2_3:Life-Cycle-Manager-Guide-v2_3>`_
+   For detailed information about LCM, please refer to the `Life Cycle Manager Guide v2.3 <https://portal.nutanix.com/page/documents/details?targetId=Life-Cycle-Manager-Guide-v2_3:Life-Cycle-Manager-Guide-v2_3>`_
 
 Performing Inventory with LCM
 +++++++++++++++++++++++++++++

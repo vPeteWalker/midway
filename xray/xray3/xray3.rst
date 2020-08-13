@@ -1,7 +1,7 @@
 .. _xray3:
 
-Executing the OLTP Test
-+++++++++++++++++++++++
+Executing the OLTP Simulator
+++++++++++++++++++++++++++++
 
 The X-Ray test scenarios offer predefined test cases that consist of multiple events and predefined parameters. X-Ray executes scenarios against test targets to produce results for analysis. X-Ray scenarios simulate real-world workloads on test targets. Effective virtualized data center solutions delegate resources so that workloads do not monopolize resources from other workloads. Running different workloads in this manner helps evaluate how multiple workloads interact with one another.
 

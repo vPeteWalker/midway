@@ -73,8 +73,6 @@ Creating a File Server
 
 #. The *Create File Server* window appears and displays the *Basics* tab. Do the following in the indicated fields:
 
-   .. figure:: images/3.png
-
    - **Name**: Enter **Files** as the name for the file server.
 
       The file server name is used by clients to access the file server. The fully qualified name (file server name + domain) must be unique.
@@ -82,6 +80,8 @@ Creating a File Server
    - **Domain**: **ntnxlab.local** if using AutoAD, otherwise customer-provided Active Directory domain.
 
    - **File Server Storage**: Enter the file server total storage size (minimum 1 TiB).
+
+   .. figure:: images/3.png
 
    - Click the **Next** button.
 

@@ -75,7 +75,7 @@ This test demonstrates the ability of Nutanix's AOS to immediately begin rebuild
 
       To refresh the screen hit CTRL+R
 
-#. Once the disk has been successfully removed, hit CTRL+C to exit the *Rebuild Estimator*.
+#. Once the disk has been successfully removed, hit **CTRL+C** to exit the *Rebuild Estimator*.
 
 #. Enable hidden commands in ncli by running ``ncli -h=true``.
 
