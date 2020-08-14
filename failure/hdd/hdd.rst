@@ -15,7 +15,7 @@ This test demonstrates the ability of Nutanix's AOS to immediately begin rebuild
 
    - BASIC: Create two VMs, one on the host that contains the HDD that the simulated failure will be performed on, one on a host that will remain untouched. Begin a continuous ping between these VMs prior to issuing the HDD failure commands, and observe that there are no lost pings. Creating VMs is oulined in :ref:`vmmanage`
 
-   - RECOMMENDED: Use X-ray to run OLTP or VDI workload. Setup of X-Ray is oulined in :ref:`xray`
+   - RECOMMENDED: Use X-ray to run OLTP or VDI workload. Setup of X-Ray is oulined in :ref:`xray`. Instructions for running the OLTP Simulator can be found in :ref:`xray3`.
 
 .. note::
 
@@ -75,7 +75,7 @@ This test demonstrates the ability of Nutanix's AOS to immediately begin rebuild
 
       To refresh the screen hit CTRL+R
 
-#. Once the disk has been successfully removed, hit CTRL+C to exit the *Rebuild Estimator*.
+#. Once the disk has been successfully removed, hit **CTRL+C** to exit the *Rebuild Estimator*.
 
 #. Enable hidden commands in ncli by running ``ncli -h=true``.
 

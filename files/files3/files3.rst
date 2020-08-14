@@ -6,11 +6,11 @@ NFS export
 
 **Pre-requisites:** Completion of :ref:`vmmanage`
 
-**(Optional) Pre-requisite:** N/A
-
 **Expected Module Duration:** 45 minutes
 
 **Covered Test IDs:** N/A
+
+**FEEDBACK** :ref:`feedback`
 
 Creating an NFS export
 ++++++++++++++++++++++

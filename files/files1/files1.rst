@@ -12,13 +12,15 @@ In this module you will deploy Files and Files analytics, providing the foundati
 
 **Pre-requisites:** Completion of :ref:`vmmanage`
 
-**(Optional) Pre-requisite:** N/A
-
 **Expected Module Duration:** 60 minutes
 
 **Covered Test IDs:** N/A
 
-- Review `NUTANIX FILES GUIDE <https://portal.nutanix.com/page/documents/details/?targetId=Files-v35:Files-v35>`_ and `FILE ANALYTICS GUIDE <https://portal.nutanix.com/page/documents/details/?targetId=File-Analytics-v2_1%3AFile-Analytics-v2_1>`_ for all details including, but not limited to, prerequities, requirements, and recommendations before proceeding.
+**FEEDBACK** :ref:`feedback`
+
+.. note::
+
+   Review `NUTANIX FILES GUIDE <https://portal.nutanix.com/page/documents/details/?targetId=Files-v35:Files-v35>`_ and `FILE ANALYTICS GUIDE <https://portal.nutanix.com/page/documents/details/?targetId=File-Analytics-v2_1%3AFile-Analytics-v2_1>`_ for all details including, but not limited to, prerequities, requirements, and recommendations before proceeding.
 
 Environment
 +++++++++++
@@ -71,8 +73,6 @@ Creating a File Server
 
 #. The *Create File Server* window appears and displays the *Basics* tab. Do the following in the indicated fields:
 
-   .. figure:: images/3.png
-
    - **Name**: Enter **Files** as the name for the file server.
 
       The file server name is used by clients to access the file server. The fully qualified name (file server name + domain) must be unique.
@@ -80,6 +80,8 @@ Creating a File Server
    - **Domain**: **ntnxlab.local** if using AutoAD, otherwise customer-provided Active Directory domain.
 
    - **File Server Storage**: Enter the file server total storage size (minimum 1 TiB).
+
+   .. figure:: images/3.png
 
    - Click the **Next** button.
 
@@ -221,4 +223,7 @@ Enabling Files Analytics
 
             (test) sudo bash /opt/nutanix/update_dns.sh
 
-You may wish to proceed to the :ref:`files3` section, which outlines creating and testing an NFS export.
+WHAT TO DO NEXT
++++++++++++++++
+
+You may wish to continue to the next section :ref:`files2`, which outlines creating and testing an SMB share, and includes File Analytics. Otherwise, you can proceed to the :ref:`files3` section, which outlines creating and testing an NFS export.

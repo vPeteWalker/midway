@@ -14,25 +14,21 @@ In this section, we will be simulating a power failure by removing power from on
 
 .. figure:: images/psug4.png
    :align: left
-   :scale: 50%
 
    `Power Supply Unit (PSU) Redundancy and Node Configuration for G4 platforms <https://portal.nutanix.com/page/documents/details?targetId=System-Specs-G4-Multinode:har-psu-redundancy-table-r.html>`_
 
 .. figure:: images/psug5.png
    :align: right
-   :scale: 50%
 
    `Power Supply Unit (PSU) Redundancy and Node Configuration for G5 platforms <https://portal.nutanix.com/page/documents/details?targetId=System-Specs-G5-Single-Node:har-psu-redundancy-table-r.html>`_
 
 .. figure:: images/psug6.png
    :align: left
-   :scale: 50%
 
    `Power Supply Unit (PSU) Redundancy and Node Configuration for G6 platforms <https://portal.nutanix.com/page/documents/details?targetId=System-Specs-G6-Multinode:har-psu-redundancy-table-g6-r.html>`_
 
 .. figure:: images/psug7.png
    :align: right
-   :scale: 50%
 
    `Power Supply Unit (PSU) Redundancy and Node Configuration for G7 platforms <https://portal.nutanix.com/page/documents/details?targetId=System-Specs-G7-Multinode:har-psu-redundancy-table-r.html>`_
 
@@ -44,7 +40,7 @@ There are two example scenarios you can run to demonstrate the cluster resilienc
 
    - BASIC: Create as many VMs as there are hosts. Begin a continuous ping between each VM to another VM, prior to issuing the shutdown command via SSH, and observe that there are no lost pings. Creating VMs is oulined in :ref:`vmmanage`
 
-   - RECOMMENDED: Use X-ray to run OLTP or VDI workload. Setup of X-Ray is oulined in :ref:`xray`
+   - RECOMMENDED: Use X-ray to run OLTP or VDI workload. Setup of X-Ray is oulined in :ref:`xray`. Instructions for running the OLTP Simulator can be found in :ref:`xray3`.
 
 #. Identify the physical power supply cord on the node you wish to remove as a part of this test. This can also be performed remotely if the customer has the ability to control individual sockets on their Power Distribution Unit (PDU), and you've confirmed the associated sockets connected to the node being tested.
 
