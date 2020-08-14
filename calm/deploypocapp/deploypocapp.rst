@@ -6,7 +6,7 @@ Deploying POC App
 
 In this module you will upload and deploy a multi-VM application from an existing Blueprint. It isn't necessarily intended to be focused on proving out Calm capabilities, but rather providing a real application, quickly, that can be used for the :ref:`flowappsec` module. To begin exploring Calm and creating your first Blueprint, see :ref:`singlevmwin`.
 
-**Pre-requisites:** Completion of :ref:`calmenable`
+**Prerequisites:** Completion of :ref:`calmenable`
 
 **Expected Module Duration:** 20 minutes
 

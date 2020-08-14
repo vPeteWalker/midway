@@ -4,7 +4,7 @@
 Prerequisites
 --------------
 
-In order for an easy POC experience using this guide, it is important to ensure the environment your testing is has met all of the pre-requisites. While the guide is applicable to both on-premises and Hosted POC (HPOC) environments, the pre-requisites differ slightly.
+In order for an easy POC experience using this guide, it is important to ensure the environment your testing is has met all of the prerequisites. While the guide is applicable to both on-premises and Hosted POC (HPOC) environments, the prerequisites differ slightly.
 
 Choosing Between HPOC and Physical
 +++++++++++++++++++++++++++++++++++
@@ -21,7 +21,7 @@ The first determination to make is whether to use a Hosted POC cluster or an on-
 HPOC Prerequisites
 +++++++++++++++++++
 
-Pre-requisites for a Nutanix Hosted POC environment are simple, as you will have a predictable network topology and use a pre-created Domain Controller image.
+Prerequisites for a Nutanix Hosted POC environment are simple, as you will have a predictable network topology and use a pre-created Domain Controller image.
 
 You'll need the following:
 
@@ -43,7 +43,7 @@ You'll need the following:
 On-premises Prerequisites
 ++++++++++++++++++++++++++
 
-Pre-requisites for an on-premises POC are more involved, as we need to ensure the provided networks and Active Directory are suitable. Establishing who will provide components such as network cables early on is critical, as is reviewing the network installation details sheet prior to arriving on-site for the install.
+Prerequisites for an on-premises POC are more involved, as we need to ensure the provided networks and Active Directory are suitable. Establishing who will provide components such as network cables early on is critical, as is reviewing the network installation details sheet prior to arriving on-site for the install.
 
 You'll need to verify the following with the customer:
 

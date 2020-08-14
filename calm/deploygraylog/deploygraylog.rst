@@ -12,7 +12,7 @@ If a customer already has a logging solution that can be used, such as Splunk, y
 
    This setup is for minimal retention on a single GrayLog instance without blowing out your cluster storage. Do not follow these instructions if you need longer retention or a distributed system. This should be great for a demo - but will be different for production.
 
-**Pre-requisites:** Completion of :ref:`calmenable`
+**Prerequisites:** Completion of :ref:`calmenable`
 
 **Expected Module Duration:** 30 minutes
 

@@ -4,7 +4,7 @@
 SMB File Share
 --------------
 
-**Pre-requisites:** Completion of :ref:`vmmanage`
+**Prerequisites:** Completion of :ref:`vmmanage`
 
 **Expected Module Duration:** 45 minutes
 

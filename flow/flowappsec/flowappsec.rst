@@ -6,7 +6,7 @@ Securing Applications
 
 In this module you will use Flow to secure communications within an example multi-tier application consisting of webserver and database CentOS VMs. For the purpose of streamlining the POC, the application has been provided in the form of a Calm Blueprint. The same overall principles for creating the policy and talking points would apply if using a customer provided application, you would simply need to account for differences in category assignment and connection ports/protocols.
 
-**Pre-requisites:** Completion of :ref:`calmenable` and :ref:`deploypocapp`
+**Prerequisites:** Completion of :ref:`calmenable` and :ref:`deploypocapp`
 
 **(Optional) Pre-requisite:** Completion of :ref:`deploygraylog`
 

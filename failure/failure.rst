@@ -1,12 +1,12 @@
 .. _failure:
 
 --------------------------------
-Starting with simulating failure
+Simulation Failures - Read First
 --------------------------------
 
 In this module you will be provided with multiple methods to test the redundancy and resiliency of the Nutanix platform.
 
-**Pre-requisites:** Completion of :ref:`vmmanage`
+**Prerequisites:** Completion of :ref:`vmmanage`
 
 **Expected Module Duration:** 15 minutes - 11+ hours (varies depends on type and number of tests)
 

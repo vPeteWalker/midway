@@ -6,7 +6,7 @@ AOS Upgrade
 
 In this module you will upgrade AOS within Prism, and demonstrate no interruption to user VMs during this process.
 
-**Pre-requisites:** Completion of :ref:`vmmanage`
+**Prerequisites:** Completion of :ref:`vmmanage`
 
 **Expected Module Duration:** 45-60 minutes
 

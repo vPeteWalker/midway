@@ -60,7 +60,9 @@
    :name: _files
    :hidden:
 
-   files/files
+   files/files1/files1
+   files/files2/files2
+   files/files3/files3
 
 .. toctree::
    :maxdepth: 2
@@ -80,6 +82,12 @@
    :hidden:
 
    failure/failure
+   failure/cvm/cvm
+   failure/hdd/hdd
+   failure/nic/nic
+   failure/node/node
+   failure/power/power
+   failure/psu/psu
 
 ==========================
 NUTANIX SE POC GUIDE (AHV)

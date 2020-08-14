@@ -10,7 +10,7 @@ Files uses a scale-out architecture that provides file services to clients throu
 
 In this module you will deploy Files and Files analytics, providing the foundation for creating, configuring, and testing SMB shares and NFS exports.
 
-**Pre-requisites:** Completion of :ref:`vmmanage`
+**Prerequisites:** Completion of :ref:`vmmanage`
 
 **Expected Module Duration:** 60 minutes
 
