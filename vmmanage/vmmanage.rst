@@ -10,8 +10,6 @@ In this module you will use Prism Central to perform basic AHV VM management tas
 
 **Covered Test IDs:** Core-007, Core-012, Core-013
 
-**FEEDBACK** ?
-
 Creating VMs
 ++++++++++++
 
@@ -46,7 +44,11 @@ Creating VMs
 
    *Using the Windows2016 disk image we previously uploaded to the cluster, we'll create a VM using a space-efficient, redirect-on-write clone, and connect it to our Primary VM network. Optionally, we could specify a subset of hosts for the VM to run on, this can be helpful when satisfying licensing requirements or pinning VMs that benefit from higher clock speeds to nodes with specific processors. Using this dialog you can also pass in Sysprep unattend scripts to Windows guests, or cloud-init scripts to Linux guests.*
 
-   **FEEDBACK** - Any thoughts on what/when to share about needing to install virtio drivers for storage/network when creating a VM from Windows installation media?
+   *In this environment we're using a pre-built OS image as you would for the majority of your VM deployments on the cluster. However, if we were creating a Windows VM from installation media, we would also need to mount and install the VirtIO storage driver in order for Windows to find the virtual disk drive. Modern Linux distributions will include a version of this driver, so additional steps aren't required during installation.*
+
+   .. note::
+
+      A future version of this guide will include an appendix exercise for creating the OS images from .iso install media.
 
 #. Select the checkbox beside the newly created VM and click **Actions > Power On**.
 
@@ -61,6 +63,12 @@ Creating VMs
 #. Log in and verify that **Remote Desktop** and **Remote Management** are enabled.
 
    .. figure:: images/3.png
+
+   .. note::
+
+      You will also likely need to disable **Allow connections only from computers running Remote Desktop with Network Level Authentication** to successfully connect to your VM via RDP.
+
+      .. figure:: images/3b.png
 
 #. Return to Prism Central and note the **IP Address** of your **WinServer** VM.
 
@@ -87,6 +95,8 @@ Cloning VMs
 
 *You can rapidly create and automatically enumerate multiple clones through PC, with the ability to make configuration changes from your base VM. Because cloning on Nutanix is a simple metadata operation, cloning is instantaneous.*
 
+*In a production environment using VMs on a domain, you would typically sysprep the VM we created in the previous exercise, potentially with a built-in unattend.xml script, and clone that version, ensuring each clone has a unique SID and domain identifiers.*
+
 #. With the **WinServer** VM selected, click **Actions > Clone**.
 
 #. Make the following changes and click **Save**:
@@ -101,7 +111,9 @@ Cloning VMs
 Nutanix Guest Tools
 +++++++++++++++++++
 
-**FEEDBACK** - Looks like bulk install isn't working as expected right now (https://jira.nutanix.com/browse/ENG-248471) and is fixed in 5.18.
+.. note::
+
+   Looks like bulk install isn't working as expected right now (https://jira.nutanix.com/browse/ENG-248471) and is fixed in 5.18.
 
 *Nutanix Guest Tools is a package that can be installed in Windows and Linux guests to provide advanced capabilities including enabling self-service file level restore using VM snapshots, application-consistent snapshots, cross-hypervisor VM mobility between AHV and ESXi, and in-guest runbook scripting for Leap.*
 
@@ -159,7 +171,7 @@ Updating VMs
 Live Migration
 ++++++++++++++
 
-**FEEDBACK** - This is pretty table stakes - anything interesting to say here? Once cross-cluster live migration is supported that's worth a call out.
+*Similar to other hypervisors, AHV allows live migration between nodes in the cluster. Live migration between different clusters is currently on the roadmap.*
 
 #. Open a console to one of your **WinServer** VMs and run ```ping -t <CLUSTER IP>``` to create a repeating activity within the guest.
 
@@ -181,12 +193,9 @@ Live Migration
 
 #. Note that the VM immediately moves to another host to comply with the affinity policy.
 
-   ..note:: This behavior should also be validated as part of any node failure testing during the POC.
+   .. note::
 
-Protecting VMs
-++++++++++++++
-
-**FEEDBACK** - Should we still be covering standard protection domains here or PC protection policies? Both seems like it would be confusing to customers.
+      This behavior should also be validated as part of any node failure testing during the POC.
 
 Filtering and Searching
 +++++++++++++++++++++++
@@ -303,3 +312,64 @@ Categories & RBAC
 #. Repeat as an **Operator** user and confirm you have access to manage the appropriate resources.
 
    *This simple, but powerful, policy engine can let you roll out self-service VM administration to your users, making sure the right people have access to the right resources and abilities. This can be further extended using Projects to help enforce quotas.*
+
+Protecting VMs
+++++++++++++++
+
+*The new Protection Policies in Prism Central allow for VM-based assignment of storage protection for your VMs, and can leverage the same categories we used in the previous exercise. We'll create a simple policy to ensure hourly backup of all Production VMs.*
+
+#. Sign-out of Prism Central and login as an **Admin** user.
+
+#. Select :fa:`bars` **> Policies > Protection Policies**. Click **Create Protection Policy**.
+
+#. Fill out the following fields:
+
+   - **Name** - ProdVM-Protection
+   - **Primary Cluster(s)** - *Our POC cluster*
+   - **Recovery Location** - *We'll leave blank as we do not have a second cluster configured, this would be used for selecting remote replication or DR target.*
+   - **Policy Type** - Asynchronous
+
+      *AHV can support an async RPO as low as 1-minute, or even perform synchronous replication with other AHV clusters provided adequate bandwidth and a round trip latency < 5ms.*
+
+   - **Retention Policy** - Roll-up
+   - **Location Retention** - 7 days
+   - Click **+ Add Categories**
+
+      - Select **Environment:Production**
+      - Click **Save**
+
+   *This will ensure any existing VMs with this category assigned will automatically have this policy applied, as well as any newly created VMs assigned to the category.*
+
+   .. figure:: images/25.png
+
+#. Click **Save**.
+
+   .. note::
+
+      After a few moments you should see **Tasks** appear to protect Production VM entities.
+
+#. Return to :fa:`bars` **> Virtual Infrastructure > VMs** and select your **WinServer** VM assigned to the **Environment:Production** category.
+
+#. From the left-hand menu, select **Recovery Points** and note that you now see an available, local snapshot.
+
+   .. figure:: images/26.png
+
+#. Select the Recovery Point and click **Actions > Restore**. *This will allow us to create an instant clone of the VM using the crash consistent snapshot*.
+
+   .. figure:: images/27.png
+
+#. If desired, update the clone name. Click **Restore**.
+
+#. Click **Back to VMs** and note the clone is already available to be powered on.
+
+#. Select the **Clone** VM and note that it does not inherit the categories of its parent VM. Assign the **Environment:Production** category to the **Clone** VM and verify that after a few moments it is added to the policy and its inital snapshot is created.
+
+   *We can also manually assign Protection Policies to VMs within Prism Central, without using categories.*
+
+#. Select both the **WinServer-1** and **WinServer-2** VMs and click **Actions > Protect**.
+
+#. Select the **ProdVM-Protection** policy and click **Protect**.
+
+   .. figure:: images/28.png
+
+   *No additional software to configure, just define your RPO, how long you want to keep your snapshots, and optionally what additional clusters should they replicate to - and you have primary storage protection for your VMs throughout their entire lifecycle.*

@@ -14,8 +14,6 @@ You will have considerable amounts of time to walk the customer through Prism Ce
 
 *Similar to Prism Element, the Prism Central dashboard puts key status and performance information at the administrator's fingertips. The key difference being that Prism Central is now aggregating data from all registered clusters, and you have the ability to customize (or add additional) dashboards to highlight the information most important to your teams.*
 
-**FEEDBACK** ?
-
 Network Settings
 ++++++++++++++++
 
@@ -116,6 +114,10 @@ While using the local Prism admin account keeps a POC simple, most organizations
 #. If using **AutoAD**, specify either the **SSP Admins** group or an individual **adminuser** account. Choose the **Cluster Admin** role and click **Save**.
 
    .. figure:: images/3.png
+
+   .. note::
+
+      If using a Security Group group, make sure to update **Type** from **User** to **Group**.
 
    .. note::
 

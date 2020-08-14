@@ -51,7 +51,7 @@ Staging A Blueprint
 
 #. Click **Credentials** to define a private key used to authenticate to the CentOS VM that will be provisioned by the Blueprint.
 
-   .. figure:: images/27b.png
+   .. figure:: images/3.png
 
 #. Expand the **CENTOS** credential and use your preferred SSH key, or paste in the following value as the **SSH Private Key**:
 
@@ -137,6 +137,6 @@ This can be done directly logged in using your Prism Administrator account by sk
 
 #. Open \http://<*WebServer-VM-IP*> in a new browser tab and validate the app is running.
 
-   .. figure:: images/41.png
+   .. figure:: images/9.png
 
 #. Log out of Prism Central and log back in as a Prism Administrator user.

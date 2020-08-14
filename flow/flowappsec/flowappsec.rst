@@ -145,7 +145,7 @@ Creating a Security Policy
 
 #. Fill out the following fields:
 
-   - **Add source by:** - Select **Subnet/IP**
+   - **Add Destination by:** - Select **Subnet/IP**
    - Specify *Your Domain Controller IP*\ /32
 
 #. Click **Add**.

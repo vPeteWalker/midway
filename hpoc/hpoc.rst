@@ -37,6 +37,8 @@ Hosted POC cluster reservations are managed using the Reservation System: https:
 
       The **FROM:** time indicates when the reservation will start, the Foundation process will take ~1 hour of additional time before the cluster is ready to be used.
 
+      **It is recommended to start the reservation several hours before you need the cluster to be available to allow time for troubleshooting/re-imaging if you experience Foundation issues.**
+
 #. Green bars indicate the cluster is available during that time frame, click any green area to begin creating a reservation.
 
    .. figure:: images/1.png
@@ -70,6 +72,11 @@ Hosted POC cluster reservations are managed using the Reservation System: https:
    .. figure:: images/3.png
 
 #. Click **Submit**.
+
+Troubleshooting HPOC Clusters
++++++++++++++++++++++++++++++
+
+If you experience issues with RX failing to properly Foundation a cluster, network connectivity issues, etc., you can engage the Corp SE team responsible for the HPOC in `#rx-and-hpoc <slack://channel?team=T0252CLM8&id=C0JSE04TA>`_ on Slack.
 
 Accessing HPOC Clusters
 +++++++++++++++++++++++
