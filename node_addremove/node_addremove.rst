@@ -12,7 +12,7 @@ Why does this matter to our customers?
 
 A customer may choose to add a node to account for a new workloads, or perhaps increase performance, capacity, or resiliency. Additionally, a customer may elect to remove a node if it is past its usable life, and may not be meeting the customer's performance needs, or is no longer supported. Nutanix removes the need to ever do forklift upgrade again, because you can continually add newer nodes and remove older nodes from the same cluster, without lengthy and tedious manual migrations.
 
-**Pre-requisites:** Completion of :ref:`vmmanage`
+**Prerequisites:** Completion of :ref:`vmmanage`
 
 **Expected Module Duration:** 45-60 minutes
 

@@ -4,7 +4,7 @@
 Lifecycle Manager (LCM)
 -----------------------
 
-**Pre-requisites:** Completion of :ref:`vmmanage`
+**Prerequisites:** Completion of :ref:`vmmanage`
 
 **Expected Module Duration:** Varies depending on number of updates performed
 

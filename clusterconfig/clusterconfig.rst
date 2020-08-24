@@ -12,8 +12,6 @@ In this module you will perform initial cluster configuration, including Pulse, 
 
 This initial configuration needs to be completed for both a Hosted or on-prem POC. These steps could be performed without the customer present, but there is opportunity throughout to call out Nutanix differentiators and to highlight the simplicity of the deployment process.
 
-**FEEDBACK** ?
-
 Initial Login
 +++++++++++++
 
@@ -34,7 +32,7 @@ Initial Login
    - **HPOC** - You have been provided this password in your **automation@nutanix.com** e-mail.
    - **On-prem** - Use the default *Nutanix/4u* password and update when prompted.
 
-#. Accept the EULA.
+#. Have the **customer** accept the EULA.
 
 #. Unless otherwise direct by the customer, leave Pulse enabled and click **Continue**.
 
@@ -58,7 +56,7 @@ Initial Login
 
 #. Select a **Failed** check to view information about the potential cause of the failure. You can manually run the NCC check again by clicking **Run Check**.
 
-   This is an opportunity to provide a quick background on Nutanix Cluster Check (NCC): *Nutanix Cluster Check, or NCC, is a constantly growing set up tests used to evaluate the health of the cluster. These checks can be updated out of band of AOS or you hypervisor, and requires no CVM or host reboots. As it is very low impact, we recommend always keeping NCC up to date and running it prior to significant events like AOS upgrades or cluster expansions.*
+   This is an opportunity to provide a quick background on Nutanix Cluster Check (NCC): *Nutanix Cluster Check, or NCC, is a constantly growing set of tests used to evaluate the health of the cluster. These checks can be updated out of band of AOS or your hypervisor, and requires no CVM or host reboots. As it is very low impact, we recommend always keeping NCC up to date and running it prior to significant events like AOS upgrades or cluster expansions.*
 
    Once the check has completed running you can check the status under **Tasks** by clicking the **Succeeded** link, the NCC output can also be downloaded here for more verbose output.
 
@@ -67,8 +65,6 @@ Initial Login
    If the check fails, see the associated Nutanix KB article listed under **References** or in the NCC output. Alternately, contact Nutanix support for additional assistance.
 
    .. figure:: images/4.png
-
-   **FEEDBACK** - *How do you typically dance around initial health check issues in the field?*
 
 Cluster Settings
 ++++++++++++++++
@@ -110,9 +106,7 @@ Cluster Settings
 Lifecycle Manager
 +++++++++++++++++
 
-**FEEDBACK** - could use LCM positioning blurb
-
-*Lifecycle Manager is the new home for 1-Click upgrades...*
+*Lifecycle Manager, or LCM, is the new home for enterprise-grade 1-Click upgrades for your Nutanix environment. We'll dig into LCM later in the POC to perform upgrades to AOS, our hypervisor, and other services - for now we'll start the inventory process to determine current software and firmware versions.*
 
 #. Select **LCM** from the dropdown menu.
 
@@ -127,7 +121,7 @@ Lifecycle Manager
 Storage Configuration
 +++++++++++++++++++++
 
-*Next we'll deploy storage for our virtual machines to use.*
+*Next we'll deploy storage for our virtual machines to use. One of the key benefits of Nutanix is the lack of tuning required to provision storage ready to run your VMs.*
 
 #. Select **Storage** from the dropdown menu.
 
@@ -137,7 +131,7 @@ Storage Configuration
 
 *The two main storage concepts in Nutanix are a Storage Pool and a Storage Container. The Storage Pool is simply the aggregation of all physical disks within the cluster. There is only one Storage Pool, as the Nutanix distributed storage fabric is intelligently spreading data across all physical disks to provide optimal performance and capacity utilization - no multiple LUNs or volumes to manage separately. Storage Containers are logical policies that apply to the Storage Pool (in vSphere each Storage Container would be presented as a Datastore to the hypervisor). Container policies allow you to do things like turn on and off different data efficiency settings like compression or erasure coding.*
 
-*While the cluster already has a default container, we'll create an additional container to show you how simple the process is. Typically you would only have multiple containers when there are different data efficiency requirements, for example, not wanting compression enabled on a datastore primarily storing pre-compressed data such as video files.*
+*While the cluster already has a default container, we'll create an additional container to show you how simple the process is. Typically you would only have multiple containers when there are different data efficiency requirements, for example, not wanting compression enabled on a datastore primarily storing pre-compressed data such as video files. Alternatively you may create different storage containers to map to different projects or business units for reporting or quota purposes.*
 
 #. Click **+ Storage Container**.
 
@@ -149,7 +143,7 @@ Storage Configuration
 
    .. figure:: images/10.png
 
-   **FEEDBACK** - *What would you typically share about the different types of storage efficiency options offered?*
+   *Compression is a great option for nearly all workloads, except for pre-compressed datasets. Erasure Coding is another option that can be used to minimize the storage footprint of your RF2 and RF3 replicas for write-cold data. Deduplication is appropriate for full byte-copy clones of VMs. In traditional storage arrays deduplication can also be helpful for eliminating zeros, but as Nutanix doesn't write zeros to begin with, we save that capacity without incurring any of the overhead of deduplication.*
 
 #. Click **Save**.
 
@@ -172,13 +166,13 @@ Network Configuration
 
    .. figure:: images/12.png
 
-.. note::
+   .. note::
 
-   By default, AHV clusters include all physical network interfaces in br0, in an Active/Backup configuration. This is the recommended configuration for POCs.
+      By default, AHV clusters include all physical network interfaces in br0, in an Active/Backup configuration. This is the recommended configuration for POCs.
 
-   Alternatively, you can change to software based Active/Active (MAC pinning) or LAG based Active/Active (requiring LACP configuration on switch ports) under **Network > + Uplink Configuration**.
+      Alternatively, you can change to software based Active/Active (MAC pinning) or LAG based Active/Active (requiring LACP configuration on switch ports) under **Network > + Uplink Configuration**.
 
-   Full instruction for updating uplink modes can be found `here <https://portal.nutanix.com/page/documents/details/?targetId=Web-Console-Guide-Prism-v5_17%3Awc-uplink-configuration-c.html>`_.
+      Full instruction for updating uplink modes can be found `here <https://portal.nutanix.com/page/documents/details/?targetId=Web-Console-Guide-Prism-v5_17%3Awc-uplink-configuration-c.html>`_.
 
 #. Select **VM** from the dropdown menu and click **Network Config**.
 
@@ -226,7 +220,7 @@ Network Configuration
 
    .. figure:: images/14.png
 
-#. Finally, to identify any bandwidth issues between CVMs, you can run a quick iPerf diagnostic from the CVM console. SSH into the **Cluster Virtual IP Address**:
+#. (Optional) Finally, to identify any bandwidth issues between CVMs, you can run a quick iPerf diagnostic from the CVM console. SSH into the **Cluster Virtual IP Address**:
 
    - **Username** - nutanix
    - **Password** - Your HPOC password or the default **nutanix/4u** password for on-prem POCs.
@@ -310,6 +304,16 @@ To streamline the POC deployment, we have provided a pre-packaged Windows Server
 #. Verify that the **AD DS** and **DNS** roles appear green.
 
    .. figure:: images/21.png
+
+   Before moving on, we'll want to update the IPAM settings of the virtual network to use the **AutoAD** VM as the primary DNS server, allowing VMs to join the domain for later exercises.
+
+#. Select **VM** from the dropdown menu and click **Network Config**.
+
+#. Beside the **Primary** network, click :fa:`pencil` to edit the configuration.
+
+#. Under **Domain Name Servers**, replace the existing value with the IP of your **AutoAD** VM.
+
+#. Click **Save** and then the **X** in the upper-right hand.
 
 Prism Central Deployment
 ++++++++++++++++++++++++

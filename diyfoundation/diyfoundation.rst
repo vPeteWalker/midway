@@ -1,63 +1,33 @@
 .. _diyfoundation_lab:
 
------------------------
-Practice Foundation Lab
------------------------
+-------------------------
+(Practice) Foundation Lab
+-------------------------
 
-Overview
-++++++++
+This module is provided for the sole purposes of allowing you to PRACTICE using Foundation using an HPOC cluster if you are unable to readily obtain a physical cluster with which to practice.
 
-.. note::
+**Expected Module Duration:** 120 minutes
 
-  Estimated time to complete: **90 Minutes**
+This lab requires a Nutanix Hosted POC (HPOC) reservation. "Nested" or "Single Node" clusters are not supported. Hypervisor and AOS version for the reservation do not matter.
 
-  This lab requires a Nutanix Hosted POC (HPOC) reservation. "Nested" clusters are not supported. Hypervisor and AOS version for the reservation do not matter.
+It is highly recommended to use a virtual desktop provided as part of your HPOC reservation to perform this lab. Using the virtual desktop will localize the transfer of large files (such as AOS and hypervisor binaries) to your Foundation VM.
 
-  It is highly recommended to use a virtual desktop provided as part of your HPOC reservation to perform this lab. Using the virtual desktop will localize the transfer of large files (such as AOS and hypervisor binaries) to your Foundation VM.
-
-  Unless otherwise directed by support, always use the latest version of Foundation.
+Unless otherwise directed by support, always use the latest version of Foundation.
 
 Foundation is used to automate the installation of the hypervisor and Controller VM on one or more nodes. In this exercise you will practice imaging a physical cluster with Foundation. In order to keep the lab self-contained, you will create a single node "cluster" on which you will deploy your Foundation VM. That Foundation instance will be used to image and create a cluster from the remaining 3 nodes in the Block.
 
 Refer to the Nutanix `Field Installation Guide <https://portal.nutanix.com/#/page/docs/details?targetId=Field-Installation-Guide-v4-0:Field-Installation-Guide-v4-0>`_ for additional instruction on configuring your local environment (Oracle VirtualBox, VMware Fusion, etc.) to run your Foundation VM.
 
-References and Downloads
-........................
-
-- `Field Installation Guide <https://portal.nutanix.com/#/page/docs/details?targetId=Field-Installation-Guide-v4-3:Field-Installation-Guide-v4-3>`_ - *Comprehensive Foundation documentation, including steps for local deployment of Foundation VM.*
-- `Foundation Release Notes <https://portal.nutanix.com/#/page/docs/details?targetId=Field-Installation-Guide-Rls-Notes-v4-3:Field-Installation-Guide-Rls-Notes-v4-3>`_ - *Fixes, known issues, enhancements, and upgrade information.*
-- `NX Hardware System Specifications <https://portal.nutanix.com/#/page/docs/list?type=hardware>`_ - *Helpful for determining LAN/IPMI/Shared ports for different hardware platforms.*
-- `Foundation binaries and related files <https://portal.nutanix.com/#/page/foundation>`_ - *Downloads for baremetal Foundation, CVM Foundation, and ISO whitelist.*
-- `KB2430 <https://portal.nutanix.com/#/page/kbs/details?targetId=kA032000000TT1HCAW>`_ - *Internal Only KB detailing how to download old versions of AOS/AHV that are no longer available on Nutanix Portal.*
-- `vSphere Administration Guide for Acropolis <https://portal.nutanix.com/#/page/docs/details?targetId=vSphere-Admin6-AOS-v56:vSphere-Admin6-AOS-v56>`_ - *Includes post-install steps for configuring HA/DRS on vSphere.*
-
-Cabling Your Hardware
-+++++++++++++++++++++
-
 .. note::
 
-  The following lab will be performed with a cluster in the Nutanix Hosted POC environment. The information on cabling below is for reference when performing a physical, baremetal Nutanix installation.
+   Additional, helpful resources related to Foundation:
 
-Foundation requires connectivity to **both** the standard network interface of a node and the Baseboard Management Controller (BMC) network interface. The BMC, called **IPMI** on Nutanix NX nodes, is a dedicated system present in every enterprise server platform used for out of band management. Other supported platforms use different names for IPMI, such as iDRAC on Dell, IMM on Lenovo, and iLO on HPE.
-
-Referring to the example diagram below, there are two options for cabling Nutanix nodes prior to imaging with Foundation:
-
-- Using two cables per node, one connected to either onboard LAN port and one connected to the dedicated IPMI port.
-- Using one cable per node, connected to the **Shared IPMI** port. With only the **Shared** port connected, it is capable of intelligently forwarding traffic to either the IPMI or LAN interface, allowing Foundation to communicate with both interfaces simultaneously.
-
-.. figure:: images/back-panel.png
-
-.. note::
-
-  During node power off/on the Shared port on certain platforms may switch between 100Mb and 1Gb speeds, which can cause issues if your switch cannot auto-negotiate to the proper speed.
-
-  Additionally, for nodes such as the NX-3175 which only have 10Gb SFP+ onboard NICs, the 1Gb transceiver used to connect to your flat switch requires electrical power. That power is only available when the node is powered on, making it critical to use two cables per node in this situation.
-
-  Overall, if there are sufficient cables and ports available, using two cables per node is preferred.
-
-Both the nodes and the host used to run the Foundation VM should be connected to the same flat switch. If imaging on a customer switch, ensure that any ports used are configured as **Access** or **Untagged**, or that a **Native** VLAN has been configured.
-
-Refer to the appropriate `manufacturer's hardware documentation <https://portal.nutanix.com/#/page/docs/list?type=hardware>`_ to determine the locations of the **IPMI** and **Shared** ports.
+   - `Field Installation Guide <https://portal.nutanix.com/#/page/docs/details?targetId=Field-Installation-Guide-v4-3:Field-Installation-Guide-v4-3>`_ - *Comprehensive Foundation documentation, including steps for local deployment of Foundation VM.*
+   - `Foundation Release Notes <https://portal.nutanix.com/#/page/docs/details?targetId=Field-Installation-Guide-Rls-Notes-v4-3:Field-Installation-Guide-Rls-Notes-v4-3>`_ - *Fixes, known issues, enhancements, and upgrade information.*
+   - `NX Hardware System Specifications <https://portal.nutanix.com/#/page/docs/list?type=hardware>`_ - *Helpful for determining LAN/IPMI/Shared ports for different hardware platforms.*
+   - `Foundation binaries and related files <https://portal.nutanix.com/#/page/foundation>`_ - *Downloads for baremetal Foundation, CVM Foundation, and ISO whitelist.*
+   - `KB2430 <https://portal.nutanix.com/#/page/kbs/details?targetId=kA032000000TT1HCAW>`_ - *Internal Only KB detailing how to download old versions of AOS/AHV that are no longer available on Nutanix Portal.*
+   - `vSphere Administration Guide for Acropolis <https://portal.nutanix.com/#/page/docs/details?targetId=vSphere-Admin6-AOS-v56:vSphere-Admin6-AOS-v56>`_ - *Includes post-install steps for configuring HA/DRS on vSphere.*
 
 Staging Your Environment
 ++++++++++++++++++++++++

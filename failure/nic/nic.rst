@@ -72,8 +72,7 @@ As we've previously seen, eth0 and eth1 are disabled, as they have no physical l
 We're looking for the port which states *active slave*. This is the active port for this bond.
 
 Initiate failover within the CLI
-++++++++++++++++++++++++++++++++
-
+--------------------------------
 .. note::
 
    This method is required for a hosted POC. For a physical POC, you have the option to proceed with these instructions, or proceed to the *Remove physical network cable* section below.
@@ -95,7 +94,7 @@ Initiate failover within the CLI
 #. You have now successfully forced a failover between interfaces. Additionally, demonstrate the result of either the **BASIC** or **RECOMMENDED** scenarios.
 
 Simulate physical NIC or switchport failure (Physical POC only)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+---------------------------------------------------------------
 
 There is no single standard between all hardware vendors to consistently identify how physical network ports are represented within Nutanix. For example, on one vendor the numbering may start from the left as you observe the physical NIC, some from right, etc. This may also vary in between form factors from the same hardware vendorm, or even based on which manufacturer's NIC is being utilized.
 

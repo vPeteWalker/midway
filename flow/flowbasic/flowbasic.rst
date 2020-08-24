@@ -6,15 +6,13 @@ Starting with Flow
 
 In this module you will enable Flow within Prism Central and create a simple isolation policy to provide microsegmentation between two VM categories.
 
-**Pre-requisites:** Completion of :ref:`vmmanage`
+**Prerequisites:** Completion of :ref:`vmmanage`
 
 **(Optional) Pre-requisite:** Completion of :ref:`deploygraylog`
 
 **Expected Module Duration:** 30 minutes
 
 **Covered Test IDs:** N/A
-
-**FEEDBACK** ?
 
 Enabling Flow
 +++++++++++++
@@ -35,7 +33,7 @@ Enabling Flow
 
       Enabling Flow with add an additional 1GiB of memory to your **PrismCentral** VM. This occurs automatically with Prism Central deployed on an AHV cluster, and does not require restarting Prism Central.
 
-   *Because Flow microsegmentation exists as a policy engine within Prism Central, it can be enabled instantly without the need to deploy additional service VMs, installing software, or using a separate console.*
+   *Because Flow microsegmentation exists as a policy engine within Prism Central, it can be enabled instantly without the need to deploy additional service VMs, installing software, or using a separate console - unlike competitive solutions like NSX which can be slow and costly to deploy and maintain.*
 
 Isolation Policy
 ++++++++++++++++
@@ -59,6 +57,10 @@ Isolation Policy
    .. note::
 
       Use the VM list to note the IP Addresses of the VMs.
+
+   .. note::
+
+      If your pings fail BEFORE creating and enabling your Flow policy, make sure that the Windows Firewall has been disabled in the VMs as this will block the ICMP traffic.
 
    *We'll use the ping as a simple indication of traffic being allowed between the VMs.*
 

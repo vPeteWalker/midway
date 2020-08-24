@@ -6,7 +6,7 @@ Calm IaaS (Windows)
 
 In this module you'll create a Single VM Blueprint in Calm, using Windows Server 2016, then deploy and manage the application. Additionally you'll publish the Blueprint to your Marketplace, so assigned users can deploy and manage their own instances on a self-service basis.
 
-**Pre-requisites:** Completion of :ref:`calmenable`
+**Prerequisites:** Completion of :ref:`calmenable`
 
 **Expected Module Duration:** 60 minutes
 
@@ -97,7 +97,7 @@ Creating a Single VM Blueprint
 
    - **vGPUs** - N/A
 
-   - **Categories** - Mark **Runtime** to allow users to configure categories at deployment time that could be used to apply a variety of policies.
+   - **Categories** - Mark **Runtime** to allow users to configure categories at deployment time that could be used to apply a variety of policies (such as your Production VM Protection Policy tied to **Environment:Production**, try it!).
 
    .. figure:: images/5.png
 
@@ -398,6 +398,6 @@ Launching your Blueprint from the Marketplace
 
 .. |marketplacemgr| image:: images/marketplacemanager.png
 .. |marketplace| image:: images/marketplace.png
-.. |Blueprints| image:: images/Blueprints.png
-.. |applications| image:: images/Blueprints.png
+.. |Blueprints| image:: images/blueprints.png
+.. |applications| image:: images/alueprints.png
 .. |projects| image:: images/projects.png

@@ -10,36 +10,6 @@ If doing an on-premises POC, you will need to perform a fresh Foundation on your
 
 **Covered Test IDs:** Core-001, Core-002
 
-Pre-Foundation Discovery
-++++++++++++++++++++++++
-
-To ensure a physical POC deployment is successful, please ensure that these typical requirements are considered before the day of install, including which components will be supplied by Nutanix or the customer:
-
-- **Rackspace**
-
-   - 1-2 rack unit (RU) per block, depending on the form factor of the block(s) being utilized.
-
-- **Power**
-
-   - 1-2 power connections per node, 2 required for full redundancy.  This can either be a C-13 to C-14 cable, or a C-13 to NEMA 5-15P and is dependent on the type of Power Distribution Unit (PDU) the customer is intending to use.
-   - Sufficient power capacity available.  Ex. NX-3060-G7 has a typical power usage of 1700 Watts.
-   - 200-240V power is required to run a 2U4N block from a single power supply
-
-- **Network**
-
-   - Network switch ports availability per node - (1+) 10 g/bit connections (SFP+ or BASE-T), 2 required for full redundancy.  (1) 100/1000 m/bit for lights out management (IPMI, ILO, iDRAC).
-   - Network cables available per node, ensuring the proper lengths to not only traverse the distance between the node(s) and the network switch(es), but to confirm you aren't exceeded the cable or transceiver specification you are using.  For customers with SFP+ network switches, you may either use TwinAx or fiber cables with SFP+ transceivers on each end. (1+) 10 g/bit connections (SFP+ or BASE-T), 2 required for full redundancy.  (1) 100/1000 m/bit for lights out management (IPMI, ILO, iDRAC).  Verify with the customer/partner who will be providing the network cables. Nutanix can supply generic TwinAx cables but these will not work will all switch brands (Cisco, HPE, etc.).
-   - Network switch configuration - Ensure all network switch ports are properly configured, including VLAN tagging, and that both the ports to be used and VLANs are already created and identified.  Typical installs utilize a single VLAN for CVM, Hypervisor, and user VMs.  However, this should be discussed and agreed upon with the customer prior to install.
-   - `Pre-Install Survey <https://docs.google.com/spreadsheets/d/15r8Q1kCIJY4ErwL1CaHHwv4Q7gmCbLOz5IaR51t9se0/edit#gid=8195649>`_ completed *and reviewed* prior to on-site arrival. This spreadsheet outlines required IPs and VLANs for a deployment.
-
-
-- **Software**
-
-   - A downloaded version of AOS from https://portal.nutanix.com - Do **NOT** use the very latest version of AOS/AHV as you will be unable to show 1-Click upgrades as part of your POC.
-   - `Nutanix KB2340 <https://portal.nutanix.com/#/page/kbs/details?targetId=kA032000000TT1HCAW>`_ provides instruction on how to download previous versions of Nutanix software that are no longer available through http://portal.nutanix.com
-Refer to https://portal.nutanix.com/#/page/compatibilitymatrix/software to ensure you are utilizing the correct version of AOS, hypervisor, and guest OS.
-Operating system templates (optional), ISOs for operating systems and applications.
-
 Setting Up Your Foundation Environment
 ++++++++++++++++++++++++++++++++++++++
 
@@ -51,7 +21,11 @@ Currently, there are two options for performing baremetal Foundation of a Nutani
 - Portable Foundation is a native application that runs on Windows 10+ or macOS 10.13.1+
 - Only supports Nutanix G4 and above, Dell, HPE, and Lenovo Cascade Lake and above
 
-Complete instructions for setting up Portable Foundation can be found `here <https://portal.nutanix.com/#/page/docs/details?targetId=Field-Installation-Guide-v4-5:v45-cluster-environment-foundation-t.html>`_
+Complete instructions for setting up Portable Foundation can be found `here <https://portal.nutanix.com/#/page/docs/details?targetId=Field-Installation-Guide-v4-5:v45-cluster-environment-foundation-t.html>`_.
+
+.. note::
+
+   9 out of 10 dentists agree that having a backup "known good" Foundation VM installed on your laptop as a fall back plan is a good idea.
 
 Foundation VM
 .............
@@ -59,7 +33,7 @@ Foundation VM
 - The Foundation VM needs to be deployed as a VM on VirtualBox, VMware Fusion, Workstation, etc.
 - Supports all NX, OEM, and software only HCL models
 
-Complete instructions for setting up the standalone Foundation VM can be found `here <https://portal.nutanix.com/#/page/docs/details?targetId=Field-Installation-Guide-v4-5:v45-portable-foundation-app-c.html>`_
+Complete instructions for setting up the standalone Foundation VM can be found `here <https://portal.nutanix.com/#/page/docs/details?targetId=Field-Installation-Guide-v4-5:v45-portable-foundation-app-c.html>`_.
 
 Cabling Your Hardware
 +++++++++++++++++++++
@@ -93,11 +67,36 @@ To save time entering IP/MAC Address information when on-site with the customer,
 Imaging Your Cluster
 ++++++++++++++++++++
 
-Complete instructions for using Foundation to perform a baremetal installation can be found `here <https://portal.nutanix.com/#/page/docs/details?targetId=Field-Installation-Guide-v4-5:v45-foundation-configure-nodes-with-foundation-t.html>`_.
+Complete instructions for using Foundation to perform a baremetal installation can be found `here <https://portal.nutanix.com/page/documents/details?targetId=Field-Installation-Guide-v4_5:Field-Installation-Guide-v4_5>`_.
 
 If you do not have access to a physical block, and wish to practice using Foundation, and can do so with a HPOC reservation and the :ref:`diyfoundation_lab` lab.
 
 Moving to Customer Network
 ++++++++++++++++++++++++++
 
-**FEEDBACK** - Any current best practices for doing this cutover? Are you using Foundation to set CVM/hypervisor VLAN and then just moving the cables over? Stopping/starting the cluster?
+Prior to moving over to the customer network, it is recommended to stop cluster services.
+
+Using an SSH client, connect to **Any CVM IP** in your block using the following credentials:
+
+- **Username** - nutanix
+- **Password** - nutanix/4u
+
+Execute the following command to stop cluster services:
+
+.. code-block:: bash
+
+  cluster stop        # Enter 'Y' when prompted to proceed
+
+In many environments, the CVM/hypervisor VLAN may not be the Native VLAN assigned to the physical switchports to which each Nutanix node will be connected. In this case, it is important to assign the proper VLAN to the CVM and hypervisor for each host before the nodes will be able to communicate on the customer network.
+
+Using a crashcart, or SSH while the nodes are still connected to a flat switch, assign the CVM VLAN followed by the hypervisor VLAN for each node using the commands found in the `AHV Administration Guide <https://portal.nutanix.com/page/documents/details?targetId=AHV-Admin-Guide-v5_17:ahv-acr-nw-segmentation-c.html>`_.
+
+Once the VLAN has been configured, uncable your flat switch and connect the block to the customer switch.
+
+Using a crashcart or SSH, verify the nodes/CVMs are able to ping one another. Connect to any CVM and execute the following command:
+
+.. code-block:: bash
+
+  cluster start
+
+Once all services show as running, you should be able to access Prism from the customer network.
