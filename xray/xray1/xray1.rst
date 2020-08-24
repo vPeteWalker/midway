@@ -3,6 +3,10 @@
 Executing an X-Ray Test
 +++++++++++++++++++++++
 
+.. note::
+
+   If you are running an X-Ray test with the intention of demonstrating how Nutanix (and multiple platforms, in a competitive situation) react to a :ref:`failure` scenario while a simulated a real-world workload is in progress, before you proceed you should consider how long that particular simulated failure operation should take, and adjust the runtime of the X-Ray test accordingly. You should also consider the customer or prospect's existing workloads when choosing an X-Ray test to perform, so that it most closely matches their environment (i.e. make the test more "real" to them). It is recommend to overestimate the test duration, as you can always stop the X-Ray test at any point once your failure testing has concluded. For example, you can safely select *Custom* for the *OLTP Simulator* test, and change the runtime to 7200 seconds (2 hours), and have confidence that 2 hours should suffice for any one particular failure scenario outlined in this workshop. Another option may be to choose to run it for 43,200 seconds (12 hours), as perhaps you wish to run through all of the simulated failure scenarios, and then stop test once your testing has concluded.
+
 The X-Ray test scenarios offer predefined test cases that consist of multiple events and predefined parameters. X-Ray executes scenarios against test targets to produce results for analysis. X-Ray scenarios simulate real-world workloads on test targets. Effective virtualized data center solutions delegate resources so that workloads do not monopolize resources from other workloads. Running different workloads in this manner helps evaluate how multiple workloads interact with one another.
 
 X-Ray uses the open-source Flexible I/O (FIO) benchmark tool to generate an I/O workload. FIO files define the characteristics of the FIO workload. Each FIO file contains defined parameters and job descriptions involved in the file.
