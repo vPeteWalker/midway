@@ -19,7 +19,7 @@ Enabling Flow
 
 *Flow offers policy-based network security and is tightly integrated into both AHV and Prism Central. Using the same categories construct we looked at for VM management, you can easily implement a distributed firewall providing you app-centric policy management for securing VM traffic.*
 
-#. Select :fa:`bars` **> Policies > Security Policies**.
+#. Select :fa:`bars` **> Policies > Security**.
 
 #. Click **Enable**.
 
@@ -50,21 +50,23 @@ Isolation Policy
 
    *Note we do not see the existing categories assigned to these VMs as the bulk operation will only list categories that the VMs have in common.*
 
-#. From your original, **Environment:Production** **WinServer** VM, open the VM console and start recurring pings (```ping -t <IP ADDRESS>```) to both an **Environment:POC** **WinServer** VM and an **Environment:POC** + **AppType:Microsoft_SQL** **WinServer** VM.
+#. From your original, **Environment:Production** **WinServer** VM, open the VM console and start recurring pings (`ping -t <IP ADDRESS>`) to both an **Environment:POC** **WinServer** VM and an **Environment:POC** + **AppType:Microsoft_SQL** **WinServer** VM.
 
    .. figure:: images/1.png
 
    .. note::
 
-      Use the VM list to note the IP Addresses of the VMs.
+      - Use the VM list to note the IP Addresses of the VMs.
+
+|
 
    .. note::
 
-      If your pings fail BEFORE creating and enabling your Flow policy, make sure that the Windows Firewall has been disabled in the VMs as this will block the ICMP traffic.
+      - If your pings fail BEFORE creating and enabling your Flow policy, confirm the Windows Firewall has been disabled within each VM, as it will block the ICMP traffic by default if left enabled.
 
    *We'll use the ping as a simple indication of traffic being allowed between the VMs.*
 
-#. Select :fa:`bars` **> Policies > Security Policies**.
+#. Select :fa:`bars` **> Policies > Security**.
 
    *Similar to previous exercises, you see you again have the ability to search and filter through all of the security policies within Prism Central.*
 
