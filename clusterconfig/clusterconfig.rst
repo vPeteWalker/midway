@@ -318,7 +318,9 @@ To streamline the POC deployment, we have provided a pre-packaged Windows Server
 Prism Central Deployment
 ++++++++++++++++++++++++
 
-**FEEDBACK** - Initial positioning blurb for Prism Central during deployment
+*While you can operate a single Nutanix cluster without Prism Central, PC provides the ability to easily manage a large number of clusters, across datacenters, and provides advanced functionality such as Prism Ops for infrastructure analytics and automation, Calm for workload deployment and management automation, Leap for DR, and more.*
+
+*Unlike traditional solutions requiring dedicated databases, licensing servers, and other components - Prism Central deploys as a virtual appliance, either as a single VM or a scale out cluster to provide redundancy and scale.*
 
 #. Select **Home** from the dropdown menu. Under **Prism Central**, click **Register or create new**.
 
@@ -346,7 +348,11 @@ Prism Central Deployment
 
 #. Click **Deploy**.
 
-   This process takes ~25 minutes, during which time you can return to `(Optional) AutoAD Image Deployment`_, if applicable, to complete the VM deployment. Additionally you can... **FEEDBACK** - Review hardware page? Talk about the weather?
+   This process takes ~25 minutes, during which time you can return to `(Optional) AutoAD Image Deployment`_, if applicable, to complete the VM deployment.
+
+   .. note::
+
+      If you experience issues deploying Prism Central using the wizard, refer to the `PC Troubleshooting Guide <https://portal.nutanix.com/page/documents/kbs/details?targetId=kA032000000TT1MCAW>`_.
 
 #. Once deployment has completed successfully (as seen in **Tasks**), browse to the **Prism Central IP** in a separate tab. Log in using the default credentials:
 
