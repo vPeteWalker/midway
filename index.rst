@@ -6,6 +6,7 @@
    :name: _info
    :hidden:
 
+   whatsnew/whatsnew
    prereqs/prereqs
    hpoc/hpoc
    foundation/foundation
@@ -23,7 +24,7 @@
 
 .. toctree::
    :maxdepth: 2
-   :caption: AOS/PC
+   :caption: Infrastructure Lifecycle
    :name: _info
    :hidden:
 
@@ -53,7 +54,6 @@
    calm/singlevmwin/singlevmwin
    calm/deploypocapp/deploypocapp
 
-
 .. toctree::
    :maxdepth: 2
    :caption: Files
@@ -77,8 +77,8 @@
 
 .. toctree::
    :maxdepth: 2
-   :caption: Files
-   :name: _files
+   :caption: Failure Scenarios
+   :name: _failure
    :hidden:
 
    failure/failure
@@ -92,6 +92,10 @@
 ==========================
 NUTANIX SE POC GUIDE (AHV)
 ==========================
+
+.. raw:: html
+
+  <strong><font color="red">Before proceeding with any planning or exercises, review the What's New section.</font></strong>
 
 What Is This?
 +++++++++++++
@@ -119,11 +123,15 @@ POCs should generally be reserved for the following situations:
 How Do I Use This Guide?
 ++++++++++++++++++++++++
 
-No two POCs are the same, and as such, much of this guide is meant to be used modularly:
+No two POCs are the same, and as such, much of this guide is meant to be used modularly.
+
+.. raw:: html
+
+  <strong><font color="red">Do NOT simply complete the exercises in order as displayed in the left-hand menu.</font></strong>
 
 - To begin, review the **Planning & Deployment** section prior to your POC.
-- The **Initial Configuration** section covers exercises that are common to all AHV POCs, and should be completed in order.
-- Following that, additional modules can be completed in almost any order. If applicable, specific pre-requisites will be noted at the beginning of each module. *This can be an important consideration based on your test plan. Depending on your test plan, it may be of far greater value/impact to show cluster lifecycle operations and failures on a cluster running multiple workloads, versus a freshly installed/empty cluster.*
+- The **Initial Configuration** section covers exercises that are common to all AHV POCs, and should be completed in order. The notable exception is you could optionally complete **Lifecycle Infrastructure** and/or **X-Ray** exercises, such as AOS upgrades, *before* completing any of the **Basic VM Management** exercises.
+- Following that, additional modules can be completed in almost any order. If applicable, specific prerequisites will be noted at the beginning of each module. *This can be an important consideration based on your test plan. Depending on your test plan, it may be of far greater value/impact to show cluster lifecycle operations and failures on a cluster running multiple workloads, versus a freshly installed/empty cluster.*
 - Each module provides an approximate **Duration** to complete. Take these into account when planning time to spend in front of the customer working through test cases.
 
 How Do I Get Support?
