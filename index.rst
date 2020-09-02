@@ -125,9 +125,11 @@ How Do I Use This Guide?
 
 No two POCs are the same, and as such, much of this guide is meant to be used modularly.
 
-.. raw:: html
+raw:: html
 
-  <strong><font color="red">Do NOT simply complete the exercises in order as displayed in the left-hand menu.</font></strong>
+.. <strong><font color="red">Do NOT simply complete the exercises in order as displayed in the left-hand menu.</font></strong>
+
+.. figure:: images/boromir.png
 
 - To begin, review the **Planning & Deployment** section prior to your POC.
 - The **Initial Configuration** section covers exercises that are common to all AHV POCs, and should be completed in order. The notable exception is you could optionally complete **Lifecycle Infrastructure** and/or **X-Ray** exercises, such as AOS upgrades, *before* completing any of the **Basic VM Management** exercises.
