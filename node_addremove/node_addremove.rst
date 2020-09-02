@@ -18,8 +18,6 @@ A customer may choose to add a node to account for a new workloads, or perhaps i
 
 **Covered Test IDs:** `Core-009, Core-010 <https://confluence.eng.nutanix.com:8443/display/SEW/Official+Nutanix+POC+Guide+-+INTERNAL>`_
 
-**FEEDBACK** :ref:`feedback`
-
 .. note::
 
    Before performing the procedure below, make sure you are running the latest version of the Nutanix Cluster Check (NCC) health checks and upgrade NCC if necessary.  Run all NCC checks, and check the Health Dashboard. If any health checks are failing, resolve them to ensure that the cluster is healthy before continuing.

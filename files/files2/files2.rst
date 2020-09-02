@@ -10,8 +10,6 @@ SMB File Share
 
 **Covered Test IDs:** N/A
 
-**FEEDBACK** :ref:`feedback`
-
 Creating an SMB File Share
 ++++++++++++++++++++++++++
 

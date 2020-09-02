@@ -58,17 +58,13 @@ Isolation Policy
 
       - Use the VM list to note the IP Addresses of the VMs.
 
-|
-
-   .. note::
-
       - If your pings fail BEFORE creating and enabling your Flow policy, confirm the Windows Firewall has been disabled within each VM, as it will block the ICMP traffic by default if left enabled.
 
    *We'll use the ping as a simple indication of traffic being allowed between the VMs.*
 
 #. Select :fa:`bars` **> Policies > Security**.
 
-   *Similar to previous exercises, you see you again have the ability to search and filter through all of the security policies within Prism Central.*
+   *Similar to previous exercises, you again have the ability to search and filter through all of the security policies within Prism Central.*
 
 #. Click **Create Security Policy**.
 
@@ -127,12 +123,12 @@ Quarantining VMs
 
    *Here you'll see you have two different options for quarantining a VM, a complete lockdown, or allowing restricted access to the VM from specific forensic tools which can be defined in the built-in quarantine policy.*
 
-#. Select **Strict** and click **Quarantine**.
+#. Select **Strict**, and then click **Quarantine**.
 
    *Now we see all sources unable to reach the quarantined VM, including devices outside of the Nutanix cluster.*
 
-#. (Optional) Return to **Security Policies** and open/update the quarantine policy to show that approved forensic tools could be allowed access to these VMs based on either IP address/range, or again by using categories (e.g. adding a **SecurityForsensics** value to the **AppType** category or defining a new category entirely).
+#. (Optional) Return to **Security** and open/update the quarantine policy to show that approved forensic tools could be allowed access to these VMs based on either IP address/range, or by using categories (e.g. adding a **SecurityForsensics** value to the **AppType** category or defining a new category entirely).
 
 #. (Optional) Launch the VM console for the quarantined VM and validate it can no longer reach any outside networks, or ping other WinServer clone VMs.
 
-#. Finally, stop the recurring ping attempts.
+#. Finally, stop all running ping commands.

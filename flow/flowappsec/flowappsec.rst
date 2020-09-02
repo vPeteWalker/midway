@@ -58,7 +58,7 @@ Creating a Security Policy
 
 *...*
 
-#. In **Prism Central**, select :fa:`bars` **> Policies > Security Policies**.
+#. In **Prism Central**, select :fa:`bars` **> Policies > Security**.
 
 #. Click **Create Security Policy > Secure Applications (App Policy) > Create**.
 
@@ -96,7 +96,7 @@ Creating a Security Policy
 
 #. Under **Inbound**, click **+ Add Source**.
 
-#. Fill out the following fields to allow all inbound IP addresses:
+#. Fill out the following fields to allow all inbound IP addresses, and then click **Add**:
 
    - **Add source by:** - Select **Subnet/IP**
    - Specify **0.0.0.0/0**
@@ -107,12 +107,11 @@ Creating a Security Policy
 
    .. figure:: images/5.png
 
-#. Fill out the following fields:
+#. Click the radio button for **Select a service** under the *Service Details* section, and type **http** within the *Service Name* box and click on the **http** entry.
 
-   - **Protocol** - TCP
-   - **Ports** - 80
+   .... figure:: images/5a.png
 
-   *Multiple protocols and ports can be added to a single rule.*
+   *Multiple services (defined as a group of protocols and ports) can be added to a single rule. If required, custom services based on TCP, UDP, or ICMP can be added utlizing by clicking New Service.*
 
 #. Click **Save**.
 
@@ -133,7 +132,7 @@ Creating a Security Policy
 
    .. figure:: images/6.png
 
-#. Select the **+** icon that appears to the left of **AppTier:Web**, specify **TCP** port **22** and click **Save**.
+#. Select the :fa:`plus-circle` icon that appears to the left of **AppTier:Web**, specify **TCP** port **22** and click **Save**.
 
 #. Repeat the previous step for **AppTier:DB** to allow Calm to communicate with the database VM.
 

@@ -12,8 +12,6 @@ In this module you will be provided with multiple methods to test the redundancy
 
 **Covered Test IDs:** `Core-015, Core-016, Core-017, Core-018 <https://confluence.eng.nutanix.com:8443/display/SEW/Official+Nutanix+POC+Guide+-+INTERNAL>`_
 
-**FEEDBACK** :ref:`feedback`
-
 Before you begin
 ++++++++++++++++
 

@@ -16,8 +16,6 @@ In this module you will deploy Files and Files analytics, providing the foundati
 
 **Covered Test IDs:** N/A
 
-**FEEDBACK** :ref:`feedback`
-
 .. note::
 
    Review `NUTANIX FILES GUIDE <https://portal.nutanix.com/page/documents/details/?targetId=Files-v35:Files-v35>`_ and `FILE ANALYTICS GUIDE <https://portal.nutanix.com/page/documents/details/?targetId=File-Analytics-v2_1%3AFile-Analytics-v2_1>`_ for all details including, but not limited to, prerequities, requirements, and recommendations before proceeding.
