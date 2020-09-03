@@ -4,7 +4,7 @@
 Prerequisites
 --------------
 
-In order for an easy POC experience using this guide, it is important to ensure the environment your testing is has met all of the prerequisites. While the guide is applicable to both on-premises and Hosted POC (HPOC) environments, the prerequisites differ slightly.
+In order for an easy POC experience using this guide, it is important to ensure the environment you are testing has met all of the prerequisites. While the guide is applicable to both on-premises and Hosted POC (HPOC) environments, the prerequisites differ slightly.
 
 Choosing Between HPOC and Physical
 +++++++++++++++++++++++++++++++++++
@@ -53,7 +53,7 @@ You'll need to verify the following with the customer:
 
 - **Power**
 
-   - 1-2 power connections per node, 2 required for full redundancy.  This can either be a C-13 to C-14 cable, or a C-13 to NEMA 5-15P and is dependent on the type of Power Distribution Unit (PDU) the customer is intending to use.
+   - 1-2 power connections per block, 2 required for full redundancy.  This can either be a C-13 to C-14 cable, or a C-13 to NEMA 5-15P and is dependent on the type of Power Distribution Unit (PDU) the customer is intending to use.
    - Sufficient power capacity available.  Ex. NX-3060-G7 has a typical power usage of 1700 Watts.
    - 200-240V power is required to run a 2U4N block from a single power supply
 
@@ -64,14 +64,14 @@ You'll need to verify the following with the customer:
    - This network should be routable to/from the customer network and to the Internet.
 
 - **(Optional) 1x XRay VLAN**
-   - If using X-Ray for load generation or additional :ref:`xray` testing, you will require an additional network.
+   - If using X-Ray for load generation or additional testing :ref:`xray`, you will require an additional network.
    - If DHCP is enabled, you'll want a /20 or larger subnet to ensure you have an adequate number of IPs for testing.
    - Ideally, request a network with no DHCP, allowing X-Ray to leverage `Link-local <https://en.wikipedia.org/wiki/Link-local_address>`_ or "Zero Configuration" networking, where the VMs communicate via self-assigned IPv4 addresses.
 
 - **Network**
 
-   - Network switch ports availability per node - (1+) 10 g/bit connections (SFP+ or BASE-T), 2 required for full redundancy.  (1) 100/1000 m/bit for lights out management (IPMI, ILO, iDRAC).
-   - Network cables available per node, ensuring the proper lengths to not only traverse the distance between the node(s) and the network switch(es), but to confirm you aren't exceeded the cable or transceiver specification you are using.  For customers with SFP+ network switches, you may either use TwinAx or fiber cables with SFP+ transceivers on each end. (1+) 10 g/bit connections (SFP+ or BASE-T), 2 required for full redundancy.  (1) 100/1000 m/bit for lights out management (IPMI, ILO, iDRAC).  Verify with the customer/partner who will be providing the network cables. Nutanix can supply generic TwinAx cables but these will not work will all switch brands (Cisco, HPE, etc.).
+   - Network switch ports availability per node - (1+) 10 Gb connections (SFP+ or BASE-T), 2 required for full redundancy.  (1) 100/1000 Mb for lights out management (IPMI, ILO, iDRAC).
+   - Network cables available per node, ensuring the proper lengths to not only traverse the distance between the node(s) and the network switch(es), but to confirm you aren't exceeding the cable or transceiver specification you are using.  For customers with SFP+ network switches, you may either use TwinAx or fiber cables with SFP+ transceivers on each end. (1+) 10 Gb connections (SFP+ or BASE-T), 2 required for full redundancy.  (1) 100/1000 Mb for lights out management (IPMI, ILO, iDRAC).  Verify with the customer/partner who will be providing the network cables. Nutanix can supply generic TwinAx cables but these will not work will all switch brands (Cisco, HPE, etc.).
    - Network switch configuration - Ensure all network switch ports are properly configured, including VLAN tagging, and that both the ports to be used and VLANs are already created and identified.  Typical installs utilize a single VLAN for CVM, Hypervisor, and user VMs.  However, this should be discussed and agreed upon with the customer prior to install.
    - `Pre-Install Survey <https://docs.google.com/spreadsheets/d/15r8Q1kCIJY4ErwL1CaHHwv4Q7gmCbLOz5IaR51t9se0/edit#gid=8195649>`_ completed *and reviewed* prior to on-site arrival. This spreadsheet outlines required IPs and VLANs for a deployment.
 
