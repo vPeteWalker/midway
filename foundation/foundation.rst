@@ -8,7 +8,7 @@ If doing an on-premises POC, you will need to perform a fresh Foundation on your
 
 **Expected Module Duration:** 150 minutes (Including racking, cabling, Foundation, and transition to customer network)
 
-**Covered Test IDs:** Core-001, Core-002
+**Covered Test IDs:** `Core-001, Core-002 <https://confluence.eng.nutanix.com:8443/display/SEW/Official+Nutanix+POC+Guide+-+INTERNAL>`_
 
 Setting Up Your Foundation Environment
 ++++++++++++++++++++++++++++++++++++++
