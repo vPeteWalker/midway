@@ -43,7 +43,7 @@ Adding Categories
 
 #. Specify **Web** as the value name. This category will be applied to the application's web tier.
 
-#. Click :fa:`plus-circle` and specify **DB**. This category will be applied to the application's MySQL database tier.
+#. Click the :fa:`plus-circle` icon and specify **DB**. This category will be applied to the application's MySQL database tier.
 
    .. figure:: images/1.png
 
@@ -55,8 +55,6 @@ Creating a Security Policy
 *Nutanix Flow includes a policy-driven security framework that uses a workload-centric approach instead of a network-centric approach. Therefore, it can scrutinize traffic to and from VMs no matter how their network configurations change and where they reside in the data center. The workload-centric, network-agnostic approach also enables the virtualization team to implement these security policies without having to rely on network security teams.*
 
 *Security policies are applied to categories and not to the VMs themselves. Therefore, it does not matter how many VMs are started up in a given category. Traffic associated with the VMs in a category is secured without administrative intervention, at any scale.*
-
-*...*
 
 #. In **Prism Central**, select :fa:`bars` **> Policies > Security**.
 
@@ -103,13 +101,13 @@ Creating a Security Policy
 
    *Sources can also be specified by Categories, allowing for greater flexibility as this data can follow a VM regardless of changes to its network location. As an example, you could add a category for Administrator desktops that would also allow connections to the web and database via SSH (TCP Port 22).*
 
-#. To create an inbound rule, select the **+** icon that appears to the left of **AppTier:Web**.
+#. To create an inbound rule, select the :fa:`plus-circle` icon that appears to the left of **AppTier:Web**.
 
    .. figure:: images/5.png
 
-#. Click the radio button for **Select a service** under the *Service Details* section, and type **http** within the *Service Name* box and click on the **http** entry.
+#. Click the radio button for **Select a service** under the *Service Details* section, type **http** within the *Service Name* box, and click on the **http** entry.
 
-   .... figure:: images/5a.png
+   .. figure:: images/5a.png
 
    *Multiple services (defined as a group of protocols and ports) can be added to a single rule. If required, custom services based on TCP, UDP, or ICMP can be added utlizing by clicking New Service.*
 
@@ -132,11 +130,13 @@ Creating a Security Policy
 
    .. figure:: images/6.png
 
-#. Select the :fa:`plus-circle` icon that appears to the left of **AppTier:Web**, specify **TCP** port **22** and click **Save**.
+#. Confirm you have the **0.0.0.0/0** inbound entry selected (blue rectangle surrounding it), then select the :fa:`plus-circle` icon that appears to the left of **AppTier:Web**.
+
+#. Click the radio button for **Select a service** under the *Service Details* section, type **ssh** within the *Service Name* box, click on the **ssh** entry, and then click **Save**.
 
 #. Repeat the previous step for **AppTier:DB** to allow Calm to communicate with the database VM.
 
-   .. figure:: images/7.png
+   .. figure:: images/7a.png
 
    *By default, the security policy allows the application to send all outbound traffic to any destination. For this example we'll assume the only outbound communication required for your application is to communicate with your DNS server.*
 
@@ -149,9 +149,9 @@ Creating a Security Policy
 
 #. Click **Add**.
 
-#. Select the **+** icon that appears to the right of **AppTier:Web**, specify **UDP** port **53** and click **Save** to allow DNS traffic. Repeat this for **AppTier:DB**.
+#. Select the :fa:`plus-circle` icon that appears to the right of **AppTier:Web**, type **domain** within the *Service Name* box, click on the **domain** entry, and then click **Save** to allow DNS traffic. Repeat this for **AppTier:DB**.
 
-   .. figure:: images/8.png
+   .. figure:: images/8a.png
 
    *Each tier of the application communicates with other tiers and the policy must allow this traffic. Some tiers such as web do not require communication within the same tier.*
 
@@ -163,20 +163,13 @@ Creating a Security Policy
 
    *If this application scaled out to multiple webserver VMs, there wouldn't be a reason for them to communicate with one another, so this reduces attack surface.*
 
-#. While **AppTier:Web** is still selected, click the :fa:`plus-circle` icon to the right of **AppTier:DB** to create a tier-to-tier rule.
-
-   .. figure:: images/10.png
-
-#. Fill out the following fields to allow communication on TCP port 3306 between the web and database tiers:
-
-   - **Protocol** - TCP
-   - **Ports** - 3306
+#. While **AppTier:Web** is still selected, click the :fa:`plus-circle` icon to the right of **AppTier:DB**, type **mysql** within the *Service Name* box, click on the **mysql** entry, and then click **Save** to create a tier-to-tier rule.
 
    *This is the default port for communication with the MySQL service on the database VM.*
 
 #. Click **Save**.
 
-   .. figure:: images/11.png
+   .. figure:: images/11a.png
 
 #. Click **Next** to review the security policy.
 
@@ -209,7 +202,7 @@ Testing the Application
 
 #. From **Prism Central > Virtual Infrastructure > VMs**, note the IP addresses of your **MYSQL-\*** and **webserver-\*** VMs.
 
-#. Open a browser and access \http://*WebServer-VM-IP*/.
+#. Open a browser and access `http://WebServer-VM-IP/`.
 
 #. Verify that the application loads and you can browse the list of stores and products.
 
@@ -221,14 +214,14 @@ Testing the Application
 
 #. Within your **WinServer** VM, open **Command Prompt** and run ``ping -t MYSQL-VM-IP`` to verify connectivity between the client and database. Leave the ping running.
 
-#. Open a second **Command Prompt** and run ``ping -t node-VM-IP`` to verify connectivity between the client and web server. Leave the ping running.
+#. Open a second **Command Prompt** and run `ping -t NODE-VM-IP` to verify connectivity between the client and web server. Leave the ping running.
 
    .. figure:: images/13.png
 
 Using Flow Visualization
 ........................
 
-#. Return to **Prism Central** and select :fa:`bars` **> Virtual Infrastructure > Policies > Security Policies > POC-App**.
+#. Return to **Prism Central** and select :fa:`bars` **> Virtual Infrastructure > Policies > Security > click on POC-App**.
 
 #. Verify that your **WinServer** VM appears as an inbound source.
 
@@ -236,7 +229,7 @@ Using Flow Visualization
 
    .. figure:: images/14.png
 
-   Are there any other detected outbound traffic flows? Hover over these connections and determine what ports are in use.
+   *Are there any other detected outbound traffic flows? Hover over these connections, and determine which ports are in use.*
 
 #. Click **Update** to edit the policy.
 
@@ -267,7 +260,7 @@ In order to enforce the policy you have defined, the policy must be applied.
 
 #. Verify that the Windows Client VM can still access the POC-App using the web browser. Add a new store or product to demonstrate the web tier is still able to communicate with the MySQL database.
 
-#. (Optional) In **Calm > Applications > POC-App-1 > Services**, select **WebServer** and click **Open Terminal** to access an HTML5 SSH session to the WebServer VM. Attempt to SSH to your database VM IP, the request should time out. If you return to the **Security Policy** you should see this traffic discovered within the app, and blocked.
+#. (Optional) In **Calm > Applications > POC-App-1 > Services**, select **WebServer** and click **Open Terminal** to access an HTML5 SSH session to the WebServer VM. Attempt to SSH to your database VM IP, the request should time out. If you return to **Security**, you should see this traffic discovered within the app, and blocked.
 
    .. figure:: images/17.png
 

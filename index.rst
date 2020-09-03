@@ -125,7 +125,6 @@ How Do I Use This Guide?
 
 No two POCs are the same, and as such, much of this guide is meant to be used modularly.
 
-
 .. <strong><font color="red">Do NOT simply complete the exercises in order as displayed in the left-hand menu.</font></strong>
 
    .. figure:: images/boromir.png
