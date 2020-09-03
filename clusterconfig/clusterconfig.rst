@@ -8,7 +8,7 @@ In this module you will perform initial cluster configuration, including Pulse, 
 
 **Expected Module Duration:** 60 minutes
 
-**Covered Test IDs:** Core-003, Core-004, Core-005, Core-006, Core-008
+**Covered Test IDs:** `Core-003, Core-004, Core-005, Core-006, Core-008 <https://confluence.eng.nutanix.com:8443/display/SEW/Official+Nutanix+POC+Guide+-+INTERNAL>`_
 
 This initial configuration needs to be completed for both a Hosted or on-prem POC. These steps could be performed without the customer present, but there is opportunity throughout to call out Nutanix differentiators and to highlight the simplicity of the deployment process.
 
@@ -34,9 +34,9 @@ Initial Login
 
 #. Have the **customer** accept the EULA.
 
-#. Unless otherwise direct by the customer, leave Pulse enabled and click **Continue**.
+#. Unless otherwise directed by the customer, leave Pulse enabled and click **Continue**.
 
-   *This is an opportunity to quickly highlight the benefits of Pulse to a customer, including faster time to resolution in the event of technical issues. For details on what information Pulse collects and how customer data is kept secure, see* `here <http://go.nutanix.com/rs/nutanix/images/pulse-datasheet.pdf>`_.
+   *This is an opportunity to quickly highlight the benefits of Pulse to a customer, including faster time to resolution in the event of technical issues. For details on what information Pulse collects and how customer data is kept secure, see* `here <http://go.nutanix.com/rs/nutanix/images/pulse-datasheet.pdf>`_ and `here <https://portal.nutanix.com/page/documents/solutions/details?targetId=TN-2133-Nutanix-Pulse-Remote-Diagnostics:TN-2133-Nutanix-Pulse-Remote-Diagnostics>`_
 
 #. Give a quick overview of the Prism Element dashboard: *The dashboard view provides key information an infrastructure or virtualization administrator would want at their fingertips, including inventory, performance and utilization metrics, cluster health, and alerting. We can dive deeper into each of these areas once we have completed setting up the cluster and have deployed some workloads.*
 
@@ -56,7 +56,7 @@ Initial Login
 
 #. Select a **Failed** check to view information about the potential cause of the failure. You can manually run the NCC check again by clicking **Run Check**.
 
-   This is an opportunity to provide a quick background on Nutanix Cluster Check (NCC): *Nutanix Cluster Check, or NCC, is a constantly growing set of tests used to evaluate the health of the cluster. These checks can be updated out of band of AOS or your hypervisor, and requires no CVM or host reboots. As it is very low impact, we recommend always keeping NCC up to date and running it prior to significant events like AOS upgrades or cluster expansions.*
+   This is an opportunity to provide a quick background on NCC: *Nutanix Cluster Check, or NCC, is a constantly growing set of tests used to evaluate the health of the cluster. These checks can be updated out of band of AOS or your hypervisor, and requires no CVM or host reboots. As it is very low impact, we recommend always keeping NCC up to date and running it prior to significant events like AOS upgrades or cluster expansions.*
 
    Once the check has completed running you can check the status under **Tasks** by clicking the **Succeeded** link, the NCC output can also be downloaded here for more verbose output.
 
@@ -255,8 +255,9 @@ To streamline the POC deployment, we have provided a pre-packaged Windows Server
          **Do not close the browser window while uploading!** You can still perform other Prism tasks in another tab.
 
       - If on-prem with cluster Internet connectivity, select **From URL** - https://get-ahv-images.s3.amazonaws.com/AutoAD.qcow2
-      - If PHX HPOC, select **From URL** - http://10.42.194.11/workshop_staging/AutoAD.qcow2 **NEED TO ADD OTHER DATACENTERS**
-
+      - If PHX HPOC, select **From URL** - http://10.42.194.11/workshop_staging/AutoAD.qcow2
+      - If RTP HPOC, select **From URL** - http://10.55.251.38/workshop_staging/AutoAD.qcow2
+      - If BLR HPOC, select **From URL** - http://10.136.239.13/workshop_staging/AutoAD.qcow2
    .. figure:: images/15.png
 
 #. Click **Save** to begin uploading/downloading the disk image. Status can be monitored in **Tasks**. While the download completes, proceed to `Prism Central Deployment`_ and return after the disk image task has completed.
@@ -340,7 +341,7 @@ Prism Central Deployment
 
    - **VM Name** - PrismCentral
    - **Select A Container** - You can leave the default
-   - **VM Sizing** - Small (should be suitable for most every POC)
+   - **VM Sizing** - Large (should be suitable for most every POC)
    - **AHV Network** - Primary
    - **IP Address** - A static IP address in your **Primary** network. For HPOC, XX.XX.XX.39 is recommended. This will be referenced as the **Prism Central IP** throughout the guide.
 
