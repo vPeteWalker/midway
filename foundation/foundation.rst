@@ -4,7 +4,7 @@
 Physical Foundation
 -------------------
 
-If doing an on-premises POC, you will need to perform a fresh Foundation on your hardware. Many SEs opt to test Foundation on the cluster at home to identify any potential issues (bad SATADOM, loose memory, etc.) before bringing the block to a customer site. The SE would then typically run Foundation again on-site as the installation process is often a part of POC test plans, allowing us to demonstrate how fast and simple it is to deploy Nutanix.
+If doing an on-premises POC, you will need to perform a fresh Foundation on your hardware. Many SEs opt to test Foundation on the cluster at home to identify any potential issues (bad SATADOM, loose memory, etc.) before bringing the block to a customer site. It is also possible, depending on the state of the Nutanix nodes you receive, that you may need to perform a Bare Metal Foundation of the nodes in order to create a Nutanix Cluster (i.e. unknown passwords for IPMI, cluster was not destroyed prior, etc.).  The SE would then typically run Foundation again on-site as the installation process is often a part of POC test plans, allowing us to demonstrate how fast and simple it is to deploy Nutanix.
 
 **Expected Module Duration:** 150 minutes (Including racking, cabling, Foundation, and transition to customer network)
 
@@ -15,13 +15,13 @@ Setting Up Your Foundation Environment
 
 Currently, there are two options for performing baremetal Foundation of a Nutanix block, Portable Foundation and the Foundation VM. The full **Foundation Use Case Matrix** can be found `here <https://portal.nutanix.com/page/documents/details/?targetId=Field-Installation-Guide-v4-5%3Av45-features-compatibility-matrix-r.html>`_.
 
-(Recommended) Portable Foundation
+(Recommended) Foundation App/Portable Foundation
 .................................
 
-- Portable Foundation is a native application that runs on Windows 10+ or macOS 10.13.1+
+- Foundation App is a native application that runs on Windows 10+ or macOS 10.13.1+
 - Only supports Nutanix G4 and above, Dell, HPE, and Lenovo Cascade Lake and above
 
-Complete instructions for setting up Portable Foundation can be found `here <https://portal.nutanix.com/#/page/docs/details?targetId=Field-Installation-Guide-v4-5:v45-cluster-environment-foundation-t.html>`_.
+Complete instructions for setting up Foundation App can be found `here <https://portal.nutanix.com/page/documents/details?targetId=Field-Installation-Guide-v4_5:v45-portable-foundation-app-c.html>`_.
 
 .. note::
 
@@ -33,7 +33,7 @@ Foundation VM
 - The Foundation VM needs to be deployed as a VM on VirtualBox, VMware Fusion, Workstation, etc.
 - Supports all NX, OEM, and software only HCL models
 
-Complete instructions for setting up the standalone Foundation VM can be found `here <https://portal.nutanix.com/#/page/docs/details?targetId=Field-Installation-Guide-v4-5:v45-portable-foundation-app-c.html>`_.
+Complete instructions for setting up the standalone Foundation VM can be found `here <https://portal.nutanix.com/page/documents/details?targetId=Field-Installation-Guide-v4_5:Prepare%20Bare-Metal%20Nodes%20for%20Imaging>`_.
 
 Cabling Your Hardware
 +++++++++++++++++++++
