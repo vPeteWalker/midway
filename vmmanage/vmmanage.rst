@@ -8,7 +8,7 @@ In this module you will use Prism Central to perform basic AHV VM management tas
 
 **Expected Module Duration:** 60 minutes
 
-**Covered Test IDs:** Core-007, Core-012, Core-013
+**Covered Test IDs:** `Core-007, Core-012, Core-013 <https://confluence.eng.nutanix.com:8443/display/SEW/Official+Nutanix+POC+Guide+-+INTERNAL>`_
 
 Creating VMs
 ++++++++++++
