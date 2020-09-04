@@ -109,7 +109,7 @@ While using the local Prism admin account keeps a POC simple, most organizations
 
 #. Click **Save**.
 
-#. To complete Active Directory configuration, you must map AD users to Prism Central roles. Under **Users and Roles**, click **+ New Mapping**.
+#. To complete Active Directory configuration, you must map AD users to Prism Central roles. Under **Users and Roles**, select **Role Mapping**, then click **+ New Mapping**.
 
 #. If using **AutoAD**, specify either the **SSP Admins** group or an individual **adminuser** account. Choose the **Cluster Admin** role and click **Save**.
 
