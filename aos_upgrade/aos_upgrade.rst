@@ -88,4 +88,4 @@ Legacy AOS upgrade
 
 #. Demonstrate the result of either the **BASIC** or **RECOMMENDED** scenarios.
 
-Congratulations! You’ve upgraded AOS, to upgrade additional components, including AHV, Calm, and others, see :ref:`lcm`
+Congratulations! You’ve upgraded AOS.  To upgrade additional components, including AHV, Calm, and others, see :ref:`lcm`

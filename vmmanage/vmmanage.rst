@@ -19,7 +19,7 @@ Creating VMs
 
    .. figure:: images/0.png
 
-   *By default, this view will show us all VMs across your environment. After we created additional workloads we can look at how to leverage the search and filtering capabilities.*
+   *By default, this view will show us all VMs across your environment. After we have created additional workloads we can look at how to leverage the search and filtering capabilities.*
 
 #. Click **Create VM** and fill out the following fields:
 
