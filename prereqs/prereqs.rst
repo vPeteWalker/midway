@@ -79,7 +79,24 @@ You'll need to verify the following with the customer:
 
    - A downloaded version of AOS from https://portal.nutanix.com - Do **NOT** use the very latest version of AOS/AHV as you will be unable to show 1-Click upgrades as part of your POC.
    - To download an older or specific version you can navigate to the Downloads section of http://portal.nutanix.com select AOS or AHV, then select the Other Versions tab and the corresponding version of software that you want to use.
+**NoIndent - 1310x1280 Image Resolution**
 .. figure:: images/0.png
+**SingleTab - 1310x1280 Image Resolution**
+  .. figure:: images/0.png
+**DoubleTab - 1310x1280 Image Resolution**
+    .. figure:: images/0.png
+**NoIndent - 1100x1075 Image Resolution**
+.. figure:: images/1.png
+**SingleTab - 1100x1075 Image Resolution**
+  .. figure:: images/1.png
+**DoubleTab - 1100x1075 Image Resolution**
+    .. figure:: images/1.png
+**NoIndent - 777x759 Image Resolution**
+.. figure:: images/2.png
+**SingleTab - 777x759 Image Resolution**
+  .. figure:: images/2.png
+**DoubleTab - 777x759 Image Resolution**
+    .. figure:: images/2.png
 
 - **4+ Nutanix nodes**
 
