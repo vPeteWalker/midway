@@ -30,7 +30,7 @@ A customer may choose to add a node to account for a new workloads, or perhaps i
 Remove node
 +++++++++++
 
-#. From the dropdown, choose the **Home** dashboard. Observe the **Hosts** count within the *Hardware Sumnmary*, and the total **Storage**, **CPU**, and **Memory** values before and after proceeding with the instructions below.
+#. From the dropdown within Prism Element, choose the **Home** dashboard. Observe the **Hosts** count within the *Hardware Summary*, and the total **Storage**, **CPU**, and **Memory** values before and after proceeding with the instructions below.
 
    .. figure:: images/7.png
       :align: center
@@ -49,7 +49,7 @@ Remove node
 Add node
 ++++++++
 
-#. From the dropdown, choose the **Home** dashboard. Observe the **Hosts** count within the *Hardware Sumnmary*, and the total **Storage**, **CPU**, and **Memory** values before and after proceeding with the instructions below.
+#. From the dropdown within Prism Element, choose the **Home** dashboard. Observe the **Hosts** count within the *Hardware Sumnmary*, and the total **Storage**, **CPU**, and **Memory** values before and after proceeding with the instructions below.
 
    .. figure:: images/7.png
       :align: center

@@ -18,6 +18,11 @@ The first determination to make is whether to use a Hosted POC cluster or an on-
 - **POC Length** - A HPOC cluster can be reserved for up to 14 days if it is associated with a POC record in Salesforce. On-premises POCs should last for no more than 45 days (although blocks can remain on-site longer if new use cases are identified and a new Salesforce POC record is created).
 - **Your Availability** - Juggling many customers requests at once is difficult, and with physical POCs the level of involvement is higher. Outsourcing the success of a POC to the partner is usually not ideal.
 
+General Prerequisites
++++++++++++++++++++++
+
+Ensure the hardware you plan to use for your POC, either physical or HPOC, is not End-of-Life (EOL) or End-of-Maintenance (EOM). AOS upgrades are not supported on EOL or EOM hardware. Please refer to `KB Article #000009466 <https://portal.nutanix.com/page/documents/kbs/details?targetId=kA00e000000CyS2CAK>`_ for more information.
+
 HPOC Prerequisites
 +++++++++++++++++++
 
@@ -59,7 +64,7 @@ You'll need to verify the following with the customer:
 
 - **1x VLAN**
 
-   - A single network can be used for your CVM/AHV network, as well as user VMs.
+   - A single network can be used for your CVM/AHV network, as well as user VMs. The customer may have a requirement to segregate UVMs and management interfaces, which would require additional VLANs or physical ports (and related wiring/tranceivers/switch ports).
    - Recommended to be /24 or larger subnet, with no DHCP configured.
    - This network should be routable to/from the customer network and to the Internet.
 

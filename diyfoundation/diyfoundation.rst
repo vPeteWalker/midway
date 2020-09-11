@@ -25,9 +25,9 @@ Refer to the Nutanix `Field Installation Guide <https://portal.nutanix.com/#/pag
    - `Field Installation Guide <https://portal.nutanix.com/#/page/docs/details?targetId=Field-Installation-Guide-v4-3:Field-Installation-Guide-v4-3>`_ - *Comprehensive Foundation documentation, including steps for local deployment of Foundation VM.*
    - `Foundation Release Notes <https://portal.nutanix.com/#/page/docs/details?targetId=Field-Installation-Guide-Rls-Notes-v4-3:Field-Installation-Guide-Rls-Notes-v4-3>`_ - *Fixes, known issues, enhancements, and upgrade information.*
    - `NX Hardware System Specifications <https://portal.nutanix.com/#/page/docs/list?type=hardware>`_ - *Helpful for determining LAN/IPMI/Shared ports for different hardware platforms.*
-   - `Foundation binaries and related files <https://portal.nutanix.com/#/page/foundation>`_ - *Downloads for baremetal Foundation, CVM Foundation, and ISO whitelist.*
+   - `Foundation binaries and related files <https://portal.nutanix.com/page/downloads?product=foundation>`_ - *Downloads for baremetal Foundation, CVM Foundation, and ISO whitelist.*
    - `KB2430 <https://portal.nutanix.com/#/page/kbs/details?targetId=kA032000000TT1HCAW>`_ - *Internal Only KB detailing how to download old versions of AOS/AHV that are no longer available on Nutanix Portal.*
-   - `vSphere Administration Guide for Acropolis <https://portal.nutanix.com/#/page/docs/details?targetId=vSphere-Admin6-AOS-v56:vSphere-Admin6-AOS-v56>`_ - *Includes post-install steps for configuring HA/DRS on vSphere.*
+   - `vSphere Administration Guide for Acropolis <https://portal.nutanix.com/page/documents/details?targetId=vSphere-Admin6-AOS-v5_17:vSphere-Admin6-AOS-v5_17>`_ - *Includes post-install steps for configuring HA/DRS on vSphere.*
 
 Staging Your Environment
 ++++++++++++++++++++++++
@@ -52,11 +52,11 @@ Execute the following commands to power off any running VMs on the cluster, stop
   cluster stop        # Enter 'Y' when prompted to proceed
   cluster destroy     # Enter 'Y' when prompted to proceed
 
-Replacing the **Node A CVM IP**, execute the following to manually create the cluster:
+Replacing the **Node A CVM IP**, **Name Server IP**, **NTP server** and execute the following to manually create the cluster:
 
 .. code-block:: bash
 
-  cluster --cluster_name=FoundationLab --dns_servers=10.42.196.10 --ntp_servers=10.42.196.10 --svm_ips=<NODE A CVM IP> create
+  cluster --cluster_name=FoundationLab --dns_servers=<NAME-SERVER-IP> --ntp_servers=<NTP-SERVER> --svm_ips=<NODE-A-CVM-IP> create
 
 .. note::
 
@@ -66,10 +66,10 @@ Replacing the **Node A CVM IP**, execute the following to manually create the cl
 
   .. figure:: images/0.png
 
-Open \https://*<NODE A CVM IP>*:9440 in your browser and log in with the following credentials:
+Open `https://<NODE-A-CVM-IP>` in your browser and log in with the following credentials:
 
 - **Username** - admin
-- **Password** - Nutanix/4u
+- **Password** - Nutanix/4u (or in the case of HPOC, your HPOC reservation password)
 
 Provide a new **admin** password that conforms to the displayed password policy. Log in as **admin** using your new password.
 
@@ -85,12 +85,12 @@ Fill out the following fields and click **Save**:
 - **Name** - Foundation
 - **Image Type** - Disk
 - **Storage Container** - default-container
-- Select **From URL**
-- **Image Source** - http://download.nutanix.com/foundation/foundation-4.3.1/Foundation_VM-4.3.4-disk-0.qcow2
+- Select **From File**
+- **Image Source** - Download the latest version from the `Nutanix Portal - Foundation Downloads <https://portal.nutanix.com/page/downloads?product=foundation>`_.
 
 .. note::
 
-  At the time of writing, Foundation 4.3.4 is the latest available version. The URL for the latest Foundation VM QCOW2 image can be downloaded from the `Nutanix Portal <https://portal.nutanix.com/#/page/foundation>`_.
+  At the time of writing, Foundation 4.5.4.2 is the latest available version. The URL for the latest Foundation VM QCOW2 image can be downloaded from the `Nutanix Portal - Foundation Downloads <https://portal.nutanix.com/page/downloads?product=foundation>`_.
 
   **Unless otherwise directed by support, always use the latest version of Foundation.**
 
@@ -103,7 +103,7 @@ Click **Virtual Networks > Create Network**.
 Fill out the following fields and click **Save**:
 
 - **Name** - Primary
-- **VLAD ID** - 0
+- **VLAN ID** - 0
 
 In **Prism > VM > Table** and click **+ Create VM**.
 
@@ -171,7 +171,7 @@ From within the Foundation VM console, launch **Nutanix Foundation** from the de
 
 .. note::
 
-  Foundation can be accessed via any browser at \http://*<Foundation VM IP>*:8000/gui/index.html
+  Foundation can be accessed via any browser at `http://<Foundation-VM-IP>:8000/gui/index.html`
 
 On the **Start** page, fill out the following fields, replacing the octet(s) that correspond to your HPOC network:
 
@@ -186,7 +186,7 @@ On the **Start** page, fill out the following fields, replacing the octet(s) tha
 
 .. note::
 
-  Foundation node/cluster settings can optionally be pre-configured using https://install.nutanix.com and imported from the **Start** page. This will not be done as part of the lab.
+  Foundation node/cluster settings can optionally be pre-configured using `https://install.nutanix.com` and imported from the **Start** page. This will not be done as part of the lab.
 
 .. note::
 
@@ -323,7 +323,7 @@ When all CVMs are ready, Foundation initiates the cluster creation process.
 
 .. figure:: images/20.png
 
-Open \https://*<Cluster Virtual IP>*:9440 in your browser and log in with the following credentials:
+Open `https://<Cluster-Virtual-IP>:9440` in your browser and log in with the following credentials:
 
 - **Username** - admin
 - **Password** - Nutanix/4u

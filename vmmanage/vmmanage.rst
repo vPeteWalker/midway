@@ -50,9 +50,13 @@ Creating VMs
 
       A future version of this guide will include an appendix exercise for creating the OS images from .iso install media.
 
-#. Select the checkbox beside the newly created VM and click **Actions > Power On**.
+#. Select the checkbox beside the newly created VM and click **Actions > Power On**. Optionally, and new in AOS 5.18, you can right click
 
    .. figure:: images/1.png
+      :align: left
+
+   .. figure:: images/1a.png
+      :align: right
 
 #. Once powered on, click **Actions > Launch console**.
 
@@ -183,7 +187,7 @@ Live Migration
 
 #. Select **Actions > Migrate** and select a different host in the cluster. While watching the VM console, click **Submit**.
 
-#. Verify the VM is now running on the selected host (may require refreshing Prism if you're impatient) and that there was no interruption to the guest.
+#. Verify the VM is now running on the selected host (may require refreshing Prism if you're impatient) and that there was no interruption to the guest ping operation.
 
 #. Select **Actions > Update** and click **+ Set Affinity**.
 

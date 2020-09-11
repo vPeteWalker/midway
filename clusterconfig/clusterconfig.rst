@@ -145,6 +145,8 @@ Storage Configuration
 
    *Compression is a great option for nearly all workloads, except for pre-compressed datasets. Erasure Coding is another option that can be used to minimize the storage footprint of your RF2 and RF3 replicas for write-cold data. Deduplication is appropriate for full byte-copy clones of VMs. In traditional storage arrays deduplication can also be helpful for eliminating zeros, but as Nutanix doesn't write zeros to begin with, we save that capacity without incurring any of the overhead of deduplication.*
 
+   *New production, all flash deployments will default to 0 min (Inline) Compression. Post Process Compression is used in the POC for the purposes of maximizing performance, especially when comparing performance figures to other platforms (e.g. VSAN will likely not test performance with storage efficiencies enabled).*
+
 #. Click **Save**.
 
 #. Select the newly created container.
@@ -182,7 +184,7 @@ Network Configuration
 
 #. Click **Create Network**.
 
-   *This is the primary network we will use for VMs in the POC. For simplicity, it is the same VLAN used by the CVMs and hypervisor. In addition to adding the virtual network, we'll also configure AHV's integrated IP Address Management to provide IP assignment to VMs on this network. This can potentially eliminate the need for separately managed DHCP services in an environment. Rather than depending on lease times, AHV IPAM will assign addresses for the life of a VM, and also makes static assignments simple at the time of VM creation.*
+   *This is the primary network we will use for VMs in the POC. For simplicity, it is the same VLAN used by the CVMs and hypervisor. In addition to adding the virtual network, we'll also configure AHV's integrated IP Address Management to provide IP assignment to VMs on this network. This can potentially eliminate the need for separately managed DHCP services in an environment. Rather than depending on lease times, AHV IPAM will assign addresses for the life of a VM, and also makes static assignments simple at the time of VM creation. The prospect may require use of their own DHCP solution. If that is the case, do not enable IPAM in the below step.*
 
 #. Provide a name for the network. This guide will consistently refer to this as your **Primary** network throughout.
 
@@ -376,4 +378,16 @@ Prism Central Deployment
 
    .. figure:: images/22.png
 
-   *From this point, Prism Central will be used for the majority of day to day monitoring and operations - providing you a user interface that can manage multiple clusters simultaneously, including clusters running different hypervisors and hardware platforms.*
+#. (Optional) Configure NTP server settings. Refer to the `Prism Web Console Guide - Recommendations for Time Synchronization section <https://portal.nutanix.com/page/documents/details?targetId=Web-Console-Guide-Prism-v5_18:wc-ntp-server-time-sync-recommendations-c.html>`_ for guidance on selecting the correct NTP servers available to you before you begin.
+
+   - Click on :fa:`bars` **> Prism Central Settings > NTP Servers**.
+
+   - Enter the IP address or (preferred for external servers) the FQDN of each NTP server, and click **Add** after each one.
+
+#. Configure Name Server settings.
+
+   - Click on :fa:`bars` **> Prism Central Settings > Name Server.
+
+   - Delete and replace the existing value with the IP of your **AutoAD** VM.
+
+   *From this point, Prism Central will be used for the majority of day to day monitoring and operations - providing you a user interface that can manage multiple clusters simultaneously. This includes clusters running different hypervisors and hardware platforms. Prism Central enables the ability to perform limited VM management, potentially eliminating the need to use a separate interface for some tasks.*

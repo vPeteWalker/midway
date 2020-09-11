@@ -15,6 +15,8 @@ Before you begin
 
 If you are competing against VSAN or VXRAIL, it is highly recommended that you view this series before beginning a POC where VSAN or VXRAIL is one of your competitors. `MicroLRN: Whiteboard Warriors - Using X-Ray Against VSAN <https://nutanix.mindtickle.com/#/courses/series/1232012167626956869?series=1232012167626956869>`_
 
+If you are in a competitive POC, and performance is one of or perhaps *the* deciding factor, recommend against using workload simulators/perf tests on older, especially hybrid clusters. These type of POCs should be run on the latest generation available, using all-flash configurations only.
+
 Deploying X-Ray
 +++++++++++++++
 
@@ -53,9 +55,9 @@ Installation and configuration of X-Ray
 
 #. Power on the new X-Ray VM, and open its console.
 
-.. note::
+   .. note::
 
-   The following steps may be optional depending on your individual setup and network. When using an IPAM configuration, all VMs will receive a DHCP address by default.
+      The following steps may be optional depending on your individual setup and network. When using an IPAM configuration, all VMs will receive a DHCP address by default.
 
 #. Within the X-Ray VM, click **Application > System Tools > Settings**.
 
@@ -67,9 +69,11 @@ Installation and configuration of X-Ray
 
    .. figure:: images/10.png
 
-#. Under *IPv4 Method* choose **Manual**. Enter the appropriate network information within the **Addresses** and **DNS** sections only. Switch the *Automatic* slider in the *DNS* section to **OFF**. Click **Apply**.
+#. Under *IPv4 Method* choose **Manual**. Use the IP listed for this VM via Prism, along with the Name Server listed in your HPOC reservation to populate the **Addresses** and **DNS** sections, and only these sections. Switch the *Automatic* slider in the *DNS* section to **OFF**. Click **Apply**.
 
    .. figure:: images/10a.png
+
+#. Slide the *Eth0* **Connected** slider to off, and then on again. This will apply the specified network settings to the VM.
 
 #. You may now exit the console.
 
@@ -89,7 +93,7 @@ Creating an X-Ray Test Target
 
    Be aware that you will receive an error if you are attempting to add a cluster as a target if it's not operating normally. For example, during an AHV upgrade you may see an error similar to the below.
 
-   .. figure:: images\22.png
+   .. figure:: images/22.png
 
 #. You will be presented with the *Tests* dashboard in X-Ray. Click the **View and Run Test** button on the test you wish to run.
 
