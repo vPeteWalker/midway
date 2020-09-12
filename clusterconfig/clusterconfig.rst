@@ -121,17 +121,17 @@ Lifecycle Manager
 Storage Configuration
 +++++++++++++++++++++
 
-*Next we'll deploy storage for our virtual machines to use. One of the key benefits of Nutanix is the lack of tuning required to provision storage ready to run your VMs.*
+   *Next we'll deploy storage for our virtual machines to use. One of the key benefits of Nutanix is the lack of tuning required to provision storage ready to run your VMs.*
 
 #. Select **Storage** from the dropdown menu.
 
-*Similar to the Dashboard view, the Storage Overview provides key metrics relevant to storage, including capacity, data efficiency, performance, and alerting.
+   *Similar to the Dashboard view, the Storage Overview provides key metrics relevant to storage, including capacity, data efficiency, performance, and alerting.
 
 #. Select the **Table** view.
 
-*The two main storage concepts in Nutanix are a Storage Pool and a Storage Container. The Storage Pool is simply the aggregation of all physical disks within the cluster. There is only one Storage Pool, as the Nutanix distributed storage fabric is intelligently spreading data across all physical disks to provide optimal performance and capacity utilization - no multiple LUNs or volumes to manage separately. Storage Containers are logical policies that apply to the Storage Pool (in vSphere each Storage Container would be presented as a Datastore to the hypervisor). Container policies allow you to do things like turn on and off different data efficiency settings like compression or erasure coding.*
+   *The two main storage concepts in Nutanix are a Storage Pool and a Storage Container. The Storage Pool is simply the aggregation of all physical disks within the cluster. There is only one Storage Pool, as the Nutanix distributed storage fabric is intelligently spreading data across all physical disks to provide optimal performance and capacity utilization - no multiple LUNs or volumes to manage separately. Storage Containers are logical policies that apply to the Storage Pool (in vSphere each Storage Container would be presented as a Datastore to the hypervisor). Container policies allow you to do things like turn on and off different data efficiency settings like compression or erasure coding.*
 
-*While the cluster already has a default container, we'll create an additional container to show you how simple the process is. Typically you would only have multiple containers when there are different data efficiency requirements, for example, not wanting compression enabled on a datastore primarily storing pre-compressed data such as video files. Alternatively you may create different storage containers to map to different projects or business units for reporting or quota purposes.*
+   *While the cluster already has a default container, we'll create an additional container to show you how simple the process is. Typically you would only have multiple containers when there are different data efficiency requirements, for example, not wanting compression enabled on a datastore primarily storing pre-compressed data such as video files. Alternatively you may create different storage containers to map to different projects or business units for reporting or quota purposes.*
 
 #. Click **+ Storage Container**.
 
@@ -160,7 +160,7 @@ Storage Configuration
 Network Configuration
 +++++++++++++++++++++
 
-*Before we deploy any VMs, we first need to review physical network connectivity and configure virtual networks, both of which are done in Prism for AHV clusters.*
+   *Before we deploy any VMs, we first need to review physical network connectivity and configure virtual networks, both of which are done in Prism for AHV clusters.*
 
 #. Select **Network** from the dropdown menu.
 
@@ -321,9 +321,9 @@ To streamline the POC deployment, we have provided a pre-packaged Windows Server
 Prism Central Deployment
 ++++++++++++++++++++++++
 
-*While you can operate a single Nutanix cluster without Prism Central, PC provides the ability to easily manage a large number of clusters, across datacenters, and provides advanced functionality such as Prism Ops for infrastructure analytics and automation, Calm for workload deployment and management automation, Leap for DR, and more.*
+   *While you can operate a single Nutanix cluster without Prism Central, PC provides the ability to easily manage a large number of clusters, across datacenters, and provides advanced functionality such as Prism Ops for infrastructure analytics and automation, Calm for workload deployment and management automation, Leap for DR, and more.*
 
-*Unlike traditional solutions requiring dedicated databases, licensing servers, and other components - Prism Central deploys as a virtual appliance, either as a single VM or a scale out cluster to provide redundancy and scale.*
+   *Unlike traditional solutions requiring dedicated databases, licensing servers, and other components - Prism Central deploys as a virtual appliance, either as a single VM or a scale out cluster to provide redundancy and scale.*
 
 #. Select **Home** from the dropdown menu. Under **Prism Central**, click **Register or create new**.
 
