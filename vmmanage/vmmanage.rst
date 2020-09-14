@@ -140,7 +140,7 @@ Nutanix Guest Tools
 Updating VMs
 ++++++++++++
 
-*AHV provides the ability to hot-add vCPUs (sockets) and memory to supported guest operating systems through Prism or ACLI. Additionally you can easily expand existing disks or add new virtual disks. No need to take app downtime just to increase resources when needed. You could also leverage X-Play to automate the process of adding resources based on VM utilization.*
+*AHV provides the ability to hot-add vCPUs (sockets) and memory to supported guest operating systems through Prism or ACLI. Additionally, you can easily expand existing disks or add new virtual disks. No need to take app downtime just to increase resources when needed. You could also leverage X-Play to automate the process of adding resources based on VM utilization.*
 
 .. note::
 
@@ -160,17 +160,39 @@ Updating VMs
 
 #. Launch the console for **WinServer-1** and login.
 
-#. Open **Disk Management** and click **Actions > Rescan Disks** to see the updated disk configuration.
+#. Open **Disk Management** and perform the following disk operations.
 
-#. Extend the **C:** partition.
+   - Click **Actions > Rescan Disks** to see the updated disk configuration.
 
-   .. figure:: images/5.png
+   - Extend the **C:** partition by right clicking on it, and choosing **Extend Volume**. Click **Next > Next > Finish**.
 
-#. Mark **Disk 1** online, initialize, and create a new simple volume (e.g. **E:**).
+   - Mark **Disk 1** online by right clicking on *Disk 1* and choosing **Online**.
+
+   - Initialize the new disk by right clicking on *Disk 1* and choosing **Initialize**
+
+   - Create a new simple volume (e.g. **E:**) by right clicking on the unallocated space, and choose **New Simple Volume**. Click **Next > Next > Choose E from the dropdown > Next > Finish**
+
+      .. figure:: images/DiskOperations.gif
 
 #. Open **Task Manager** and verify the guest sees the additional memory.
 
-   .. figure:: images/6.png
+   .. figure:: images/mem1.png
+      :align: left
+      Before
+
+   .. figure:: images/mem2.png
+      :align: right
+      After
+
+#. Open **Device Manager** and verify the guest sees the additional vCPUs.
+
+   .. figure:: images/cpu1.png
+      :align: left
+      Before
+
+   .. figure:: images/cpu2.png
+      :align: right
+      After
 
 Live Migration
 ++++++++++++++
