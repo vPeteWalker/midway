@@ -177,24 +177,24 @@ Updating VMs
 #. Open **Task Manager** and verify the guest sees the additional memory.
 
    .. figure:: images/mem1.png
-       :align: left
+      :align: left
 
       Before
 
    .. figure:: images/mem2.png
-       :align: right
+      :align: right
 
       After
 
 #. Open **Device Manager** and verify the guest sees the additional vCPUs.
 
    .. figure:: images/cpu1.png
-       :align: left
+      :align: left
 
       Before
 
    .. figure:: images/cpu2.png
-       :align: right
+      :align: right
 
       After
 
