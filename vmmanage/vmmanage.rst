@@ -178,21 +178,25 @@ Updating VMs
 
    .. figure:: images/mem1.png
        :align: left
-       Before
+
+      Before
 
    .. figure:: images/mem2.png
        :align: right
-       After
+
+      After
 
 #. Open **Device Manager** and verify the guest sees the additional vCPUs.
 
    .. figure:: images/cpu1.png
        :align: left
-       Before
+
+      Before
 
    .. figure:: images/cpu2.png
        :align: right
-       After
+
+      After
 
 Live Migration
 ++++++++++++++
