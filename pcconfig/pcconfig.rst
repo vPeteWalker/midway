@@ -62,12 +62,16 @@ Disk Images
    - Select **URL** and provide the appropriate URL for your **CentOS7.qcow2** disk image.
 
       - **HPOC (PHX)** - http://10.42.194.11/workshop_staging/CentOS7.qcow2
+      - **HPOC (RTP)** - http://10.55.251.38/workshop_staging/CentOS7.qcow2
+      - **HPOC (BLR)** - http://10.136.239.13/workshop_staging/CentOS7.qcow2
       - **Internet** - https://get-ahv-images.s3.amazonaws.com/CentOS7.qcow2
 
    - Click **Upload file**.
    - Provide the appropriate URL for your **Windows2016.qcow2** disk image.
 
       - **HPOC (PHX)** - http://10.42.194.11/workshop_staging/Windows2016.qcow2
+      - **HPOC (RTP)** - http://10.55.251.38/workshop_staging/Windows2016.qcow2
+      - **HPOC (BLR)** - http://10.136.239.13/workshop_staging/Windows2016.qcow2
       - **Internet** - https://get-ahv-images.s3.amazonaws.com/Windows2016.qcow2
 
    - Click **Upload file**.
