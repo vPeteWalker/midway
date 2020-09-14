@@ -177,12 +177,10 @@ Updating VMs
 #. Open **Task Manager** and verify the guest sees the additional memory.
 
    .. figure:: images/mem1.png
-      :align: left
 
       Before
 
    .. figure:: images/mem2.png
-      :align: right
 
       After
 
