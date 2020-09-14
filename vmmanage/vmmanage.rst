@@ -168,7 +168,7 @@ Updating VMs
 
    - Mark **Disk 1** online by right clicking on *Disk 1* and choosing **Online**.
 
-   - Initialize the new disk by right clicking on *Disk 1* and choosing **Initialize**
+   - Initialize the new disk by right clicking on *Disk 1* and choosing **Initialize**.
 
    - Create a new simple volume (e.g. **E:**) by right clicking on the unallocated space, and choose **New Simple Volume**. Click **Next > Next > Choose E from the dropdown > Next > Finish**
 
