@@ -172,7 +172,7 @@ Updating VMs
 
    - Create a new simple volume (e.g. **E:**) by right clicking on the unallocated space, and choose **New Simple Volume**. Click **Next > Next > Choose E from the dropdown > Next > Finish**
 
-      .. figure:: images/DiskOperations.gif
+   .. figure:: images/DiskOperations.gif
 
 #. Open **Task Manager** and verify the guest sees the additional memory.
 
@@ -195,6 +195,12 @@ Updating VMs
       :align: right
 
       After
+
+Experiment:
+
+.. raw:: html
+
+   <video controls src="_static/video/diskoperations3.mp4"></video>
 
 Live Migration
 ++++++++++++++
