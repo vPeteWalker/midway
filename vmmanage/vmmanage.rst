@@ -172,7 +172,13 @@ Updating VMs
 
    - Create a new simple volume (e.g. **E:**) by right clicking on the unallocated space, and choose **New Simple Volume**. Click **Next > Next > Choose E from the dropdown > Next > Finish**
 
+**FEEDBACK** - Which do you prefer gif, or video? Don't care? Prefer screen shots?
+
    .. figure:: images/DiskOperations.gif
+
+   .. raw:: html
+
+      <video controls src="_static/video/diskoperations3.mp4"></video>
 
 #. Open **Task Manager** and verify the guest sees the additional memory.
 
@@ -198,9 +204,7 @@ Updating VMs
 
 Experiment:
 
-.. raw:: html
 
-   <video controls src="_static/video/diskoperations3.mp4"></video>
 
 Live Migration
 ++++++++++++++
@@ -242,7 +246,7 @@ Filtering and Searching
 
    .. figure:: images/10.png
 
-   *Imagine you have 10 different clusters being managed by Prism Central, and you want to identify just the VMs in two specific clusters with low memory utilization.*
+   *Imagine you have 10 different clusters being managed by Prism Central, and you want to identify just the VMs in two specific clusters with low memory utilization. In comparison, how is the customer doing this today, if they are even able to?*
 
 #. Click in the **Search Bar** and click :fa:`star`.
 
@@ -254,7 +258,7 @@ Filtering and Searching
 
    .. figure:: images/12.png
 
-   *Each entity collects dozens of different metrics, so depending on your goal, you may want to see specific metrics for your filtered list. We include a few default views we think are helpful, but you can also easily create your own custom focus views.*
+   *Each entity collects dozens of different metrics, so depending on your goal, you may want to see specific metrics for your filtered list. We include a few default views we think are helpful, but you can also easily create your own custom focus views. What scenarios can you create to illustrate how these abilities can solve problems for your customer?*
 
 #. Click **Focus > + Add Custom**.
 
