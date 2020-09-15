@@ -23,6 +23,13 @@ General Prerequisites
 
 Ensure the hardware you plan to use for your POC, either physical or HPOC, is not End-of-Life (EOL) or End-of-Maintenance (EOM). AOS upgrades are not supported on EOL or EOM hardware. Please refer to `KB Article #000009466 <https://portal.nutanix.com/page/documents/kbs/details?targetId=kA00e000000CyS2CAK>`_ for more information.
 
+Licensing
++++++++++
+
+The vast majority of software will allow the operation of it, even without a license. Some are time-limited, after which point those features become disabled. In most cases, it will prevent a warning (i.e. "nag") bar across the top of Prism, and if you have SMTP configured, a daily e-mail will be sent to advise that the cluster is utilizing unlicensed features. That said, there are other features that have a hard requirement to be licensed, otherwise it cannot be enabled. Those features are listed below. You must ensure you license these features before enabling these features. Refer to the `SE Wiki / Proof of Concept (POCs) <https://confluence.eng.nutanix.com:8443/x/yA4sAw>`_ for further details. These instructions will aid you with licensing your cluster to avoid any restrictions or warnings.
+
+   - Software Encryption
+
 HPOC Prerequisites
 +++++++++++++++++++
 
