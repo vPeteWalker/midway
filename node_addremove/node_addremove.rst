@@ -51,7 +51,7 @@ Add node
 
 #. From the dropdown within Prism Element, choose the **Home** dashboard. Observe the **Hosts** count within the *Hardware Sumnmary*, and the total **Storage**, **CPU**, and **Memory** values before and after proceeding with the instructions below.
 
-   .. figure:: images/7.png
+   .. figure:: images/8.png
       :align: center
 
 #. Either click :fa:`gear` **> Settings > Expand Cluster**, or from the dropdown menu choose **Hardware > +Expand Cluster**.
@@ -83,7 +83,12 @@ Add node
    The network addresses are validated before continuing. If an issue is discovered, the problem addresses are highlighted in red. If there are no issues, the process moves to the *Assign Rack* screen with a message at the top when the hypervisor, AOS, or other relevant feature is incompatible with the cluster version.
 
       .. figure:: images/3.png
-         :align: center
+         :align: left
+         Example if Hypervisor does need to be upgraded
+
+      .. figure:: images/3a.png
+         :align: right
+         Example if Hypervisor does NOT need to be upgraded
 
 #. When all the fields are correct, click the **Expand Cluster** button.
 

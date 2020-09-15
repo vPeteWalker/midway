@@ -146,9 +146,15 @@ Updating VMs
 
    See `AHV Administration Guide <https://portal.nutanix.com/page/documents/details/?targetId=AHV-Admin-Guide-v5_17%3Aahv-vm-memory-and-cpu-configuration-c.html>`_ for full AHV Hot-Plug documentation and Guest OS Compatibility.
 
-#. Select **WinServer-1** and click **Actions > Update**.
+#. Launch the console for **WinServer-1** and login.
+
+#. Verify you have a *Processors* section within Device Manager. If you don't, please refer to `this <https://portal.nutanix.com/page/documents/kbs/details?targetId=kA00e000000LMCXCA4>`_ article before proceeding.
+
+#. Within Prism, select **WinServer-1** and click **Actions > Update**.
 
 #. Increase the **Memory** to 6 GiB.
+
+#. Modify the vCPU setting to **4**.
 
 #. Under **Disks**, click :fa:`pencil` next to your existing **DISK** and increase the size by 10 GiB. Click **Update**.
 
@@ -157,8 +163,6 @@ Updating VMs
    .. figure:: images/4.png
 
 #. Click **Save**.
-
-#. Launch the console for **WinServer-1** and login.
 
 #. Open **Disk Management** and perform the following disk operations.
 
@@ -201,10 +205,6 @@ Updating VMs
       :align: right
 
       After
-
-Experiment:
-
-
 
 Live Migration
 ++++++++++++++
@@ -252,7 +252,9 @@ Filtering and Searching
 
    .. figure:: images/11.png
 
-   *You can save sets of filters to be able rapidly access commonly used queries.*
+   *By clicking the :fa:`star`, you can save sets of filters to be able rapidly access commonly used queries. This new entry will be displayed at the top of your Favorites list, alongside other items you have favorited.*
+
+      .. figure:: images/11a.png
 
 #. Using your filtered list, click **Focus > Performance**.
 
@@ -339,7 +341,7 @@ Categories & RBAC
 
    .. figure:: images/22.png
 
-#. Sign-out of Prism Central and login as a **Developer** user.
+#. Log out of Prism Central and login as a **Developer** user. (ex. devuser01 - refer to the *NTNXLAB.local Details* within :ref:`prereqs` for further details)
 
    .. figure:: images/23.png
 
@@ -347,7 +349,7 @@ Categories & RBAC
 
    .. figure:: images/24.png
 
-#. Repeat as an **Operator** user and confirm you have access to manage the appropriate resources.
+#. Repeat as an **Operator** user and confirm you have access to manage the appropriate resources. (ex. operator01 - refer to the *NTNXLAB.local Details* within :ref:`prereqs` for further details)
 
    *This simple, but powerful, policy engine can let you roll out self-service VM administration to your users, making sure the right people have access to the right resources and abilities. This can be further extended using Projects to help enforce quotas.*
 
