@@ -56,7 +56,7 @@ SQL VM Deployment
    - **Accept** the licensing agreement
    - Enter **nutanix/4u** as the Administrator password and click **Finish**
 
-#. Log in to the VM using the Administrator username and the password you just set.
+#. Log in to the VM using the Administrator username, along with the password you just set.
 
 #. Disable Windows Firewall for all networks.
 
@@ -124,21 +124,21 @@ SQL VM Deployment
 Installing Era
 ++++++++++++++
 
-#. Download the qcow2 image file of the Era from the Nutanix Support portal.
+#. Download the **Era Install for AHV** image file from the `Nutanix Support portal <https://portal.nutanix.com/page/downloads?product=era>`_. Alternatively, you can
 
-#. Log on to the Prism Element web console.
+#. Log on to the *Prism Element* web console.
 
-#. Select Settings from the main menu drop-down list and click Image Configuration.
+#. Select *Settings* from the main menu drop-down list, and click **Image Configuration**.
 
-#. Under Image Configuration, click Upload Image.
+#. Under *Image Configuration*, click **Upload Image**.
 
-#. In the Create Image dialog box, do the following in the indicated fields.
+#. In the *Create Image* dialog box, do the following in the indicated fields:
 
-   - Name. Type a name of the image.
+   - **Name**. Type a name of the image (ex. Era)
 
-   - Annotation. Type a description of the image.
+   - **Annotation**. Type a description of the image.
 
-   - Image Type. Select Disk from the drop-down list.
+   - **Image Type**. Select Disk from the drop-down list.
 
    - Storage Container. Select a storage container on which you want to install Era.
 
