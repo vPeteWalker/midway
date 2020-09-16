@@ -89,6 +89,22 @@
    failure/power/power
    failure/psu/psu
 
+.. .. toctree::
+..    :maxdepth: 2
+..    :caption: Databases
+..    :name: _dbs
+..    :hidden:
+..
+..    db/gettingstarted/gettingstarted
+..    db/mssqldeploy/mssqldeploy
+..    db/cloning/cloning
+..    db/aag/aag
+..    db/oraclepatch/oraclepatch
+..    db/flow_secure_fiesta/flow_secure_fiesta
+..    db/flow_isolate_fiesta/flow_isolate_fiesta
+..    prismops/prismops_blue_medora_lab/prismops_blue_medora_lab
+..    db/cleanup/cleanup
+
 ==========================
 NUTANIX SE POC GUIDE (AHV)
 ==========================
