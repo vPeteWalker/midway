@@ -26,18 +26,11 @@ SQL VM Deployment
 
 #. From the dropdown within Prism, select **VM > + Create VM**.
 
-   .. figure:: images/1.png
-
-#. Click **Create VM**.
-
-#. Select your assigned cluster and click **OK**.
-
 #. Fill out the following fields:
 
    - **Name** - MSSQL
    - **Description** - (Optional) Description for your VM.
    - **vCPU(s)** - 2
-   - **Number of Cores per vCPU** - 1
    - **Memory** - 4 GiB
 
    - Select **+ Add New Disk**
@@ -52,15 +45,15 @@ SQL VM Deployment
 
 #. Click **Save** to create the VM.
 
-#. Right click on the VM, and select **Power On**.
+#. Right click the VM, and select **Power On**.
 
-#. Once powered on, right click on the VM, and select **Launch Console** and complete Windows Server setup:
+#. Once powered on, right click the VM, and select **Launch Console**. Complete Windows Server setup as follows:
 
-   - Click **Next**
-   - **Accept** the licensing agreement
-   - Enter **nutanix/4u** as the Administrator password and click **Finish**
+   - Click **Next**.
+   - **Accept** the licensing agreement.
+   - Enter **nutanix/4u** as the Administrator password and click **Finish**.
 
-#. Log in to the VM using the Administrator username, along with the password you just set.
+#. Log in to the VM using the *Administrator* username, and *nutanix/4u* password.
 
 #. Disable Windows Firewall for all networks.
 
@@ -76,17 +69,19 @@ SQL VM Deployment
 
    - Close the *Server Manager* window.
 
+#. Join the *ntnxlab.local* domain.
+
+   -
+
 #. Launch **File Explorer** and note the current, single disk configuration.
 
    .. figure:: images/2.png
 
    .. note::
 
-      Best practices for database VMs involve spreading the OS, SQL binaries, databases, TempDB, and logs across separate disks in order to maximize performance. On non-AHV hypervisors, these disks should be properly spread across multiple disk controllers, as shown in the diagram below.
+      Best practices for database VMs involve spreading the OS, SQL binaries, databases, TempDB, and logs across separate disks in order to maximize performance.
 
-      .. figure:: images/2b.png
-
-      For complete details for tuning SQL Server on Nutanix (including guidance around NUMA, hyperthreading, SQL Server configuration settings, and more), see the `Nutanix Microsoft SQL Server Best Practices Guide <https://portal.nutanix.com/#/page/solutions/details?targetId=BP-2015-Microsoft-SQL-Server:BP-2015-Microsoft-SQL-Server>`_.
+      For complete details for running Microsoft SQL Server on Nutanix (including guidance around NUMA, hyperthreading, SQL Server configuration settings, and more), see the `Nutanix Microsoft SQL Server Best Practices Guide <https://portal.nutanix.com/#/page/solutions/details?targetId=BP-2015-Microsoft-SQL-Server:BP-2015-Microsoft-SQL-Server>`_.
 
 #. From the desktop, launch the **01 - Rename Server.ps1** PowerShell script shortcut and fill out the following fields:
 
@@ -249,7 +244,7 @@ Initial Era Configuration
 
 #. In the *Services* screen, do the following in the indicated fields:
 
-#. Review the *DNS Servers* and *NTP Servers* entries. Remove any entries that Era added (i.e. that you didn't).
+#. Ensure that the AutoAD IP address is the only entry in the *DNS Servers* field.
 
 #. (Optional) Configure the SMTP server. If you choose not to configure SMTP, remove the e-mail address in the *Sender's Email* field.
 
@@ -277,8 +272,67 @@ Initial Era Configuration
 
    .. figure:: images/era7.png
 
+Configure Windows Domain
+........................
+
+#. From the dropdown, choose **Profiles**.
+
+#. Select **Windows Domain**.
+
+#. Click **Create**.
+
+#. In the *Create Windows Domain Profile* screen, do the following in the indicated fields:
+
+   - **Name** NTNXLAB
+
+   - **Domain to Join (FQDN)** ntnxlab.local
+
+   - **Username** ntnxlab.local\administrators
+
+   - **Password** nutanix/4u
+
+   .. figure:: images/era14.png
+
+#. Click **Create**.
+
+Configure UI Timeout
+....................
+
+#. Click on the **admin** dropdown at the top right, and choose **Profile**.
+
+#. Set the *Timeout* setting to **Never**. This will help avoid being logged out unexpectedly.
+
+Modifying Era VM Network Settings Post-Launch
+.............................................
+
+.. note::
+
+   These instructions are taken from the *Assigning A Static IP Address To The Era VM By Using The Console* section of the Era Guide. However, you may utilize any or all of the parameters for the `era-server set` command to accomplish your goal. For example, if you only need to modify the name server that the Era VM is using, you would type `era_server set nameserver=<NAMESERVER-IP>`.
+
+#. Within Prism, right click the Era VM, and click **Launch Console**
+.
+#. Use the following credentials to log on to Era:
+
+   - User name: era
+   - Password: Nutanix.1
+
+#. Launch the Era server prompt by typing `era-server`.
+
+#. The command is `era_server set ip=<IP-address> gateway=<GATEWAY-ADDRESS> netmask=<NETMASK-IP> nameserver=<NAMESERVER>
+
 Registering MSSQL VM
 ++++++++++++++++++++
+
+Registering a database server with Era allows you to deploy databases to that resource, or to use that resource as the basis for a Software Profile.
+
+A SQL Server database server must meet the following requirements before you are able to register it with Era. Your SQL VM meets all of these criteria.
+
+   - A local user account or a domain user account with administrator privileges on the database server must be provided.
+   - Windows account or the SQL login account provided must be a member of sysadmin role.
+   - SQL Server instance must be running.
+   - Database files must not exist in C:\ Drive.
+   - Database must be in an online state.
+   - Windows remote management (WinRM) must be enabled.
 
 #. From the dropdown, select **Databases**.
 
@@ -308,118 +362,37 @@ Registering MSSQL VM
 
 #. The registration process will take approximately 5 minutes. In the meantime, proceed with these steps:
 
-   - From the dropdown, select **Administration**.
+   - From the dropdown menu, select **SLAs**. Era has five built-in SLAs (Gold, Silver, Bronze, Zero, and Brass). SLAs control however the database server is backed up. This can with a combination of Continuous Protection, Daily, Weekly Monthly and Quarterly protection intervals.
 
-#. From the dropdown menu, select **SLAs**.
-
-   Era has five built-in SLAs (Gold, Silver, Bronze, Zero, and Brass). SLAs control however the database server is backed up. This can with a combination of Continuous Protection, Daily, Weekly Monthly and Quarterly protection intervals.
-
-#. From the dropdown menu, select **Profiles**.
+   - From the dropdown menu, select **Profiles**.
 
    Profiles pre-define resources and configurations, making it simple to consistently provision environments and reduce configuration sprawl. For example, Compute Profiles specifiy the size of the database server, including details such as vCPUs, cores per vCPU, and memory.
-
-#. Under **Network**, click **+ Create**.
-
-   .. figure:: images/8.png
-
-#. Fill out the following fields and click **Create**:
-
-   - **Engine** - Microsoft SQL Server
-   - **Name** - *Assigned User VLAN*-MSSQL-NETWORK
-   - **Public Service VLAN** - *Assigned User VLAN*
-
-   .. figure:: images/9.png
-
-#. Click **+ Create** again and fill out the following fields:
-
-   - **Engine** - Oracle
-   - **Type** - Single Instance
-   - **Name** - *Assigned User VLAN*-ORACLE-NETWORK
-   - **Public Service VLAN** - *Assigned User VLAN*
-
-#. Click **Create** to finish creating your Oracle network profile.
-
-   .. figure:: images/10.png
-
-Registering Your MSSQL VM
-+++++++++++++++++++++++++
-
-Registering a database server with Era allows you to deploy databases to that resource, or to use that resource as the basis for a Software Profile.
-
-You must meet the following requirements before you register a SQL Server database with Era:
-
-- A local user account or a domain user account with administrator privileges on the database server must be provided.
-- Windows account or the SQL login account provided must be a member of sysadmin role.
-- SQL Server instance must be running.
-- Database files must not exist in C:\ Drive.
-- Database must be in an online state.
-- Windows remote management (WinRM) must be enabled
-
-.. note::
-
-   Your *XYZ*\ **-MSSQL** VM meets all of these criteria.
-
-#. In **Era**, select **Database Servers** from the dropdown menu and **List** from the lefthand menu.
-
-   .. figure:: images/11.png
-
-#. Click **+ Register** and fill out the following fields:
-
-   - **Engine** - Microsoft SQL Server
-   - **IP Address or Name of VM** - *Initials*\ -MSSQL
-   - **Windows Administrator Name** - Administrator
-   - **Windows Administrator Password** - nutanix/4u
-   - **Instance** - MSSQLSERVER (This should auto-populate after providing credentials)
-   - **Connect to SQL Server Admin** - Windows Admin User
-   - **User Name** - Administrator
-
-   .. note::
-
-      If **Instance** does not automatically populate, disable the Windows Firewall in your *XYZ*\ **-MSSQL** VM.
-
-   .. figure:: images/12.png
-
-   .. note::
-
-    You can click **API Equivalent** for many operations in Era to enter an interactive wizard providing JSON payload based data you've input or selected within the UI, and examples of the API call in multiple languages (cURL, Python, Golang, Javascript, and Powershell).
-
-    .. figure:: images/17.png
-
-#. Click **Register** to begin ingesting the Database Server into Era.
-
-#. Select **Operations** from the dropdown menu to monitor the registration. This process should take approximately 5 minutes.
-
-   .. figure:: images/13.png
-
-   .. note::
-
-      It is also possible to register existing databases on any server, which will also register the database server it is on.
 
 Creating A Software Profile
 +++++++++++++++++++++++++++
 
 Before additional SQL Server VMs can be provisioned, a Software Profile must first be created from the database server VM registered in the previous step. A software profile is a template that includes the SQL Server database and operating system. This template exists as a hidden, cloned disk image on your Nutanix storage.
 
-#. Select **Profiles** from the dropdown menu and **Software** from the lefthand menu.
+#. Select **Profiles** from the dropdown menu and then **Software** from the lefthand menu.
 
    .. figure:: images/14.png
 
 #. Click **+ Create** and fill out the following fields:
 
    - **Engine** - Microsoft SQL Server
-   - **Name** - *Initials*\ _MSSQL_2016
+   - **Name** - MSSQL_2016
    - **Description** - (Optional)
-   - **Database Server** - Select your registered *Initials*\ -MSSQL VM
-
-   .. figure:: images/15.png
+   - **Database Server** - Select your registered MSSQL VM
 
 #. Click **Create**.
+
+   .. figure:: images/15.png
 
 #. Select **Operations** from the dropdown menu to monitor the registration. This process should take approximately 5 minutes.
 
    .. figure:: images/16.png
 
-#. Once the profile creation completes successfully, Shutdown (Gracefully) your *Initials*\ **-MSSQL** VM in Prism.
+#. Once the profile creation completes successfully, return to Prism. Right click your MSSQL VM, and choose **Power Off Actions > Guest Shutdown**.
 
 Creating a New MSSQL Database Server
 ++++++++++++++++++++++++++++++++++++
@@ -428,31 +401,29 @@ You've completed all the one time operations required to be able to provision an
 
 #. In **Era**, select **Databases** from the dropdown menu and **Sources** from the lefthand menu.
 
-#. Click **+ Provision > Single Node Database**.
+#. Click **+ Provision > Microsoft SQL Server > Database**.
 
-   .. figure:: images/18.png
+   .. figure:: images/era12.png
 
 #. In the **Provision a Database** wizard, fill out the following fields to configure the Database Server:
 
-   - **Engine** - Microsoft SQL Server
-   - **Database Server** - Create New Server
-   - **Database Server Name** - *Initials*\ -MSSQL2
+   - **Database Server VM** - Create New Server
+   - **Database Server VM Name** - MSSQL2
    - **Description** - (Optional)
-   - **Software Profile** - *Initials*\ _MSSQL_2016
-   - **Compute Profile** - CUSTOM_EXTRA_SMALL
-   - **Network Profile** - *User VLAN*\ _MSSQL_NETWORK
+   - **Software Profile** - MSSQL_2016
+   - **Compute Profile** - DEFAULT_OOB_COMPUTE
+   - **Network Profile** - DEFAULT_OOB_SQLSERVER_NETWORK
    - **Database Time Zone** - Eastern Standard Time
    - Select **Join Domain**
    - **Windows Domain Profile** - NTNXLAB
    - **Windows License Key** - (Leave Blank)
    - **Administrator Password** - nutanix/4u
    - **Instance Name** - MSSQLSERVER
-   - **Server Collation** - Default
    - **Database Parameter Profile** - DEFAULT_SQLSERVER_INSTANCE_PARAMS
    - **SQL Service Startup Account** - ntnxlab.local\\Administrator
    - **SQL Service Startup Account Password** - nutanix/4u
 
-   .. figure:: images/19.png
+   .. figure:: images/era16.png
 
    .. note::
 
@@ -469,12 +440,11 @@ You've completed all the one time operations required to be able to provision an
 
 #. Click **Next**, and fill out the following fields to configure the Database:
 
-   - **Database Name** - *Initials*\ -fiesta
+   - **Database Name** - Fiesta2
    - **Description** - (Optional)
-   - **Size (GiB)** - 200 (Default)
    - **Database Parameter Profile** - DEFAULT_SQLSERVER_DATABASE_PARAMS
 
-   .. figure:: images/20.png
+   .. figure:: images/era17.png
 
    .. note::
 
@@ -489,22 +459,20 @@ You've completed all the one time operations required to be able to provision an
 
    .. note::
 
-      .. raw:: html
+      The default BRASS SLA does NOT include Continuous Protection snapshots.
 
-        <strong><font color="red">It is critical to select the BRONZE SLA in the following step. The default BRASS SLA does NOT include Continuous Protection snapshots.</font></strong>
-
-   - **Name** - *initials*\ -fiesta_TM (Default)
    - **Description** - (Optional)
-   - **SLA** - DEFAULT_OOB_BRONZE_SLA
-   - **Schedule** - (Defaults)
+   - **SLA** - DEFAULT_OOB_GOLD_SLA
 
-   .. figure:: images/21.png
+   .. figure:: images/era18.png
 
-#. Click **Provision** to begin creating your new database server VM and **fiesta** database.
+#. Click **Provision** to begin creating your new database server VM and **Fiesta** database.
 
-#. Select **Operations** from the dropdown menu to monitor the provisioning. This process should take approximately 20 minutes.
+#. Select **Operations** from the dropdown menu to monitor the provisioning. This process should take approximately 20 minutes. You may continue with the first two steps in the next section while this operation is running.
 
-   .. figure:: images/22.png
+   .. figure:: images/era19.png
+
+If you encounter errors unrelated to the information you entered, you can select the name of the process within *Operations* and click **Resubmit**.
 
    .. note::
 
@@ -513,31 +481,28 @@ You've completed all the one time operations required to be able to provision an
       Some of the best practices automatically configured by Era include:
 
       - Distribute databases and log files across multiple vDisks.
-      - Do not use Windows dynamic disks or other in-guest volume management
-      - Distribute vDisks across multiple SCSI controllers (for ESXi)
-      - For each database, use multiple data files: one file per vCPU.
+      - Do not use Windows dynamic disks or other in-guest volume management.
+      - For each database, use multiple data files; one file per vCPU.
       - Configure initial log file size to 4 GB or 8 GB and iterate by the initial amount to reach the desired size.
       - Use multiple TempDB data files, all the same size.
-      - Use available hypervisor network control mechanisms (for example, VMware NIOC).
-
 
 Exploring the Provisioned DB Server
 ++++++++++++++++++++++++++++++++++++
 
-#. In **Prism Element > Storage > Volume Groups**, locate the **ERA_**\ *Initials*\ **_MSSQL2_\*** VG and observe the layout on the **Virtual Disk** tab. <What does this tell us?>
+#. In **Prism Element > Storage > Volume Groups**, locate the **ERA_MSSQL2_...** VG and observe the layout on the **Virtual Disk** tab.
 
    .. figure:: images/23.png
 
-#. View the disk layout of your newly provisioned VM in Prism. <What are all of these disks and how is this different from the original VM we registered?>
+#. View the disk layout of your newly provisioned VM in Prism, and compare to the previous VM. This VM follows best practices when it comes to disk layout, where as the original VM does not.
 
    .. figure:: images/24.png
 
-#. In Prism, note the IP address of your *Initials*\ **-MSSQL2** VM and connect to it via RDP using the following credentials:
+#. In Prism, note the IP address of your *MSSQL2* VM and connect to it via RDP using the following credentials:
 
-   - **User Name** - NTNXLAB\\Administrator
+   - **User Name** - Administrator
    - **Password** - nutanix/4u
 
-#. Open **Start > Run > diskmgmt.msc** to view the in-guest disk layout. Right-click an unlabeled volume and select **Change Drive Letter and Paths** to view the path to which Era has mounted the volume. Note there are dedicated drives corresponding to SQL data and log locations, similar to the original SQL Server to which you manually applied best practices. <Anything else to share here?>
+#. Open **Start > Run > diskmgmt.msc** to view the in-guest disk layout. Right-click an unlabeled volume and select **Change Drive Letter and Paths** to view the path to which Era has mounted the volume. Note there are dedicated drives corresponding to SQL data and log locations, similar to the original SQL Server to which you manually applied best practices.
 
    .. figure:: images/25.png
 
