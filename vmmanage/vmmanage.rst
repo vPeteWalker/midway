@@ -8,7 +8,7 @@ In this module you will use Prism Central to perform basic AHV VM management tas
 
 **Expected Module Duration:** 60 minutes
 
-**Covered Test IDs:** Core-007, Core-012, Core-013
+**Covered Test IDs:** `Core-007, Core-012, Core-013 <https://confluence.eng.nutanix.com:8443/display/SEW/Official+Nutanix+POC+Guide+-+INTERNAL>`_
 
 Creating VMs
 ++++++++++++
@@ -19,7 +19,7 @@ Creating VMs
 
    .. figure:: images/0.png
 
-   *By default, this view will show us all VMs across your environment. After we created additional workloads we can look at how to leverage the search and filtering capabilities.*
+   *By default, this view will show us all VMs across your environment. After we have created additional workloads we can look at how to leverage the search and filtering capabilities.*
 
 #. Click **Create VM** and fill out the following fields:
 
@@ -50,9 +50,13 @@ Creating VMs
 
       A future version of this guide will include an appendix exercise for creating the OS images from .iso install media.
 
-#. Select the checkbox beside the newly created VM and click **Actions > Power On**.
+#. Select the checkbox beside the newly created VM and click **Actions > Power On**. Optionally, and new in AOS 5.18, you can right click
 
    .. figure:: images/1.png
+      :align: left
+
+   .. figure:: images/1a.png
+      :align: right
 
 #. Once powered on, click **Actions > Launch console**.
 
@@ -136,15 +140,21 @@ Nutanix Guest Tools
 Updating VMs
 ++++++++++++
 
-*AHV provides the ability to hot-add vCPUs (sockets) and memory to supported guest operating systems through Prism or ACLI. Additionally you can easily expand existing disks or add new virtual disks. No need to take app downtime just to increase resources when needed. You could also leverage X-Play to automate the process of adding resources based on VM utilization.*
+*AHV provides the ability to hot-add vCPUs (sockets) and memory to supported guest operating systems through Prism or ACLI. Additionally, you can easily expand existing disks or add new virtual disks. No need to take app downtime just to increase resources when needed. You could also leverage X-Play to automate the process of adding resources based on VM utilization.*
 
 .. note::
 
    See `AHV Administration Guide <https://portal.nutanix.com/page/documents/details/?targetId=AHV-Admin-Guide-v5_17%3Aahv-vm-memory-and-cpu-configuration-c.html>`_ for full AHV Hot-Plug documentation and Guest OS Compatibility.
 
-#. Select **WinServer-1** and click **Actions > Update**.
+#. Launch the console for **WinServer-1** and login.
+
+#. Verify you have a *Processors* section within Device Manager. If you don't, please refer to `this <https://portal.nutanix.com/page/documents/kbs/details?targetId=kA00e000000LMCXCA4>`_ article before proceeding.
+
+#. Within Prism, select **WinServer-1** and click **Actions > Update**.
 
 #. Increase the **Memory** to 6 GiB.
+
+#. Modify the vCPU setting to **4**.
 
 #. Under **Disks**, click :fa:`pencil` next to your existing **DISK** and increase the size by 10 GiB. Click **Update**.
 
@@ -154,19 +164,47 @@ Updating VMs
 
 #. Click **Save**.
 
-#. Launch the console for **WinServer-1** and login.
+#. Open **Disk Management** and perform the following disk operations.
 
-#. Open **Disk Management** and click **Actions > Rescan Disks** to see the updated disk configuration.
+   - Click **Actions > Rescan Disks** to see the updated disk configuration.
 
-#. Extend the **C:** partition.
+   - Extend the **C:** partition by right clicking on it, and choosing **Extend Volume**. Click **Next > Next > Finish**.
 
-   .. figure:: images/5.png
+   - Mark **Disk 1** online by right clicking on *Disk 1* and choosing **Online**.
 
-#. Mark **Disk 1** online, initialize, and create a new simple volume (e.g. **E:**).
+   - Initialize the new disk by right clicking on *Disk 1* and choosing **Initialize**.
+
+   - Create a new simple volume (e.g. **E:**) by right clicking on the unallocated space, and choose **New Simple Volume**. Click **Next > Next > Choose E from the dropdown > Next > Finish**
+
+**FEEDBACK** - Which do you prefer gif, or video? Don't care? Prefer screen shots?
+
+   .. figure:: images/DiskOperations.gif
+
+   .. raw:: html
+
+      <video controls src="_static/video/diskoperations3.mp4"></video>
 
 #. Open **Task Manager** and verify the guest sees the additional memory.
 
-   .. figure:: images/6.png
+   .. figure:: images/mem1.png
+
+      Before
+
+   .. figure:: images/mem2.png
+
+      After
+
+#. Open **Device Manager** and verify the guest sees the additional vCPUs.
+
+   .. figure:: images/cpu1.png
+      :align: left
+
+      Before
+
+   .. figure:: images/cpu2.png
+      :align: right
+
+      After
 
 Live Migration
 ++++++++++++++
@@ -183,7 +221,7 @@ Live Migration
 
 #. Select **Actions > Migrate** and select a different host in the cluster. While watching the VM console, click **Submit**.
 
-#. Verify the VM is now running on the selected host (may require refreshing Prism if you're impatient) and that there was no interruption to the guest.
+#. Verify the VM is now running on the selected host (may require refreshing Prism if you're impatient) and that there was no interruption to the guest ping operation.
 
 #. Select **Actions > Update** and click **+ Set Affinity**.
 
@@ -208,19 +246,21 @@ Filtering and Searching
 
    .. figure:: images/10.png
 
-   *Imagine you have 10 different clusters being managed by Prism Central, and you want to identify just the VMs in two specific clusters with low memory utilization.*
+   *Imagine you have 10 different clusters being managed by Prism Central, and you want to identify just the VMs in two specific clusters with low memory utilization. In comparison, how is the customer doing this today, if they are even able to?*
 
 #. Click in the **Search Bar** and click :fa:`star`.
 
    .. figure:: images/11.png
 
-   *You can save sets of filters to be able rapidly access commonly used queries.*
+   *By clicking the :fa:`star`, you can save sets of filters to be able rapidly access commonly used queries. This new entry will be displayed at the top of your Favorites list, alongside other items you have favorited.*
+
+      .. figure:: images/11a.png
 
 #. Using your filtered list, click **Focus > Performance**.
 
    .. figure:: images/12.png
 
-   *Each entity collects dozens of different metrics, so depending on your goal, you may want to see specific metrics for your filtered list. We include a few default views we think are helpful, but you can also easily create your own custom focus views.*
+   *Each entity collects dozens of different metrics, so depending on your goal, you may want to see specific metrics for your filtered list. We include a few default views we think are helpful, but you can also easily create your own custom focus views. What scenarios can you create to illustrate how these abilities can solve problems for your customer?*
 
 #. Click **Focus > + Add Custom**.
 
@@ -301,7 +341,7 @@ Categories & RBAC
 
    .. figure:: images/22.png
 
-#. Sign-out of Prism Central and login as a **Developer** user.
+#. Log out of Prism Central and login as a **Developer** user. (ex. devuser01 - refer to the *NTNXLAB.local Details* within :ref:`prereqs` for further details)
 
    .. figure:: images/23.png
 
@@ -309,7 +349,7 @@ Categories & RBAC
 
    .. figure:: images/24.png
 
-#. Repeat as an **Operator** user and confirm you have access to manage the appropriate resources.
+#. Repeat as an **Operator** user and confirm you have access to manage the appropriate resources. (ex. operator01 - refer to the *NTNXLAB.local Details* within :ref:`prereqs` for further details)
 
    *This simple, but powerful, policy engine can let you roll out self-service VM administration to your users, making sure the right people have access to the right resources and abilities. This can be further extended using Projects to help enforce quotas.*
 

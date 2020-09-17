@@ -10,8 +10,6 @@ SMB File Share
 
 **Covered Test IDs:** N/A
 
-**FEEDBACK** :ref:`feedback`
-
 Creating an SMB File Share
 ++++++++++++++++++++++++++
 
@@ -404,7 +402,15 @@ During this exercise, you will explore the new, integrated File Analytics capabi
 
 #. Click **Add** the Everyone permissions with the following:
 
-#. Open a PowerShell window as another non-Administrator user account by holding **Shift** and right-clicking the **PowerShell** icon in the start menu and selecting **More > Run as a different user**.
+   - Read & Execute
+   - List folder contents
+   - Read
+
+   .. figure:: images/43.png
+
+#. Choose **OK** then **OK** again
+
+#. Open a PowerShell window as another non-Administrator user account (ex. User01 - full listed provided in ref:`prereqs`) by holding **Shift** and right-clicking the **PowerShell** icon in the start menu and selecting **More > Run as a different user**.
 
    .. figure:: images/24.png
 

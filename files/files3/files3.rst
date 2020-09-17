@@ -10,8 +10,6 @@ NFS export
 
 **Covered Test IDs:** N/A
 
-**FEEDBACK** :ref:`feedback`
-
 Creating an NFS export
 ++++++++++++++++++++++
 
@@ -71,7 +69,7 @@ In the following exercise you will:
 
    .. code-block:: bash
 
-      sh -c "echo nameserver *AutoAD VM or customer-provided domain controller IP* > /etc/resolv.conf"
+      sudo sh -c "echo nameserver *AutoAD VM or customer-provided domain controller IP* > /etc/resolv.conf"
 
    Install the NFSv4 client:
 
@@ -91,11 +89,13 @@ In the following exercise you will:
 
       mount.nfs4 files.ntnxlab.local:/ /filesmnt/
 
-   Show disk utilization for a Linux file system. Observe that the **logs** directory is mounted in ``/filesmnt/logs``:
+   Show disk utilization for a Linux file system, and perform a directory listing. Observe that the **logs** directory is mounted in ``/filesmnt/logs``:
 
    .. code-block:: bash
 
       df -kh
+
+      ls -l /filesmnt/
 
    You will see output similar to the below.
 

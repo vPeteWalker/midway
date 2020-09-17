@@ -10,8 +10,6 @@ Lifecycle Manager (LCM)
 
 **Covered Test IDs:** N/A
 
-**FEEDBACK** :ref:`feedback`
-
 In this module we will demonstrate how to perform an inventory, followed by performing updates with LCM.
 
 What is LCM?
@@ -40,7 +38,7 @@ Performing Inventory with LCM
 
    Other entities, such as AOS, AHV, and component firmware, are local to Prism Element. To manage these entities, you must log on to **Prism Element**.
 
-#. From the drop-down menu, select **LCM**.
+#. From the drop-down menu in Prism Element, select **LCM**.
 
 #. In the LCM sidebar, select **Inventory**.
 
@@ -80,12 +78,12 @@ Performing Updates with LCM
 
 #. From the drop-down menu, select **LCM**.
 
-#. In the LCM sidebar, under *Updates*, select **Software** or **Firmware**.
+#. In the LCM sidebar, under *Updates*, select **Software** or **Firmware** (If using the HPOC, it will be likely that only Software will be an available option).
 
 #. Select the updates you want to perform.
 
    - Select the checkbox for the node you want to update, or select All to update the entire cluster.
-
+   - If there are multiple versions of software available for that component (AOS/Foundation/BIOS etc.), you can click the hyperlink of the software version to select a specific version of software that you wish to install.
    - Select the components you want to update. When you select a node, LCM selects the checkboxes for all updateable components by default. Clear the checkbox of any component you do not want to update.
 
 #. Click **NCC Check**.  In the dialog box that appears, specify which prechecks you want LCM to run before updating.

@@ -23,7 +23,7 @@ Enabling Calm
 
    .. figure:: images/0.png
 
-#. Click **Enable App Management**.
+#. Click **Enable App Management > Save**.
 
    .. figure:: images/1.png
 
@@ -40,9 +40,11 @@ Enabling Calm
 Creating A Project
 ++++++++++++++++++
 
-*In order for non-infrastructure administrators to access Calm, allowing them to create or manage applications, users or groups must first be assigned to a Project, which acts as a logical container to define user roles, infrastructure resources, and resource quotas. Projects define a set users with a common set of requirements or a common structure and function, such as a team of engineers collaborating on an application.*
+*In order for non-infrastructure administrators to access Calm, allowing them to create or manage applications, users or groups must first be assigned to a Project, which acts as a logical container to define user roles, infrastructure resources, and resource quotas. Projects define a set of users with a common set of requirements or a common structure and function, such as a team of engineers collaborating on an application.*
 
 *For the POC, we'll create a new POC project for any blueprints we build and deploy.*
+
+#. Dismiss the *Welcome to Calm* pop up by clicking the **X** at the top right.
 
 #. In **Calm**, select **Projects** from the left-hand menu and click **+ Create Project**.
 
@@ -92,11 +94,11 @@ Creating A Project
 
 #. Click **Save & Configure Environment**.
 
-   ..note::
+   .. note::
 
       This will redirect you to the Envrionments page, but there is nothing needed to configure here immediately. Environment definitions are required when launching Blueprints directly from the Marketplace.
 
-   *That's it, now we're ready to start building our own Blueprints or importing and deploying existing applications.*
+   *That's it! Now we're ready to start building our own Blueprints or importing and deploying existing applications.*
 
 Enabling Showback
 +++++++++++++++++
