@@ -11,7 +11,7 @@ DELETE FROM mysql.db WHERE Db='test' OR Db='test\_%';
 FLUSH PRIVILEGES;
 EOF
 
-mysql -u root -p $1 <<-EOF
+mysql -u root --password=$1 <<-EOF
 
 /*Create Database*/
 CREATE DATABASE fiestadb;
