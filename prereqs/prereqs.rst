@@ -89,8 +89,6 @@ You'll need to verify the following with the customer:
 
 - **Software**
 
-   .. note::
-
    - Disk images can be downloaded from either the provided Amazon S3 links, or from the Nutanix Portal, directly to the cluster (vs. the two step process of downloading it, then uploading it to the cluster). However, if you know the customer environment has poor or no Internet connectivity, the images can also be downloaded to a local device (USB thumb drive, laptop, or similar) and uploaded to the cluster via Prism or CLI once on-site. It is always recommended to play it safe, and if you are unsure of the customer's capabilities, spend the extra time to download all the necessary files beforehand.
 
    - To capture the download link on the Nutanix Portal, click the :fa:`ellipsis-v`, and choose **Copy Download Link**. You can then paste that link into locations such as (but not limited to) the **From URL** entry within *Settings > Image Configuration > Create Image > Image Source section* or the **AOS Base Software Binary File** entry within *Settings > Upgrade Software > Update Software > Upload Upgrade Software Binary*. Be aware that these are time-limited links, in addition to the fact that not all links are short enough to be utilized within Prism on Windows (at the time of writing), so this method may be unavailable for certain downloads.

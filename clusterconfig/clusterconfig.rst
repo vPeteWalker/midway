@@ -71,7 +71,7 @@ Cluster Settings
 
 #. Next we'll validate network details set during the Foundation process. Start by selecting **Settings** from the dropdown menu.
 
-   Under **Network**, select **Name Servers** and verify your DNS entries are correct. Select **NTP Servers** and verify your entries are correct.
+   Under **Network**, select **Name Servers** and verify your DNS entries are correct. Select **NTP Servers** and verify your entries are correct. Refer to the `Prism Web Console Guide - Recommendations for Time Synchronization section <https://portal.nutanix.com/page/documents/details?targetId=Web-Console-Guide-Prism-v5_18:wc-ntp-server-time-sync-recommendations-c.html>`_ for guidance.
 
    .. figure:: images/5.png
 
@@ -378,7 +378,7 @@ Prism Central Deployment
 
    .. figure:: images/22.png
 
-#. (Optional) Configure NTP server settings. Refer to the `Prism Web Console Guide - Recommendations for Time Synchronization section <https://portal.nutanix.com/page/documents/details?targetId=Web-Console-Guide-Prism-v5_18:wc-ntp-server-time-sync-recommendations-c.html>`_ for guidance on selecting the correct NTP servers available to you before you begin.
+#. Configure NTP server settings. Refer to the `Prism Web Console Guide - Recommendations for Time Synchronization section <https://portal.nutanix.com/page/documents/details?targetId=Web-Console-Guide-Prism-v5_18:wc-ntp-server-time-sync-recommendations-c.html>`_ for guidance.
 
    - Click on :fa:`bars` **> Prism Central Settings > NTP Servers**.
 

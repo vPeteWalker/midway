@@ -15,12 +15,16 @@ In this workshop you will manually deploy a Microsoft SQL Server VM, using a scr
 TEMP REQUIREMENTS PLACEHOLDER
 +++++++++++++++++++++++++++++
 
-SQL 2016 image - links to different datacenters
+Links to different datacenters for:
+SQL 2016 image
+Era image
+
+https://portal.nutanix.com/page/documents/details?targetId=Nutanix-Era-User-Guide-v1_3:Nutanix-Era-User-Guide-v1_3
 
 SQL VM Deployment
 +++++++++++++++++
 
-#. In **Prism Central**, select :fa:`bars` **> Virtual Infrastructure > VMs**.
+#. From the dropdown within Prism, select **VM > + Create VM**.
 
    .. figure:: images/1.png
 
@@ -111,6 +115,8 @@ SQL VM Deployment
 
    .. figure:: images/4.png
 
+#. Download `this <https://github.com/nutanixworkshops/EraWithMSSQL/raw/master/deploy_mssql_era/FiestaDB-MSSQL.sql>`_ file to the desktop.
+
 #. Launch **SQL Server Management Studio 17** from the desktop.
 
 #. Leave the default *Windows Authentication*, and click **Connect**.
@@ -119,12 +125,20 @@ SQL VM Deployment
 
    .. figure:: images/5.png
 
+#. Right click on **Databases** and choose **New Database**. Enter **Fiesta** in the *Database name* field. Click **OK**.
+
+#. Click on **File > Open > File**. Choose the *FiestaDB-MSSQL.sql* file you previously downloaded to the desktop, and click **Open**.
+
+#. Click **Execute**. This will create data within the *Fiesta* database.
+
+   .. figure:: images/era10.png
+
    Congratulations, you now have a functioning SQL Server VM. While this process could be further automated through `acli`, Calm, or REST API calls orchestrated by a third party tool, provisioning only solves a Day 1 problem for databases, and does little to address storage sprawl, cloning, or patch management.
 
 Installing Era
 ++++++++++++++
 
-#. Download the **Era Install for AHV** image file from the `Nutanix Support portal <https://portal.nutanix.com/page/downloads?product=era>`_. Alternatively, you can
+#. Download the **Era Install for AHV** image file from the `Nutanix Support portal <https://portal.nutanix.com/page/downloads?product=era>`_.
 
 #. Log on to the *Prism Element* web console.
 
@@ -140,113 +154,161 @@ Installing Era
 
    - **Image Type**. Select Disk from the drop-down list.
 
-   - Storage Container. Select a storage container on which you want to install Era.
+   - **Storage Container**. Select the **default** storage container to install Era.
 
-   - Under Image Source, select Upload a file and click Choose File.
+   - Under *Image Source*, select **Upload a file**, and click **Choose File**.
 
-   - Browse to the location on your local computer where you have saved the qcow2 image file of Era and click Open.
+   - Browse to the location on your local computer where you have saved the qcow2 image file of Era, and click **Open**.
 
-   - Click Save.
+   - Click **Save**.
 
-   Wait for the time the Create Image task completes.
+   Wait until the **Create Image** task completes before proceeding.
 
-#. From the main menu drop-down list, select VM and click Create VM.
-
-   Do the following in the indicated fields.
-
-   - Name. Enter a name of the VM.
-
-   - (Optional) Description. Enter a description of the VM.
-
-   - Timezone. Select the timezone that you want VM to use. If you are creating a Linux VM, select (UTC) UTC.
-
-   .. note::
-
-      The RTC of Linux VMs must be in UTC, so select the UTC timezone if you are creating a Linux VM.
-
-      Windows VMs preserve the RTC in the local timezone, so set up the Windows VM with the hardware clock pointing to the desired timezone.
-
-   - Use this VM as an agent VM. Select this option to make this VM as an agent VM.
-
-   - You can use this option for the VMs that must be powered on before the rest of the VMs (for example, to provide network functions before rest of VMs are powered on the host) and must be powered off and migrated after rest of the VMs (for example, during maintenance mode operations).
-
-   - vCPU(s). Enter 4 as the number of virtual CPUs to allocate to this VM.
-
-   - Number of Cores Per vCPU. Enter 1 as the number of cores assigned to each virtual CPU.
-
-   - Memory. Enter 16 GB as the amount of memory (in GB) to allocate to this VM.
-
-#. To attach a disk to the VM, click Add New Disk.
+#. From the main menu drop-down list, select **VM**, and then click **+ Create VM**.
 
    Do the following in the indicated fields.
 
-   - Type. Select Disk as the type of storage device from the drop-down list.
+   - **Name** Enter a name of the VM.
 
-   - Operation. Select Clone from Image Service to copy the Era image that you have imported by using the image service feature onto the disk.
+   - (Optional) **Description** Enter a description of the VM.
 
-   - Bus Type. Select SCSI as the bus type from the pull-down list.
+   - **Use this VM as an agent VM** Select this option to make this VM as an agent VM.
 
-   - Image. Select the Era image that you have imported by using the image service feature.
+   - **vCPU(s)** Enter 4 as the number of virtual CPUs to allocate to this VM.
 
-   - Size. This field is populated with the size of the image after you select the Era image in the previous step.
+   - **Memory** Enter 16 GB as the amount of memory (in GB) to allocate to this VM.
 
-   - Click Add to attach the disk to the VM and return to the Create VM dialog box.
+#. Click **Add New Disk**.
 
-#. To create a network interface for the VM, click Add New NIC.
+   Do the following in the indicated fields.
 
-   -  VLAN Name. Select the target virtual LAN from the drop-down list. The list includes all defined networks.
+   - **Operation** Select **Clone from Image Service** to copy the Era image that you have imported by using the image service feature onto the disk.
 
-   - (Optional) IP Address. Enter an IP address for the VLAN.
+   - **Image** Select the Era image that you have imported by using the image service feature.
 
-   - This field appears only if the NIC is placed in a managed network. Entering an IP address in this field is optional if the network configuration provides an IP pool. If you leave the field blank, the NIC is assigned an IP address from the pool.
+   - Click **Add** to attach the disk to the VM and return to the *Create VM* dialog box.
 
-   - Click Add to create a network interface for the VM and return to the Create VM dialog box.
+#. To create a network interface for the VM, click **Add New NIC**.
+
+   -  **VLAN Name** Verify **Primary** is selected.
+
+   - (Optional) **IP Address**. Enter an IP address for the VLAN.
+
+   - Click **Add** to create a network interface for the VM and return to the *Create VM* dialog box.
 
 #. (Optional) If you want to assign a static IP address to the Era VM, do the following:
 
-   - Select the Custom Script check box.
+   - Select the **Custom Script** check box.
 
-   - In the Type or paste script text box, paste the following script.
+   - In the *Type or paste script* text box, paste the following script.
 
    .. code-block:: bash
 
       #cloud-config
       runcmd:
-       - configure_static_ip ip=ip_address gateway=gateway_address netmask=ip_netmask nameserver=ns1
+       - configure_static_ip ip=<STATIC-IP-ADDRESS> gateway=<GATEWAY-ADDRESS> netmask=<NETMASK-IP> nameserver=<NAMESERVER>
 
-#. Click the Save button to create the VM.
+   All parameters except the nameserver parameter are mandatory.
 
-#. In the Table view of the VM dashboard, select the Era VM and click Power On to start the VM.
+#. Click the **Save** button to create the VM.
 
-#. Determine the IP address assigned to the Era VM from the IP Addresses field of the Table view in the Prism Element web console.
+#. In the *Table* view of the VM dashboard, right click the Era VM, and select **Power On** to start the VM.
 
-   If you assigned a static IP address to the Era VM on a VLAN that has a DHCP server, Prism Element first assigns an IP address to the Era VM by using DHCP. Wait for one or two minutes and refresh the Prism Element page to verify if the static IP address you specified has been assigned to the VM.
+#. Determine the IP address assigned to the Era VM from the *IP Addresses* field.
 
-Exploring Era Resources
-+++++++++++++++++++++++
+   If you assigned a static IP address to the Era VM on a VLAN that has a DHCP server (ex. the *Primary* VLAN on the HPOC), Prism Element first assigns an IP address to the Era VM by using DHCP. Wait for one or two minutes and refresh the Prism Element page to verify if the static IP address you specified has been assigned to the VM.
 
-Era is distributed as a virtual appliance that can be installed on either AHV or ESXi.
+Initial Era Configuration
++++++++++++++++++++++++++
 
-#. In **Prism Central > VMs > List**, identify the IP address assigned to the **EraServer-\*** VM using the **IP Addresses** column.
+#. Open `<ERA-VM-IP>` in a new browser tab.
 
-#. Open `https://<ERA-VM-IP>:8443` in a new browser tab.
+#. Read the *Nutanix End User License Agreement (EULA) agreement*, click the **I have read and agree to terms and conditions option**, and then click **Continue**. In the *Nutanix Customer Experience Program* screen, click **OK**.
 
-#. Login using the following credentials:
+#. In the logon screen, set a password for the administrator user (admin) in the *Enter new password* and *Re-enter new password* fields, and click **Set Password**.
 
-   - **Username** - admin
-   - **Password** - nutanix/4u
+#. In the *Era’s Cluster* screen, do the following in the indicated fields:
 
-#. From the **Dashboard** dropdown, select **Administration**.
+   - **Name** Type a name of the Nutanix cluster as you want the name to appear in Era.
 
-#. Under **Cluster Details**, note that Era has already been configured for your assigned cluster.
+   - **Description** Type a description of the Nutanix cluster.
 
-   .. figure:: images/6.png
+   - **IP Address of the Prism Element** Type the IP address of the Prism Element web console of the Nutanix cluster.
 
-#. Select **Era Resources** from the left-hand menu.
+   - **Prism Element Administrator** Type the user name of the Prism Element user account with which you want Era to access the Nutanix cluster.
 
-#. Under **VLANs Available for Network Profiles**, click **Add**. Select your *User* VLAN and click **Add**.
+      .. note::
 
-   .. figure:: images/7.png
+         It is not best practice to use the default administrative account for Era operations. In a production environment, it is therefore recommended to use a separate Prism Element user account with Nutanix cluster administrative privileges as Era service account.
+
+   - **Password** Type the password of the Prism Element user account.
+
+   - Click **Next**.
+
+      .. figure:: images/era1.png
+
+#. In the *Services* screen, do the following in the indicated fields:
+
+#. Review the *DNS Servers* and *NTP Servers* entries. Remove any entries that Era added (i.e. that you didn't).
+
+#. (Optional) Configure the SMTP server. If you choose not to configure SMTP, remove the e-mail address in the *Sender's Email* field.
+
+#. In the *Era Server's OS Time Zone* list, select a timezone.
+
+   .. figure:: images/era2.png
+
+#. Click **Next**. This will validate your settings.
+
+   .. figure:: images/era3.png
+
+#. In the *Storage Container* screen, select the storage container that you want Era to use to provision new databases and database servers. Click **Next**.
+
+   .. figure:: images/era4.png
+
+#. In the *Network Profile* screen, within the *VLAN* section, select the **Primary** VLAN from the drop-down list. Click **Next**.
+
+   .. figure:: images/era5.png
+
+#. In the *Setup* screen, click **Get Started**. The *Getting Started* page describes how to register and provision databases in Era. You can also open the main menu and start using the product.
+
+   .. figure:: images/era6.png
+
+#. In the *Getting Started* screen, select the **Yes** button.
+
+   .. figure:: images/era7.png
+
+Registering MSSQL VM
+++++++++++++++++++++
+
+#. From the dropdown, select **Databases**.
+
+#. Click **+ Register > Microsoft SQL Server > Database**.
+
+   .. figure:: images/era8.png
+
+#. The *Register a SQL Server Database* window appears. In the *Database Server VM* step, select **Not registered**.
+
+#. In the *Era’s Cluster* screen, do the following in the indicated fields:
+
+   - **IP Address or Name of VM** Select the VM you created in the *SQL VM Deployment* section. Verify that the associated IP address matches the IP address that is listed in Prism, as there may be multiple IP addresses listed for the same VM.
+
+   - **Windows Administrator Name** Type the user name of the administrator account (ex. Administrator).
+
+   - **Windows Administrator Password** Type the password of the administrator account.
+
+   - **Instance** Era automatically discovers all the instances a database server VM. In our case, there is only one instance named **MSSQLSERVER**.
+
+   - The *Connect to SQL Server Login* and *User Name* fields allow a choice of authentication between Windows Admin, and SQL Server user. Leave the default at **Windows Admin User**, and click **Next**.
+
+   - Select the **Fiesta** database within the *Unregistered Databases* section. Click **Next**.
+
+   .. figure:: images/era11.png
+
+   - Click **Register**.
+
+#. The registration process will take approximately 5 minutes. In the meantime, proceed with these steps:
+
+   - From the dropdown, select **Administration**.
 
 #. From the dropdown menu, select **SLAs**.
 
@@ -496,7 +558,7 @@ Another approach could involve adding your new Era database to an existing datab
 
 #. Copy and paste the following script into the query editor and click **Execute**:
 
-   .. literalinclude:: FiestaDB-MSSQL.sql
+   .. literalinclude:: FiestaDB-MSSQL
      :caption: FiestaDB Data Import Script
      :language: sql
 
