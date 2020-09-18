@@ -1,12 +1,19 @@
-.. title:: Nutanix POC Guide
+.. title:: Nutanix SE POC Guide
+
+.. toctree::
+   :caption: Resources
+   :name: _info
+   :hidden:
+
+   self
+   whatsnew/whatsnew
 
 .. toctree::
    :maxdepth: 2
    :caption: Planning & Deployment
-   :name: _info
+   :name: _planning
    :hidden:
 
-   whatsnew/whatsnew
    prereqs/prereqs
    hpoc/hpoc
    foundation/foundation
@@ -89,9 +96,9 @@
    failure/power/power
    failure/psu/psu
 
-==========================
-NUTANIX SE POC GUIDE (AHV)
-==========================
+===============================
+SE POC Guide Introduction (AHV)
+===============================
 
 .. raw:: html
 
@@ -125,9 +132,9 @@ How Do I Use This Guide?
 
 No two POCs are the same, and as such, much of this guide is meant to be used modularly.
 
-.. <strong><font color="red">Do NOT simply complete the exercises in order as displayed in the left-hand menu.</font></strong>
+.. raw:: html
 
-   .. figure:: images/boromir.png
+  <strong><font color="red">Do NOT simply complete the exercises in order as displayed in the left-hand menu.</font></strong>
 
 - To begin, review the **Planning & Deployment** section prior to your POC.
 - The **Initial Configuration** section covers exercises that are common to all AHV POCs, and should be completed in order. The notable exception is you could optionally complete **Lifecycle Infrastructure** and/or **X-Ray** exercises, such as AOS upgrades, *before* completing any of the **Basic VM Management** exercises.
@@ -139,9 +146,9 @@ How Do I Get Support?
 
 If you're experiencing product issues during a POC, you can engage Nutanix Support directly by creating a case at https://portal.nutanix.com or calling 1-855-NUTANIX, Option 3. The full list of international support phone numbers can be found `here <https://www.nutanix.com/support-services/product-support/support-phone-numbers>`_.
 
-For non-blocking issues, you can also try to engage Support in `#sre <slack://channel?team=T0252CLM8&id=C07SH5139>`_  or product specific channels (e.g. `#calm <slack://channel?team=T0252CLM8&id=C5F3QSQGG>`_, `#era <slack://channel?team=T0252CLM8&id=CANA44ZAN>`_, `#flow <slack://channel?team=T0252CLM8&id=C8M7J79EF>`_, etc.) in Slack.
+For non-blocking issues, you can also try to engage Support in `#sre <slack://channel?team=T0252CLM8&id=C07SH5139>`_  or product specific channels (e.g. #calm, #era, #flow, etc.) in Slack.
 
 Feedback
 ++++++++
 
-We already have multiple additions planned for this guide, including more advanced Calm exercises, Era, X-Play, and Leap. If you have additional feedback, questions, or ideas, please send them to `the Technical Enablement team <te-amer@nutanix.com>`_. We'd love to hear from you.
+We already have multiple additions planned for this guide, including more advanced Calm exercises, Era, X-Play, and Leap. If you have additional feedback, questions, or ideas, please send them to te-amer@nutanix.com.
