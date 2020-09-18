@@ -10,6 +10,8 @@ In this module you will use Prism Central to perform basic AHV VM management tas
 
 **Covered Test IDs:** `Core-007, Core-012, Core-013 <https://confluence.eng.nutanix.com:8443/display/SEW/Official+Nutanix+POC+Guide+-+INTERNAL>`_
 
+`Nutanix POC Test Plan Tracker <https://docs.google.com/spreadsheets/d/15r8Q1kCIJY4ErwL1CaHHwv4Q7gmCbLOz5IaR51t9se0/edit#gid=398743295>`_
+
 Creating VMs
 ++++++++++++
 

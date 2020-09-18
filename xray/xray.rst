@@ -10,6 +10,8 @@ Starting with X-Ray
 
 **Covered Test IDs:** `Core-019, Core-020, VSAN-001, VSAN-002, VSAN-003, VSAN-004, HF-001, HF-002, HF-003, HF-004 <https://confluence.eng.nutanix.com:8443/display/SEW/Official+Nutanix+POC+Guide+-+INTERNAL>`_
 
+`Nutanix POC Test Plan Tracker <https://docs.google.com/spreadsheets/d/15r8Q1kCIJY4ErwL1CaHHwv4Q7gmCbLOz5IaR51t9se0/edit#gid=398743295>`_
+
 Before you begin
 ++++++++++++++++
 

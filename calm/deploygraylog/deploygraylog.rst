@@ -1,4 +1,4 @@
-.. _singlevmwin:
+.. _deploygraylog:
 
 -------------------------
 Flow Logging with GrayLog

@@ -10,6 +10,8 @@ In this module you will perform initial cluster configuration, including Pulse, 
 
 **Covered Test IDs:** `Core-003, Core-004, Core-005, Core-006, Core-008 <https://confluence.eng.nutanix.com:8443/display/SEW/Official+Nutanix+POC+Guide+-+INTERNAL>`_
 
+`Nutanix POC Test Plan Tracker <https://docs.google.com/spreadsheets/d/15r8Q1kCIJY4ErwL1CaHHwv4Q7gmCbLOz5IaR51t9se0/edit#gid=398743295>`_
+
 This initial configuration needs to be completed for both a Hosted or on-prem POC. These steps could be performed without the customer present, but there is opportunity throughout to call out Nutanix differentiators and to highlight the simplicity of the deployment process.
 
 Initial Login

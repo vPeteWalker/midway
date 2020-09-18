@@ -82,7 +82,7 @@ Isolation Policy
 
       - Search for **AppType:Microsoft_SQL**
 
-   - (Optional - if **Syslog** configured within Prism Central via :ref:`singlevmwin` section) Enable **Policy Hit Logs**
+   - (Optional - if **Syslog** configured within Prism Central via :ref:`deploygraylog` section) Enable **Policy Hit Logs**
 
    .. figure:: images/2.png
 

@@ -56,7 +56,7 @@ Replacing the **Node A CVM IP**, **Name Server IP**, **NTP server** and execute 
 
 .. code-block:: bash
 
-  cluster --cluster_name=FoundationLab --dns_servers=<NAME-SERVER-IP> --ntp_servers=<NTP-SERVER> --svm_ips=<NODE-A-CVM-IP> create
+  cluster -s <NODE-A-CVM-IP> redundancy_factor=1 --cluster_name=NHTLab --dns_servers=<NAME-SERVER-IP> --ntp_servers=<NTP-SERVER> create
 
 .. note::
 
@@ -74,6 +74,11 @@ Open `https://<NODE-A-CVM-IP>` in your browser and log in with the following cre
 Provide a new **admin** password that conforms to the displayed password policy. Log in as **admin** using your new password.
 
 Accept the EULA and Pulse prompts.
+
+Troubleshooting
+...............
+
+If you run into an issue where the cluster and/or node is in a state where you can't destroy or create a cluster, refer to `Forcibly Destroying the Cluster Using the .node_unconfigure File <https://portal.nutanix.com/page/documents/kbs/details?targetId=kA032000000CietCAC>`_
 
 Installing Foundation
 +++++++++++++++++++++
