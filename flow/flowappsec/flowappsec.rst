@@ -4,17 +4,117 @@
 Securing Applications
 ---------------------
 
-In this module you will use Flow to secure communications within an example multi-tier application consisting of webserver and database CentOS VMs. For the purpose of streamlining the POC, the application has been provided in the form of a Calm Blueprint. The same overall principles for creating the policy and talking points would apply if using a customer provided application, you would simply need to account for differences in category assignment and connection ports/protocols.
+In this module you will use Flow to secure communications within an example multi-tier application consisting of webserver and database CentOS VMs.
 
-**Prerequisites:** Completion of :ref:`calmenable` and :ref:`deploypocapp`
+The same overall principles for creating the policy and talking points would apply if using a customer provided application, you would simply need to account for differences in category assignment and connection ports/protocols.
 
-**(Optional) Pre-requisite:** Completion of :ref:`deploygraylog`
+**(Optional) Prerequisites:**
+
+For the purpose of streamlining the POC, the application can either be provisioned using Calm or manually (using the provided CentOS disk image and cloud-init scripts):
+
+- If your POC will include Calm, you are encouraged to complete the :ref:`calmenable` and :ref:`deploypocapp` exercises.
+- If your POC will not include Calm, you can provision the application by following the `Manual POC App Deployment`_ steps below.
+
+.. note::
+
+   The manual process takes ~5 minutes to deploy your application, whereas the Calm exercises take ~15-30 minutes to complete.
+
+Additionally, you can leverage GrayLog as a remote syslog server which can be used for Flow logging:
+
+- This requires completion of the :ref:`calmenable` and :ref:`deploygraylog` exercises (as we leverage the built-in Marketplace Blueprint for GrayLog).
 
 **Expected Module Duration:** 45 minutes
 
 **Covered Test IDs:** N/A
 
-*With a real application in place to provide HTTP and database traffic, we can now walk through how Flow can be used to provide even finer-grained controls within the datacenter.*
+Manual POC App Deployment
+++++++++++++++++++++++++
+
+*The purpose of using a "real" application for this exercise is to demonstrate the additional capabilities of Flow for shaping policies around specific ports and service interactions between VMs (such as HTTP and database traffic), rather than all communication between individual or groups of VMs.*
+
+#. If you are using Calm to provision your POC App for this exercise, skip ahead to `Adding Categories`_.
+
+   *First we'll provision a CentOS VM that will run the MySQL database for our small eCommerce app.*
+
+#. In **Prism Central**, select :fa:`bars` **> Virtual Infrastructure > VMs**.
+
+#. Click **Create VM** and fill out the following fields:
+
+   - **Name** - MYSQL-POCApp
+   - **vCPUs** - 4
+   - **Number of Cores Per vCPU** - 1
+   - **Memory** - 4 GiB
+   - Click **+ Add New Disk**
+
+      - **Type** - Disk
+      - **Operation** - Clone from Image Service
+      - **Bus Type** - SCSI
+      - **Image** - CentOS7.qcow2
+      - Click **Add**
+
+   - Click **+ Add New NIC**
+
+      - **Network Name** - Primary
+      - Click **Add**
+
+   - Select **Custom Script**
+   - Select **Type or Paste Script** and paste in the following **Cloud-init** script:
+
+   .. literalinclude:: mysql.cloudconfig
+    :linenos:
+    :language: YAML
+
+#. Click **Save**.
+
+#. Power on the VM and click **Launch Console**.
+
+#. Monitor the VM deployment until you the bottom of the console indicates that Cloud-init has finished. The database should now be running, allowing us to provision the WebServer VM next.
+
+   .. figure:: images/18.png
+
+   .. note::
+
+      You could also verify the database is running by logging into the VM (U\:root P\:nutanix/4u) and executing ``systemdctl status mysqld``
+
+#. Note the IP Address of your **MYSQL-POCApp** VM in Prism (or by executing ``ifconfig`` in the VM console). *We will use this IP in the Cloud-init script for our WebServer to point the application to the IP address of the database.*
+
+#. Click **Create VM** and fill out the following fields:
+
+   - **Name** - WebServer-POCApp
+   - **vCPUs** - 4
+   - **Number of Cores Per vCPU** - 1
+   - **Memory** - 4 GiB
+   - Click **+ Add New Disk**
+
+      - **Type** - Disk
+      - **Operation** - Clone from Image Service
+      - **Bus Type** - SCSI
+      - **Image** - CentOS7.qcow2
+      - Click **Add**
+
+   - Click **+ Add New NIC**
+
+      - **Network Name** - Primary
+      - Click **Add**
+
+   - Select **Custom Script**
+   - Select **Type or Paste Script** and paste in the following **Cloud-init** script:
+
+   .. literalinclude:: webserver.cloudconfig
+    :linenos:
+    :language: YAML
+
+#. Do **NOT** click **Save** yet! On **Line 104** of the **Cloud-init** script you need to replace the string **YOUR-MYSQL-POCAPP-VM-IP-ADDRESS** with the previously noted IP address of your **MYSQL-POCApp** VM (e.g. 10.42.93.110) in the **Type or Paste Script** field.
+
+#. Click **Save**.
+
+#. Power on the VM and click **Launch Console**.
+
+#. Again, monitor the VM deployment until you the bottom of the console indicates that Cloud-init has finished.
+
+#. In your browser, browse to the IP address of your **WebServer-POCApp** VM and validate the application is running (as seen below).
+
+   .. figure:: images/19.png
 
 Adding Categories
 +++++++++++++++++
@@ -43,7 +143,7 @@ Adding Categories
 
 #. Specify **Web** as the value name. This category will be applied to the application's web tier.
 
-#. Click the :fa:`plus-circle` icon and specify **DB**. This category will be applied to the application's MySQL database tier.
+#. Click :fa:`plus-circle` and specify **DB**. This category will be applied to the application's MySQL database tier.
 
    .. figure:: images/1.png
 
@@ -56,7 +156,9 @@ Creating a Security Policy
 
 *Security policies are applied to categories and not to the VMs themselves. Therefore, it does not matter how many VMs are started up in a given category. Traffic associated with the VMs in a category is secured without administrative intervention, at any scale.*
 
-#. In **Prism Central**, select :fa:`bars` **> Policies > Security**.
+*...*
+
+#. In **Prism Central**, select :fa:`bars` **> Policies > Security Policies**.
 
 #. Click **Create Security Policy > Secure Applications (App Policy) > Create**.
 
@@ -94,22 +196,23 @@ Creating a Security Policy
 
 #. Under **Inbound**, click **+ Add Source**.
 
-#. Fill out the following fields to allow all inbound IP addresses, and then click **Add**:
+#. Fill out the following fields to allow all inbound IP addresses:
 
    - **Add source by:** - Select **Subnet/IP**
    - Specify **0.0.0.0/0**
 
    *Sources can also be specified by Categories, allowing for greater flexibility as this data can follow a VM regardless of changes to its network location. As an example, you could add a category for Administrator desktops that would also allow connections to the web and database via SSH (TCP Port 22).*
 
-#. To create an inbound rule, select the :fa:`plus-circle` icon that appears to the left of **AppTier:Web**.
+#. To create an inbound rule, select the **+** icon that appears to the left of **AppTier:Web**.
 
    .. figure:: images/5.png
 
-#. Click the radio button for **Select a service** under the *Service Details* section, type **http** within the *Service Name* box, and click on the **http** entry.
+#. Fill out the following fields:
 
-   .. figure:: images/5a.png
+   - **Protocol** - TCP
+   - **Ports** - 80
 
-   *Multiple services (defined as a group of protocols and ports) can be added to a single rule. If required, custom services based on TCP, UDP, or ICMP can be added utlizing by clicking New Service.*
+   *Multiple protocols and ports can be added to a single rule.*
 
 #. Click **Save**.
 
@@ -130,13 +233,11 @@ Creating a Security Policy
 
    .. figure:: images/6.png
 
-#. Confirm you have the **0.0.0.0/0** inbound entry selected (blue rectangle surrounding it), then select the :fa:`plus-circle` icon that appears to the left of **AppTier:Web**.
-
-#. Click the radio button for **Select a service** under the *Service Details* section, type **ssh** within the *Service Name* box, click on the **ssh** entry, and then click **Save**.
+#. Select the **+** icon that appears to the left of **AppTier:Web**, specify **TCP** port **22** and click **Save**.
 
 #. Repeat the previous step for **AppTier:DB** to allow Calm to communicate with the database VM.
 
-   .. figure:: images/7a.png
+   .. figure:: images/7.png
 
    *By default, the security policy allows the application to send all outbound traffic to any destination. For this example we'll assume the only outbound communication required for your application is to communicate with your DNS server.*
 
@@ -149,9 +250,9 @@ Creating a Security Policy
 
 #. Click **Add**.
 
-#. Select the :fa:`plus-circle` icon that appears to the right of **AppTier:Web**, type **domain** within the *Service Name* box, click on the **domain** entry, and then click **Save** to allow DNS traffic. Repeat this for **AppTier:DB**.
+#. Select the **+** icon that appears to the right of **AppTier:Web**, specify **UDP** port **53** and click **Save** to allow DNS traffic. Repeat this for **AppTier:DB**.
 
-   .. figure:: images/8a.png
+   .. figure:: images/8.png
 
    *Each tier of the application communicates with other tiers and the policy must allow this traffic. Some tiers such as web do not require communication within the same tier.*
 
@@ -163,13 +264,20 @@ Creating a Security Policy
 
    *If this application scaled out to multiple webserver VMs, there wouldn't be a reason for them to communicate with one another, so this reduces attack surface.*
 
-#. While **AppTier:Web** is still selected, click the :fa:`plus-circle` icon to the right of **AppTier:DB**, type **mysql** within the *Service Name* box, click on the **mysql** entry, and then click **Save** to create a tier-to-tier rule.
+#. While **AppTier:Web** is still selected, click the :fa:`plus-circle` icon to the right of **AppTier:DB** to create a tier-to-tier rule.
+
+   .. figure:: images/10.png
+
+#. Fill out the following fields to allow communication on TCP port 3306 between the web and database tiers:
+
+   - **Protocol** - TCP
+   - **Ports** - 3306
 
    *This is the default port for communication with the MySQL service on the database VM.*
 
 #. Click **Save**.
 
-   .. figure:: images/11a.png
+   .. figure:: images/11.png
 
 #. Click **Next** to review the security policy.
 
@@ -202,7 +310,7 @@ Testing the Application
 
 #. From **Prism Central > Virtual Infrastructure > VMs**, note the IP addresses of your **MYSQL-\*** and **webserver-\*** VMs.
 
-#. Open a browser and access `http://WebServer-VM-IP/`.
+#. Open a browser and access \http://*WebServer-VM-IP*/.
 
 #. Verify that the application loads and you can browse the list of stores and products.
 
@@ -214,14 +322,14 @@ Testing the Application
 
 #. Within your **WinServer** VM, open **Command Prompt** and run ``ping -t MYSQL-VM-IP`` to verify connectivity between the client and database. Leave the ping running.
 
-#. Open a second **Command Prompt** and run `ping -t NODE-VM-IP` to verify connectivity between the client and web server. Leave the ping running.
+#. Open a second **Command Prompt** and run ``ping -t node-VM-IP`` to verify connectivity between the client and web server. Leave the ping running.
 
    .. figure:: images/13.png
 
 Using Flow Visualization
 ........................
 
-#. Return to **Prism Central** and select :fa:`bars` **> Virtual Infrastructure > Policies > Security > click on POC-App**.
+#. Return to **Prism Central** and select :fa:`bars` **> Virtual Infrastructure > Policies > Security Policies > POC-App**.
 
 #. Verify that your **WinServer** VM appears as an inbound source.
 
@@ -229,7 +337,7 @@ Using Flow Visualization
 
    .. figure:: images/14.png
 
-   *Are there any other detected outbound traffic flows? Hover over these connections, and determine which ports are in use.*
+   Are there any other detected outbound traffic flows? Hover over these connections and determine what ports are in use.
 
 #. Click **Update** to edit the policy.
 
@@ -260,7 +368,7 @@ In order to enforce the policy you have defined, the policy must be applied.
 
 #. Verify that the Windows Client VM can still access the POC-App using the web browser. Add a new store or product to demonstrate the web tier is still able to communicate with the MySQL database.
 
-#. (Optional) In **Calm > Applications > POC-App-1 > Services**, select **WebServer** and click **Open Terminal** to access an HTML5 SSH session to the WebServer VM. Attempt to SSH to your database VM IP, the request should time out. If you return to **Security**, you should see this traffic discovered within the app, and blocked.
+#. (Optional) In **Calm > Applications > POC-App-1 > Services**, select **WebServer** and click **Open Terminal** to access an HTML5 SSH session to the WebServer VM. Attempt to SSH to your database VM IP, the request should time out. If you return to the **Security Policy** you should see this traffic discovered within the app, and blocked.
 
    .. figure:: images/17.png
 

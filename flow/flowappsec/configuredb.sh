@@ -100,4 +100,5 @@ INSERT INTO InventoryRecords (product_id,product_name,store_id,store_name,quanti
 GRANT ALL PRIVILEGES ON fiestadb.* TO 'root'@'%' IDENTIFIED BY '$1';
 
 FLUSH PRIVILEGES;
+SHOW tables;
 EOF
