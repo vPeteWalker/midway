@@ -1,34 +1,190 @@
 .. _mssqldeploy:
 
--------------------------
-Deploying MS SQL with Era
--------------------------
+-------------------
+Era - Microsoft SQL
+-------------------
 
 Traditional database VM deployment resembles the diagram below. The process generally starts with a IT ticket for a database (from Dev, Test, QA, Analytics, etc.). Next, one or more teams will need to deploy the storage resources, and VM(s) required. Once infrastructure is ready, a DBA needs to provision and configure database software. Once provisioned, any best practices and data protection/backup policies need to be applied. Finally the database can be handed over to the end user. That's a lot of handoffs, and the potential for a lot of friction.
 
 .. figure:: images/0.png
 
-Whereas with a Nutanix cluster and Era, provisioning and protecting a database should take you no longer than it took to read this intro.
+Whereas with Nutanix cluster and Era, provisioning and protecting a database should take you no longer than it took to read this intro.
 
-In this workshop you will manually deploy a Microsoft SQL Server VM, using a script to apply best practices. This VM will act as a master image to create a profile for deploying additional SQL VMs using Era.
+This workshop includes detailed instructions to:
+   - Deploy a new VM from Windows 2016 or 2019 golden image
+   - Deploy SQL Server 2016
+   - Deploy Era
+   -
 
-TEMP REQUIREMENTS PLACEHOLDER
-+++++++++++++++++++++++++++++
+TEMP PLACEHOLDER
+++++++++++++++++
 
 Links to different datacenters for:
 SQL 2016 image
 Era image
+SQL Server Management Studio - https://aka.ms/ssmsfullsetup
+Windows Scratch if performing manual SQL install
+These instructions will walk you through cloning a VM, created in the :ref:`_windows_scratch` section, and using it as a base image to install SQL Server 2016.
+In this workshop you will manually deploy a SQL Server 2016 VM. This VM will act as a master image to create a profile for deploying additional SQL VMs using Era.
+
+TEST BY REMOVING DNS TO ENSURE NOTHING IS BEING PULLING FROM ANYWHERE BEHIND THE SCENES
+
 
 https://portal.nutanix.com/page/documents/details?targetId=Nutanix-Era-User-Guide-v1_3:Nutanix-Era-User-Guide-v1_3
 
-SQL VM Deployment
-+++++++++++++++++
+SQL Server 2016 - Manual Deployment
++++++++++++++++++++++++++++++++++++
+
+These instructions will walk you through cloning a VM (created in the :ref:`_windows_scratch` section), and using it as a base image to install SQL Server 2016.In this workshop you will manually deploy a SQL Server 2016 VM. This VM will act as a master image to create a profile for deploying additional SQL VMs using Era.
+
+Deploy and configure Windows Server 2016 from clone
+...................................................
+
+#. From the dropdown within Prism, select **VM**. Select the *Table* view, if not already selected.
+
+#. Highlight your base Windows 2016 image. Right click, and choose **Clone**.
+
+#. Name the clone. This should be something that describes both its base operating system, and function (ex. Win16SQL16). Optionally adjust any VM settings based on your specific POC requirements. Click **OK** once complete.
+
+#. Right click the new VM, and select **Power On**.
+
+#. Once powered on, right click the VM, and select **Launch Console**.
+
+#. Click **Next** and then **Accept**.
+
+#. Use *nutanix/4u* for both the **Password** and **Reenter Password** fields. Click **OK**.
+
+#. Log in to the VM using the *Administrator* username, and *nutanix/4u* password.
+
+#. Rename the computer.
+
+   - Open *Server Manager* and select **Local Server**.
+
+   - Click on the link to the right of *Computer Name* (ex. WIN-O74HDA2JLG0)
+
+   - Click **Change**.
+
+   - Enter the same name you chose for the VM within the *Computer Name* field. Click **OK > OK > OK**. Restart the computer.
+
+#. (Optional) Join the *ntnxlab.local* domain.
+
+   #. Log in to the VM using the *Administrator* username, and *nutanix/4u* password.
+
+   - Open *Server Manager* and select **Local Server**.
+
+   - Click on the link to the right of *Computer Name* (ex. WIN-O74HDA2JLG0)
+
+   - Click **Change**.
+
+   - Under *Member of* select **Domain:**. Enter the domain name within the **Domain:** field (ex. ntnxlab.local).
+
+   - You will be prompted for domain administrator credentials. For the *ntnxlab.local* domain, enter **Administrator** for the username, and **nutanix/4u** for the password.
+
+   - Click **OK > OK > OK**. Restart the computer.
+
+#. Disable Windows Firewall for all networks.
+
+   - Open *Server Manager* and select **Local Server**.
+
+   - Within the *Windows Firewall* entry, click on **Private: On**.
+
+   - In the left pane, click on **Turn Windows Firewall on or off**.
+
+   - Under both *Private network settings* and *Public network settings*, click on the bullets for **Turn off Windows Firewall (not recommended)**.
+
+   - Click **OK** and close the *Windows Firewall* window.
+
+#. Enable Remote Desktop.
+
+   - Log in to the VM using the *Administrator* username, and *nutanix/4u* password.
+
+   - Click on the **Disabled** link to the right of *Remote Desktop*.
+
+      .. figure:: images/3.png
+
+   - Within the *Remote Desktop* section, select **Allow remote connections to this computer**. Click the box for **Allow connections only from computers running Remote Desktop with Network Level Authentication** to successfully connect to your VM via RDP. Click **OK > OK**.
+
+      .. figure:: images/3b.png
+
+#. Close the *Server Manager* window.
+
+#. Launch **File Explorer** and note the current, single disk configuration.
+
+   .. note::
+
+      Best practices for database VMs involve spreading the OS, SQL binaries, databases, TempDB, and logs across separate disks in order to maximize performance. We are specifically not following these recommendations in this workshop so that we may highlight one of the many benefits of Era later on.
+
+      For complete details for running SQL Server on Nutanix (including guidance around NUMA, hyperthreading, SQL Server configuration settings, and more), see the `Nutanix Microsoft SQL Server Best Practices Guide <https://portal.nutanix.com/#/page/solutions/details?targetId=BP-2015-Microsoft-SQL-Server:BP-2015-Microsoft-SQL-Server>`_.
+
+SQL Server 2016 - Manual Deployment
+...................................
+
+#. Within Prism, make note of the IP address for your *Win16SQL16* VM. Right click on it, and choose **Update**.
+
+#. Eject both ISO images by clicking the :fa:`eject` icon next to both.
+
+#. Click the :fa:`pencil-alt` icon next to either CD-ROM.
+
+#. Within the *Operation* dropdown, choose **Clone from image service**.
+
+#. Within the *Image* dropdown, choose **MSSQL2016**.
+
+#. Click **Update > Save**.
+
+#. Remote Desktop into your *Win16SQL16* either using the local *Administrator* username, and *nutanix/4u* password, or the domain administrator credentials (ex. ntnxlab.local\administrator) if joined to a domain.
+
+#. Open **File Explorer** and double-click on the CD-ROM drive letter containing the SQL 2016 ISO. This will begin the SQL 2016 installation.
+
+#. Click on **Installation > New SQL Server stand-alone installation or add features to an existing installation**.
+
+   .. figure:: images/9.png
+
+#. Click **Next** on the *Product Key* page to use the *Evaluation* edition.
+
+#. Click **I accept the license terms.** on the *License Terms* page, and click **Next**.
+
+#. Click the **Database Engine Services** box within the *Instance Features* section on the *Feature Selection* page, and click **Next**.
+
+#. Click **Next** on the *Instance Configuration* page.
+
+#. Click **Next** on the *Server Configuration* page.
+
+#. Click **Add Current User** within the *Specify SQL Server administrators*. Click **Next**.
+
+#. Click **Install** on the *Ready to Install* page.
+
+The installation process should take approximately 5 minutes. Click **Close** once complete. Close the *SQL Server Installation Center*.
+
+#. Install SQL Server Management Tools by executing **SSMS-Setup-ENU.exe**.
+
+#. Click **Install**. This process will take approximately 5-10 minutes. Click **Restart** once complete.
+
+#. Download `this <https://github.com/nutanixworkshops/EraWithMSSQL/raw/master/deploy_mssql_era/FiestaDB-MSSQL.sql>`_ file to the desktop of your *Win16SQL16* VM.
+
+#. Launch **SQL Server Management Studio 18** from the desktop.
+
+#. Leave the default *Windows Authentication*, and click **Connect**.
+
+#. Verify the database server is available, with only system databases provisioned.
+
+   .. figure:: images/5.png
+
+#. Right click on **Databases** and choose **New Database**. Enter **Fiesta** in the *Database name* field. Click **OK**.
+
+#. Click on **File > Open > File**. Choose the *FiestaDB-MSSQL.sql* file you previously downloaded to the desktop, and click **Open**.
+
+#. Click **Execute**. This will create data within the *Fiesta* database.
+
+   .. figure:: images/era10.png
+
+SQL Server 2016 - Image Deployment
+++++++++++++++++++++++++++++++++++
 
 #. From the dropdown within Prism, select **VM > + Create VM**.
 
 #. Fill out the following fields:
 
-   - **Name** - MSSQL
+   - **Name** - MSSQL2016
    - **Description** - (Optional) Description for your VM.
    - **vCPU(s)** - 2
    - **Memory** - 4 GiB
@@ -69,7 +225,9 @@ SQL VM Deployment
 
    - Close the *Server Manager* window.
 
-#. Join the *ntnxlab.local* domain.
+#. (Optional) Join the *ntnxlab.local* domain.
+
+   - Open *Server Manager* and select **Local Server**.
 
    -
 
@@ -81,7 +239,7 @@ SQL VM Deployment
 
       Best practices for database VMs involve spreading the OS, SQL binaries, databases, TempDB, and logs across separate disks in order to maximize performance.
 
-      For complete details for running Microsoft SQL Server on Nutanix (including guidance around NUMA, hyperthreading, SQL Server configuration settings, and more), see the `Nutanix Microsoft SQL Server Best Practices Guide <https://portal.nutanix.com/#/page/solutions/details?targetId=BP-2015-Microsoft-SQL-Server:BP-2015-Microsoft-SQL-Server>`_.
+      For complete details for running SQL Server on Nutanix (including guidance around NUMA, hyperthreading, SQL Server configuration settings, and more), see the `Nutanix Microsoft SQL Server Best Practices Guide <https://portal.nutanix.com/#/page/solutions/details?targetId=BP-2015-Microsoft-SQL-Server:BP-2015-Microsoft-SQL-Server>`_.
 
 #. From the desktop, launch the **01 - Rename Server.ps1** PowerShell script shortcut and fill out the following fields:
 

@@ -135,7 +135,11 @@ Click on :fa:`plus` **Add New Disk**. Change the *Type* to **CD-ROM**. Change th
 
 #. Recommend you perform all Windows updates. This can be very time consuming, you may wish to move onto other tasks/demos, while you monitor this from time to time and restart when prompted.
 
-#. When all Windows Updates are complete, run **C:\Windows\System32\Sysprep\Sysprep.exe**. Check the box for **Generalize**, and from the *Shutdown Options* dropdown, choose **Shutdown**.
+#. Windows Updates will require multiple restarts to apply all updates. Every time you are prompted to restart, do so, and check for Windows Updates once again. Process only when there are no other updates to apply.
+
+#. Ensure the date/time are correct. If not, right click on the time (lower right hand corner) and choose **Adjust Date/Time**. Make the required changes, and close the window once complete.
+
+#. Execute **C:\Windows\System32\Sysprep\Sysprep.exe**. Check the box for **Generalize**, and from the *Shutdown Options* dropdown, choose **Shutdown**.
 
    .. figure:: images/8.png
 
@@ -143,7 +147,7 @@ Click on :fa:`plus` **Add New Disk**. Change the *Type* to **CD-ROM**. Change th
 
       Per Microsoft: "When a system is generalized, specific configuration data for a given installation of Windows is removed. For example, during the generalize configuration pass, the unique security ID (SID) and other hardware-specific settings are removed from the image."
 
-#. Once the shutdown is complete, this image can now be used whenever Windows Server 2019 needs to be deployed during the POC process.
+#. Once the shutdown is complete, this image can now serve as the Windows Server 2016 base image during the POC process.
 
 Installing Windows 2019 from ISO
 ++++++++++++++++++++++++++++++++
@@ -218,7 +222,9 @@ Click on :fa:`plus` **Add New Disk**. Change the *Type* to **CD-ROM**. Change th
 
 #. Recommend you perform all Windows updates. This can be very time consuming, you may wish to move onto other tasks/demos, while you monitor this from time to time and restart when prompt
 
-#. When all Windows Updates are complete, run **C:\Windows\System32\Sysprep\Sysprep.exe**. Check the box for **Generalize**, and from the *Shutdown Options* dropdown, choose **Shutdown**.
+#. Windows Updates will require multiple restarts to apply all updates. Every time you are prompted to restart, do so, and check for Windows Updates once again. Process only when there are no other updates to apply.
+
+#. Execute **C:\Windows\System32\Sysprep\Sysprep.exe**. Check the box for **Generalize**, and from the *Shutdown Options* dropdown, choose **Shutdown**.
 
    .. figure:: images/8.png
 
@@ -226,4 +232,4 @@ Click on :fa:`plus` **Add New Disk**. Change the *Type* to **CD-ROM**. Change th
 
       Per Microsoft: "When a system is generalized, specific configuration data for a given installation of Windows is removed. For example, during the generalize configuration pass, the unique security ID (SID) and other hardware-specific settings are removed from the image."
 
-#. Once the shutdown is complete, this image can now be used whenever Windows Server 2019 needs to be deployed during the POC process.
+#. Once the shutdown is complete, this image can now serve as the Windows Server 2019 base image during the POC process.
