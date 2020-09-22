@@ -23,6 +23,8 @@ General Prerequisites
 
 Ensure the hardware you plan to use for your POC, either physical or HPOC, is not End-of-Life (EOL) or End-of-Maintenance (EOM). AOS upgrades are not supported on EOL or EOM hardware. Please refer to `KB Article #000009466 <https://portal.nutanix.com/page/documents/kbs/details?targetId=kA00e000000CyS2CAK>`_ for more information.
 
+All EULAs **MUST** be accepted by the customer. Previously, customer's had to sign `this <https://docs.google.com/a/nutanix.com/viewer?a=v&pid=sites&srcid=bnV0YW5peC5jb218Y29ycHxneDoyMDIyMTVkOTBiMzA5NGI4>`_ product trial agreement. Now this language is included in our product EULAs.
+
 Licensing
 +++++++++
 

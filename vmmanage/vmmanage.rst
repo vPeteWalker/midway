@@ -178,10 +178,6 @@ Updating VMs
 
    - Create a new simple volume (e.g. **E:**) by right clicking on the unallocated space, and choose **New Simple Volume**. Click **Next > Next > Choose E from the dropdown > Next > Finish**
 
-**FEEDBACK** - Which do you prefer gif, or video? Don't care? Prefer screen shots?
-
-   .. figure:: images/DiskOperations.gif
-
    .. raw:: html
 
       <video controls src="_static/video/diskoperations3.mp4"></video>

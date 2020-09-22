@@ -23,7 +23,7 @@ Nutanix Virt IO is a collection of drivers for paravirtual devices that enhance 
 
    .. figure:: images/4.png
 
-#. Log on to Prism, and choose **Settings** from the dropdown.
+#. Log on to Prism Element, and choose **Settings** from the dropdown.
 
 #. Click on **Image Configuration**.
 
@@ -65,7 +65,7 @@ You may use a customer-provided image, or obtain the Windows Server 2016 and Win
 Installing Windows 2016 from ISO
 ++++++++++++++++++++++++++++++++
 
-#. Log on to Prism, and choose **Settings** from the dropdown.
+#. Log on to Prism Element, and choose **Settings** from the dropdown.
 
 #. Click on **Image Configuration**.
 
@@ -83,7 +83,7 @@ Installing Windows 2016 from ISO
 
    .. figure:: images/1.png
 
-#. Within Prism, click on :fa:`bars` **> Virtual Infrastructure > VMs**.
+#. Within Prism Element, click on :fa:`bars` **> Virtual Infrastructure > VMs**.
 
 #. Click on :fa:`plus` **Create VM**.
 
@@ -109,7 +109,7 @@ Click on :fa:`plus` **Add New Disk**. Change the *Type* to **CD-ROM**. Change th
 
 #. Click **Save**.
 
-#. Within Prism, right click on your *Windows2016* VM, and choose **Power on**.
+#. Within Prism Element, right click on your *Windows2016* VM, and choose **Power on**.
 
 #. Wait a few moments, then right click on your *Windows2016* VM, and choose **Launch Console**.
 
@@ -133,6 +133,10 @@ Click on :fa:`plus` **Add New Disk**. Change the *Type* to **CD-ROM**. Change th
 
 #. Set the Administrator as **nutanix/4u** for ease of use, and login as Administrator.
 
+#. Within Prism Element, right click on your *Win16SQL16* VM, and choose **Update**.
+
+#. Remove one CD-ROM drive by clicking the :fa:`times` icon.
+
 #. Recommend you perform all Windows updates. This can be very time consuming, you may wish to move onto other tasks/demos, while you monitor this from time to time and restart when prompted.
 
 #. Windows Updates will require multiple restarts to apply all updates. Every time you are prompted to restart, do so, and check for Windows Updates once again. Process only when there are no other updates to apply.
@@ -152,7 +156,7 @@ Click on :fa:`plus` **Add New Disk**. Change the *Type* to **CD-ROM**. Change th
 Installing Windows 2019 from ISO
 ++++++++++++++++++++++++++++++++
 
-#. Log on to Prism, and choose **Settings** from the dropdown.
+#. Log on to Prism Element, and choose **Settings** from the dropdown.
 
 #. Click on **Image Configuration**.
 
@@ -170,7 +174,7 @@ Installing Windows 2019 from ISO
 
    .. figure:: images/1.png
 
-#. Within Prism, click on :fa:`bars` **> Virtual Infrastructure > VMs**.
+#. Within Prism Element, click on :fa:`bars` **> Virtual Infrastructure > VMs**.
 
 #. Click on :fa:`plus` **Create VM**.
 
@@ -196,7 +200,7 @@ Click on :fa:`plus` **Add New Disk**. Change the *Type* to **CD-ROM**. Change th
 
 #. Click **Save**.
 
-#. Within Prism, right click on your *Windows2019* VM, and choose **Power on**.
+#. Within Prism Element, right click on your *Windows2019* VM, and choose **Power on**.
 
 #. Wait a few moments, then right click on your *Windows2019* VM, and choose **Launch Console**.
 

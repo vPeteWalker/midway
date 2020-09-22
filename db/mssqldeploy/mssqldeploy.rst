@@ -35,16 +35,32 @@ https://portal.nutanix.com/page/documents/details?targetId=Nutanix-Era-User-Guid
 SQL Server 2016 - Manual Deployment
 +++++++++++++++++++++++++++++++++++
 
-These instructions will walk you through cloning a VM (created in the :ref:`_windows_scratch` section), and using it as a base image to install SQL Server 2016.In this workshop you will manually deploy a SQL Server 2016 VM. This VM will act as a master image to create a profile for deploying additional SQL VMs using Era.
+These instructions will walk you through cloning a VM (originally created within the :ref:`_windows_scratch` section), and using it as a base image on which to install SQL Server 2016. You will then manually deploy a SQL Server 2016 VM. This VM will act as a master image to create a profile for deploying additional SQL VMs with Nutanix and Microsoft best practices automatically applied by Era.
 
 Deploy and configure Windows Server 2016 from clone
 ...................................................
 
-#. From the dropdown within Prism, select **VM**. Select the *Table* view, if not already selected.
+#. From the dropdown within Prism Element, select **VM**. Select the *Table* view, if not already selected.
 
-#. Highlight your base Windows 2016 image. Right click, and choose **Clone**.
+#. Highlight your base Windows 2016 image, right click and choose **Clone**.
 
-#. Name the clone. This should be something that describes both its base operating system, and function (ex. Win16SQL16). Optionally adjust any VM settings based on your specific POC requirements. Click **OK** once complete.
+#. Name the clone. This should be something that describes both its base operating system, and function (ex. Win16SQL16). Recommend the VM name is 15 characters or less, since we'll be renaming the Windows server to the same name.
+
+#. Perform the following tasks:
+
+   - Eject the CD-ROM by clicking the :fa:`eject` icon
+
+   - Click the :fa:`pencil-alt` icon next to the CD-ROM
+
+   - Within the *Operation* dropdown, choose **Clone from image service**
+
+   - Within the *Image* dropdown, choose **MSSQL2016**. Click **Update**
+
+   - Select **+ Add New Disk**
+
+   - **Size** - 100 GiB
+
+   - Select **Add**
 
 #. Right click the new VM, and select **Power On**.
 
@@ -68,7 +84,7 @@ Deploy and configure Windows Server 2016 from clone
 
 #. (Optional) Join the *ntnxlab.local* domain.
 
-   #. Log in to the VM using the *Administrator* username, and *nutanix/4u* password.
+   - Log in to the VM using the *Administrator* username, and *nutanix/4u* password.
 
    - Open *Server Manager* and select **Local Server**.
 
@@ -96,7 +112,7 @@ Deploy and configure Windows Server 2016 from clone
 
 #. Enable Remote Desktop.
 
-   - Log in to the VM using the *Administrator* username, and *nutanix/4u* password.
+   - Open *Server Manager* and select **Local Server**.
 
    - Click on the **Disabled** link to the right of *Remote Desktop*.
 
@@ -106,7 +122,19 @@ Deploy and configure Windows Server 2016 from clone
 
       .. figure:: images/3b.png
 
-#. Close the *Server Manager* window.
+#. Remote Desktop into your *Win16SQL16* either using the local *Administrator* username.
+
+#. Open **Disk Management** and perform the following disk operations:
+
+   - Mark **Disk 1** online by right clicking on *Disk 1* and choosing **Online**.
+
+   - Initialize the new disk by right clicking on *Disk 1* and choosing **Initialize**.
+
+   - Create a new simple volume (e.g. **E:**) by right clicking on the unallocated space, and choose **New Simple Volume**. Click **Next > Next > Choose E from the dropdown > Next > Finish**
+
+   .. raw:: html
+
+      <video controls src="_static/video/diskoperations3.mp4"></video>
 
 #. Launch **File Explorer** and note the current, single disk configuration.
 
@@ -116,22 +144,14 @@ Deploy and configure Windows Server 2016 from clone
 
       For complete details for running SQL Server on Nutanix (including guidance around NUMA, hyperthreading, SQL Server configuration settings, and more), see the `Nutanix Microsoft SQL Server Best Practices Guide <https://portal.nutanix.com/#/page/solutions/details?targetId=BP-2015-Microsoft-SQL-Server:BP-2015-Microsoft-SQL-Server>`_.
 
-SQL Server 2016 - Manual Deployment
-...................................
+SQL Server 2016 Installation
+............................
 
-#. Within Prism, make note of the IP address for your *Win16SQL16* VM. Right click on it, and choose **Update**.
+#. Within Prism Element, make note of the IP address for your *Win16SQL16* VM. Right click on it, and choose **Update**.
 
-#. Eject both ISO images by clicking the :fa:`eject` icon next to both.
 
-#. Click the :fa:`pencil-alt` icon next to either CD-ROM.
 
-#. Within the *Operation* dropdown, choose **Clone from image service**.
 
-#. Within the *Image* dropdown, choose **MSSQL2016**.
-
-#. Click **Update > Save**.
-
-#. Remote Desktop into your *Win16SQL16* either using the local *Administrator* username, and *nutanix/4u* password, or the domain administrator credentials (ex. ntnxlab.local\administrator) if joined to a domain.
 
 #. Open **File Explorer** and double-click on the CD-ROM drive letter containing the SQL 2016 ISO. This will begin the SQL 2016 installation.
 
@@ -180,7 +200,9 @@ The installation process should take approximately 5 minutes. Click **Close** on
 SQL Server 2016 - Image Deployment
 ++++++++++++++++++++++++++++++++++
 
-#. From the dropdown within Prism, select **VM > + Create VM**.
+This will deploy Windows 2016 and SQL 2016, allowing you to proceed to installing Era more quickly.
+
+#. From the dropdown within Prism Element, select **VM > + Create VM**.
 
 #. Fill out the following fields:
 
@@ -193,6 +215,10 @@ SQL Server 2016 - Image Deployment
       - **Type** - DISK
       - **Operation** - Clone from Image Service
       - **Image** - MSSQL-2016-VM.qcow2
+      - Select **Add**
+
+   - Select **+ Add New Disk**
+      - **Size** - 100 GiB
       - Select **Add**
 
    - Select **Add New NIC**
@@ -211,62 +237,35 @@ SQL Server 2016 - Image Deployment
 
 #. Log in to the VM using the *Administrator* username, and *nutanix/4u* password.
 
-#. Disable Windows Firewall for all networks.
+#. Open **Disk Management** and perform the following disk operations.
 
-   - Open *Server Manager* and select **Local Server**.
+   - Mark **Disk 1** online by right clicking on *Disk 1* and choosing **Online**.
 
-   - Within the *Windows Firewall* entry, click on **Private: On**.
+   - Initialize the new disk by right clicking on *Disk 1* and choosing **Initialize**.
 
-   - In the left pane, click on **Turn Windows Firewall on or off**.
+   - Create a new simple volume (e.g. **E:**) by right clicking on the unallocated space, and choose **New Simple Volume**. Click **Next > Next > Choose E from the dropdown > Next > Finish**
 
-   - Under both *Private network settings* and *Public network settings*, click on the bullets for **Turn off Windows Firewall (not recommended)**.
+   .. raw:: html
 
-   - Click **OK** and close the *Windows Firewall* window.
+      <video controls src="_static/video/diskoperations3.mp4"></video>
 
-   - Close the *Server Manager* window.
-
-#. (Optional) Join the *ntnxlab.local* domain.
-
-   - Open *Server Manager* and select **Local Server**.
-
-   -
-
-#. Launch **File Explorer** and note the current, single disk configuration.
-
-   .. figure:: images/2.png
+#. Launch **File Explorer** and note the current disk configuration.
 
    .. note::
 
-      Best practices for database VMs involve spreading the OS, SQL binaries, databases, TempDB, and logs across separate disks in order to maximize performance.
+      Best practices for database VMs involve spreading the OS, SQL binaries, databases, TempDB, and logs across separate disks in order to maximize performance. We are specifically not following these recommendations in this workshop so that we may highlight one of the many benefits of Era later on.
 
       For complete details for running SQL Server on Nutanix (including guidance around NUMA, hyperthreading, SQL Server configuration settings, and more), see the `Nutanix Microsoft SQL Server Best Practices Guide <https://portal.nutanix.com/#/page/solutions/details?targetId=BP-2015-Microsoft-SQL-Server:BP-2015-Microsoft-SQL-Server>`_.
 
-#. From the desktop, launch the **01 - Rename Server.ps1** PowerShell script shortcut and fill out the following fields:
+#. Rename the computer.
 
-   - **Enter the Nutanix cluster IP** - <CLUSTER-VIP>
-   - **Enter the Nutanix user name for...** - admin
-   - **Enter the Nutanix password for "admin"** - <CLUSTER-PASSWORD>
+   - Open *Server Manager* and select **Local Server**.
 
-   The script will validate the VM name does not exceed 15 characters and then rename the server to match the VM name.
+   - Click on the link to the right of *Computer Name* (ex. WIN-O74HDA2JLG0)
 
-#. Once VM has rebooted, log in as previous, and launch the **02 - Complete Build.ps1** Powershell script shortcut. Fill out the following fields:
+   - Click **Change**.
 
-   - **Enter the Nutanix cluster IP** - <CLUSTER-VIP>
-   - **Enter the Nutanix user name for...** - admin
-   - **Enter the Nutanix password for "admin"** - <CLUSTER-PASSWORD>
-   - **Enter the Nutanix container name** - <DEFAULT-CONTAINER-NAME>
-
-   .. note::
-
-      All fields in the above script are case sensitive.
-
-   This script will setup and create disk drives according to best practices place SQL data files on those drives. The SQL Systems File is placed on the D:\ drive and data and logs files are placed on separate drives.
-
-#. Once VM has rebooted, log in to the VM, and verify the new disk configuration in both **Prism** and **File Explorer** within the VM itself.
-
-   .. figure:: images/3.png
-
-   .. figure:: images/4.png
+   - Enter the same name you chose for the VM within the *Computer Name* field. Click **OK > OK > OK**. Restart the computer.
 
 #. Download `this <https://github.com/nutanixworkshops/EraWithMSSQL/raw/master/deploy_mssql_era/FiestaDB-MSSQL.sql>`_ file to the desktop.
 
@@ -291,7 +290,7 @@ SQL Server 2016 - Image Deployment
 Installing Era
 ++++++++++++++
 
-#. Download the **Era Install for AHV** image file from the `Nutanix Support portal <https://portal.nutanix.com/page/downloads?product=era>`_.
+#. Download the **Era Install for AHV** image file from the `Era Downloads section - Nutanix Support Portal <https://portal.nutanix.com/page/downloads?product=era>`_ either click the **Download** button associated with the latest version of *Era Install for AHV*, or the :fa:`elipsis`next to it, and choose **Copy Download Link**.
 
 #. Log on to the *Prism Element* web console.
 
@@ -303,19 +302,29 @@ Installing Era
 
    - **Name**. Type a name of the image (ex. Era)
 
-   - **Annotation**. Type a description of the image.
-
-   - **Image Type**. Select Disk from the drop-down list.
+   - **Image Type**. Select **Disk** from the drop-down list.
 
    - **Storage Container**. Select the **default** storage container to install Era.
 
-   - Under *Image Source*, select **Upload a file**, and click **Choose File**.
+   - **Choose one of the following**:
 
-   - Browse to the location on your local computer where you have saved the qcow2 image file of Era, and click **Open**.
+      - Within *Image Source*, click **Upload a file > Choose File**. Browse to the Disk image for Era, and click **Open**.
+
+         .. figure:: images/6.png
+
+      **OR**
+
+      - Click :fa:`dot-circle` **From URL**, and paste the download link you previously copied from the Nutanix Portal.
+
+         .. figure:: images/5.png
+
+         .. note::
+
+            Verify that the *Image Type* is **Disk**.
 
    - Click **Save**.
 
-   Wait until the **Create Image** task completes before proceeding.
+   - Wait until the **Create Image** task completes before proceeding.
 
 #. From the main menu drop-down list, select **VM**, and then click **+ Create VM**.
 
@@ -323,21 +332,17 @@ Installing Era
 
    - **Name** Enter a name of the VM.
 
-   - (Optional) **Description** Enter a description of the VM.
+   - **vCPU(s)** 4
 
-   - **Use this VM as an agent VM** Select this option to make this VM as an agent VM.
-
-   - **vCPU(s)** Enter 4 as the number of virtual CPUs to allocate to this VM.
-
-   - **Memory** Enter 16 GB as the amount of memory (in GB) to allocate to this VM.
+   - **Memory** 16 GiB
 
 #. Click **Add New Disk**.
 
    Do the following in the indicated fields.
 
-   - **Operation** Select **Clone from Image Service** to copy the Era image that you have imported by using the image service feature onto the disk.
+   - **Operation** Select **Clone from Image Service**.
 
-   - **Image** Select the Era image that you have imported by using the image service feature.
+   - **Image** Select the Era image (ex. Era)
 
    - Click **Add** to attach the disk to the VM and return to the *Create VM* dialog box.
 
@@ -384,11 +389,11 @@ Initial Era Configuration
 
    - **Name** Type a name of the Nutanix cluster as you want the name to appear in Era.
 
-   - **Description** Type a description of the Nutanix cluster.
+   - (Optional) **Description** Type a description of the Nutanix cluster.
 
-   - **IP Address of the Prism Element** Type the IP address of the Prism Element web console of the Nutanix cluster.
+   - **IP Address of the Prism Element** Type the IP address of the Prism Element VIP.
 
-   - **Prism Element Administrator** Type the user name of the Prism Element user account with which you want Era to access the Nutanix cluster.
+   - **Prism Element Administrator** Type the user name of the Prism Element user account with which you want Era to access the Nutanix cluster. (ex. admin)
 
       .. note::
 
@@ -402,9 +407,11 @@ Initial Era Configuration
 
 #. In the *Services* screen, do the following in the indicated fields:
 
-#. Ensure that the AutoAD IP address is the only entry in the *DNS Servers* field.
+#. In the *DNS Servers Addresses* list, ensure that the AutoAD IP address is the only entry in the *DNS Servers* field.
 
-#. (Optional) Configure the SMTP server. If you choose not to configure SMTP, remove the e-mail address in the *Sender's Email* field.
+#. In the *NTP Servers Addresses* list, use the same NTP servers you used when configuring Prism.
+
+#. (Optional) Configure the SMTP server.
 
 #. In the *Era Server's OS Time Zone* list, select a timezone.
 
@@ -430,7 +437,7 @@ Initial Era Configuration
 
    .. figure:: images/era7.png
 
-Configure Windows Domain
+(Optional) Configure Windows Domain
 ........................
 
 #. From the dropdown, choose **Profiles**.
@@ -458,7 +465,7 @@ Configure UI Timeout
 
 #. Click on the **admin** dropdown at the top right, and choose **Profile**.
 
-#. Set the *Timeout* setting to **Never**. This will help avoid being logged out unexpectedly.
+#. Set the *Timeout* setting to **Never**. This will help avoid being logged out unexpectedly during your POC.
 
 Modifying Era VM Network Settings Post-Launch
 .............................................
@@ -471,12 +478,12 @@ Modifying Era VM Network Settings Post-Launch
 .
 #. Use the following credentials to log on to Era:
 
-   - User name: era
-   - Password: Nutanix.1
+   - **User name**: era
+   - **Password**: Nutanix.1
 
 #. Launch the Era server prompt by typing `era-server`.
 
-#. The command is `era_server set ip=<IP-address> gateway=<GATEWAY-ADDRESS> netmask=<NETMASK-IP> nameserver=<NAMESERVER>
+#. The full command is `era_server set ip=<IP-address> gateway=<GATEWAY-ADDRESS> netmask=<NETMASK-IP> nameserver=<NAMESERVER>
 
 Registering MSSQL VM
 ++++++++++++++++++++
@@ -498,9 +505,9 @@ A SQL Server database server must meet the following requirements before you are
 
    .. figure:: images/era8.png
 
-#. The *Register a SQL Server Database* window appears. In the *Database Server VM* step, select **Not registered**.
+#. The *Register a SQL Server Database* window appears. In the *Database Server VM* screen, do the following in the indicated fields:
 
-#. In the *Era’s Cluster* screen, do the following in the indicated fields:
+   - Select **Not registered** within *Database is on a Server VM that is:*.
 
    - **IP Address or Name of VM** Select the VM you created in the *SQL VM Deployment* section. Verify that the associated IP address matches the IP address that is listed in Prism, as there may be multiple IP addresses listed for the same VM.
 
@@ -512,11 +519,15 @@ A SQL Server database server must meet the following requirements before you are
 
    - The *Connect to SQL Server Login* and *User Name* fields allow a choice of authentication between Windows Admin, and SQL Server user. Leave the default at **Windows Admin User**, and click **Next**.
 
-   - Select the **Fiesta** database within the *Unregistered Databases* section. Click **Next**.
+#. In the *Database Server VM* screen, select the **Fiesta** database within the *Unregistered Databases* section. Click **Next**.
 
    .. figure:: images/era11.png
 
-   - Click **Register**.
+#. In the *Time Machine* screen, choose **DEFAULT_OOB_GOLD_SLA** within the *SLA* field.
+
+#. Click **Register**.
+
+#. In the *Status* column, click **Registering** to monitor the status.
 
 #. The registration process will take approximately 5 minutes. In the meantime, proceed with these steps:
 
