@@ -13,8 +13,10 @@ Whereas with Nutanix cluster and Era, provisioning and protecting a database sho
 This workshop includes detailed instructions to:
    - Deploy a new VM from Windows 2016 or 2019 golden image
    - Deploy SQL Server 2016
-   - Deploy Era
+   - Deploy Era 2.0
    -
+
+The goal is provide a completely transparent process to install both SQL and Era, avoiding use of any pre-built images, scripts, or anything that could be considered "black box". This is especially important for POCs being performed in highly-secure environments, where pre-built images or scripts may be forbidden. Everything used here is either publicly available (ex. Microsoft ISO images) and/or in plain text that can be easily reviewed (ex. SQL query file).
 
 TEMP PLACEHOLDER
 ++++++++++++++++
@@ -23,14 +25,14 @@ Links to different datacenters for:
 SQL 2016 image
 Era image
 SQL Server Management Studio - https://aka.ms/ssmsfullsetup
-Windows Scratch if performing manual SQL install
-These instructions will walk you through cloning a VM, created in the :ref:`_windows_scratch` section, and using it as a base image to install SQL Server 2016.
-In this workshop you will manually deploy a SQL Server 2016 VM. This VM will act as a master image to create a profile for deploying additional SQL VMs using Era.
+Windows Scratch prereq
 
 TEST BY REMOVING DNS TO ENSURE NOTHING IS BEING PULLING FROM ANYWHERE BEHIND THE SCENES
 
 
 https://portal.nutanix.com/page/documents/details?targetId=Nutanix-Era-User-Guide-v1_3:Nutanix-Era-User-Guide-v1_3
+
+https://portal.nutanix.com/page/documents/details?targetId=Nutanix-Era-User-Guide-v2_0:Nutanix-Era-User-Guide-v2_0
 
 SQL Server 2016 - Manual Deployment
 +++++++++++++++++++++++++++++++++++
@@ -44,29 +46,31 @@ Deploy and configure Windows Server 2016 from clone
 
 #. Highlight your base Windows 2016 image, right click and choose **Clone**.
 
-#. Name the clone. This should be something that describes both its base operating system, and function (ex. Win16SQL16). Recommend the VM name is 15 characters or less, since we'll be renaming the Windows server to the same name.
+#. Name the clone. This should be something that describes both its base operating system, and function (ex. Win16SQL16). Recommend the VM name is fewer than 15 characters, since we'll be renaming the Windows server to the same name.
 
 #. Perform the following tasks:
 
-   - Eject the CD-ROM by clicking the :fa:`eject` icon
+   - Right click on your *Win16SQL16* VM, and choose **Update**.
 
-   - Click the :fa:`pencil-alt` icon next to the CD-ROM
+   - Click the :fa:`eject` icon if the CD-ROM is not already empty.
 
-   - Within the *Operation* dropdown, choose **Clone from image service**
+   - Click the :fa:`pencil-alt` icon next to the CD-ROM.
 
-   - Within the *Image* dropdown, choose **MSSQL2016**. Click **Update**
+   - Within the *Operation* dropdown, choose **Clone from image service**.
 
-   - Select **+ Add New Disk**
+   - Within the *Image* dropdown, choose **MSSQL2016**. Click **Update**.
 
-   - **Size** - 100 GiB
+   - Select **+ Add New Disk**.
 
-   - Select **Add**
+   - **Size** - 100 GiB.
+
+   - Select **Add**.
 
 #. Right click the new VM, and select **Power On**.
 
 #. Once powered on, right click the VM, and select **Launch Console**.
 
-#. Click **Next** and then **Accept**.
+#. Click **Next > Accept**.
 
 #. Use *nutanix/4u* for both the **Password** and **Reenter Password** fields. Click **OK**.
 
@@ -80,7 +84,7 @@ Deploy and configure Windows Server 2016 from clone
 
    - Click **Change**.
 
-   - Enter the same name you chose for the VM within the *Computer Name* field. Click **OK > OK > OK**. Restart the computer.
+   - Enter the same name you chose for the VM within the *Computer Name* field. Click **OK > OK > Close > Restart Now**.
 
 #. (Optional) Join the *ntnxlab.local* domain.
 
@@ -96,13 +100,15 @@ Deploy and configure Windows Server 2016 from clone
 
    - You will be prompted for domain administrator credentials. For the *ntnxlab.local* domain, enter **Administrator** for the username, and **nutanix/4u** for the password.
 
-   - Click **OK > OK > OK**. Restart the computer.
+   - Click **OK > OK > Close > Restart Now**.
 
 #. Disable Windows Firewall for all networks.
 
+   - Log in to the VM using the *Administrator* username, and *nutanix/4u* password.
+
    - Open *Server Manager* and select **Local Server**.
 
-   - Within the *Windows Firewall* entry, click on **Private: On**.
+   - Within the *Windows Firewall* entry, click on **Private: On**. If this is already set to **Private: Off** you may skip this section.
 
    - In the left pane, click on **Turn Windows Firewall on or off**.
 
@@ -118,11 +124,11 @@ Deploy and configure Windows Server 2016 from clone
 
       .. figure:: images/3.png
 
-   - Within the *Remote Desktop* section, select **Allow remote connections to this computer**. Click the box for **Allow connections only from computers running Remote Desktop with Network Level Authentication** to successfully connect to your VM via RDP. Click **OK > OK**.
+   - Within the *Remote Desktop* section, select **Allow remote connections to this computer**. Click **OK**. Click the box for **Allow connections only from computers running Remote Desktop with Network Level Authentication** to successfully connect to your VM via RDP. Click **OK**.
 
       .. figure:: images/3b.png
 
-#. Remote Desktop into your *Win16SQL16* either using the local *Administrator* username.
+#. Remote Desktop into your *Win16SQL16* VM using the *Administrator* username.
 
 #. Open **Disk Management** and perform the following disk operations:
 
@@ -130,13 +136,15 @@ Deploy and configure Windows Server 2016 from clone
 
    - Initialize the new disk by right clicking on *Disk 1* and choosing **Initialize**.
 
-   - Create a new simple volume (e.g. **E:**) by right clicking on the unallocated space, and choose **New Simple Volume**. Click **Next > Next > Choose E from the dropdown > Next > Finish**
+   - Create a new simple volume (ex. **E:**) by right clicking on the unallocated space, and choose **New Simple Volume**. Click **Next > Next > Choose E from the dropdown > Next > Finish**
 
    .. raw:: html
 
       <video controls src="_static/video/diskoperations3.mp4"></video>
 
-#. Launch **File Explorer** and note the current, single disk configuration.
+   - Verify your new volume has a drive letter assigned (ex. E:), and is present within *File Explorer*. If it does not, right click on the volume, and choose **Change Drive Letter and Paths...**. Click **Add**. Choose a drive letter (ex. E:). Click **OK > OK**, and then close the *Disk Management* window.
+
+#. Within **File Explorer**, note the current disk configuration.
 
    .. note::
 
@@ -144,14 +152,16 @@ Deploy and configure Windows Server 2016 from clone
 
       For complete details for running SQL Server on Nutanix (including guidance around NUMA, hyperthreading, SQL Server configuration settings, and more), see the `Nutanix Microsoft SQL Server Best Practices Guide <https://portal.nutanix.com/#/page/solutions/details?targetId=BP-2015-Microsoft-SQL-Server:BP-2015-Microsoft-SQL-Server>`_.
 
-SQL Server 2016 Installation
-............................
+#. Close the console for *Win16SQL16*.
 
-#. Within Prism Element, make note of the IP address for your *Win16SQL16* VM. Right click on it, and choose **Update**.
+SQL Server 2016 Installation (Windows 2016)
+...........................................
 
+#. Within Prism Element, make note of the IP address for your *Win16SQL16* VM.
 
+#. Connect to your *Win16SQL16* VM using Remote Desktop.
 
-
+#. Download `this <https://github.com/nutanixworkshops/EraWithMSSQL/raw/master/deploy_mssql_era/FiestaDB-MSSQL.sql>`_ file to the desktop of your *Win16SQL16* VM.
 
 #. Open **File Explorer** and double-click on the CD-ROM drive letter containing the SQL 2016 ISO. This will begin the SQL 2016 installation.
 
@@ -163,13 +173,15 @@ SQL Server 2016 Installation
 
 #. Click **I accept the license terms.** on the *License Terms* page, and click **Next**.
 
+#. Check the **Use Microsoft Update to check for updates (recommended)** and click **Next**.
+
 #. Click the **Database Engine Services** box within the *Instance Features* section on the *Feature Selection* page, and click **Next**.
 
 #. Click **Next** on the *Instance Configuration* page.
 
 #. Click **Next** on the *Server Configuration* page.
 
-#. Click **Add Current User** within the *Specify SQL Server administrators*. Click **Next**.
+#. Click **Add Current User** within the *Specify SQL Server administrators* of the *Database Engine Configuration* page. Click **Next**.
 
 #. Click **Install** on the *Ready to Install* page.
 
@@ -179,97 +191,11 @@ The installation process should take approximately 5 minutes. Click **Close** on
 
 #. Click **Install**. This process will take approximately 5-10 minutes. Click **Restart** once complete.
 
-#. Download `this <https://github.com/nutanixworkshops/EraWithMSSQL/raw/master/deploy_mssql_era/FiestaDB-MSSQL.sql>`_ file to the desktop of your *Win16SQL16* VM.
+#. Connect to your *Win16SQL16* VM using Remote Desktop.
 
-#. Launch **SQL Server Management Studio 18** from the desktop.
+#. Open **File Explorer > This PC**. Click on your additional drive letter (ex. E:\), and create two folders: **Databases** and **Logs**.
 
-#. Leave the default *Windows Authentication*, and click **Connect**.
-
-#. Verify the database server is available, with only system databases provisioned.
-
-   .. figure:: images/5.png
-
-#. Right click on **Databases** and choose **New Database**. Enter **Fiesta** in the *Database name* field. Click **OK**.
-
-#. Click on **File > Open > File**. Choose the *FiestaDB-MSSQL.sql* file you previously downloaded to the desktop, and click **Open**.
-
-#. Click **Execute**. This will create data within the *Fiesta* database.
-
-   .. figure:: images/era10.png
-
-SQL Server 2016 - Image Deployment
-++++++++++++++++++++++++++++++++++
-
-This will deploy Windows 2016 and SQL 2016, allowing you to proceed to installing Era more quickly.
-
-#. From the dropdown within Prism Element, select **VM > + Create VM**.
-
-#. Fill out the following fields:
-
-   - **Name** - MSSQL2016
-   - **Description** - (Optional) Description for your VM.
-   - **vCPU(s)** - 2
-   - **Memory** - 4 GiB
-
-   - Select **+ Add New Disk**
-      - **Type** - DISK
-      - **Operation** - Clone from Image Service
-      - **Image** - MSSQL-2016-VM.qcow2
-      - Select **Add**
-
-   - Select **+ Add New Disk**
-      - **Size** - 100 GiB
-      - Select **Add**
-
-   - Select **Add New NIC**
-      - **VLAN Name** - *Primary*
-      - Select **Add**
-
-#. Click **Save** to create the VM.
-
-#. Right click the VM, and select **Power On**.
-
-#. Once powered on, right click the VM, and select **Launch Console**. Complete Windows Server setup as follows:
-
-   - Click **Next**.
-   - **Accept** the licensing agreement.
-   - Enter **nutanix/4u** as the Administrator password and click **Finish**.
-
-#. Log in to the VM using the *Administrator* username, and *nutanix/4u* password.
-
-#. Open **Disk Management** and perform the following disk operations.
-
-   - Mark **Disk 1** online by right clicking on *Disk 1* and choosing **Online**.
-
-   - Initialize the new disk by right clicking on *Disk 1* and choosing **Initialize**.
-
-   - Create a new simple volume (e.g. **E:**) by right clicking on the unallocated space, and choose **New Simple Volume**. Click **Next > Next > Choose E from the dropdown > Next > Finish**
-
-   .. raw:: html
-
-      <video controls src="_static/video/diskoperations3.mp4"></video>
-
-#. Launch **File Explorer** and note the current disk configuration.
-
-   .. note::
-
-      Best practices for database VMs involve spreading the OS, SQL binaries, databases, TempDB, and logs across separate disks in order to maximize performance. We are specifically not following these recommendations in this workshop so that we may highlight one of the many benefits of Era later on.
-
-      For complete details for running SQL Server on Nutanix (including guidance around NUMA, hyperthreading, SQL Server configuration settings, and more), see the `Nutanix Microsoft SQL Server Best Practices Guide <https://portal.nutanix.com/#/page/solutions/details?targetId=BP-2015-Microsoft-SQL-Server:BP-2015-Microsoft-SQL-Server>`_.
-
-#. Rename the computer.
-
-   - Open *Server Manager* and select **Local Server**.
-
-   - Click on the link to the right of *Computer Name* (ex. WIN-O74HDA2JLG0)
-
-   - Click **Change**.
-
-   - Enter the same name you chose for the VM within the *Computer Name* field. Click **OK > OK > OK**. Restart the computer.
-
-#. Download `this <https://github.com/nutanixworkshops/EraWithMSSQL/raw/master/deploy_mssql_era/FiestaDB-MSSQL.sql>`_ file to the desktop.
-
-#. Launch **SQL Server Management Studio 17** from the desktop.
+#. Launch **SQL Server Management Studio 18**.
 
 #. Leave the default *Windows Authentication*, and click **Connect**.
 
@@ -277,15 +203,25 @@ This will deploy Windows 2016 and SQL 2016, allowing you to proceed to installin
 
    .. figure:: images/5.png
 
-#. Right click on **Databases** and choose **New Database**. Enter **Fiesta** in the *Database name* field. Click **OK**.
+#. Add and modify a SQL database by performing the following:
+
+   - Right click on **Databases** and choose **New Database**.
+
+   - Enter **Fiesta** in the *Database name* field.
+
+   - Scroll to the right, and select :fa:`elipsis-h` within the *Path* section for the *Fiesta* entry. Browse to the *databases* directory within the secondary drive (ex. E:\). Click **OK**.
+
+   - Scroll to the right, and select :fa:`elipsis-h` within the *Path* section for the *Fiesta_log* entry. Browse to the *logs* directory within the secondary drive (ex. E:\). Click **OK**.
+
+   .. figure:: images/20.png
+
+   - Click **OK**.
 
 #. Click on **File > Open > File**. Choose the *FiestaDB-MSSQL.sql* file you previously downloaded to the desktop, and click **Open**.
 
 #. Click **Execute**. This will create data within the *Fiesta* database.
 
    .. figure:: images/era10.png
-
-   Congratulations, you now have a functioning SQL Server VM. While this process could be further automated through `acli`, Calm, or REST API calls orchestrated by a third party tool, provisioning only solves a Day 1 problem for databases, and does little to address storage sprawl, cloning, or patch management.
 
 Installing Era
 ++++++++++++++
@@ -372,12 +308,14 @@ Installing Era
 
 #. In the *Table* view of the VM dashboard, right click the Era VM, and select **Power On** to start the VM.
 
-#. Determine the IP address assigned to the Era VM from the *IP Addresses* field.
+#. If you did not set a static IP, determine the IP address assigned to the Era VM from the *IP Addresses* field.
 
-   If you assigned a static IP address to the Era VM on a VLAN that has a DHCP server (ex. the *Primary* VLAN on the HPOC), Prism Element first assigns an IP address to the Era VM by using DHCP. Wait for one or two minutes and refresh the Prism Element page to verify if the static IP address you specified has been assigned to the VM.
+   .. note::
 
-Initial Era Configuration
-+++++++++++++++++++++++++
+      If you assigned a static IP address to the Era VM on a VLAN that has a DHCP server (ex. the *Primary* VLAN on the HPOC), Prism Element first assigns an IP address to the Era VM by using DHCP. Wait for one or two minutes and refresh the Prism Element page to verify if the static IP address you specified has been assigned to the VM.
+
+Era Configuration
++++++++++++++++++
 
 #. Open `<ERA-VM-IP>` in a new browser tab.
 
@@ -438,7 +376,9 @@ Initial Era Configuration
    .. figure:: images/era7.png
 
 (Optional) Configure Windows Domain
-........................
+...................................
+
+Only proceed with the following if you joined your *Win16SQL16* VM to a domain.
 
 #. From the dropdown, choose **Profiles**.
 
@@ -483,7 +423,7 @@ Modifying Era VM Network Settings Post-Launch
 
 #. Launch the Era server prompt by typing `era-server`.
 
-#. The full command is `era_server set ip=<IP-address> gateway=<GATEWAY-ADDRESS> netmask=<NETMASK-IP> nameserver=<NAMESERVER>
+#. The full command is `era_server set ip=<IP-address> gateway=<GATEWAY-ADDRESS> netmask=<NETMASK-IP> nameserver=<NAMESERVER>`
 
 Registering MSSQL VM
 ++++++++++++++++++++
@@ -499,7 +439,7 @@ A SQL Server database server must meet the following requirements before you are
    - Database must be in an online state.
    - Windows remote management (WinRM) must be enabled.
 
-#. From the dropdown, select **Databases**.
+#. From the dropdown, select **Databases**, then **Sources** from the lefthand menu.
 
 #. Click **+ Register > Microsoft SQL Server > Database**.
 
@@ -509,13 +449,13 @@ A SQL Server database server must meet the following requirements before you are
 
    - Select **Not registered** within *Database is on a Server VM that is:*.
 
-   - **IP Address or Name of VM** Select the VM you created in the *SQL VM Deployment* section. Verify that the associated IP address matches the IP address that is listed in Prism, as there may be multiple IP addresses listed for the same VM.
+   - **IP Address or Name of VM** Select the VM you created in the *SQL VM Deployment* section.
 
    - **Windows Administrator Name** Type the user name of the administrator account (ex. Administrator).
 
    - **Windows Administrator Password** Type the password of the administrator account.
 
-   - **Instance** Era automatically discovers all the instances a database server VM. In our case, there is only one instance named **MSSQLSERVER**.
+   - **Instance** Era automatically discovers all the instances within a SQL server VM. In our case, there is only one instance named **MSSQLSERVER**.
 
    - The *Connect to SQL Server Login* and *User Name* fields allow a choice of authentication between Windows Admin, and SQL Server user. Leave the default at **Windows Admin User**, and click **Next**.
 
@@ -524,6 +464,8 @@ A SQL Server database server must meet the following requirements before you are
    .. figure:: images/era11.png
 
 #. In the *Time Machine* screen, choose **DEFAULT_OOB_GOLD_SLA** within the *SLA* field.
+
+   .. figure:: images/era11a.png
 
 #. Click **Register**.
 
@@ -540,45 +482,38 @@ A SQL Server database server must meet the following requirements before you are
 Creating A Software Profile
 +++++++++++++++++++++++++++
 
-Before additional SQL Server VMs can be provisioned, a Software Profile must first be created from the database server VM registered in the previous step. A software profile is a template that includes the SQL Server database and operating system. This template exists as a hidden, cloned disk image on your Nutanix storage.
+Before additional SQL Server VMs can be provisioned, a *Software Profile* must first be created from the SQL server VM registered in the previous step. A software profile is a template that includes the SQL Server database and operating system. This template exists as a hidden, cloned disk image on your Nutanix cluster.
 
-#. Select **Profiles** from the dropdown menu and then **Software** from the lefthand menu.
+#. From the dropdown, select **Profiles**, and then **Software** from the lefthand menu.
+
+#. Click **+ Create**, and then **Microsoft SQL Server**. Fill out the following fields:
+
+   - **Profile Name** - MSSQL_2016
+   - **Database Server** - Select your registered MSSQL VM
 
    .. figure:: images/14.png
 
-#. Click **+ Create** and fill out the following fields:
-
-   - **Engine** - Microsoft SQL Server
-   - **Name** - MSSQL_2016
-   - **Description** - (Optional)
-   - **Database Server** - Select your registered MSSQL VM
-
-#. Click **Create**.
-
-   .. figure:: images/15.png
+#. Click **Next > Create**.
 
 #. Select **Operations** from the dropdown menu to monitor the registration. This process should take approximately 5 minutes.
 
-   .. figure:: images/16.png
-
-#. Once the profile creation completes successfully, return to Prism. Right click your MSSQL VM, and choose **Power Off Actions > Guest Shutdown**.
+#. Once the profile creation completes successfully, return to Prism. Right click your *Win16SQL16* VM, and choose **Power Off Actions > Guest Shutdown**.
 
 Creating a New MSSQL Database Server
 ++++++++++++++++++++++++++++++++++++
 
-You've completed all the one time operations required to be able to provision any number of SQL Server VMs. Follow the steps below to provision a database of a fresh database server, with best practices automatically applied by Era.
+You've completed all the one-time operations required to be able to provision any number of SQL Server VMs. Follow the steps below to provision a new database server, with best practices automatically applied by Era.
 
-#. In **Era**, select **Databases** from the dropdown menu and **Sources** from the lefthand menu.
+#. In **Era**, select **Databases** from the dropdown menu, and then **Sources** from the lefthand menu.
 
 #. Click **+ Provision > Microsoft SQL Server > Database**.
 
    .. figure:: images/era12.png
 
-#. In the **Provision a Database** wizard, fill out the following fields to configure the Database Server:
+#. In the **Provision a Database** wizard, fill out the following fields with the *Database Server VM* screen to configure the Database Server:
 
    - **Database Server VM** - Create New Server
    - **Database Server VM Name** - MSSQL2
-   - **Description** - (Optional)
    - **Software Profile** - MSSQL_2016
    - **Compute Profile** - DEFAULT_OOB_COMPUTE
    - **Network Profile** - DEFAULT_OOB_SQLSERVER_NETWORK
@@ -596,21 +531,20 @@ You've completed all the one time operations required to be able to provision an
 
    .. note::
 
-      A **Instance Name** is the name of the database server, this is not the hostname. The default is **MSSQLSERVER**. You can install multiple separate instances of MSSQL on the same server as long as they have different instance names. This was more common on a physical server, however, you do not need additional MSSQL licenses to run multiple instances of SQL on the same server.
+      A *Instance Name* is the name of the database server, not the hostname. The default is **MSSQLSERVER**. You can install multiple separate instances of MSSQL on the same server as long as they have different instance names. This was more common on a physical server. However, you do not need additional MSSQL licenses to run multiple instances of SQL on the same server.
 
-      **Server Collation** is a configuration setting that determines how the database engine should treat character data at the server, database, or column level. SQL Server includes a large set of collations for handling the language and regional differences that come with supporting users and applications in different parts of the world. A collation can also control case sensitivity on database. You can have different collations for each database on a single instance. The default collation is **SQL_Latin1_General_CP1_CI_AS** which breaks out like below:
+      *Server Collation* is a configuration setting that determines how the database engine should treat character data at the server, database, or column level. SQL Server includes a large set of collations for handling the language and regional differences that come with supporting users and applications in different parts of the world. A collation can also control case sensitivity on database. You can have different collations for each database on a single instance. The default collation is *SQL_Latin1_General_CP1_CI_AS* which breaks down to:
 
-         - **Latin1** makes the server treat strings using charset latin 1, basically **ASCII**
-         - **CP1** stands for Code Page 1252. CP1252 is  single-byte character encoding of the Latin alphabet, used by default in the legacy components of Microsoft Windows for English and some other Western languages
-         - **CI** indicates case insensitive comparisons, meaning **ABC** would equal **abc**
-         - **AS** indicates accent sensitive, meaning **ü** does not equal **u**
+         - *Latin1* makes the server treat strings using charset latin 1, basically *ASCII*
+         - *CP1* stands for Code Page 1252. CP1252 is  single-byte character encoding of the Latin alphabet, used by default in the legacy components of Microsoft Windows for English and some other Western languages
+         - *CI* indicates case insensitive comparisons, meaning *ABC* would equal *abc*
+         - *AS* indicates accent sensitive, meaning *ü* does not equal *u*
 
-      **Database Parameter Profiles** define the minimum server memory SQL Server should start with, as well as the maximum amount of memory SQL server will use. By default, it is set high enough that SQL Server can use all available server memory. You can also enable contained databases feature which will isolate the database from others on the instance for authentication.
+      *Database Parameter Profiles* define the minimum server memory SQL Server should start with, as well as the maximum amount of memory SQL server will use. By default, it is set high enough that SQL Server can use all available server memory. You can also enable contained databases feature which will isolate the database from others on the instance for authentication.
 
-#. Click **Next**, and fill out the following fields to configure the Database:
+#. Click **Next**, and fill out the following fields within the *Database* screen:
 
    - **Database Name** - Fiesta2
-   - **Description** - (Optional)
    - **Database Parameter Profile** - DEFAULT_SQLSERVER_DATABASE_PARAMS
 
    .. figure:: images/era17.png
@@ -619,25 +553,24 @@ You've completed all the one time operations required to be able to provision an
 
       Common applications for pre/post-installation scripts include:
 
-      - Data masking scripts
-      - Register the database with DB monitoring solution
-      - Scripts to update DNS/IPAM
-      - Scripts to automate application setup, such as app-level cloning for Oracle PeopleSoft
+      - Data masking scripts.
+      - Register the database with DB monitoring solution.
+      - Scripts to update DNS/IPAM.
+      - Scripts to automate application setup, such as app-level cloning for Oracle PeopleSoft.
 
-#. Click **Next** and fill out the following fields to configure the Time Machine for your database:
+#. Click **Next**, and fill out the following fields within the *Time Machine* screen:
 
-   .. note::
+      .. note::
 
-      The default BRASS SLA does NOT include Continuous Protection snapshots.
+         The default *BRASS* SLA does not include Continuous Protection snapshots.
 
-   - **Description** - (Optional)
    - **SLA** - DEFAULT_OOB_GOLD_SLA
 
    .. figure:: images/era18.png
 
-#. Click **Provision** to begin creating your new database server VM and **Fiesta** database.
+#. Click **Provision** to begin creating your new database server VM and **Fiesta2** database.
 
-#. Select **Operations** from the dropdown menu to monitor the provisioning. This process should take approximately 20 minutes. You may continue with the first two steps in the next section while this operation is running.
+#. Select **Operations** from the dropdown menu to monitor the *Provision* process. This process should take approximately 20 minutes.
 
    .. figure:: images/era19.png
 
@@ -645,20 +578,20 @@ If you encounter errors unrelated to the information you entered, you can select
 
    .. note::
 
-      Observe the step for applying best practices in **Operations**.
+      Observe the step for applying best practices in *Operations*.
 
       Some of the best practices automatically configured by Era include:
 
-      - Distribute databases and log files across multiple vDisks.
-      - Do not use Windows dynamic disks or other in-guest volume management.
-      - For each database, use multiple data files; one file per vCPU.
-      - Configure initial log file size to 4 GB or 8 GB and iterate by the initial amount to reach the desired size.
-      - Use multiple TempDB data files, all the same size.
+      - Distributes databases and log files across multiple vDisks.
+      - Does not use Windows dynamic disks or other in-guest volume management.
+      - For each database, uses multiple data files - one file per vCPU.
+      - Configures initial log file size to 4 GB or 8 GB and iterates by the initial amount to reach the desired size.
+      - Uses multiple TempDB data files, all the same size.
 
 Exploring the Provisioned DB Server
 ++++++++++++++++++++++++++++++++++++
 
-#. In **Prism Element > Storage > Volume Groups**, locate the **ERA_MSSQL2_...** VG and observe the layout on the **Virtual Disk** tab.
+#. In **Prism Element > Storage > Table View > Volume Group**, locate the **ERA_MSSQL2_...** Volume Group (VG) and observe the layout on the **Virtual Disk** tab.
 
    .. figure:: images/23.png
 

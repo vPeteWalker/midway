@@ -13,6 +13,7 @@ There are a few pieces of software that are required to be able to accomplish th
 
    - Windows image (2016 or 2019)
    - VirtIO ISO
+   - (Optional) Chrome or Firefox
 
 VirtIO
 ......
@@ -97,7 +98,7 @@ Installing Windows 2016 from ISO
 
 #. Click on :fa:`plus` **Add New Disk**.
 
-#. WIthin the *Disks* section, click on :fa:`pencil-alt` for the *CD-ROM* entry. Within the *Operation* dropdown, choose **Clone from Image Service**. Within the *Image* dropdown, choose **Windows2016ISO**. Click **Update**.
+#. Within the *Disks* section, click on :fa:`pencil-alt` for the *CD-ROM* entry. Within the *Operation* dropdown, choose **Clone from Image Service**. Within the *Image* dropdown, choose **Windows2016ISO**. Click **Update**.
 
 #. Within the *Add Disk* dialog box, enter **100** for *Size*, and click **Add**.
 
@@ -119,15 +120,15 @@ Click on :fa:`plus` **Add New Disk**. Change the *Type* to **CD-ROM**. Change th
 
 #. Click the **I accept the license terms** box, and then click **Next**.
 
-#. Choose **Custom**
+#. Choose **Custom**.
 
-#. Click **Load Driver**
+#. Click **Load Driver**.
 
 #. Choose the CD-ROM drive that has the VirtIO ISO loaded. Click on **Windows Server 2016 > amd64**. Click **OK**.
 
    .. figure:: images/7.png
 
-#. Highlight all entries by CTRL-clicking each entry, and click **Next**.
+#. Highlight all entries by CTRL-clicking (Mac: CMD-click ??) each entry, and click **Next**.
 
 #. The installation disk should not be displayed. Click **Next** to begin the Windows installation process.
 
@@ -223,6 +224,10 @@ Click on :fa:`plus` **Add New Disk**. Change the *Type* to **CD-ROM**. Change th
 #. The installation disk should not be displayed. Click **Next** to begin the Windows installation process.
 
 #. Set the Administrator as **nutanix/4u** for ease of use, and login as Administrator.
+
+#. Within Prism Element, right click on your *Win19SQL16* VM, and choose **Update**.
+
+#. Remove one CD-ROM drive by clicking the :fa:`times` icon.
 
 #. Recommend you perform all Windows updates. This can be very time consuming, you may wish to move onto other tasks/demos, while you monitor this from time to time and restart when prompt
 
