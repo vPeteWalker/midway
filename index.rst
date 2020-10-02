@@ -102,7 +102,7 @@ SE POC Guide Introduction (AHV)
 
 .. raw:: html
 
-  <strong><font color="red">Before proceeding with any planning or exercises, review the What's New section.</font></strong>
+  <strong><font color="red">Before proceeding with any planning or exercises, review the *What's New* section.</font></strong>
 
 What Is This?
 +++++++++++++

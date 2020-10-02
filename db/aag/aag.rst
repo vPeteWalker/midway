@@ -4,92 +4,147 @@
 Simplifying Database Availability
 ---------------------------------
 
-Up to this point, we have been using Era to create single instance databases. For any real, production database, you would want to use a clustered solution to provide high availability, reducing any chance of downtime for your application or your business. Era supports provisioning and managing Microsoft SQL Server AlwaysOn Availability Group and Oracle RAC clustered databases.
+Up to this point, we have been using Era to create single instance databases. For a production database, a clustered solution to provide high availability is required to reduce the chance of downtime for your application, and/or your business. Era supports provisioning and managing Microsoft SQL Server Always-On Availability Group (AAG) and Oracle RAC clustered databases.
 
-SQL Server AAG clusters have many moving parts, and deploying a single cluster manually can easily take several hours or more.
+SQL Server AAG clusters have many moving parts, and manually deploying a single cluster can easily take several hours.
 
-*In this lab you will clone your existing production SQL Server database to a database cluster and test its availability using the Fiesta app.*
+*In this lab you will clone your existing production SQL Server database to a database cluster, and test its availability using the Fiesta app. This requires completion of the :ref:`calmenable` section*
+
+Provision Fiesta Web Tier
++++++++++++++++++++++++++
+
+In this section you'll deploy the web tier of the application, and connect it to your production database.
+
+#. `Download the Fiesta Blueprint by right-clicking here <https://raw.githubusercontent.com/nutanixworkshops/EraWithMSSQL/master/deploy_mssql_era/FiestaNoDB.json>`_. This single-VM Blueprint is used to provision only the web tier portion of the application.
+
+#. From Prism Central, click on :ref:`bars` **Services > Calm**.
+
+#. Select **Blueprints** from the left-hand menu and click **Upload Blueprint**.
+
+#. Select **FiestaNoDB.json**.
+
+#. Select **POC-Project** as the Calm project and click **Upload**.
+
+#. Select the **NodeReact** Service, and in the **VM** Configuration menu on the right, select **Primary** as the **NIC 1** network.
+
+#. Click **Credentials**.
+
+#. Expand the **CENTOS** credential, and paste in the following value as the **SSH Private Key**:
+
+   ::
+
+     -----BEGIN RSA PRIVATE KEY-----
+     MIIEowIBAAKCAQEAii7qFDhVadLx5lULAG/ooCUTA/ATSmXbArs+GdHxbUWd/bNG
+     ZCXnaQ2L1mSVVGDxfTbSaTJ3En3tVlMtD2RjZPdhqWESCaoj2kXLYSiNDS9qz3SK
+     6h822je/f9O9CzCTrw2XGhnDVwmNraUvO5wmQObCDthTXc72PcBOd6oa4ENsnuY9
+     HtiETg29TZXgCYPFXipLBHSZYkBmGgccAeY9dq5ywiywBJLuoSovXkkRJk3cd7Gy
+     hCRIwYzqfdgSmiAMYgJLrz/UuLxatPqXts2D8v1xqR9EPNZNzgd4QHK4of1lqsNR
+     uz2SxkwqLcXSw0mGcAL8mIwVpzhPzwmENC5OrwIBJQKCAQB++q2WCkCmbtByyrAp
+     6ktiukjTL6MGGGhjX/PgYA5IvINX1SvtU0NZnb7FAntiSz7GFrODQyFPQ0jL3bq0
+     MrwzRDA6x+cPzMb/7RvBEIGdadfFjbAVaMqfAsul5SpBokKFLxU6lDb2CMdhS67c
+     1K2Hv0qKLpHL0vAdEZQ2nFAMWETvVMzl0o1dQmyGzA0GTY8VYdCRsUbwNgvFMvBj
+     8T/svzjpASDifa7IXlGaLrXfCH584zt7y+qjJ05O1G0NFslQ9n2wi7F93N8rHxgl
+     JDE4OhfyaDyLL1UdBlBpjYPSUbX7D5NExLggWEVFEwx4JRaK6+aDdFDKbSBIidHf
+     h45NAoGBANjANRKLBtcxmW4foK5ILTuFkOaowqj+2AIgT1ezCVpErHDFg0bkuvDk
+     QVdsAJRX5//luSO30dI0OWWGjgmIUXD7iej0sjAPJjRAv8ai+MYyaLfkdqv1Oj5c
+     oDC3KjmSdXTuWSYNvarsW+Uf2v7zlZlWesTnpV6gkZH3tX86iuiZAoGBAKM0mKX0
+     EjFkJH65Ym7gIED2CUyuFqq4WsCUD2RakpYZyIBKZGr8MRni3I4z6Hqm+rxVW6Dj
+     uFGQe5GhgPvO23UG1Y6nm0VkYgZq81TraZc/oMzignSC95w7OsLaLn6qp32Fje1M
+     Ez2Yn0T3dDcu1twY8OoDuvWx5LFMJ3NoRJaHAoGBAJ4rZP+xj17DVElxBo0EPK7k
+     7TKygDYhwDjnJSRSN0HfFg0agmQqXucjGuzEbyAkeN1Um9vLU+xrTHqEyIN/Jqxk
+     hztKxzfTtBhK7M84p7M5iq+0jfMau8ykdOVHZAB/odHeXLrnbrr/gVQsAKw1NdDC
+     kPCNXP/c9JrzB+c4juEVAoGBAJGPxmp/vTL4c5OebIxnCAKWP6VBUnyWliFhdYME
+     rECvNkjoZ2ZWjKhijVw8Il+OAjlFNgwJXzP9Z0qJIAMuHa2QeUfhmFKlo4ku9LOF
+     2rdUbNJpKD5m+IRsLX1az4W6zLwPVRHp56WjzFJEfGiRjzMBfOxkMSBSjbLjDm3Z
+     iUf7AoGBALjvtjapDwlEa5/CFvzOVGFq4L/OJTBEBGx/SA4HUc3TFTtlY2hvTDPZ
+     dQr/JBzLBUjCOBVuUuH3uW7hGhW+DnlzrfbfJATaRR8Ht6VU651T+Gbrr8EqNpCP
+     gmznERCNf9Kaxl/hlyV5dZBe/2LIK+/jLGNu9EJLoraaCBFshJKF
+     -----END RSA PRIVATE KEY-----
+
+#. Click **Save** and click **Back** once the Blueprint has completed saving.
+
+#. Click **Launch** and fill out the following fields:
+
+   - **Name of the Application** - FiestaWeb
+   - **db_password** - nutanix/4u
+   - **db_name** - fiesta (as configured when you deployed through Era)
+   - **db_dialect** - mssql
+   - **db_domain_name** - ntnxlab.local
+   - **db_username** - Administrator
+   - **db_host_address** - The IP of your **-MSSQL2** VM
+
+#. Click **Create**.
+
+#. Select the **Audit** tab to monitor the deployment. This process should take < 5 minutes.
+
+#. Once the application status changes to **Running**, select the **Services** tab and select the **NodeReact** service to obtain the **IP Address** of your web server.
+
+#. Open `http://<NODEREACT-IP-ADDRESS>:5001` in a new browser tab to access the *Fiesta* application.
 
 Creating an Era Managed Network
 +++++++++++++++++++++++++++++++
 
-#. In **Era > Administration > Era Resources**, Review the configured Networks. If the **EraManaged** Network does not show under **VLANs Available for Network Profiles**, click **Add**.
+#. In Era, from the dropdown, choose **Administration**. Click **Era Resources** from the left-hand side.
 
    .. figure:: images/3.png
 
-#. Fill out the following fields and click **Add**:
-
-   .. note:: The network configuration below should roughly match the addressing below.
-       In most cases:
-
-       - "Gateway" will be 10.x.x.129
-       - "Subnet Mask" will be 255.255.255.128
-       - "Primary DNS" will be 10.x.x.41
-       - "First Address" will be 10.x.x.220
-       - "Last Address" will be 10.x.x.253
-
-   - **Select a VLAN** - EraManaged
-   - Select **Manage IP Address Pool**
-   - **Gateway** - *same as Secondary Network*
-   - Select **Verify**
-   - **Subnet Mask** - 255.255.255.128
-   - **Primary DNS** - 10.x.x.41 *Refer to Network Info Provided by Bootcamps Leader*
-   - **DNS Domain** - ntnxlab.local
-   - **First Address** - 10.x.x.220 *Refer to Network Info Provided by Bootcamps Leader*
-   - **Last Address** - 10.x.x.253 *Refer to Network Info Provided by Bootcamps Leader*
+#. Fill out the fields and click **Add**.
 
    .. figure:: images/4.png
 
-#. In **Era > Profiles > Network**, click **+ Create** to add the **EraManaged** network to a profile.
+#. From the dropdown, choose **Profiles**. Click **Network** from the left-hand side.
+
+#. Click :ref:`plus`**Create > Microsoft SQL Server > Database Server VMs**.
 
 #. Fill out the following fields:
 
-   - **Engine** - Microsoft SQL Server
-   - **Name** - ERAMANAGED_MSSQL_NETWORK
-   - **Public Service VLAN** - EraManaged
+   - **Name** - ERAMANAGED_MSSQL
+   - **Public Service VLAN** - Era
 
    .. figure:: images/5.png
 
 #. Click **Create**.
 
-.. _provisioningaag:
-
 Provisioning an AAG
 +++++++++++++++++++
 
-#. In **Era**, select **Time Machines** from the dropdown menu.
+#. Select **Time Machines** from the dropdown menu.
 
-#. Select the Time Machine associated with your production database (e.g. *xyz-fiesta_TM*, NOT *xyz-fiesta2_TM*).
+#. Select **fiesta_TM**, then from the *Actions* menu, choose **Create Database Clone > Availability Database**.
 
-#. Select **Actions > Clone Database > Cluster Database**.
+   By default, a clone will be created from the most recent *Point in Time*. Alternatively you can explicitly specify a previous point in time or snapshot.
 
-   By default, a clone will be created from the most recent **Point in Time**. Alternatively you can explicitly specify a previous point in time or snapshot.
+The *Create SQL Server Availability Database Clone from Time Machine* window will appear, beginning with the *Time/Snapshot* section.
 
 #. Click **Next**.
 
    .. figure:: images/6.png
 
-#. Fill out the following fields and click **Next**:
+The *Server Cluster* section will appear.
 
-   - **Windows Cluster** - Create New Cluster
-   - **Windows Cluster Name** - *Initials*\ -clusterdb (Cluster Name has a 15 Character limit)
-   - **Compute Profile** - CUSTOM_EXTRA_SMALL
-   - **Network Profile** - ERAMANAGED_MSSQL_NETWORK
+#. *New Server Cluster* section:
+
+   - **Windows Cluster Name** - FiestaCluster (cluster name has a 15 character limit)
    - **Windows Domain Profile** - NTNXLAB
-   - **Administrator Password** - Nutanix/4u
-   - **Instance Name** - MSSQLSERVER
+   - **Network Profile** - ERAMANAGED_MSSQL
+
+#. *Database Server VMs in the Cluster* section:
+
+   - **Compute Profile** - DEFAULT_OOB_COMPUTE
+   - **Administrator Password** - nutanix/4u
+
+#. *SQL Server Instance: MSSQLSERVER* section:
+
    - **SQL Service Startup Account** - ntnxlab.local\\Administrator
    - **SQL Service Startup Account Password** - nutanix/4u
-   - **SQL Server Authentication Mode** - Windows Authentication
-   - **Domain User Account** - ntnxlab.local\\Administrator
 
    .. figure:: images/7a.png
 
-#. Modify the following default **Topology** fields and click **Next**:
+#. Click **Next**.
 
-   - **Always on Availability Group Name** - *Initials*\ -aag
+The *AG* section will appear.
 
-   .. figure:: images/8.png
+#. Click **Next**.
 
    .. note::
 
@@ -106,13 +161,11 @@ Provisioning an AAG
 
       **Readable Secondaries** allows you to offload your secondary read-only workloads from your primary replica, which conserves its resources for your mission critical workloads. If you have mission critical read-workload or the workload that cannot tolerate latency (up to a few seconds), you should run it on the primary.
 
+The *Database* section will appear.
+
 #. Click **Clone**.
 
-   .. figure:: images/9.png
-
-#. Monitor the refresh on the **Operations** page. This operation should take approximately 35 minutes. **You can proceed to the next section while your clustered database servers are provisioned.**
-
-   .. figure:: images/10.png
+#. Monitor the refresh on the **Operations** page. This operation should take approximately 35 minutes. You can proceed to the next section while your clustered database servers are provisioned.
 
 Configure Fiesta for AAG
 ++++++++++++++++++++++++
@@ -167,3 +220,11 @@ What are the key things we learned in this lab?
 
 - Production databases require high levels of availability to prevent downtime
 - Era makes the deployment of complex, clustered databases as easy (and as fast) as single instance databases
+
+???
+
+- Existing databases can be easily onboarded into Era, and turned into templates
+- Existing brownfield databases can also be registered with Era
+- Profiles allow administrators to provision resources based on published standards
+- Customizable recovery SLAs allow you to tune continuous, daily, and monthly RPO based on your app's requirements
+- Era provides One-click provisioning of multiple database engines, including automatic application of database best practices
