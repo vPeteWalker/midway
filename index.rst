@@ -96,6 +96,24 @@
    failure/power/power
    failure/psu/psu
 
+.. toctree::
+   :maxdepth: 2
+   :caption: Windows from Scratch
+   :name: _windows_scratch
+   :hidden:
+
+   windows_scratch/windows_scratch
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Era
+   :name: _Era
+   :hidden:
+
+   db/mssqldeploy/mssqldeploy
+   db/era/era
+   db/aag/aag
+
 ===============================
 SE POC Guide Introduction (AHV)
 ===============================

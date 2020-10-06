@@ -67,11 +67,11 @@ In this section you'll deploy the web tier of the application, and connect it to
 
    - **Name of the Application** - FiestaWeb
    - **db_password** - nutanix/4u
-   - **db_name** - fiesta (as configured when you deployed through Era)
+   - **db_name** - Fiesta
    - **db_dialect** - mssql
    - **db_domain_name** - ntnxlab.local
    - **db_username** - Administrator
-   - **db_host_address** - The IP of your **-MSSQL2** VM
+   - **db_host_address** - The IP of your **MSSQL2** VM
 
 #. Click **Create**.
 
