@@ -1,8 +1,8 @@
 .. _mssqldeploy:
 
--------------
-Microsoft SQL
--------------
+------------------------
+Microsoft SQL Deployment
+------------------------
 
 Traditional database VM deployment resembles the diagram below. The process generally starts with a IT ticket for a database (from Dev, Test, QA, Analytics, etc.). Next, one or more teams will need to deploy the storage resources, and VM(s) required. Once infrastructure is ready, a DBA needs to provision and configure database software. Once provisioned, any best practices and data protection/backup policies need to be applied. Finally the database can be handed over to the end user. That's a lot of handoffs, and the potential for a lot of friction.
 

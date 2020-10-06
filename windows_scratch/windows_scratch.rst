@@ -173,7 +173,7 @@ Installing Windows 2019 from ISO
 
 #. Click **Save**.
 
-   .. figure:: images/1.png
+   .. figure:: images/1a.png
 
 #. Within Prism Element, click on :fa:`bars` **> Virtual Infrastructure > VMs**.
 

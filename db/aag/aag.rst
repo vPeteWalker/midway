@@ -1,8 +1,8 @@
 .. _aag:
 
----------------------------------
-Simplifying Database Availability
----------------------------------
+-----------------------------------
+Microsoft SQL Database Availability
+-----------------------------------
 
 Up to this point, we have been using Era to create single instance databases. For a production database, a clustered solution to provide high availability is required to reduce the chance of downtime for your application, and/or your business. Era supports provisioning and managing Microsoft SQL Server Always-On Availability Group (AAG) and Oracle RAC clustered databases.
 
@@ -25,7 +25,7 @@ In this section you'll deploy the web tier of the application, and connect it to
 
 #. Select **POC-Project** as the Calm project and click **Upload**.
 
-#. Select the **NodeReact** Service, and in the **VM** Configuration menu on the right, select **Primary** as the **NIC 1** network.
+#. Select the **WebServer** Service, and in the **VM** Configuration menu on the right, select **Primary** as the **NIC 1** network.
 
 #. Click **Credentials**.
 
@@ -77,9 +77,9 @@ In this section you'll deploy the web tier of the application, and connect it to
 
 #. Select the **Audit** tab to monitor the deployment. This process should take < 5 minutes.
 
-#. Once the application status changes to **Running**, select the **Services** tab and select the **NodeReact** service to obtain the **IP Address** of your web server.
+#. Once the application status changes to **Running**, select the **Services** tab and select the **WebServer** service to obtain the **IP Address** of your web server.
 
-#. Open `http://<NODEREACT-IP-ADDRESS>:5001` in a new browser tab to access the *Fiesta* application.
+#. Open `http://<WEBSERVER-IP-ADDRESS>:5001` in a new browser tab to access the *Fiesta* application.
 
 Creating an Era Managed Network
 +++++++++++++++++++++++++++++++
@@ -108,7 +108,15 @@ Creating an Era Managed Network
 Provisioning an AAG
 +++++++++++++++++++
 
-#. Select **Time Machines** from the dropdown menu.
+Before deploying our AAG, let's make a quick update to our application.
+
+#. Open `<http://WebServer-IP-address:5001>`_ in another browser tab. (ex. `<http://10.42.212.50:5001>`_)
+
+#. Under **Stores**, click **Add New Store** and fill out the required fields. Validate your new store appears in the UI.
+
+   .. figure:: images/5a.png
+
+#. From within Era, select **Time Machines** from the dropdown menu.
 
 #. Select **fiesta_TM**, then from the *Actions* menu, choose **Create Database Clone > Availability Database**.
 
@@ -170,27 +178,38 @@ The *Database* section will appear.
 Configure Fiesta for AAG
 ++++++++++++++++++++++++
 
-Rather than deploy an additional Fiesta web server VM, you will update the configuration of your existing VM to point to the database cluster.
+Rather than deploy an additional Fiesta web server VM, you will update the configuration of your existing webserver to reference the newly-created database cluster, instead of a single database server. A real world equivalent would be a small customer with a single database and webserver (perhaps a single VM or physical server running both database and webserver). Era could be used in that scenario to clone the existing database into two database servers, configured with Always-On Availability. The result would be greatly reduced or eliminated potential downtime.
 
-#. In **Era > Databases > Clones**, and select your most recent clone to view the details of the AAG deployment. Note the **Listener IP Address** of the Always on Availability Group.
+#. From within Era, select **Databases** from the dropdown, and from the left-hand side, choose **Clones**.
+
+#. Expand the *FiestaCluste_AG* selection, and then click on the most recent clone to view the details of the AAG deployment. Note the *Listener IP Address* within the *Always on Availability Group* section.
 
    .. figure:: images/11.png
 
-#. In **Prism Central > Calm > Applications**, select your *Initials*\ **-DevFiesta** deployment. In the **Services** tab, select the **NodeReact** service and click **Open Terminal > Proceed** to open a new tab with an SSH session into the VM.
+#. Open an SSH session, and log into the *Fiesta* web server using the following credentials:
+
+   - **Username** - centos
+   - **Password** - nutanix/4u
+
+#. Run `cat Fiesta/config/config.js` to display the current Fiesta config.
+
+#. Run `sudo sed -i 's/CURRENT_DB_HOST_ADDRESS_VALUE/AAG_LISTENER_IP_ADDRESS_VALUE/g' ~/Fiesta/config/config.js` (ex. `sudo sed -i 's/10.42.69.62/10.42.69.109/g' ~/Fiesta/config/config.js`) to modify the Fiesta config to reference the newly-created AAG.
+
+#. Run `cat Fiesta/config/config.js` to confirm the update was successful.
 
    .. figure:: images/12.png
 
-#. Run: cat Fiesta/config/config.js and note the DB_HOST_ADDRESS value.
+      Before
 
    .. figure:: images/13.png
 
-#. Run sudo sed -i 's/CURRENT_DB_HOST_ADDRESS_VALUE/AAG_LISTENER_IP_ADDRESS_VALUE/g' ~/Fiesta/config/config.js
+      After
 
-#. cat Fiesta/config/config.js to confirm update
+#. Run `sudo systemctl restart fiesta` to apply the configuration changes.
 
-   .. figure:: images/14.png
+.. note::
 
-#. sudo systemctl restart fiesta
+   The above command can be used to modify any portion of the config.js file for Fiesta. For example, perhaps you entered a typo in the domain name, and would 
 
 Failing A Cluster Server
 ++++++++++++++++++++++++
