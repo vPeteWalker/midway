@@ -4,11 +4,11 @@
 Microsoft SQL Database Availability
 -----------------------------------
 
-Up to this point, we have been using Era to create single instance databases. For a production database, a clustered solution to provide high availability is required to reduce the chance of downtime for your application, and/or your business. Era supports provisioning and managing Microsoft SQL Server Always-On Availability Group (AAG) and Oracle RAC clustered databases.
+Up to this point, we have been using Era to create single instance databases. For a production database, a clustered solution to provide high availability is necessary to reduce the chance of downtime for your application, and therefore your business. Era supports provisioning and managing Microsoft SQL Server Always-On Availability Groups (AAG) and Oracle RAC clustered databases.
 
 SQL Server AAG clusters have many moving parts, and manually deploying a single cluster can easily take several hours.
 
-*In this lab you will clone your existing production SQL Server database to a database cluster, and test its availability using the Fiesta app. This requires completion of the :ref:`calmenable` section*
+*In this lab you will clone an existing production SQL Server database, turn it into a database cluster, and test its availability using the Fiesta app. This requires completion of the :ref:`calmenable` section.*
 
 Provision Fiesta Web Tier
 +++++++++++++++++++++++++
@@ -209,41 +209,40 @@ Rather than deploy an additional Fiesta web server VM, you will update the confi
 
 .. note::
 
-   The above command can be used to modify any portion of the config.js file for Fiesta. For example, perhaps you entered a typo in the domain name, and would 
+   The same command can be used to modify any portion of the config.js file used for Fiesta. For example, perhaps you entered a typo in the domain name, and it would be faster to correct it, versus completely redeploying the Fiesta server blueprint.
+
+   `sudo sed -i 's/ntnxlabTYPO.local/ntnxlab.local/g' ~/Fiesta/config/config.js`
 
 Failing A Cluster Server
 ++++++++++++++++++++++++
 
-Time to break stuff!
-
-#. Open your **Dev Fiesta** web app and make a change such as deleting a store and/or adding additional products to a store.
+#. Within your *Fiesta* web app, make any changes to the store, such as deleting a store and/or adding additional products to a store. Go bananas!
 
    .. figure:: images/15.png
 
-#. In **Prism Central > VMs**, power off *Initials*\ **-clusterdb-1** VM.
+#. Within Prism Central, click on :fa:`bars` **Virtual Infrastructure > VMs**.
 
-   .. note:: You can double check which VM is currently the primary member of the AAG by noting which VM currently displays the AAG's Listener IP Address and Windows Cluster IP in Prism Central.
+You can determine check which VM is currently the primary member of the AAG by noting which VM currently displays the AAG's Listener IP Address and Windows Cluster IP in Prism Central.
+
+#. Power off the primary VM.
 
    .. figure:: images/16.png
 
-#. Refresh **Prism Central** and note that the **Listener** and **Cluster** IP addresses are now assigned to the other **clusterdb** VM.
+#. Refresh **Prism Central** and note that the **Listener** and **Cluster** IP addresses are now assigned to the other *FiestaCluster* VM.
 
    .. figure:: images/17.png
 
-#. Refresh your **Dev Fiesta** web app and validate data is being displayed properly.
+#. Refresh your *Fiesta* web app, and ensure it is operating correctly by making a few more changes.
+
+   .. figure:: images/18.png
 
 Takeaways
 +++++++++
 
 What are the key things we learned in this lab?
 
-- Production databases require high levels of availability to prevent downtime
-- Era makes the deployment of complex, clustered databases as easy (and as fast) as single instance databases
-
-???
-
-- Existing databases can be easily onboarded into Era, and turned into templates
-- Existing brownfield databases can also be registered with Era
-- Profiles allow administrators to provision resources based on published standards
-- Customizable recovery SLAs allow you to tune continuous, daily, and monthly RPO based on your app's requirements
-- Era provides One-click provisioning of multiple database engines, including automatic application of database best practices
+- Production databases require high levels of availability to prevent downtime.
+- Era makes the deployment of complex, clustered databases as easy (and as fast) as single instance databases - and many times faster than deploying manually!
+- Existing databases can be easily onboarded into Era, and turned into templates from which to deploy any number of additional database servers.
+- Customizable recovery SLAs allow you to tune continuous, daily, and monthly RPO based on your app's requirements.
+- Era provides one-click provisioning, and automatic application of database best practices.
