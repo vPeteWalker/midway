@@ -36,6 +36,8 @@ Nutanix Virt IO is a collection of drivers for paravirtual devices that enhance 
 
    - **Image Type** - ISO
 
+|
+
    **Choose one of the following**:
 
       - Within *Image Source*, click **Upload a file > Choose File**. Browse to the ISO file for VirtIO, and click **Open**.
@@ -144,9 +146,10 @@ Click on :fa:`plus` **Add New Disk**. Change the *Type* to **CD-ROM**. Change th
 
 #. Ensure the date/time are correct. If not, right click on the time (lower right hand corner) and choose **Adjust Date/Time**. Make the required changes, and close the window once complete.
 
-#. Execute **C:\Windows\System32\Sysprep\Sysprep.exe**. Check the box for **Generalize**, and from the *Shutdown Options* dropdown, choose **Shutdown**.
+#. Execute **C:\\Windows\\System32\\Sysprep\\Sysprep.exe**. Check the box for **Generalize**, and from the *Shutdown Options* dropdown, choose **Shutdown**.
 
    .. figure:: images/8.png
+      :align: center
 
    .. note::
 
@@ -233,9 +236,10 @@ Click on :fa:`plus` **Add New Disk**. Change the *Type* to **CD-ROM**. Change th
 
 #. Windows Updates will require multiple restarts to apply all updates. Every time you are prompted to restart, do so, and check for Windows Updates once again. Process only when there are no other updates to apply.
 
-#. Execute **C:\Windows\System32\Sysprep\Sysprep.exe**. Check the box for **Generalize**, and from the *Shutdown Options* dropdown, choose **Shutdown**.
+#. Execute **C:\\Windows\\System32\\Sysprep\\Sysprep.exe**. Check the box for **Generalize**, and from the *Shutdown Options* dropdown, choose **Shutdown**.
 
    .. figure:: images/8.png
+      :align: center
 
    .. note::
 

@@ -160,13 +160,11 @@ SQL Server 2016 Installation (Windows 2016)
 
 #. Remote Desktop into your *Win16SQL16* VM using the **DOMAIN** *Administrator* (i.e. ntnxlab.local\administrator) username.
 
-#. Download `this <https://github.com/nutanixworkshops/EraWithMSSQL/raw/master/deploy_mssql_era/FiestaDB-MSSQL.sql>`_ file to the desktop of your *Win16SQL16* VM. Recommend using Chrome as the browser, as it allows you to **right click > Save As...**, whereas Internet Explorer does not. Choose **All Files** in the file type, otherwise you may inadvertantly save the file as *.txt* instead of *.sql*, preventing you from running it as a script.
+#. Download `this <https://github.com/nutanixworkshops/EraWithMSSQL/raw/master/deploy_mssql_era/FiestaDB-MSSQL.sql>`_ file to the desktop of your *Win16SQL16* VM. Recommend using Chrome as the browser, as it allows you to **right click > Save As...**, whereas Internet Explorer does not. Choose **All Files** in the file type dropdown, otherwise you may inadvertantly save the file as *.txt* instead of *.sql*, preventing you from running it as a script.
 
 #. Open **File Explorer** and double-click on the CD-ROM drive letter containing the SQL 2016 ISO. This will begin the SQL 2016 installation.
 
 #. Click on **Installation > New SQL Server stand-alone installation or add features to an existing installation**.
-
-   .. figure:: images/9.png
 
 #. Click **Next** on the *Product Key* page to use the *Evaluation* edition.
 
@@ -200,7 +198,7 @@ The installation process should take approximately 5 minutes.
 
 #. Verify the database server is available, with only system databases provisioned.
 
-   .. figure:: images/5.png
+   .. figure:: images/FIX IMAGE
 
 #. Add and modify a SQL database by performing the following:
 
@@ -208,11 +206,11 @@ The installation process should take approximately 5 minutes.
 
    - Enter **Fiesta** in the *Database name* field.
 
-   - Scroll to the right, and select :fa:`elipsis-h` within the *Path* section for the *Fiesta* entry. Browse to the *databases* directory within the secondary drive (ex. E:\). Click **OK**.
+   - Scroll to the right, and select :fa:`ellipsis-h` within the *Path* section for the *Fiesta* entry. Browse to the *databases* directory within the secondary drive (ex. E:\). Click **OK**.
 
-   - Scroll to the right, and select :fa:`elipsis-h` within the *Path* section for the *Fiesta_log* entry. Browse to the *logs* directory within the secondary drive (ex. E:\). Click **OK**.
+   - Scroll to the right, and select :fa:`ellipsis-h` within the *Path* section for the *Fiesta_log* entry. Browse to the *logs* directory within the secondary drive (ex. E:\). Click **OK**.
 
-   .. figure:: images/20.png
+   .. figure:: images/FIX IMAGE
 
    - Click **OK**.
 
@@ -225,3 +223,8 @@ The installation process should take approximately 5 minutes.
 #. Close the Remote Desktop session.
 
 *You have now successfully install Microsoft SQL Server. We will utilize this in proceeding modules with Era.*
+
+SQL Server 2016 Installation (Windows 2019)
+...........................................
+
+TBD - What's different?

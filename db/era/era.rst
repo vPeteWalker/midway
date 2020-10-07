@@ -9,7 +9,7 @@ Era requires the *Manage IP address pool* option enabled on a VLAN for certain f
 
 #. Within Prism, click on **Settings** from the dropdown, and then **Network Configuration** from the left-hand side.
 
-#. Click :fa:`plus`**Create Network**.
+#. Click :fa:`plus` **Create Network**.
 
 #. Enter **Era** within the *Network Name* field, and the VLAN within the *VLAN ID* field.
 
@@ -21,7 +21,7 @@ Era requires the *Manage IP address pool* option enabled on a VLAN for certain f
 Installation
 ++++++++++++
 
-#. Download the **Era Install for AHV** image file from the `Era Downloads section - Nutanix Support Portal <https://portal.nutanix.com/page/downloads?product=era>`_ either click the **Download** button associated with the latest version of *Era Install for AHV*, or the :fa:`elipsis`next to it, and choose **Copy Download Link**.
+#. Download the **Era Install for AHV** image file from the `Era Downloads section - Nutanix Support Portal <https://portal.nutanix.com/page/downloads?product=era>`_ either click the **Download** button associated with the latest version of *Era Install for AHV*, or the :fa: `ellipsis-v` next to it, and choose **Copy Download Link**.
 
 #. Log on to the *Prism Element* web console.
 
@@ -41,13 +41,13 @@ Installation
 
       - Within *Image Source*, click **Upload a file > Choose File**. Browse to the Disk image for Era, and click **Open**.
 
-         .. figure:: images/6.png
+         .. figure:: images/FIX IMAGE
 
       **OR**
 
       - Click :fa:`dot-circle` **From URL**, and paste the download link you previously copied from the Nutanix Portal.
 
-         .. figure:: images/5.png
+         .. figure:: images/FIX IMAGE
 
          .. note::
 
@@ -87,7 +87,7 @@ Installation
 
    - Select the **Custom Script** check box.
 
-   - In the *Type or paste script* text box, paste the following script.
+   - In the *Type or paste script* text box, paste the following script, and replace the indicated references (ex. <NETMASK-IP> would be 255.255.255.128).
 
    .. code-block:: bash
 

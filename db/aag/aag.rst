@@ -8,7 +8,7 @@ Up to this point, we have been using Era to create single instance databases. Fo
 
 SQL Server AAG clusters have many moving parts, and manually deploying a single cluster can easily take several hours.
 
-*In this lab you will clone an existing production SQL Server database, turn it into a database cluster, and test its availability using the Fiesta app. This requires completion of the :ref:`calmenable` section.*
+In this lab you will clone an existing production SQL Server database, turn it into a database cluster, and test its availability using the Fiesta app. This requires completion of the :ref:`calmenable` section.
 
 Provision Fiesta Web Tier
 +++++++++++++++++++++++++
@@ -17,19 +17,19 @@ In this section you'll deploy the web tier of the application, and connect it to
 
 #. `Download the Fiesta Blueprint by right-clicking here <https://raw.githubusercontent.com/nutanixworkshops/EraWithMSSQL/master/deploy_mssql_era/FiestaNoDB.json>`_. This single-VM Blueprint is used to provision only the web tier portion of the application.
 
-#. From Prism Central, click on :ref:`bars` **Services > Calm**.
+#. From Prism Central, click on :fa:`bars` **Services > Calm**.
 
 #. Select **Blueprints** from the left-hand menu and click **Upload Blueprint**.
 
 #. Select **FiestaNoDB.json**.
 
-#. Select **POC-Project** as the Calm project and click **Upload**.
+#. Select **POC-Project** as the Calm project, and click **Upload**.
 
 #. Select the **WebServer** Service, and in the **VM** Configuration menu on the right, select **Primary** as the **NIC 1** network.
 
 #. Click **Credentials**.
 
-#. Expand the **CENTOS** credential, and paste in the following value as the **SSH Private Key**:
+#. Expand the **CENTOS** credential, and paste in the following value as the **SSH Private Key**. Click the icon in the upper right-hand corner of the below window to copy the commands to your clipboard. You may then paste that within Calm.
 
    ::
 
@@ -61,9 +61,9 @@ In this section you'll deploy the web tier of the application, and connect it to
      gmznERCNf9Kaxl/hlyV5dZBe/2LIK+/jLGNu9EJLoraaCBFshJKF
      -----END RSA PRIVATE KEY-----
 
-#. Click **Save** and click **Back** once the Blueprint has completed saving.
+#. Click **Save**, and then click **Back** once the Blueprint has completed saving.
 
-#. Click **Launch** and fill out the following fields:
+#. Click **Launch**. Fill out the following fields:
 
    - **Name of the Application** - FiestaWeb
    - **db_password** - nutanix/4u
@@ -71,13 +71,13 @@ In this section you'll deploy the web tier of the application, and connect it to
    - **db_dialect** - mssql
    - **db_domain_name** - ntnxlab.local
    - **db_username** - Administrator
-   - **db_host_address** - The IP of your **MSSQL2** VM
+   - **db_host_address** - The IP of your *MSSQL2* VM
 
 #. Click **Create**.
 
-#. Select the **Audit** tab to monitor the deployment. This process should take < 5 minutes.
+#. Select the **Audit** tab to monitor the deployment. This process should take <5 minutes.
 
-#. Once the application status changes to **Running**, select the **Services** tab and select the **WebServer** service to obtain the **IP Address** of your web server.
+#. Once the application status changes to **Running**, select the **Services** tab, and then select the **WebServer** service to obtain the **IP Address** of your web server.
 
 #. Open `http://<WEBSERVER-IP-ADDRESS>:5001` in a new browser tab to access the *Fiesta* application.
 
