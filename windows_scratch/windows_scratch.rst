@@ -18,9 +18,9 @@ There are a few pieces of software that are required to be able to accomplish th
 VirtIO
 ......
 
-Nutanix Virt IO is a collection of drivers for paravirtual devices that enhance the stability and performance of virtual machines on a paravirtualized hypervisor (Network, Disk, ). This is required to install Microsoft Windows on Nutanix AHV.
+Nutanix Virt IO is a collection of drivers for paravirtual devices that enhance the stability and performance of virtual machines on a paravirtualized hypervisor (Balloon, Ethernet, and SCSI pass through drivers). This is required to install Microsoft Windows on Nutanix AHV.
 
-#. Within the `AHV section of the Downloads page on the Nutanix Portal <https://portal.nutanix.com/page/downloads?product=ahv>`_, choose **VirtIO** from the dropdown, and then either click the **Download** button associated with the latest version of *Nutanix VirtIO for Windows (iso)*, or the :fa:`elipsis`next to it, and choose **Copy Download Link**.
+#. Within the `AHV section of the Downloads page on the Nutanix Portal <https://portal.nutanix.com/page/downloads?product=ahv>`_, choose **VirtIO** from the dropdown, and then either click the **Download** button associated with the latest version of *Nutanix VirtIO for Windows (iso)*, or the :fa:`ellipsis-v`next to it, and choose **Copy Download Link**.
 
    .. figure:: images/4.png
 
@@ -36,23 +36,25 @@ Nutanix Virt IO is a collection of drivers for paravirtual devices that enhance 
 
    - **Image Type** - ISO
 
-|
+
 
    **Choose one of the following**:
 
-      - Within *Image Source*, click **Upload a file > Choose File**. Browse to the ISO file for VirtIO, and click **Open**.
+   **EITHER**
+
+      - Within *Image Source*, click **Upload a file > Choose File**. Browse to the ISO file for VirtIO, select it, and click **Open**.
 
          .. figure:: images/6.png
 
    **OR**
 
-      - Click :fa:`dot-circle` **From URL**, and paste the download link you previously copied from the Nutanix Portal.
+      - Within *Image Source*, click :fa:`dot-circle` **From URL**, and paste the download link you previously copied from the Nutanix Portal.
 
          .. figure:: images/5.png
 
          .. note::
 
-            Verify that the *Image Type* is **ISO**. After pasting the download link, as it may change to **Disk**.
+            Verify that the *Image Type* is **ISO** before clicking **Save**. After pasting the download link, as it may change to **Disk**.
 
 #. Click **Save**.
 
@@ -80,19 +82,19 @@ Installing Windows 2016 from ISO
 
    - **Image Type** - ISO
 
-#. Within *Image Source*, click **Upload a file > Choose File**. Browse to the ISO file for Windows 2016, and click **Open**.
+#. Within *Image Source*, click **Upload a file > Choose File**. Browse to the ISO file for Windows 2016, select it, and click **Open**.
 
 #. Click **Save**.
 
    .. figure:: images/1.png
 
-#. Within Prism Element, click on :fa:`bars` **> Virtual Infrastructure > VMs**.
+#. Choose **VM** from the dropdown menu.
 
 #. Click on :fa:`plus` **Create VM**.
 
 #. Enter the following with the listed fields:
 
-   - **Name** - Windows2016Image
+   - **Name** - Windows2016
 
    - **vCPU** - 2
 
@@ -100,21 +102,21 @@ Installing Windows 2016 from ISO
 
 #. Click on :fa:`plus` **Add New Disk**.
 
-#. Within the *Disks* section, click on :fa:`pencil-alt` for the *CD-ROM* entry. Within the *Operation* dropdown, choose **Clone from Image Service**. Within the *Image* dropdown, choose **Windows2016ISO**. Click **Update**.
+#. Within the *Disks* section, click on the pencil next to the *CD-ROM* entry. Within the *Operation* dropdown, choose **Clone from Image Service**. Within the *Image* dropdown, choose **Windows2016ISO**. Click **Update**.
 
-#. Within the *Add Disk* dialog box, enter **100** for *Size*, and click **Add**.
+#. Within the *Add Disk* dialog box, enter **100** for *Size (GiB)*, and click **Add**.
 
    .. figure:: images/2.png
 
 Click on :fa:`plus` **Add New Disk**. Change the *Type* to **CD-ROM**. Change the *Operation* to **Clone from Image Service**. Change *Image* to **VirtIO**. Click **Add**.
 
-#. Click :fa:`plus` **Add New NIC**, and click **Add**.
+#. Click :fa:`plus` **Add New NIC**. Ensure *Primary* is selected, and click **Add**. and click **Add**.
 
 #. Click **Save**.
 
 #. Within Prism Element, right click on your *Windows2016* VM, and choose **Power on**.
 
-#. Wait a few moments, then right click on your *Windows2016* VM, and choose **Launch Console**.
+#. Wait a few moments, then right click on your *Windows2016* VM once more, and choose **Launch Console**.
 
 #. Click **Next** on the initial *Windows Setup* screen, then click **Install Now**.
 
@@ -124,23 +126,23 @@ Click on :fa:`plus` **Add New Disk**. Change the *Type* to **CD-ROM**. Change th
 
 #. Choose **Custom**.
 
-#. Click **Load Driver**.
+#. Click **Load Driver > Browse**.
 
 #. Choose the CD-ROM drive that has the VirtIO ISO loaded. Click on **Windows Server 2016 > amd64**. Click **OK**.
 
    .. figure:: images/7.png
 
-#. Highlight all entries by CTRL-clicking (Mac: CMD-click ??) each entry, and click **Next**.
+#. Highlight all entries by CTRL-clicking each entry, and click **Next**.
 
-#. The installation disk should not be displayed. Click **Next** to begin the Windows installation process.
+#. The installation disk should now be displayed. Click **Next** to begin the Windows installation process.
 
 #. Set the Administrator as **nutanix/4u** for ease of use, and login as Administrator.
 
-#. Within Prism Element, right click on your *Win16SQL16* VM, and choose **Update**.
+#. Within Prism Element, right click on your *Windows2016* VM, and choose **Update**.
 
 #. Remove one CD-ROM drive by clicking the :fa:`times` icon.
 
-#. Recommend you perform all Windows updates. This can be very time consuming, you may wish to move onto other tasks/demos, while you monitor this from time to time and restart when prompted.
+#. Recommend you perform all Windows updates. This can be very time consuming, so you may wish to move onto other tasks/demos while you monitor this from time to time and restart when prompted.
 
 #. Windows Updates will require multiple restarts to apply all updates. Every time you are prompted to restart, do so, and check for Windows Updates once again. Process only when there are no other updates to apply.
 
@@ -172,7 +174,7 @@ Installing Windows 2019 from ISO
 
    - **Image Type** - ISO
 
-#. Within *Image Source*, click **Upload a file > Choose File**. Browse to the ISO file for Windows 2019, and click **Open**.
+#. Within *Image Source*, click **Upload a file > Choose File**. Browse to the ISO file for Windows 2019, select it, and click **Open**.
 
 #. Click **Save**.
 
@@ -184,7 +186,7 @@ Installing Windows 2019 from ISO
 
 #. Enter the following with the listed fields:
 
-   - **Name** - Windows2019Image
+   - **Name** - Windows2019
 
    - **vCPU** - 2
 
@@ -192,15 +194,15 @@ Installing Windows 2019 from ISO
 
 #. Click on :fa:`plus` **Add New Disk**.
 
-#. WIthin the *Disks* section, click on :fa:`pencil-alt` for the *CD-ROM* entry. Within the *Operation* dropdown, choose **Clone from Image Service**. Within the *Image* dropdown, choose **Windows2019ISO**. Click **Update**.
+#. Within the *Disks* section, click on the pencil next to the *CD-ROM* entry. Within the *Operation* dropdown, choose **Clone from Image Service**. Within the *Image* dropdown, choose **Windows2019ISO**. Click **Update**.
 
-#. Within the *Add Disk* dialog box, enter **100** for *Size*, and click **Add**.
+#. Click on :fa:`plus` **Add New Disk**. Within the *Add Disk* dialog box, enter **100** for *Size (GiB)*, and click **Add**.
 
    .. figure:: images/2.png
 
 Click on :fa:`plus` **Add New Disk**. Change the *Type* to **CD-ROM**. Change the *Operation* to **Clone from Image Service**. Change *Image* to **VirtIO**. Click **Add**.
 
-#. Click :fa:`plus` **Add New NIC**, and click **Add**.
+#. Click :fa:`plus` **Add New NIC**. Ensure *Primary* is selected, and click **Add**.
 
 #. Click **Save**.
 
@@ -214,25 +216,25 @@ Click on :fa:`plus` **Add New Disk**. Change the *Type* to **CD-ROM**. Change th
 
 #. Click the **I accept the license terms** box, and then click **Next**.
 
-#. Choose **Custom**
+#. Choose **Custom**.
 
-#. Click **Load Driver**
+#. Click **Load Driver > Browse**.
 
-#. Choose the CD-ROM drive that has the VirtIO ISO loaded. Click on **Windows Server 2016 > amd64**. Click **OK**.
+#. Choose the CD-ROM drive that has the VirtIO ISO loaded. Click on **Windows Server 2019 > amd64**. Click **OK**.
 
-   .. figure:: images/7.png
+   .. figure:: images/7a.png
 
 #. Highlight all entries by CTRL-clicking each entry, and click **Next**.
 
-#. The installation disk should not be displayed. Click **Next** to begin the Windows installation process.
+#. The installation disk should now be displayed. Click **Next** to begin the Windows installation process.
 
 #. Set the Administrator as **nutanix/4u** for ease of use, and login as Administrator.
 
-#. Within Prism Element, right click on your *Win19SQL16* VM, and choose **Update**.
+#. Within Prism Element, right click on your *Windows2019* VM, and choose **Update**.
 
 #. Remove one CD-ROM drive by clicking the :fa:`times` icon.
 
-#. Recommend you perform all Windows updates. This can be very time consuming, you may wish to move onto other tasks/demos, while you monitor this from time to time and restart when prompt
+#. Recommend you perform all Windows updates. This can be very time consuming, so you may wish to move onto other tasks/demos while you monitor this from time to time and restart when prompt
 
 #. Windows Updates will require multiple restarts to apply all updates. Every time you are prompted to restart, do so, and check for Windows Updates once again. Process only when there are no other updates to apply.
 
