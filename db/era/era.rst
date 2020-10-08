@@ -5,7 +5,7 @@ Era Deployment
 Network Configuration
 +++++++++++++++++++++
 
-Era requires the *Manage IP address pool* option enabled on a VLAN for certain features.
+Era requires the *Manage IP address pool* option enabled on a VLAN for certain features. If you do not intend on completing the :ref:`advanced_aag`, you may skip this section.
 
 #. Within Prism, click on **Settings** from the dropdown, and then **Network Configuration** from the left-hand side.
 

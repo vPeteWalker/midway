@@ -45,7 +45,7 @@ Deploy and configure Windows Server 2016 from clone
 
 #. Highlight your base Windows 2016 image, right click and choose **Clone**.
 
-#. Name the clone. This should be something that describes both its base operating system, and function (ex. Win16SQL16). Recommend the VM name is fewer than 15 characters, since we'll be renaming the Windows server to the same name.
+#. Name the clone. This should be something that describes both its base operating system, and function (ex. Win16SQL16). The VM name should be fewer than 15 characters to conform to Windows computer name limitations.
 
 #. Perform the following tasks:
 
@@ -64,6 +64,10 @@ Deploy and configure Windows Server 2016 from clone
    - **Size** - 100 GiB.
 
    - Select **Add**.
+
+.. note::
+
+   The additional disk will store the database and log files, as required by Era: "Database files must not exist in the Windows OS boot drive" (i.e. the "C:" drive). It will be presented to Windows as the "E:" drive, outlined in the proceeding steps. Refer to the Era User Guide for a full list of requirements.
 
 #. Right click the new VM, and select **Power On**.
 

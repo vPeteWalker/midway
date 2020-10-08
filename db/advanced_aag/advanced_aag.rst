@@ -1,4 +1,4 @@
-.. _aag:
+.. _advanced_aag:
 
 -----------------------------------
 Microsoft SQL Database Availability
@@ -15,69 +15,113 @@ Provision Fiesta Web Tier
 
 In this section you'll deploy the web tier of the application, and connect it to your production database.
 
-#. `Download the Fiesta Blueprint by right-clicking here <https://raw.githubusercontent.com/nutanixworkshops/EraWithMSSQL/master/deploy_mssql_era/FiestaNoDB.json>`_. This single-VM Blueprint is used to provision only the web tier portion of the application.
+.. #. `Download the Fiesta Blueprint by right-clicking here <https://raw.githubusercontent.com/nutanixworkshops/EraWithMSSQL/master/deploy_mssql_era/FiestaNoDB.json>`_. This single-VM Blueprint is used to provision only the web tier portion of the application.
+..
+.. #. From Prism Central, click on :fa:`bars` **Services > Calm**.
+..
+.. #. Select **Blueprints** from the left-hand menu and click **Upload Blueprint**.
+..
+.. #. Select **FiestaNoDB.json**.
+..
+.. #. Select **POC-Project** as the Calm project, and click **Upload**.
+..
+.. #. Select the **WebServer** Service, and in the **VM** Configuration menu on the right, select **Primary** as the **NIC 1** network.
+..
+.. #. Click **Credentials**.
+..
+.. #. Expand the **CENTOS** credential, and paste in the following value as the **SSH Private Key**. Click the icon in the upper right-hand corner of the below window to copy the commands to your clipboard. You may then paste that within Calm.
+..
+..    ::
+..
+..      -----BEGIN RSA PRIVATE KEY-----
+..      MIIEowIBAAKCAQEAii7qFDhVadLx5lULAG/ooCUTA/ATSmXbArs+GdHxbUWd/bNG
+..      ZCXnaQ2L1mSVVGDxfTbSaTJ3En3tVlMtD2RjZPdhqWESCaoj2kXLYSiNDS9qz3SK
+..      6h822je/f9O9CzCTrw2XGhnDVwmNraUvO5wmQObCDthTXc72PcBOd6oa4ENsnuY9
+..      HtiETg29TZXgCYPFXipLBHSZYkBmGgccAeY9dq5ywiywBJLuoSovXkkRJk3cd7Gy
+..      hCRIwYzqfdgSmiAMYgJLrz/UuLxatPqXts2D8v1xqR9EPNZNzgd4QHK4of1lqsNR
+..      uz2SxkwqLcXSw0mGcAL8mIwVpzhPzwmENC5OrwIBJQKCAQB++q2WCkCmbtByyrAp
+..      6ktiukjTL6MGGGhjX/PgYA5IvINX1SvtU0NZnb7FAntiSz7GFrODQyFPQ0jL3bq0
+..      MrwzRDA6x+cPzMb/7RvBEIGdadfFjbAVaMqfAsul5SpBokKFLxU6lDb2CMdhS67c
+..      1K2Hv0qKLpHL0vAdEZQ2nFAMWETvVMzl0o1dQmyGzA0GTY8VYdCRsUbwNgvFMvBj
+..      8T/svzjpASDifa7IXlGaLrXfCH584zt7y+qjJ05O1G0NFslQ9n2wi7F93N8rHxgl
+..      JDE4OhfyaDyLL1UdBlBpjYPSUbX7D5NExLggWEVFEwx4JRaK6+aDdFDKbSBIidHf
+..      h45NAoGBANjANRKLBtcxmW4foK5ILTuFkOaowqj+2AIgT1ezCVpErHDFg0bkuvDk
+..      QVdsAJRX5//luSO30dI0OWWGjgmIUXD7iej0sjAPJjRAv8ai+MYyaLfkdqv1Oj5c
+..      oDC3KjmSdXTuWSYNvarsW+Uf2v7zlZlWesTnpV6gkZH3tX86iuiZAoGBAKM0mKX0
+..      EjFkJH65Ym7gIED2CUyuFqq4WsCUD2RakpYZyIBKZGr8MRni3I4z6Hqm+rxVW6Dj
+..      uFGQe5GhgPvO23UG1Y6nm0VkYgZq81TraZc/oMzignSC95w7OsLaLn6qp32Fje1M
+..      Ez2Yn0T3dDcu1twY8OoDuvWx5LFMJ3NoRJaHAoGBAJ4rZP+xj17DVElxBo0EPK7k
+..      7TKygDYhwDjnJSRSN0HfFg0agmQqXucjGuzEbyAkeN1Um9vLU+xrTHqEyIN/Jqxk
+..      hztKxzfTtBhK7M84p7M5iq+0jfMau8ykdOVHZAB/odHeXLrnbrr/gVQsAKw1NdDC
+..      kPCNXP/c9JrzB+c4juEVAoGBAJGPxmp/vTL4c5OebIxnCAKWP6VBUnyWliFhdYME
+..      rECvNkjoZ2ZWjKhijVw8Il+OAjlFNgwJXzP9Z0qJIAMuHa2QeUfhmFKlo4ku9LOF
+..      2rdUbNJpKD5m+IRsLX1az4W6zLwPVRHp56WjzFJEfGiRjzMBfOxkMSBSjbLjDm3Z
+..      iUf7AoGBALjvtjapDwlEa5/CFvzOVGFq4L/OJTBEBGx/SA4HUc3TFTtlY2hvTDPZ
+..      dQr/JBzLBUjCOBVuUuH3uW7hGhW+DnlzrfbfJATaRR8Ht6VU651T+Gbrr8EqNpCP
+..      gmznERCNf9Kaxl/hlyV5dZBe/2LIK+/jLGNu9EJLoraaCBFshJKF
+..      -----END RSA PRIVATE KEY-----
+..
+.. #. Click **Save**, and then click **Back** once the Blueprint has completed saving.
+..
+.. #. Click **Launch**. Fill out the following fields:
+..
+..    - **Name of the Application** - FiestaWeb
+..    - **db_password** - nutanix/4u
+..    - **db_name** - Fiesta
+..    - **db_dialect** - mssql
+..    - **db_domain_name** - ntnxlab.local
+..    - **db_username** - Administrator
+..    - **db_host_address** - The IP of your *MSSQL2* VM
+..
+.. #. Click **Create**.
+..
+.. #. Select the **Audit** tab to monitor the deployment. This process should take <5 minutes.
+..
+.. #. Once the application status changes to **Running**, select the **Services** tab, and then select the **WebServer** service to obtain the **IP Address** of your web server.
 
-#. From Prism Central, click on :fa:`bars` **Services > Calm**.
+#. In **Prism Central**, select :fa:`bars` **Virtual Infrastructure > VMs**.
 
-#. Select **Blueprints** from the left-hand menu and click **Upload Blueprint**.
+#. Click **Create VM** and fill out the following fields:
 
-#. Select **FiestaNoDB.json**.
+   - **Name** - WebServer
+   - **vCPUs** - 4
+   - **Number of Cores Per vCPU** - 1
+   - **Memory** - 4 GiB
+   - Click **+ Add New Disk**
 
-#. Select **POC-Project** as the Calm project, and click **Upload**.
+      - **Type** - Disk
+      - **Operation** - Clone from Image Service
+      - **Bus Type** - SCSI
+      - **Image** - CentOS7.qcow2
+      - Click **Add**
 
-#. Select the **WebServer** Service, and in the **VM** Configuration menu on the right, select **Primary** as the **NIC 1** network.
+   - Click **+ Add New NIC**
 
-#. Click **Credentials**.
+      - **Network Name** - Primary
+      - Click **Add**
 
-#. Expand the **CENTOS** credential, and paste in the following value as the **SSH Private Key**. Click the icon in the upper right-hand corner of the below window to copy the commands to your clipboard. You may then paste that within Calm.
+   - Select **Custom Script**
+   - Select **Type or Paste Script**. Click the icon in the upper right-hand corner of the below window to copy the script to your clipboard. You may then paste the following **Cloud-init** script:
 
-   ::
+   .. literalinclude:: webserver.cloudconfig
+    :linenos:
+    :language: YAML
 
-     -----BEGIN RSA PRIVATE KEY-----
-     MIIEowIBAAKCAQEAii7qFDhVadLx5lULAG/ooCUTA/ATSmXbArs+GdHxbUWd/bNG
-     ZCXnaQ2L1mSVVGDxfTbSaTJ3En3tVlMtD2RjZPdhqWESCaoj2kXLYSiNDS9qz3SK
-     6h822je/f9O9CzCTrw2XGhnDVwmNraUvO5wmQObCDthTXc72PcBOd6oa4ENsnuY9
-     HtiETg29TZXgCYPFXipLBHSZYkBmGgccAeY9dq5ywiywBJLuoSovXkkRJk3cd7Gy
-     hCRIwYzqfdgSmiAMYgJLrz/UuLxatPqXts2D8v1xqR9EPNZNzgd4QHK4of1lqsNR
-     uz2SxkwqLcXSw0mGcAL8mIwVpzhPzwmENC5OrwIBJQKCAQB++q2WCkCmbtByyrAp
-     6ktiukjTL6MGGGhjX/PgYA5IvINX1SvtU0NZnb7FAntiSz7GFrODQyFPQ0jL3bq0
-     MrwzRDA6x+cPzMb/7RvBEIGdadfFjbAVaMqfAsul5SpBokKFLxU6lDb2CMdhS67c
-     1K2Hv0qKLpHL0vAdEZQ2nFAMWETvVMzl0o1dQmyGzA0GTY8VYdCRsUbwNgvFMvBj
-     8T/svzjpASDifa7IXlGaLrXfCH584zt7y+qjJ05O1G0NFslQ9n2wi7F93N8rHxgl
-     JDE4OhfyaDyLL1UdBlBpjYPSUbX7D5NExLggWEVFEwx4JRaK6+aDdFDKbSBIidHf
-     h45NAoGBANjANRKLBtcxmW4foK5ILTuFkOaowqj+2AIgT1ezCVpErHDFg0bkuvDk
-     QVdsAJRX5//luSO30dI0OWWGjgmIUXD7iej0sjAPJjRAv8ai+MYyaLfkdqv1Oj5c
-     oDC3KjmSdXTuWSYNvarsW+Uf2v7zlZlWesTnpV6gkZH3tX86iuiZAoGBAKM0mKX0
-     EjFkJH65Ym7gIED2CUyuFqq4WsCUD2RakpYZyIBKZGr8MRni3I4z6Hqm+rxVW6Dj
-     uFGQe5GhgPvO23UG1Y6nm0VkYgZq81TraZc/oMzignSC95w7OsLaLn6qp32Fje1M
-     Ez2Yn0T3dDcu1twY8OoDuvWx5LFMJ3NoRJaHAoGBAJ4rZP+xj17DVElxBo0EPK7k
-     7TKygDYhwDjnJSRSN0HfFg0agmQqXucjGuzEbyAkeN1Um9vLU+xrTHqEyIN/Jqxk
-     hztKxzfTtBhK7M84p7M5iq+0jfMau8ykdOVHZAB/odHeXLrnbrr/gVQsAKw1NdDC
-     kPCNXP/c9JrzB+c4juEVAoGBAJGPxmp/vTL4c5OebIxnCAKWP6VBUnyWliFhdYME
-     rECvNkjoZ2ZWjKhijVw8Il+OAjlFNgwJXzP9Z0qJIAMuHa2QeUfhmFKlo4ku9LOF
-     2rdUbNJpKD5m+IRsLX1az4W6zLwPVRHp56WjzFJEfGiRjzMBfOxkMSBSjbLjDm3Z
-     iUf7AoGBALjvtjapDwlEa5/CFvzOVGFq4L/OJTBEBGx/SA4HUc3TFTtlY2hvTDPZ
-     dQr/JBzLBUjCOBVuUuH3uW7hGhW+DnlzrfbfJATaRR8Ht6VU651T+Gbrr8EqNpCP
-     gmznERCNf9Kaxl/hlyV5dZBe/2LIK+/jLGNu9EJLoraaCBFshJKF
-     -----END RSA PRIVATE KEY-----
+   .. warning::
 
-#. Click **Save**, and then click **Back** once the Blueprint has completed saving.
+      Before proceeding, modify the **YOUR-MYSQL-POCAPP-VM-IP-ADDRESS** entry within line 104 in the Cloud-init script. No other modifications are necessary.
 
-#. Click **Launch**. Fill out the following fields:
+      Example: `- sed -i 's/REPLACE_DB_HOST_ADDRESS/10.42.69.85/g' /home/centos/Fiesta/config/config.js`
 
-   - **Name of the Application** - FiestaWeb
-   - **db_password** - nutanix/4u
-   - **db_name** - Fiesta
-   - **db_dialect** - mssql
-   - **db_domain_name** - ntnxlab.local
-   - **db_username** - Administrator
-   - **db_host_address** - The IP of your *MSSQL2* VM
+#. Click **Save**.
 
-#. Click **Create**.
+#. Power on the VM and click **Launch Console**.
 
-#. Select the **Audit** tab to monitor the deployment. This process should take <5 minutes.
+#. Monitor the VM deployment until the console indicates that Cloud-init has finished.
 
-#. Once the application status changes to **Running**, select the **Services** tab, and then select the **WebServer** service to obtain the **IP Address** of your web server.
+#. In your browser, browse to the IP address of your **WebServer** VM and validate the application is running (as seen below).
+
+   .. figure:: images/19.png
 
 #. Open `http://<WEBSERVER-IP-ADDRESS>:5001` in a new browser tab to access the *Fiesta* application.
 

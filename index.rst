@@ -112,7 +112,8 @@
 
    db/mssqldeploy/mssqldeploy
    db/era/era
-   db/aag/aag
+   db/basic_clone/basic_clone
+   db/advanced_aag/advanced_aag
 
 ===============================
 SE POC Guide Introduction (AHV)
