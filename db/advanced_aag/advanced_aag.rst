@@ -83,7 +83,7 @@ In this section you'll deploy the web tier of the application, and connect it to
 
 #. Click **Create VM** and fill out the following fields:
 
-   - **Name** - WebServer
+   - **Name** - FiestaWebProd
    - **vCPUs** - 4
    - **Number of Cores Per vCPU** - 1
    - **Memory** - 4 GiB
@@ -92,7 +92,7 @@ In this section you'll deploy the web tier of the application, and connect it to
       - **Type** - Disk
       - **Operation** - Clone from Image Service
       - **Bus Type** - SCSI
-      - **Image** - CentOS7.qcow2
+      - **Image** - CentOS_7_Cloud.qcow2
       - Click **Add**
 
    - Click **+ Add New NIC**
@@ -109,7 +109,7 @@ In this section you'll deploy the web tier of the application, and connect it to
 
    .. warning::
 
-      Before proceeding, modify the **YOUR-MYSQL-POCAPP-VM-IP-ADDRESS** entry within line 104 in the Cloud-init script. No other modifications are necessary.
+      Before proceeding, modify the **YOUR-MSSQL-VM-IP-ADDRESS** entry within line 104 in the Cloud-init script. No other modifications are necessary.
 
       Example: `- sed -i 's/REPLACE_DB_HOST_ADDRESS/10.42.69.85/g' /home/centos/Fiesta/config/config.js`
 

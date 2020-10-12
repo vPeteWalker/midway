@@ -99,9 +99,9 @@ runcmd:
  - npm install
  - npm run build
  - npm install nodemon concurrently
- - sed -i 's/REPLACE_DB_NAME/fiesta/g' /home/centos/Fiesta/config/config.js
-# ** ONLY UPDATE THE >> YOUR-MSSQL-VM-IP-ADDRESS << ENTRY IN THE BELOW LINE BEFORE SAVING YOUR VM - DO NOT MODIFY ANY OTHER LINES**
- - sed -i 's/REPLACE_DB_HOST_ADDRESS/YOUR-MSSQL-VM-IP-ADDRESS/g' /home/centos/Fiesta/config/config.js
+ - sed -i 's/REPLACE_DB_NAME/fiestadev/g' /home/centos/Fiesta/config/config.js
+# ** ONLY UPDATE THE >> YOUR-MYSQL-POCAPP-VM-IP-ADDRESS << PORTION IN THE BELOW LINE BEFORE SAVING YOUR VM - DO NOT MODIFY ANY OTHER LINES**
+ - sed -i 's/REPLACE_DB_HOST_ADDRESS/YOUR-MYSQL-POCAPP-VM-IP-ADDRESS/g' /home/centos/Fiesta/config/config.js
 # ** ONLY UPDATE THE ABOVE LINE - DO NOT MODIFY ANY OTHER LINES **
  - sed -i 's/REPLACE_DB_DIALECT/mssql/g' /home/centos/Fiesta/config/config.js
  - sed -i 's/REPLACE_DB_DOMAIN_NAME/ntnxlab.local/g' /home/centos/Fiesta/config/config.js

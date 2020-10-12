@@ -8,13 +8,16 @@ Traditional database VM deployment resembles the diagram below. The process gene
 
 .. figure:: images/0.png
 
-Whereas with Nutanix cluster and Era, provisioning and protecting a database should take you no longer than it took to read this intro. For details on deploying Microsoft SQL Server on Nutanix best practices, please refer to `Microsoft SQL Server - Nutanix Best Practices <https://nutanixinc.sharepoint.com/sites/solutions/Solutions%20and%20GSO%20Document%20Library/BP-2015-Microsoft-SQL-Server.pdf>`_
+BLURB DETAILING WHY ERA IS BETTER, METRICS, ETC.
+
+For details on deploying Microsoft SQL Server on Nutanix best practices, please refer to `Microsoft SQL Server - Nutanix Best Practices <https://nutanixinc.sharepoint.com/sites/solutions/Solutions%20and%20GSO%20Document%20Library/BP-2015-Microsoft-SQL-Server.pdf>`_
 
 This workshop includes detailed instructions to:
    - Deploy a new VM from Windows 2016 or 2019 golden image (created in :ref:`_windows_scratch`)
-   - Deploy SQL Server 2016
-   - Deploy Era 2.0
-   -
+   - Deploy and configure SQL Server 2016
+   - Deploy and configure Era 2.0
+   - Clone SQL Server database - using both UI and API
+   - Create and configure a highly-available database environment
 
 The goal is provide a completely transparent process to install SQL to meet the requirements for Era, avoiding use of any pre-built images, scripts, or anything that could be considered "black box". This is especially important for POCs being performed in highly-secure environments, where pre-built images or scripts may be forbidden. Everything used here is either publicly available (ex. Microsoft ISO images) and/or in plain text that can be easily reviewed (ex. SQL query file).
 
@@ -36,16 +39,37 @@ https://portal.nutanix.com/page/documents/details?targetId=Nutanix-Era-User-Guid
 SQL Server 2016 - Manual Deployment
 +++++++++++++++++++++++++++++++++++
 
-These instructions will walk you through cloning a VM (originally created within the :ref:`_windows_scratch` section), and using it as a base image on which to install SQL Server 2016. You will then manually deploy a SQL Server 2016 VM. This VM will act as a master image to create a profile for deploying additional SQL VMs with Nutanix and Microsoft best practices automatically applied by Era.
+These instructions will walk you through cloning a Windows VM (created via the :ref:`_windows_scratch` section). You will then manually install SQL Server 2016. This VM will act as a master image to create a profile for deploying additional SQL VMs with Nutanix and Microsoft best practices automatically applied by Era.
+
+Upload SQL Server 2016 ISO
+..........................
+
+#. Log on to Prism Element, and choose **Settings** from the dropdown.
+
+#. Click on **Image Configuration**.
+
+#. Click on :fa:`plus` **Upload Image**.
+
+#. Enter the following with the listed fields:
+
+   - **Name** - MSSQL2016
+
+   - **Image Type** - ISO
+
+#. Within *Image Source*, click **Upload a file > Choose File**. Browse to the ISO file for Windows 2016, select it, and click **Open**.
+
+#. Click **Save**.
+
+   .. figure:: images/1.png
 
 Deploy and configure Windows Server 2016 from clone
 ...................................................
 
 #. From the dropdown within Prism Element, select **VM**. Select the *Table* view, if not already selected.
 
-#. Highlight your base Windows 2016 image, right click and choose **Clone**.
+#. Highlight your base Windows 2016 image (i.e. *Windows2016*), right click, and choose **Clone**.
 
-#. Name the clone. This should be something that describes both its base operating system, and function (ex. Win16SQL16). The VM name should be fewer than 15 characters to conform to Windows computer name limitations.
+#. Name the clone. Typically, this should be something that describes both its base operating system, and function (ex. Win16SQL16). The VM name should be fewer than 15 characters to conform to Windows computer name limitations.
 
 #. Perform the following tasks:
 
@@ -53,7 +77,7 @@ Deploy and configure Windows Server 2016 from clone
 
    - Click the :fa:`eject` icon if the CD-ROM is not already empty.
 
-   - Click the :fa:`pencil-alt` icon next to the CD-ROM.
+   - Click the pencil icon next to the CD-ROM.
 
    - Within the *Operation* dropdown, choose **Clone from image service**.
 
@@ -67,7 +91,7 @@ Deploy and configure Windows Server 2016 from clone
 
 .. note::
 
-   The additional disk will store the database and log files, as required by Era: "Database files must not exist in the Windows OS boot drive" (i.e. the "C:" drive). It will be presented to Windows as the "E:" drive, outlined in the proceeding steps. Refer to the Era User Guide for a full list of requirements.
+   We will utilize the additional disk will store the database and log files, as required by Era: "Database files must not exist in the Windows OS boot drive" (i.e. the "C:" drive). It will be presented to Windows as the "E:" drive, outlined in the proceeding steps. Refer to the Era User Guide for a full list of requirements.
 
 #. Right click the new VM, and select **Power On**.
 
@@ -95,7 +119,7 @@ Deploy and configure Windows Server 2016 from clone
 
    - Open *Server Manager* and select **Local Server**.
 
-   - Click on the link to the right of *Computer Name* (ex. WIN-O74HDA2JLG0)
+   - Click on the link to the right of *Computer Name* (ex. `WIN-O74HDA2JLG0`)
 
    - Click **Change**.
 
@@ -107,7 +131,7 @@ Deploy and configure Windows Server 2016 from clone
 
 #. Disable Windows Firewall for all networks.
 
-   - Log in to the VM using the **DOMAIN** *Administrator* username (i.e. ntnxlab.local\administrator), and *nutanix/4u* password.
+   - Log in to the VM using the *DOMAIN* Administrator username (i.e. ntnxlab.local\administrator), and *nutanix/4u* password.
 
    - Open *Server Manager* and select **Local Server**.
 
@@ -131,7 +155,7 @@ Deploy and configure Windows Server 2016 from clone
 
       .. figure:: images/3b.png
 
-#. Remote Desktop into your *Win16SQL16* VM using the **DOMAIN** *Administrator* (i.e. ntnxlab.local\administrator) username.
+#. Remote Desktop into your *Win16SQL16* VM using the *Domain* Administrator (i.e. ntnxlab.local\administrator) username.
 
 #. Open **Disk Management** and perform the following disk operations:
 
@@ -151,7 +175,7 @@ Deploy and configure Windows Server 2016 from clone
 
    .. note::
 
-      Best practices for database VMs involve spreading the OS, SQL binaries, databases, TempDB, and logs across separate disks in order to maximize performance. We are specifically not following these recommendations in this workshop so that we may highlight one of the many benefits of Era later on.
+      Best practices for database VMs involve spreading the OS, SQL binaries, databases, TempDB, and logs into their own separate disks in order to maximize performance. In the interest of simplicity and brevity, we are not following all of these recommendations in this workshop, only the minimum necessary to meet Era's requirements.
 
       For complete details for running SQL Server on Nutanix (including guidance around NUMA, hyperthreading, SQL Server configuration settings, and more), see the `Nutanix Microsoft SQL Server Best Practices Guide <https://portal.nutanix.com/#/page/solutions/details?targetId=BP-2015-Microsoft-SQL-Server:BP-2015-Microsoft-SQL-Server>`_.
 
@@ -162,7 +186,7 @@ SQL Server 2016 Installation (Windows 2016)
 
 #. Within Prism Element, make note of the IP address for your *Win16SQL16* VM.
 
-#. Remote Desktop into your *Win16SQL16* VM using the **DOMAIN** *Administrator* (i.e. ntnxlab.local\administrator) username.
+#. Remote Desktop into your *Win16SQL16* VM using the *DOMAIN* Administrator (i.e. ntnxlab.local\administrator) username.
 
 #. Download `this <https://github.com/nutanixworkshops/EraWithMSSQL/raw/master/deploy_mssql_era/FiestaDB-MSSQL.sql>`_ file to the desktop of your *Win16SQL16* VM. Recommend using Chrome as the browser, as it allows you to **right click > Save As...**, whereas Internet Explorer does not. Choose **All Files** in the file type dropdown, otherwise you may inadvertantly save the file as *.txt* instead of *.sql*, preventing you from running it as a script.
 
@@ -192,7 +216,7 @@ The installation process should take approximately 5 minutes.
 
 #. Click **Install**. This process will take approximately 5-10 minutes. Click **Restart** once complete.
 
-#. Remote Desktop into your *Win16SQL16* VM using the **DOMAIN** *Administrator* (i.e. ntnxlab.local\administrator) username.
+#. Remote Desktop into your *Win16SQL16* VM using the *DOMAIN* Administrator (i.e. ntnxlab.local\administrator) username.
 
 #. Open **File Explorer > This PC**. Click on your additional drive letter (ex. E:\), and create two folders: **Databases** and **Logs**.
 

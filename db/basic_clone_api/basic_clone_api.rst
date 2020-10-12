@@ -8,7 +8,11 @@ Era provides the *Time Machine* functionality to simplify cloning operations. Ti
 
 Copy Data Management (CDM) (a.k.a. database cloning) is a critical day 2 database operation. Multiple teams, such as developers, QA, and analysts often request separate copies of production databases for their own purposes. Each additional clone comes with a cost: an ever-increasing strain on the company's storage capacity. Two clones? Double the storage, and so forth. An additional challenge is providing these teams with the most up-to-date production data from which to test. All too often this is a manual task, requiring the full attention of a database administrator (DBA).
 
-In this lab you will use Era to create a clone of your SQL Server database to be used as part of a test environment. After making changes to your production database, you will refresh your test environment.
+In this lab you will API calls to:
+
+- Create a clone of your SQL Server production database *FiestaProd*, along with its own web server, which will be used as a development environment.
+- Make changes to your production database, and refresh your development environment.
+- Use your *FiestaDev* environment to observe the modifications made to the production database are reflected in the development environment.
 
 Cloning from the Era UI
 +++++++++++++++++++++++
@@ -31,20 +35,21 @@ By default, a clone will be created from the most recent *Point in Time*. Altern
 
 #. Make the following selections and click **Next**:
 
-   - **Database Server** - Create New Server
-   - **Database Server Name** - FiestaDev
+   - **Database Server VM** - Create New Server
+   - **Database Server Name** - FiestaDB_Dev
    - **Compute Profile** - DEFAULT_OOB_COMPUTE
    - **Network Profile** - DEFAULT_OOB_SQLSERVER_NETWORK
    - **Administrator Password** - nutanix/4u
    - Select **Join Domain**
    - **Windows Domain Profile** - NTNXLAB
-   - **Domain User Account** - ntnxlab.local\\Administrator
 
-   .. figure:: images/2.png THIS NEEDS A NEW SS WITH FIESTADEV NAME
+   .. figure:: images/2.png
 
 #. Select **API Equivalent**.
 
 #. Review the **JSON Data** and example **Script** presented by the Era UI for programmatically generating a database clone based on your inputs. Click **Copy** within the *JSON* section (left-hand side).
+
+.. note:: If you care to paste this into another program, be sure it keeps the formatting intact, as programs such as the built-in Windows Notepad will not. Recommend Notepad++ or Sublime Text.
 
    .. figure:: images/3.png
 
@@ -88,7 +93,7 @@ Now that you have a functioning development environment, it's time to create som
 
    .. figure:: images/17.png
 
-#. Click **Stores** from the menu and select **View Store** from one of the available stores.
+#. Click **Stores** from the menu, and select **View Store** from one of the available stores.
 
 #. Click **Add New Store Product**. Fill out the following fields and click **Submit**:
 
@@ -104,29 +109,33 @@ Now that you have a functioning development environment, it's time to create som
 
 HOW DO WE DO THIS USING THE API EXPLORER?
 
-#. In **Era > Time Machines**, select the Time Machine that corresponds to your production database. Select **Actions > Log Catch Up > Yes** to ensure the latest database entries have been flushed to disk.
+#. Within Era, from the *admin* dropdown, choose **REST API Explorer**.
 
-   .. figure:: images/19.png
+#. Spin up another copy of DEV fiesta web app.
 
-#. Monitor the log catch up on the **Operations** page. This should take approximately 1 minute.
-
-   .. figure:: images/20.png
-
-#. In **Era > Databases > Clones**, select your cloned database and click **Refresh**.
-
-   .. figure:: images/21.png
-
-#. By default, the database will be refreshed to the most recent **Point in Time**, but you can manually specify a time or individual snapshot. For the purposes of this exercise, use the most recent time. Click **Refresh**.
-
-   .. figure:: images/22.png
-
-#. Monitor the refresh on the **Operations** page. This should take approximately 4 minutes.
-
-#. Once the refresh has completed, open your **Dev** Fiesta web app and validate the product and inventory data now matches your production database.
-
-   .. figure:: images/18.png
-
-   With a few mouse clicks, your DBA was able to push current production data to the cloned database. This could be further automated through the Era CLI or APIs.
+.. #. **Era > Time Machines**, select the Time Machine that corresponds to your production database. Select **Actions > Log Catch Up > Yes** to ensure the latest database entries have been flushed to disk.
+..
+..    .. figure:: images/19.png
+..
+.. #. Monitor the log catch up on the **Operations** page. This should take approximately 1 minute.
+..
+..    .. figure:: images/20.png
+..
+.. #. In **Era > Databases > Clones**, select your cloned database and click **Refresh**.
+..
+..    .. figure:: images/21.png
+..
+.. #. By default, the database will be refreshed to the most recent **Point in Time**, but you can manually specify a time or individual snapshot. For the purposes of this exercise, use the most recent time. Click **Refresh**.
+..
+..    .. figure:: images/22.png
+..
+.. #. Monitor the refresh on the **Operations** page. This should take approximately 4 minutes.
+..
+.. #. Once the refresh has completed, open your **Dev** Fiesta web app and validate the product and inventory data now matches your production database.
+..
+..    .. figure:: images/18.png
+..
+..    With a few mouse clicks, your DBA was able to push current production data to the cloned database. This could be further automated through the Era CLI or APIs.
 
 Takeaways
 +++++++++

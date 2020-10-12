@@ -58,8 +58,8 @@ Nutanix Virt IO is a collection of drivers for paravirtual devices that enhance 
 
 #. Click **Save**.
 
-Windows
-.......
+Installing Windows
+..................
 
 You may use a customer-provided image, or obtain the Windows Server 2016 and Windows Server 2019 ISO images directly from the `Microsoft Evaluation Center <https://www.microsoft.com/en-us/evalcenter/evaluate-windows-server>`_.
 

@@ -308,7 +308,7 @@ You've completed all the one-time operations required to be able to provision an
 #. In the **Provision a Database** wizard, fill out the following fields with the *Database Server VM* screen to configure the Database Server:
 
    - **Database Server VM** - Create New Server
-   - **Database Server VM Name** - MSSQL2
+   - **Database Server VM Name** - FiestaPROD_DB
    - **Software Profile** - MSSQL_2016
    - **Compute Profile** - DEFAULT_OOB_COMPUTE
    - **Network Profile** - DEFAULT_OOB_SQLSERVER_NETWORK
@@ -339,7 +339,7 @@ You've completed all the one-time operations required to be able to provision an
 
 #. Click **Next**, and fill out the following fields within the *Database* screen:
 
-   - **Database Name** - Fiesta2
+   - **Database Name** - FiestaPROD_DB
    - **Database Parameter Profile** - DEFAULT_SQLSERVER_DATABASE_PARAMS
 
    .. figure:: images/era17.png

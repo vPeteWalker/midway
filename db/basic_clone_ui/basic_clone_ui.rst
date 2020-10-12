@@ -8,7 +8,11 @@ Era provides the *Time Machine* functionality to simplify cloning operations. Ti
 
 Copy Data Management (CDM) (a.k.a. database cloning) is a critical day 2 database operation. Multiple teams, such as developers, QA, and analysts often request separate copies of production databases for their own purposes. Each additional clone comes with a cost: an ever-increasing strain on the company's storage capacity. Two clones? Double the storage, and so forth. An additional challenge is providing these teams with the most up-to-date production data from which to test. All too often this is a manual task, requiring the full attention of a database administrator (DBA).
 
-In this lab you will use Era to create a clone of your SQL Server database to be used as part of a test environment. After making changes to your production database, you will refresh your test environment.
+In this lab you will use the UI to:
+
+- Create a clone of your SQL Server production database (FiestaProd), along with its own web server, which will be used as a development environment.
+- Make changes to your production database, and refresh your development environment.
+- Use your FiestaDev environment to observe the modifications made to the production database are reflected in the development environment.
 
 Cloning from the Era UI
 +++++++++++++++++++++++
@@ -32,19 +36,59 @@ By default, a clone will be created from the most recent *Point in Time*. Altern
 #. Make the following selections and click **Next**:
 
    - **Database Server** - Create New Server
-   - **Database Server Name** - FiestaDev
+   - **Database Server Name** - FiestaDB_Dev
    - **Compute Profile** - DEFAULT_OOB_COMPUTE
    - **Network Profile** - DEFAULT_OOB_SQLSERVER_NETWORK
    - **Administrator Password** - nutanix/4u
    - Select **Join Domain**
    - **Windows Domain Profile** - NTNXLAB
-   - **Domain User Account** - ntnxlab.local\\Administrator
 
-   .. figure:: images/2.png THIS NEEDS A NEW SS WITH FIESTADEV NAME
+   .. figure:: images/2.png
 
 #. Click **Clone**.
 
 #. From the dropdown, select **Operations** to monitor the progress. This should take approximately 15 minutes.
+
+Deploy Development Web Server
++++++++++++++++++++++++++++++
+
+This exercise will walk you through creating a web server configured for your *FiestaDev* MSSQL server.
+
+#. In **Prism Central**, select :fa:`bars` **Virtual Infrastructure > VMs**.
+
+#. Click **Create VM** and fill out the following fields:
+
+   - **Name** - FiestaWEB_Dev
+   - **vCPUs** - 4
+   - **Number of Cores Per vCPU** - 1
+   - **Memory** - 4 GiB
+   - Click **+ Add New Disk**
+
+      - **Type** - Disk
+      - **Operation** - Clone from Image Service
+      - **Bus Type** - SCSI
+      - **Image** - CentOS_7_cloud.qcow2
+      - Click **Add**
+
+   - Click **+ Add New NIC**
+
+      - **Network Name** - Primary
+      - Click **Add**
+
+   - Select **Custom Script**
+   - Select **Type or Paste Script**. Click the icon in the upper right-hand corner of the below window to copy the script to your clipboard. You may then paste the following *cloud-config* script:
+
+      .. literalinclude:: webserver.cloudconfig
+       :linenos:
+       :language: YAML
+
+   .. warning::
+
+      Before proceeding, modify the **YOUR-MSSQL-VM-IP-ADDRESS** entry within line 104 in the cloud-config script with the IP address from your *FiestaDB_Dev* VM. No other modifications are necessary.
+
+      Example: `- sed -i 's/REPLACE_DB_HOST_ADDRESS/10.42.69.85/g' /home/centos/Fiesta/config/config.js`
+
+
 
 Refreshing Cloned Databases
 +++++++++++++++++++++++++++
