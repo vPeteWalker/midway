@@ -1,6 +1,6 @@
 .. _era_mssql:
 
-Please complete :ref:`mssqldeploy` before proceeding.
+Please complete :ref:`db/mssqldeploy` before proceeding.
 
 --------------
 Era Deployment
@@ -377,7 +377,7 @@ You've completed all the one-time operations required to be able to provision an
 
    .. figure:: images/era19.png
 
-#. #. Remote Desktop into your *FiestaDB_Prod* VM using the *Domain* Administrator (i.e. ntnxlab.local\administrator) username.
+#. Remote Desktop into your *FiestaDB_Prod* VM using the *Domain* Administrator (i.e. ntnxlab.local\administrator) username.
 
 #. Launch **SQL Server Management Studio**.
 
@@ -389,4 +389,47 @@ You've completed all the one-time operations required to be able to provision an
 
    .. figure:: images/era10.png
 
-Excellent! You've provisioned your first database from a MS SQL profile. Keep going to see how to create a database clone either using the UI: :ref:`basic_clone_ui` or via APIs: :ref:`basic_clone_api`. Maybe you'd like to skip to creating an Always-On Availability Group (AAG)? :ref:`advanced_aag`
+Deploy Production Web Server
+++++++++++++++++++++++++++++
+
+This exercise will walk you through creating a web server configured for your *FiestaWEB_Prod* MSSQL server.
+
+#. In **Prism Central**, select :fa:`bars` **Virtual Infrastructure > VMs**.
+
+#. Determine the IP address of your *FiestaDB_Prod* VM.
+
+#. Click **Create VM** and fill out the following fields:
+
+   - **Name** - FiestaWEB_Prod
+   - **vCPUs** - 2
+   - **Number of Cores Per vCPU** - 1
+   - **Memory** - 4 GiB
+   - Click **+ Add New Disk**
+
+      - **Type** - Disk
+      - **Operation** - Clone from Image Service
+      - **Bus Type** - SCSI
+      - **Image** - CentOS_7_cloud.qcow2
+      - Click **Add**
+
+   - Click :fa:`plus`**Add New NIC**
+
+      - **Network Name** - Primary
+      - Click **Add**
+
+   - Select **Custom Script**
+   - Select **Type or Paste Script**. Click the icon in the upper right-hand corner of the below window to copy the script to your clipboard. You may then paste the following *cloud-config* script:
+
+      .. literalinclude:: webserver.cloudconfig
+       :linenos:
+       :language: YAML
+
+   .. warning::
+
+      Before proceeding, modify the **YOUR-FIESTADB_PROD-VM-IP-ADDRESS** portion within line 105 in the cloud-config script with the IP address from your *FiestaDB_Prod* VM. No other modifications are necessary.
+
+      Example: `- sed -i 's/REPLACE_DB_HOST_ADDRESS/10.42.69.85/g' /home/centos/Fiesta/config/config.js`
+
+#. Once the VM has completed deploying, open `http://<FIESTAWEB_PROD-IP-ADDRESS>:5001` in a new browser tab to access the *Fiesta* application.
+
+Excellent! You've provisioned your first database from a MS SQL profile. Keep going to see how to create a database clone either using the UI: :ref:`db/basic_clone_ui` or via APIs: :ref:`db/basic_clone_api`. Maybe you'd like to skip to creating an Always-On Availability Group (AAG)? :ref:`db/advanced_aag`

@@ -20,7 +20,7 @@ VirtIO
 
 Nutanix Virt IO is a collection of drivers for paravirtual devices that enhance the stability and performance of virtual machines on a paravirtualized hypervisor (Balloon, Ethernet, and SCSI pass through drivers). This is required to install Microsoft Windows on Nutanix AHV.
 
-#. Within the `AHV section of the Downloads page on the Nutanix Portal <https://portal.nutanix.com/page/downloads?product=ahv>`_, choose **VirtIO** from the dropdown, and then either click the **Download** button associated with the latest version of *Nutanix VirtIO for Windows (iso)*, or the :fa:`ellipsis-v`next to it, and choose **Copy Download Link**.
+#. Within the `AHV section of the Downloads page on the Nutanix Portal <https://portal.nutanix.com/page/downloads?product=ahv>`_, choose **VirtIO** from the dropdown, and then either click the **Download** button associated with the latest version of *Nutanix VirtIO for Windows (iso)*, or the :fa:`ellipsis-v` next to it, and choose **Copy Download Link**.
 
    .. figure:: images/4.png
 

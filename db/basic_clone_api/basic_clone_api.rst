@@ -1,10 +1,10 @@
 .. _basic_clone_api:
 
-Please complete :ref:`era_mssql` before proceeding.
+Please complete :ref:`db/era_mssql` before proceeding.
 
-------------------------------
-Time Machine, Cloning via APIs
-------------------------------
+----------------------------
+Time Machine & Cloning - API
+----------------------------
 
 Era provides the *Time Machine* functionality to simplify cloning operations. Time Machine captures and maintains snapshots and transactional logs of your source databases as defined in the schedule. For every source database you register with Era, a Time Machine is created for that source database. You'd then create clones that are not only space efficient, but enable you to refresh clones either to a point in time (by using transactional logs) or by using snapshots. These operations eliminate what was a previously manual process, thus allowing the DBA to focus their efforts on more pressing endeavors.
 
@@ -96,7 +96,7 @@ This exercise will walk you through creating a web server configured for your *F
    - **vCPUs** - 2
    - **Number of Cores Per vCPU** - 1
    - **Memory** - 4 GiB
-   - Click **+ Add New Disk**
+   - Click :fa:`plus`**Add New Disk**
 
       - **Type** - Disk
       - **Operation** - Clone from Image Service
@@ -104,7 +104,7 @@ This exercise will walk you through creating a web server configured for your *F
       - **Image** - CentOS_7_cloud.qcow2
       - Click **Add**
 
-   - Click **+ Add New NIC**
+   - Click :fa:`plus`**Add New NIC**
 
       - **Network Name** - Primary
       - Click **Add**
@@ -118,18 +118,18 @@ This exercise will walk you through creating a web server configured for your *F
 
    .. warning::
 
-      Before proceeding, modify the **YOUR-MSSQL-VM-IP-ADDRESS** portion within line 104 in the cloud-config script with the IP address from your *FiestaDB_Dev* VM. No other modifications are necessary.
+      Before proceeding, modify the **YOUR-FIESTADB_DEV-VM-IP-ADDRESS** portion within line 105 in the cloud-config script with the IP address from your *FiestaDB_Dev* VM. No other modifications are necessary.
 
       Example: `- sed -i 's/REPLACE_DB_HOST_ADDRESS/10.42.69.85/g' /home/centos/Fiesta/config/config.js`
 
-#. Once the VM has completed deploying, retrieve its IP address from Prism, and open `http://<FIESTAWEB_DEV-IP-ADDRESS>:5001` in a new browser tab to access the *Fiesta* application.
+#. Once the VM has completed deploying, open `http://<FIESTAWEB_DEV-IP-ADDRESS>:5001` in a new browser tab to access the *Development* Fiesta application.
 
 Refreshing Cloned Databases
 +++++++++++++++++++++++++++
 
 Now that you have a functioning development environment, it's time to create some changes within your production environment.
 
-#. In a new browser tab, return to your **Production** Fiesta web app. Click **Products > Add New Product**.
+#. In a new browser tab, return to your *Production* Fiesta web application (i.e. *FiestaWEB_Prod* web server). Click **Products > Add New Product**.
 
    .. figure:: images/16.png
 
@@ -137,7 +137,7 @@ Now that you have a functioning development environment, it's time to create som
 
    - **Product Name** - The Best Balloons
    - **Suggested Retail Price** - 100.00
-   - **Product Image URL** - https://partycity6.scene7.com/is/image/PartyCity/_pdp_sq_?$_1000x1000_$&$product=PartyCity/251182
+   - **Product Image URL** - `https://partycity6.scene7.com/is/image/PartyCity/_pdp_sq_?$_1000x1000_$&$product=PartyCity/251182`
    - **Product Comments** - Everybody Knows
 
    .. figure:: images/17.png
@@ -154,13 +154,13 @@ Now that you have a functioning development environment, it's time to create som
 
    .. figure:: images/18.png
 
-#. In a separate browser tab, open your **Dev** Fiesta web app. Confirm that the products and inventory added to the **Production** instance are not present.
+#. In a separate browser tab, open your **Dev** Fiesta web application. Confirm that the products and inventory added to the **Production** instance are not present.
 
 HOW DO WE DO THIS USING THE API EXPLORER?
 
 #. Within Era, from the *admin* dropdown, choose **REST API Explorer**.
 
-#. Spin up another copy of DEV fiesta web app.
+#. Spin up another copy of DEV fiesta web application.
 
 .. #. **Era > Time Machines**, select the Time Machine that corresponds to your production database. Select **Actions > Log Catch Up > Yes** to ensure the latest database entries have been flushed to disk.
 ..
