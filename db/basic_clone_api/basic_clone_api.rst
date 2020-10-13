@@ -12,9 +12,13 @@ Copy Data Management (CDM) (a.k.a. database cloning) is a critical day 2 databas
 
 In this lab you will API calls to:
 
-- Create a clone of your SQL Server production database *FiestaProd*, along with its own web server, which will be used as a development environment.
+- Create a clone of your SQL Server production database *FiestaDB_Prod*, along with its own web server, which will be used as a development environment.
 - Make changes to your production database, and refresh your development environment.
-- Use your *FiestaDev* environment to observe the modifications made to the production database are reflected in the development environment.
+- Use your *FiestaDB_Dev* environment to observe the modifications made to the production database are reflected in the development environment.
+
+.. note::
+
+   Before proceeding with the below, please be aware that the same steps will be accomplished also using the :ref:`_basic_clone_ui` section.
 
 Cloning from the Era API
 ++++++++++++++++++++++++

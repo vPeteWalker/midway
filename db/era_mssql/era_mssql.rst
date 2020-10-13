@@ -27,41 +27,47 @@ Installation
 
 #. Download the **Era Install for AHV** image file from the `Era Downloads section - Nutanix Support Portal <https://portal.nutanix.com/page/downloads?product=era>`_ either click the **Download** button associated with the latest version of *Era Install for AHV*, or the :fa: `ellipsis-v` next to it, and choose **Copy Download Link**.
 
-#. Log on to the *Prism Element* web console.
+#. In **Prism Central**, select :fa:`bars` **Virtual Infrastructure > Images**.
 
-#. Select *Settings* from the main menu drop-down list, and click **Image Configuration**.
+#. Click **Add Image**.
 
-#. Under *Image Configuration*, click **Upload Image**.
+#. Under *Image Source*, choose one of the following:
 
-#. In the *Create Image* dialog box, do the following in the indicated fields:
+   - Choose **Image File** > :fa:`plus` **Add File**. Browse to the Era .QCOW2 file, select it, and click **Open**. Click **Next > Save**.
 
-   - **Name**. Type a name of the image (ex. Era)
+**OR**
 
-   - **Image Type**. Select **Disk** from the drop-down list.
+   - Choose **URL**, paste the URL (which you copied via *Copy Download Link* above), and click **Upload File**. Click **Next > Save**.
 
-   - **Storage Container**. Select the **default** storage container to install Era.
+#. Wait until the **Create Image** task completes before proceeding.
 
-   - **Choose one of the following**:
+.. #. In the *Create Image* dialog box, do the following in the indicated fields:
+..
+..    - **Name**. Type a name of the image (ex. Era)
+..
+..    - **Image Type**. Select **Disk** from the drop-down list.
+..
+..    - **Storage Container**. Select the **default** storage container to install Era.
+..
+..    - **Choose one of the following**:
+..
+..       - Within *Image Source*, click **Upload a file > Choose File**. Browse to the Disk image for Era, and click **Open**.
+..
+..          .. figure:: images/FIX IMAGE
+..
+..       **OR**
+..
+..       - Click :fa:`dot-circle` **From URL**, and paste the download link you previously copied from the Nutanix Portal.
+..
+..          .. figure:: images/FIX IMAGE
+..
+..          .. note::
+..
+..             Verify that the *Image Type* is **Disk**.
+..
+..    - Click **Save**.
 
-      - Within *Image Source*, click **Upload a file > Choose File**. Browse to the Disk image for Era, and click **Open**.
-
-         .. figure:: images/FIX IMAGE
-
-      **OR**
-
-      - Click :fa:`dot-circle` **From URL**, and paste the download link you previously copied from the Nutanix Portal.
-
-         .. figure:: images/FIX IMAGE
-
-         .. note::
-
-            Verify that the *Image Type* is **Disk**.
-
-   - Click **Save**.
-
-   - Wait until the **Create Image** task completes before proceeding.
-
-#. From the main menu drop-down list, select **VM**, and then click **+ Create VM**.
+#. Select :fa:`bars` **Virtual Infrastructure > VMs**. and then click **Create VM**.
 
    Do the following in the indicated fields.
 
@@ -103,7 +109,7 @@ Installation
 
 #. Click the **Save** button to create the VM.
 
-#. In the *Table* view of the VM dashboard, right click the Era VM, and select **Power On** to start the VM.
+#. Right click the Era VM, and select **Power On** to start the VM.
 
 #. If you did not set a static IP, determine the IP address assigned to the Era VM from the *IP Addresses* field.
 
@@ -240,7 +246,7 @@ A SQL Server database server must meet the following requirements before you are
 
 #. From the dropdown, select **Databases**, then **Sources** from the lefthand menu.
 
-#. Click **+ Register > Microsoft SQL Server > Database**.
+#. Click :fa:`plus`**Register > Microsoft SQL Server > Database**.
 
    .. figure:: images/era8.png
 
@@ -248,15 +254,17 @@ A SQL Server database server must meet the following requirements before you are
 
    - Select **Not registered** within *Database is on a Server VM that is:*.
 
-   - **IP Address or Name of VM** Select the VM you created in the *SQL VM Deployment* section.
+   - **IP Address or Name of VM** Select the VM you created in the :ref:`mssqldeploy` section.
 
-   - **Windows Administrator Name** Type the user name of the administrator account (ex. Administrator).
+   - **Windows Administrator Name** Type the user name of the administrator account (ex. administrator@ntnxlab.local).
 
    - **Windows Administrator Password** Type the password of the administrator account.
 
    - **Instance** Era automatically discovers all the instances within a SQL server VM. In our case, there is only one instance named **MSSQLSERVER**.
 
    - The *Connect to SQL Server Login* and *User Name* fields allow a choice of authentication between Windows Admin, and SQL Server user. Leave the default at **Windows Admin User**, and click **Next**.
+
+      .. figure:: images/era9.png
 
 #. In the *Database Server VM* screen, select the **Fiesta** database within the *Unregistered Databases* section. Click **Next**.
 
@@ -268,9 +276,9 @@ A SQL Server database server must meet the following requirements before you are
 
 #. Click **Register**.
 
-#. In the *Status* column, click **Registering** to monitor the status.
+#. In the *Status* column, click **Registering** to monitor the status, or choose **Operations** from the dropdown.
 
-#. The registration process will take approximately 5 minutes. In the meantime, proceed with these steps:
+#. The registration process will take approximately 5 minutes. In the meantime, proceed with the remaining steps in this section. Wait for the registration process to complete to proceed to the next section.
 
    - From the dropdown menu, select **SLAs**. Era has five built-in SLAs (Gold, Silver, Bronze, Zero, and Brass). SLAs control however the database server is backed up. This can with a combination of Continuous Protection, Daily, Weekly Monthly and Quarterly protection intervals.
 
@@ -283,43 +291,39 @@ Creating A Software Profile
 
 Before additional SQL Server VMs can be provisioned, a *Software Profile* must first be created from the SQL server VM registered in the previous step. A software profile is a template that includes the SQL Server database and operating system. This template exists as a hidden, cloned disk image on your Nutanix cluster.
 
-#. From the dropdown, select **Profiles**, and then **Software** from the lefthand menu.
+#. From the dropdown, select **Profiles**, and then **Software** from the left-hand menu.
 
-#. Click **+ Create**, and then **Microsoft SQL Server**. Fill out the following fields:
+#. Click :fa:`plus`**Create**, and then **Microsoft SQL Server**. Fill out the following fields:
 
    - **Profile Name** - MSSQL_2016
    - **Database Server** - Select your registered MSSQL VM
-
-   .. figure:: images/14.png
 
 #. Click **Next > Create**.
 
 #. Select **Operations** from the dropdown menu to monitor the registration. This process should take approximately 5 minutes.
 
-#. Once the profile creation completes successfully, return to Prism. Right click your *Win16SQL16* VM, and choose **Power Off Actions > Guest Shutdown**.
+#. Once the profile creation completes successfully, return to Prism Central. Right click your *Win16SQL16* VM, and choose **Power Off Actions > Guest Shutdown**.
 
 Creating a New Microsoft SQL Database Server
 ............................................
 
-You've completed all the one-time operations required to be able to provision any number of SQL Server VMs. Follow the steps below to provision a new database server, with best practices automatically applied by Era.
+You've completed all the one-time operations required to be able to provision any number of SQL Server VMs. Follow the steps below to provision a new database server.
 
-#. In **Era**, select **Databases** from the dropdown menu, and then **Sources** from the lefthand menu.
+#. In **Era**, select **Databases** from the dropdown menu, and then **Sources** from the left-hand menu.
 
-#. Click **+ Provision > Microsoft SQL Server > Database**.
+#. Click :fa:`plus`**Provision > Microsoft SQL Server > Database**.
 
    .. figure:: images/era12.png
 
 #. In the **Provision a Database** wizard, fill out the following fields with the *Database Server VM* screen to configure the Database Server:
 
    - **Database Server VM** - Create New Server
-   - **Database Server VM Name** - FiestaPROD_DB
+   - **Database Server VM Name** - FiestaDB_Prod
    - **Software Profile** - MSSQL_2016
    - **Compute Profile** - DEFAULT_OOB_COMPUTE
    - **Network Profile** - DEFAULT_OOB_SQLSERVER_NETWORK
-   - **Database Time Zone** - Eastern Standard Time
    - Select **Join Domain**
    - **Windows Domain Profile** - NTNXLAB
-   - **Windows License Key** - (Leave Blank)
    - **Administrator Password** - nutanix/4u
    - **Instance Name** - MSSQLSERVER
    - **Database Parameter Profile** - DEFAULT_SQLSERVER_INSTANCE_PARAMS
@@ -330,7 +334,7 @@ You've completed all the one-time operations required to be able to provision an
 
    .. note::
 
-      A *Instance Name* is the name of the database server, not the hostname. The default is **MSSQLSERVER**. You can install multiple separate instances of MSSQL on the same server as long as they have different instance names. This was more common on a physical server. However, you do not need additional MSSQL licenses to run multiple instances of SQL on the same server.
+      A *Instance Name* is the name of the database server, not the hostname. The default is **MSSQLSERVER**. You can install multiple separate instances of MSSQL on the same server as long as they have different instance names.
 
       *Server Collation* is a configuration setting that determines how the database engine should treat character data at the server, database, or column level. SQL Server includes a large set of collations for handling the language and regional differences that come with supporting users and applications in different parts of the world. A collation can also control case sensitivity on database. You can have different collations for each database on a single instance. The default collation is *SQL_Latin1_General_CP1_CI_AS* which breaks down to:
 
@@ -343,7 +347,7 @@ You've completed all the one-time operations required to be able to provision an
 
 #. Click **Next**, and fill out the following fields within the *Database* screen:
 
-   - **Database Name** - FiestaPROD_DB
+   - **Database Name** - FiestaDB_Prod
    - **Database Parameter Profile** - DEFAULT_SQLSERVER_DATABASE_PARAMS
 
    .. figure:: images/era17.png
@@ -367,8 +371,22 @@ You've completed all the one-time operations required to be able to provision an
 
    .. figure:: images/era18.png
 
-#. Click **Provision** to begin creating your new database server VM and *Fiesta2* database.
+#. Click **Provision** to begin creating your new database server VM and *FiestaDB_Prod* database.
 
 #. Select **Operations** from the dropdown menu to monitor the *Provision* process. This process should take approximately 20 minutes.
 
    .. figure:: images/era19.png
+
+#. #. Remote Desktop into your *FiestaDB_Prod* VM using the *Domain* Administrator (i.e. ntnxlab.local\administrator) username.
+
+#. Launch **SQL Server Management Studio**.
+
+#. Click **Connect**.
+
+#. Click on **File > Open > File**. Choose the *FiestaDB-MSSQL.sql* file you previously downloaded to the desktop, and click **Open**.
+
+#. Confirm you have *FiestaDB_Prod* selected, and click **Execute**. This will create the necessary data within the *FiestaDB_Prod* database for use in the proceeding steps.
+
+   .. figure:: images/era10.png
+
+Excellent! You've provisioned your first database from a MS SQL profile. Keep going to see how to create a database clone either using the UI: :ref:`basic_clone_ui` or via APIs: :ref:`basic_clone_api`. Maybe you'd like to skip to creating an Always-On Availability Group (AAG)? :ref:`advanced_aag`

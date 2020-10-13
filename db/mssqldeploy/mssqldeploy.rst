@@ -28,7 +28,7 @@ TEMP PLACEHOLDER
 
 Links to different datacenters for:
 SQL 2016 image
-(optional) SQL Server Management Studio - https://aka.ms/ssmsfullsetup
+SQL Server Management Studio - https://aka.ms/ssmsfullsetup
 Windows Scratch prereq
 
 TEST BY REMOVING DNS TO ENSURE NOTHING IS BEING PULLING FROM ANYWHERE BEHIND THE SCENES??
@@ -70,13 +70,13 @@ Upload SQL Server 2016 ISO
 Deploy and configure Windows Server 2016 from clone
 ...................................................
 
-#. From the dropdown within Prism Element, select **VM**. Select the *Table* view, if not already selected.
+#. In **Prism Central**, select :fa:`bars` **Virtual Infrastructure > VMs**.
 
 #. Highlight your base Windows 2016 image (i.e. *Windows2016*), right click, and choose **Clone**.
 
 #. Name the clone. Typically, this should be something that describes both its base operating system, and function (ex. Win16SQL16). The VM name should be fewer than 15 characters to conform to Windows computer name limitations.
 
-#. Perform the following tasks:
+#. Perform the following tasks once the clone has been created:
 
    - Right click on your *Win16SQL16* VM, and choose **Update**.
 
@@ -93,6 +93,8 @@ Deploy and configure Windows Server 2016 from clone
    - **Size** - 100 GiB.
 
    - Select **Add**.
+
+   - Click **Save**.
 
 .. note::
 
@@ -124,7 +126,7 @@ Deploy and configure Windows Server 2016 from clone
 
    - Open *Server Manager* and select **Local Server**.
 
-   - Click on the link to the right of *Computer Name* (ex. `WIN-O74HDA2JLG0`)
+   - Click on the link to the right of *Computer Name* (ex. `Win16SQL16`)
 
    - Click **Change**.
 
@@ -140,11 +142,11 @@ Deploy and configure Windows Server 2016 from clone
 
    - Open *Server Manager* and select **Local Server**.
 
-   - Within the *Windows Firewall* entry, click on **Private: On**. If this is already set to **Private: Off** you may skip this section.
+   - Within the *Windows Firewall* entry, click on **Domain: On**.
 
    - In the left pane, click on **Turn Windows Firewall on or off**.
 
-   - Under both *Private network settings* and *Public network settings*, click on the bullets for **Turn off Windows Firewall (not recommended)**.
+   - Under *Domain network settings*, *Private network settings* and *Public network settings*, click on the bullets for **Turn off Windows Firewall (not recommended)**.
 
    - Click **OK** and close the *Windows Firewall* window.
 
@@ -160,15 +162,21 @@ Deploy and configure Windows Server 2016 from clone
 
       .. figure:: images/3b.png
 
+#. Close the console.
+
+#. Using Prism Central, determine the IP address of your *Win16SQL16* VM.
+
 #. Remote Desktop into your *Win16SQL16* VM using the *Domain* Administrator (i.e. ntnxlab.local\administrator) username.
 
-#. Open **Disk Management** and perform the following disk operations:
+#. Close *Server Manager*.
+
+#. Open **Disk Management** (diskmgmt.msc) and perform the following disk operations:
 
    - Mark **Disk 1** online by right clicking on *Disk 1* and choosing **Online**.
 
-   - Initialize the new disk by right clicking on *Disk 1* and choosing **Initialize**.
+   - Initialize the new disk by right clicking on *Disk 1* and choosing **Initialize**. Click **OK**.
 
-   - Create a new simple volume (ex. **E:**) by right clicking on the unallocated space, and choose **New Simple Volume**. Click **Next > Next > Choose E from the dropdown > Next > Finish**
+   - Create a new simple volume (ex. **E:**) by right clicking on the unallocated space, and choose **New Simple Volume**. Click **Next > Next > Choose E from the dropdown > Next > Next > Finish**
 
    .. raw:: html
 
@@ -180,30 +188,28 @@ Deploy and configure Windows Server 2016 from clone
 
    .. note::
 
-      Best practices for database VMs involve spreading the OS, SQL binaries, databases, TempDB, and logs into their own separate disks in order to maximize performance. In the interest of simplicity and brevity, we are not following all of these recommendations in this workshop, only the minimum necessary to meet Era's requirements.
+      Best practices for database VMs involve spreading the OS, SQL binaries, databases, TempDB, and logs into their own separate disks in order to maximize performance. In the interest of simplicity and brevity, we are not following all of these recommendations in this workshop, only the minimum necessary to meet Era's requirements to proceed.
 
       For complete details for running SQL Server on Nutanix (including guidance around NUMA, hyperthreading, SQL Server configuration settings, and more), see the `Nutanix Microsoft SQL Server Best Practices Guide <https://portal.nutanix.com/#/page/solutions/details?targetId=BP-2015-Microsoft-SQL-Server:BP-2015-Microsoft-SQL-Server>`_.
-
-#. Close the console window for your *Win16SQL16* VM.
 
 SQL Server 2016 Installation (Windows 2016)
 ...........................................
 
-#. Within Prism Element, make note of the IP address for your *Win16SQL16* VM.
+#. Within Prism Central, make note of the IP address for your *Win16SQL16* VM.
 
 #. Remote Desktop into your *Win16SQL16* VM using the *DOMAIN* Administrator (i.e. ntnxlab.local\administrator) username.
 
-#. Download `this <https://github.com/nutanixworkshops/EraWithMSSQL/raw/master/deploy_mssql_era/FiestaDB-MSSQL.sql>`_ file to the desktop of your *Win16SQL16* VM. Recommend using Chrome as the browser, as it allows you to **right click > Save As...**, whereas Internet Explorer does not. Choose **All Files** in the file type dropdown, otherwise you may inadvertantly save the file as *.txt* instead of *.sql*, preventing you from running it as a script.
+#. Download `this <https://github.com/nutanixworkshops/EraWithMSSQL/raw/master/deploy_mssql_era/FiestaDB-MSSQL.sql>`_ file to the desktop of your *Win16SQL16* VM. We will be using this file in proceeding steps to populate the database we create with data. Recommend using Chrome as the browser, as it allows you to **right click > Save As...**, whereas Internet Explorer does not. Choose **All Files** in the file type dropdown, otherwise you may inadvertantly save the file as *.txt* instead of *.sql*, preventing you from running it as a script from within *SQL Server Management Tools*.
 
-#. Open **File Explorer** and double-click on the CD-ROM drive letter containing the SQL 2016 ISO. This will begin the SQL 2016 installation.
+#. Open **File Explorer** and double-click on the CD-ROM drive letter containing the SQL 2016 ISO, or open the CD-ROM drive, and double-click on **SETUP.EXE**. This will begin the SQL 2016 installation.
 
 #. Click on **Installation > New SQL Server stand-alone installation or add features to an existing installation**.
 
 #. Click **Next** on the *Product Key* page to use the *Evaluation* edition.
 
-#. Click **I accept the license terms.** on the *License Terms* page, and click **Next**.
+#. Click the **I accept the license terms.** check box on the *License Terms* page, and click **Next**.
 
-#. Check the **Use Microsoft Update to check for updates (recommended)** and click **Next**.
+#. Click **Next** on the *Microsoft Update* page.
 
 #. Click the **Database Engine Services** box within the *Instance Features* section on the *Feature Selection* page, and click **Next**.
 
@@ -211,47 +217,45 @@ SQL Server 2016 Installation (Windows 2016)
 
 #. Click **Next** on the *Server Configuration* page.
 
-#. Click **Add Current User** within the *Specify SQL Server administrators* of the *Database Engine Configuration* page. Click **Next**.
+#. Click **Add Current User** within the *Specify SQL Server administrators* of the *Database Engine Configuration* page, and click **Next**.
 
 #. Click **Install** on the *Ready to Install* page.
 
 The installation process should take approximately 5 minutes.
 
-#. Install SQL Server Management Tools by either clicking on **Install SQL Server Management Tools** within the *SQL Server Installation Center* window, or (recommended) executing **SSMS-Setup-ENU.exe**.
+#. Click **Close** on the *Complete* page.
 
-#. Click **Install**. This process will take approximately 5-10 minutes. Click **Restart** once complete.
+#. Install SQL Server Management Tools by clicking on **Install SQL Server Management Tools** within the *SQL Server Installation Center* window, if you haven't already downloaded it. This will redirect you to the Microsoft website to download the latest version.
+
+#. Click **Install**. This process will take approximately 5-10 minutes. While you are waiting, you can proceed to the next step.
+
+#. Open **File Explorer > This PC**. Click on your additional drive letter (ex. E:\), and create two folders: **databases** and **logs**.
+
+#. Wait until the *SQL Server Management Tools* install is complete, then click **Restart**.
 
 #. Remote Desktop into your *Win16SQL16* VM using the *DOMAIN* Administrator (i.e. ntnxlab.local\administrator) username.
 
-#. Open **File Explorer > This PC**. Click on your additional drive letter (ex. E:\), and create two folders: **Databases** and **Logs**.
-
 #. Launch **SQL Server Management Studio**.
 
-#. Leave the default *Windows Authentication*, and click **Connect**.
+#. Click **Connect**.
 
 #. Verify the database server is available, with only system databases provisioned.
 
-   .. figure:: images/FIX IMAGE
+   .. figure:: images/4.png
 
-#. Add and modify a SQL database by performing the following:
+#. Create a new SQL database by performing the following:
 
    - Right click on **Databases** and choose **New Database**.
 
-   - Enter **Fiesta** in the *Database name* field.
+   - Enter **FiestaDB_Prod** in the *Database name* field.
 
-   - Scroll to the right, and select :fa:`ellipsis-h` within the *Path* section for the *Fiesta* entry. Browse to the *databases* directory within the secondary drive (ex. E:\). Click **OK**.
+   - Scroll to the right, and select :fa:`ellipsis-h` within the *Path* section for the *FiestaDB_Prod* entry. Browse to the *databases* directory within the secondary drive (ex. E:\). Click **OK**.
 
-   - Scroll to the right, and select :fa:`ellipsis-h` within the *Path* section for the *Fiesta_log* entry. Browse to the *logs* directory within the secondary drive (ex. E:\). Click **OK**.
+   - Scroll to the right, and select :fa:`ellipsis-h` within the *Path* section for the *FiestaDB_Prod_log* entry. Browse to the *logs* directory within the secondary drive (ex. E:\). Click **OK**.
 
-   .. figure:: images/FIX IMAGE
+   .. figure:: images/5.png
 
    - Click **OK**.
-
-#. Click on **File > Open > File**. Choose the *FiestaDB-MSSQL.sql* file you previously downloaded to the desktop, and click **Open**.
-
-#. Click **Execute**. This will create data within the *Fiesta* database.
-
-   .. figure:: images/era10.png
 
 #. Close the Remote Desktop session.
 
@@ -260,4 +264,6 @@ The installation process should take approximately 5 minutes.
 SQL Server 2016 Installation (Windows 2019)
 ...........................................
 
-TBD - What's different?
+This process is almost exactly the same as on Windows 2016. A few notable differences to be aware of:
+
+- When running Disk Management, it may be necessary to run it from Control Panel -> Administrative tools, as running it via Start -> Run may result in an error around insufficient privileges.
