@@ -111,9 +111,19 @@
    :hidden:
 
    db/mssqldeploy/mssqldeploy
-   db/era/era
-   db/basic_clone/basic_clone
+   db/era_mssql/era_mssql
+   db/basic_clone_ui/basic_clone_ui
+   db/basic_clone_api/basic_clone_api
    db/advanced_aag/advanced_aag
+   db/patch_sql/patch_sql
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Appendix
+   :name: _Appendix
+   :hidden:
+
+   appendix/appendix
 
 ===============================
 SE POC Guide Introduction (AHV)
@@ -166,6 +176,11 @@ How Do I Get Support?
 If you're experiencing product issues during a POC, you can engage Nutanix Support directly by creating a case at https://portal.nutanix.com or calling 1-855-NUTANIX, Option 3. The full list of international support phone numbers can be found `here <https://www.nutanix.com/support-services/product-support/support-phone-numbers>`_.
 
 For non-blocking issues, you can also try to engage Support in `#sre <slack://channel?team=T0252CLM8&id=C07SH5139>`_  or product specific channels (e.g. #calm, #era, #flow, etc.) in Slack.
+
+Appendix
+++++++++
+
+It is highly recommended to read through the Appendix before you begin any POC, to understand what guidance is available for each portion of the workshop. While not applicable in every situation, consider these "good to know" before you begin your POC. For quick reference, that section is located here: :ref:`appendix`.
 
 Feedback
 ++++++++

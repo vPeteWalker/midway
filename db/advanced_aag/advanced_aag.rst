@@ -103,7 +103,7 @@ In this section you'll deploy the web tier of the application, and connect it to
       - Click **Add**
 
    - Select **Custom Script**
-   - Select **Type or Paste Script**. Click the icon in the upper right-hand corner of the below window to copy the script to your clipboard. You may then paste the following **Cloud-init** script:
+   - Select **Type or Paste Script**. Click the icon in the upper right-hand corner of the below window to copy the script to your clipboard. You may then paste the following **cloud-config** script:
 
    .. literalinclude:: webserver.cloudconfig
     :linenos:
@@ -111,7 +111,7 @@ In this section you'll deploy the web tier of the application, and connect it to
 
    .. warning::
 
-      Before proceeding, modify the **YOUR-MSSQL-VM-IP-ADDRESS** entry within line 104 in the Cloud-init script. No other modifications are necessary.
+      Before proceeding, modify the **YOUR-MSSQL-VM-IP-ADDRESS** entry within line 104 in the *cloud-config* script. No other modifications are necessary.
 
       Example: `- sed -i 's/REPLACE_DB_HOST_ADDRESS/10.42.69.85/g' /home/centos/Fiesta/config/config.js`
 
@@ -119,7 +119,7 @@ In this section you'll deploy the web tier of the application, and connect it to
 
 #. Power on the VM and click **Launch Console**.
 
-#. Monitor the VM deployment until the console indicates that Cloud-init has finished.
+#. Monitor the VM deployment until the console indicates that the cloud-config has finished.
 
 #. In your browser, browse to the IP address of your **WebServer** VM and validate the application is running (as seen below).
 
