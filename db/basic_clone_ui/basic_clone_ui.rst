@@ -1,5 +1,7 @@
 .. _basic_clone_ui:
 
+Please complete :ref:`era_mssql` before proceeding.
+
 -------------------------
 Time Machines and Cloning
 -------------------------
@@ -14,6 +16,10 @@ In this lab you will use the UI to:
 - Make changes to your production database, and refresh your development environment.
 - Use your FiestaDev environment to observe the modifications made to the production database are reflected in the development environment.
 
+.. note::
+
+   Before proceeding with the below, please be aware that the same steps can be accomplished also using the :ref:`_basic_clone_api` section.
+
 Cloning from the Era UI
 +++++++++++++++++++++++
 
@@ -25,7 +31,7 @@ In this exercise you will explore the workflow for cloning a database through th
 
 #. Select **Actions > Create Database Clone > Database**.
 
-By default, a clone will be created from the most recent *Point in Time*. Alternatively, you can specify a previous point in time or snapshot.
+By default, a clone will be created from the most recent *Point in Time*. While not utilized in this workshop, you can specify a previous point in time or snapshot.
 
 #. Click **Next**.
 
@@ -36,7 +42,7 @@ By default, a clone will be created from the most recent *Point in Time*. Altern
 #. Make the following selections and click **Next**:
 
    - **Database Server** - Create New Server
-   - **Database Server Name** - FiestaDB_Dev
+   - **Database Server Name** - FiestaDB_Dev *Use this exact name, as changing this will prevent you from successfully completing the proceeding steps*
    - **Compute Profile** - DEFAULT_OOB_COMPUTE
    - **Network Profile** - DEFAULT_OOB_SQLSERVER_NETWORK
    - **Administrator Password** - nutanix/4u
@@ -52,14 +58,14 @@ By default, a clone will be created from the most recent *Point in Time*. Altern
 Deploy Development Web Server
 +++++++++++++++++++++++++++++
 
-This exercise will walk you through creating a web server configured for your *FiestaDev* MSSQL server.
+This exercise will walk you through creating a web server configured for your *FiestaWEB_Dev* MSSQL server.
 
 #. In **Prism Central**, select :fa:`bars` **Virtual Infrastructure > VMs**.
 
 #. Click **Create VM** and fill out the following fields:
 
    - **Name** - FiestaWEB_Dev
-   - **vCPUs** - 4
+   - **vCPUs** - 2
    - **Number of Cores Per vCPU** - 1
    - **Memory** - 4 GiB
    - Click **+ Add New Disk**
@@ -88,14 +94,14 @@ This exercise will walk you through creating a web server configured for your *F
 
       Example: `- sed -i 's/REPLACE_DB_HOST_ADDRESS/10.42.69.85/g' /home/centos/Fiesta/config/config.js`
 
-
+#. Once the VM has completed deploying, retrieve its IP address from Prism, and open `http://<FIESTAWEB_DEV-IP-ADDRESS>:5001` in a new browser tab to access the *Fiesta* application.
 
 Refreshing Cloned Databases
 +++++++++++++++++++++++++++
 
-Now that you have a functioning "development" environment, it's time to create some changes within your production environment.
+Now that you have a functioning development environment, it's time to create some changes within your production environment.
 
-#. In a new browser tab, return to your *Production* Fiesta web app. Click **Products > Add New Product**.
+#. In a new browser tab, return to your *Production* Fiesta web app (i.e. *FiestaWEB_Prod* web server). Click **Products > Add New Product**.
 
    .. figure:: images/16.png
 
@@ -120,9 +126,9 @@ Now that you have a functioning "development" environment, it's time to create s
 
    .. figure:: images/18.png
 
-#. In a separate browser tab, open your **Dev** Fiesta web app. Confirm that the products and inventory added to the **Production** instance are not present.
+#. In a separate browser tab, open your **Dev** Fiesta web app (i.e. *FiestaWEB_Dev*). Observe that the products and inventory added to the *Production* instance are NOT present.
 
-#. In **Era > Time Machines**, select the Time Machine that corresponds to your production database. Select **Actions > Log Catch Up > Yes** to ensure the latest database entries have been flushed to disk.
+#. In **Era > Time Machines**, select the *Time Machine* that corresponds to your production database (i.e. *FiestaDB_Prod*). Select **Actions > Log Catch Up > Yes** to ensure the latest database entries have been flushed to disk.
 
 #. Monitor the log catch up on the **Operations** page. This should take approximately 1 minute.
 
@@ -130,15 +136,15 @@ Now that you have a functioning "development" environment, it's time to create s
 
    .. figure:: images/21.png
 
-#. By default, the database will be refreshed to the most recent **Point in Time**, but you can manually specify a time or individual snapshot. For the purposes of this exercise, use the most recent time. Click **Refresh**.
+#. By default, the database will be refreshed to the most recent *Point in Time*, but you can manually specify a time or individual snapshot. For the purposes of this exercise, use the most recent time. Click **Refresh**.
 
-#. Monitor the refresh on the **Operations** page. This should take approximately 5 minutes.
+#. Monitor the refresh on the *Operations* page. This should take approximately 5 minutes.
 
-#. Once the refresh has completed, open your **Dev** Fiesta web app and validate the product and inventory data now matches your production database.
+#. Once the refresh has completed, open your *Development* Fiesta web app (i.e. *FiestaWEB_Dev*) and validate the product and inventory mofifications are now present, as they were in your *Production* database.
 
    .. figure:: images/18.png
 
-   With a few mouse clicks, your DBA was able to push current production data to the cloned database. This could be further automated through the Era CLI or APIs.
+   With a few mouse clicks, your DBA was able to push current production data to the cloned database utilized for development work within minutes.
 
 Takeaways
 +++++++++

@@ -1,5 +1,7 @@
 .. _advanced_aag:
 
+Please complete :ref:`era_mssql` before proceeding.
+
 -----------------------------------
 Microsoft SQL Database Availability
 -----------------------------------

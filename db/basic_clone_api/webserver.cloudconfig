@@ -99,7 +99,8 @@ runcmd:
  - npm install
  - npm run build
  - npm install nodemon concurrently
- - sed -i 's/REPLACE_DB_NAME/fiestadev/g' /home/centos/Fiesta/config/config.js
+# ** The below line has been modified for use exclusively in the SE POC Workshop. Please be aware before using it for any other purpose. **
+ - sed -i 's/REPLACE_DB_NAME/fiestaweb_dev/g' /home/centos/Fiesta/config/config.js
 # ** ONLY UPDATE THE >> YOUR-MYSQL-POCAPP-VM-IP-ADDRESS << PORTION IN THE BELOW LINE BEFORE SAVING YOUR VM - DO NOT MODIFY ANY OTHER LINES**
  - sed -i 's/REPLACE_DB_HOST_ADDRESS/YOUR-MYSQL-POCAPP-VM-IP-ADDRESS/g' /home/centos/Fiesta/config/config.js
 # ** ONLY UPDATE THE ABOVE LINE - DO NOT MODIFY ANY OTHER LINES **

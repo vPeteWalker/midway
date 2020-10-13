@@ -1,5 +1,7 @@
 .. _mssqldeploy:
 
+Please complete :ref:`windows_scratch` before proceeding.
+
 ------------------------
 Microsoft SQL Deployment
 ------------------------
@@ -39,7 +41,10 @@ https://portal.nutanix.com/page/documents/details?targetId=Nutanix-Era-User-Guid
 SQL Server 2016 - Manual Deployment
 +++++++++++++++++++++++++++++++++++
 
-These instructions will walk you through cloning a Windows VM (created via the :ref:`_windows_scratch` section). You will then manually install SQL Server 2016. This VM will act as a master image to create a profile for deploying additional SQL VMs with Nutanix and Microsoft best practices automatically applied by Era.
+These instructions will walk you through:
+
+- Cloning a Windows VM.
+- Manually install SQL Server 2016. This VM will act as a master image to create a profile for deploying additional SQL VMs with Nutanix and Microsoft best practices automatically applied by Era.
 
 Upload SQL Server 2016 ISO
 ..........................

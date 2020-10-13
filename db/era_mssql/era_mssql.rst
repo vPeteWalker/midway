@@ -1,3 +1,7 @@
+.. _era_mssql:
+
+Please complete :ref:`mssqldeploy` before proceeding.
+
 --------------
 Era Deployment
 --------------

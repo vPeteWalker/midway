@@ -1,5 +1,7 @@
 .. _basic_clone_api:
 
+Please complete :ref:`era_mssql` before proceeding.
+
 ------------------------------
 Time Machine, Cloning via APIs
 ------------------------------
@@ -14,10 +16,10 @@ In this lab you will API calls to:
 - Make changes to your production database, and refresh your development environment.
 - Use your *FiestaDev* environment to observe the modifications made to the production database are reflected in the development environment.
 
-Cloning from the Era UI
-+++++++++++++++++++++++
+Cloning from the Era API
+++++++++++++++++++++++++
 
-In this exercise you will explore the workflow for cloning a database through the Era web interface. **At the end of this exercise you will NOT click Clone to begin the cloning process, you will instead create the clone programmatically in the next exercise. This exercise is simply to show the UI workflow.**
+In this exercise you will explore the workflow for cloning a database through the Era APIs. **At the end of this exercise you will NOT click Clone to begin the cloning process, you will instead create the clone programmatically in the next exercise. This exercise is simply to show the UI workflow.**
 
 #. In **Era**, select **Time Machines** from the dropdown menu.
 
@@ -25,7 +27,7 @@ In this exercise you will explore the workflow for cloning a database through th
 
 #. Select **Actions > Create Database Clone > Database**.
 
-By default, a clone will be created from the most recent *Point in Time*. Alternatively, you can specify a previous point in time or snapshot.
+By default, a clone will be created from the most recent *Point in Time*. While not utilized in this workshop, you can specify a previous point in time or snapshot.
 
 #. Click **Next**.
 
@@ -36,7 +38,7 @@ By default, a clone will be created from the most recent *Point in Time*. Altern
 #. Make the following selections and click **Next**:
 
    - **Database Server VM** - Create New Server
-   - **Database Server Name** - FiestaDB_Dev
+   - **Database Server Name** - FiestaDB_Dev *Use this exact name, as changing this will prevent you from successfully completing the proceeding steps*
    - **Compute Profile** - DEFAULT_OOB_COMPUTE
    - **Network Profile** - DEFAULT_OOB_SQLSERVER_NETWORK
    - **Administrator Password** - nutanix/4u
@@ -49,9 +51,11 @@ By default, a clone will be created from the most recent *Point in Time*. Altern
 
 #. Review the **JSON Data** and example **Script** presented by the Era UI for programmatically generating a database clone based on your inputs. Click **Copy** within the *JSON* section (left-hand side).
 
-.. note:: If you care to paste this into another program, be sure it keeps the formatting intact, as programs such as the built-in Windows Notepad will not. Recommend Notepad++ or Sublime Text.
+.. note::
 
-   .. figure:: images/3.png
+   If you care to paste this into another program, be sure it keeps the formatting intact, as programs such as the built-in Windows Notepad will not. Recommend Notepad++ or Sublime Text.
+
+.. figure:: images/3.png
 
 #. Click **Close** and then click **X** to close the *Clone Database* wizard.
 
@@ -74,6 +78,47 @@ By default, a clone will be created from the most recent *Point in Time*. Altern
 #. Click **Execute**.
 
 #. From the dropdown, select **Operations** to monitor the progress. This should take approximately 15 minutes.
+
+Deploy Development Web Server
++++++++++++++++++++++++++++++
+
+This exercise will walk you through creating a web server configured for your *FiestaWEB_Dev* MSSQL server.
+
+#. In **Prism Central**, select :fa:`bars` **Virtual Infrastructure > VMs**.
+
+#. Click **Create VM** and fill out the following fields:
+
+   - **Name** - FiestaWEB_Dev
+   - **vCPUs** - 2
+   - **Number of Cores Per vCPU** - 1
+   - **Memory** - 4 GiB
+   - Click **+ Add New Disk**
+
+      - **Type** - Disk
+      - **Operation** - Clone from Image Service
+      - **Bus Type** - SCSI
+      - **Image** - CentOS_7_cloud.qcow2
+      - Click **Add**
+
+   - Click **+ Add New NIC**
+
+      - **Network Name** - Primary
+      - Click **Add**
+
+   - Select **Custom Script**
+   - Select **Type or Paste Script**. Click the icon in the upper right-hand corner of the below window to copy the script to your clipboard. You may then paste the following *cloud-config* script:
+
+      .. literalinclude:: webserver.cloudconfig
+       :linenos:
+       :language: YAML
+
+   .. warning::
+
+      Before proceeding, modify the **YOUR-MSSQL-VM-IP-ADDRESS** portion within line 104 in the cloud-config script with the IP address from your *FiestaDB_Dev* VM. No other modifications are necessary.
+
+      Example: `- sed -i 's/REPLACE_DB_HOST_ADDRESS/10.42.69.85/g' /home/centos/Fiesta/config/config.js`
+
+#. Once the VM has completed deploying, retrieve its IP address from Prism, and open `http://<FIESTAWEB_DEV-IP-ADDRESS>:5001` in a new browser tab to access the *Fiesta* application.
 
 Refreshing Cloned Databases
 +++++++++++++++++++++++++++
