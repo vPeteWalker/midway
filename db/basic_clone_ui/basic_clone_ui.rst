@@ -1,6 +1,6 @@
 .. _basic_clone_ui:
 
-Please complete :ref:`db/era_mssql` before proceeding.
+Please complete :ref:`era_mssql` before proceeding.
 
 ---------------------------
 Time Machine & Cloning - UI
@@ -12,13 +12,13 @@ Copy Data Management (CDM) (a.k.a. database cloning) is a critical day 2 databas
 
 In this lab you will use the UI to:
 
-- Create a clone of your SQL Server production database *FiestaDB_Prod*, along with its own web server, which will be used as a development environment.
+- Create a clone of your SQL Server production database *FiestaDB_Prod*, and along with its dedicated web server, which will be used as a development environment.
 - Make changes to your production database, and refresh your development environment.
 - Use your *FiestaDB_Dev* environment to observe the modifications made to the production database are reflected in the development environment.
 
 .. note::
 
-   Before proceeding with the below, please be aware that the same steps will be accomplished also using the :ref:`_basic_clone_api` section.
+   Before proceeding with the below, please be aware that the same steps will be accomplished also using the :ref:`basic_clone_api` section.
 
 Cloning from the Era UI
 +++++++++++++++++++++++
@@ -31,7 +31,7 @@ In this exercise you will explore the workflow for cloning a database through th
 
 #. Select **Actions > Create Database Clone > Database**.
 
-By default, a clone will be created from the most recent *Point in Time*. While not utilized in this workshop, Era allows you to specify either a previous point in time, or snapshot.
+   By default, a clone will be created from the most recent *Point in Time*. While not utilized in this workshop, Era allows you to specify either a previous point in time, or snapshot.
 
 #. Click **Next**.
 
@@ -39,10 +39,12 @@ By default, a clone will be created from the most recent *Point in Time*. While 
 
    Databases can be cloned alongside an entirely new server, automatically provisioned by Era, or as an additional database inside an existing database server.
 
-#. Make the following selections and click **Next**. Be sure to use this exact naming shown, as changing this will prevent you from successfully completing the proceeding steps.
+#. Make the following selections and click **Next**.
+
+   Be sure to use this exact naming shown, as changing this will prevent you from successfully completing the proceeding steps.
 
    - **Database Server** - Create New Server
-   - **Database Server Name** - FiestaDB_Dev *Use this exact name, as changing this will prevent you from successfully completing the proceeding steps*
+   - **Database Server Name** - FiestaDB_Dev
    - **Compute Profile** - DEFAULT_OOB_COMPUTE
    - **Network Profile** - DEFAULT_OOB_SQLSERVER_NETWORK
    - **Administrator Password** - nutanix/4u
@@ -51,7 +53,9 @@ By default, a clone will be created from the most recent *Point in Time*. While 
 
    .. figure:: images/2.png
 
-#. Make the following selections and click **Clone**. Be sure to use this exact naming shown, as changing this will prevent you from successfully completing the proceeding steps.
+#. Make the following selections and click **Clone**.
+
+   Be sure to use this exact naming shown, as changing this will prevent you from successfully completing the proceeding steps.
 
    - **Clone Name** - FiestaDB_Dev
    - **Database Name on VM** - FiestaDB_Dev
@@ -133,15 +137,15 @@ Now that you have a functioning development environment, it's time to create som
 
 #. In a separate browser tab, open your **Dev** Fiesta web app (i.e. *FiestaWEB_Dev*). Observe that the products and inventory added to the *Production* instance are NOT present.
 
-#. In **Era > Time Machines**, select the *Time Machine* that corresponds to your production database (i.e. *FiestaDB_Prod*). Select **Actions > Log Catch Up > Yes** to ensure the latest database entries have been flushed to disk.
+#. In Era, choose **Time Machines** from the dropdown. Select the *Time Machine* that corresponds to your production database (i.e. *FiestaDB_Prod*). Select **Actions > Log Catch Up > Yes** to ensure the latest database entries have been flushed to disk.
 
 #. Monitor the log catch up on the **Operations** page. This should take approximately 1 minute.
 
-#. In **Era > Databases > Clones**, select your cloned database and click **Refresh**.
+#. Choose **Databases** from the dropdown, then **Clones** from the left-hand side. Select your cloned database and click **Refresh**.
 
    .. figure:: images/21.png
 
-#. By default, the database will be refreshed to the most recent *Point in Time*, but you can manually specify a time or individual snapshot. For the purposes of this exercise, use the most recent time. Click **Refresh**.
+#. By default, the database will be refreshed to the most recent *Point in Time*, but you can manually specify a time or individual snapshot. For the purposes of this exercise, leave the default and click **Refresh**.
 
 #. Monitor the refresh on the *Operations* page. This should take approximately 5 minutes.
 
@@ -149,7 +153,7 @@ Now that you have a functioning development environment, it's time to create som
 
    .. figure:: images/18.png
 
-   With a few mouse clicks, your DBA was able to push current production data to the cloned database utilized for development work within minutes.
+With a few mouse clicks, your DBA was able to push current production data to the cloned database utilized for development work within minutes.
 
 Takeaways
 +++++++++

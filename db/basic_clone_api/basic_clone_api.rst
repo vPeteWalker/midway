@@ -1,6 +1,6 @@
 .. _basic_clone_api:
 
-Please complete :ref:`db/era_mssql` before proceeding.
+Please complete :ref:`era_mssql` before proceeding.
 
 ----------------------------
 Time Machine & Cloning - API
@@ -12,18 +12,18 @@ Copy Data Management (CDM) (a.k.a. database cloning) is a critical day 2 databas
 
 In this lab you will API calls to:
 
-- Create a clone of your SQL Server production database *FiestaDB_Prod*, along with its own web server, which will be used as a development environment.
+- Create a clone of your SQL Server production database *FiestaDB_Prod*, and along with its dedicated web server, will be used as a development environment.
 - Make changes to your production database, and refresh your development environment.
 - Use your *FiestaDB_Dev* environment to observe the modifications made to the production database are reflected in the development environment.
 
 .. note::
 
-   Before proceeding with the below, please be aware that the same steps will be accomplished also using the :ref:`_basic_clone_ui` section.
+   Before proceeding with the below, please be aware that the same steps will be accomplished also using the :ref:`basic_clone_ui` section.
 
 Cloning from the Era API
 ++++++++++++++++++++++++
 
-In this exercise you will explore the workflow for cloning a database through the Era APIs. **At the end of this exercise you will NOT click Clone to begin the cloning process, you will instead create the clone programmatically in the next exercise. This exercise is simply to show the UI workflow.**
+In this exercise you will explore the workflow for cloning a database through the Era APIs. At the end of this exercise you will not click **Clone** to begin the cloning process, you will instead create the clone programmatically in the next exercise. This exercise will utilize the UI to capture the information we need.
 
 #. In **Era**, select **Time Machines** from the dropdown menu.
 
@@ -41,8 +41,10 @@ By default, a clone will be created from the most recent *Point in Time*. While 
 
 #. Make the following selections and click **Next**:
 
+   Be sure to use this exact naming shown, as changing this will prevent you from successfully completing the proceeding steps.
+
    - **Database Server VM** - Create New Server
-   - **Database Server Name** - FiestaDB_Dev *Use this exact name, as changing this will prevent you from successfully completing the proceeding steps*
+   - **Database Server Name** - FiestaDB_Dev
    - **Compute Profile** - DEFAULT_OOB_COMPUTE
    - **Network Profile** - DEFAULT_OOB_SQLSERVER_NETWORK
    - **Administrator Password** - nutanix/4u
@@ -155,12 +157,6 @@ Now that you have a functioning development environment, it's time to create som
    .. figure:: images/18.png
 
 #. In a separate browser tab, open your **Dev** Fiesta web application. Confirm that the products and inventory added to the **Production** instance are not present.
-
-HOW DO WE DO THIS USING THE API EXPLORER?
-
-#. Within Era, from the *admin* dropdown, choose **REST API Explorer**.
-
-#. Spin up another copy of DEV fiesta web application.
 
 .. #. **Era > Time Machines**, select the Time Machine that corresponds to your production database. Select **Actions > Log Catch Up > Yes** to ensure the latest database entries have been flushed to disk.
 ..

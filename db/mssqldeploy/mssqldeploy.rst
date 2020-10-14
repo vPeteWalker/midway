@@ -10,8 +10,6 @@ Traditional database VM deployment resembles the diagram below. The process gene
 
 .. figure:: images/0.png
 
-BLURB DETAILING WHY ERA IS BETTER, METRICS, ETC.
-
 For details on deploying Microsoft SQL Server on Nutanix best practices, please refer to `Microsoft SQL Server - Nutanix Best Practices <https://nutanixinc.sharepoint.com/sites/solutions/Solutions%20and%20GSO%20Document%20Library/BP-2015-Microsoft-SQL-Server.pdf>`_
 
 This workshop includes detailed instructions to:
@@ -23,20 +21,7 @@ This workshop includes detailed instructions to:
 
 The goal is provide a completely transparent process to install SQL to meet the requirements for Era, avoiding use of any pre-built images, scripts, or anything that could be considered "black box". This is especially important for POCs being performed in highly-secure environments, where pre-built images or scripts may be forbidden. Everything used here is either publicly available (ex. Microsoft ISO images) and/or in plain text that can be easily reviewed (ex. SQL query file).
 
-TEMP PLACEHOLDER
-++++++++++++++++
-
-Links to different datacenters for:
-SQL 2016 image
-SQL Server Management Studio - https://aka.ms/ssmsfullsetup
-Windows Scratch prereq
-
-TEST BY REMOVING DNS TO ENSURE NOTHING IS BEING PULLING FROM ANYWHERE BEHIND THE SCENES??
-
-
-https://portal.nutanix.com/page/documents/details?targetId=Nutanix-Era-User-Guide-v1_3:Nutanix-Era-User-Guide-v1_3
-
-https://portal.nutanix.com/page/documents/details?targetId=Nutanix-Era-User-Guide-v2_0:Nutanix-Era-User-Guide-v2_0
+`Era User Guide v2.0 <https://portal.nutanix.com/page/documents/details?targetId=Nutanix-Era-User-Guide-v2_0:Nutanix-Era-User-Guide-v2_0>_`
 
 SQL Server 2016 - Manual Deployment
 +++++++++++++++++++++++++++++++++++
@@ -88,7 +73,7 @@ Deploy and configure Windows Server 2016 from clone
 
    - Within the *Image* dropdown, choose **MSSQL2016**. Click **Update**.
 
-   - Select **+ Add New Disk**.
+   - Select :fa:`plus`**Add New Disk**.
 
    - **Size** - 100 GiB.
 

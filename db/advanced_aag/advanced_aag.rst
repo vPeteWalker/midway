@@ -1,6 +1,6 @@
 .. _advanced_aag:
 
-Please complete :ref:`db/era_mssql` before proceeding.
+Please complete :ref:`era_mssql` before proceeding.
 
 -----------------------------------
 Microsoft SQL Database Availability
@@ -10,7 +10,7 @@ Up to this point, we have been using Era to create single instance databases. Fo
 
 SQL Server AAG clusters have many moving parts, and manually deploying a single cluster can easily take several hours.
 
-In this lab you will clone an existing production SQL Server database, turn it into a database cluster, and test its availability using the Fiesta app. This requires completion of the :ref:`calmenable` section.
+In this lab you will clone an existing production SQL Server database, turn it into a database cluster, and test its availability using the Fiesta app.
 
 Provision Fiesta Web Tier
 +++++++++++++++++++++++++

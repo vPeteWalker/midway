@@ -1,6 +1,6 @@
 .. _era_mssql:
 
-Please complete :ref:`db/mssqldeploy` before proceeding.
+Please complete :ref:`mssqldeploy` before proceeding.
 
 --------------
 Era Deployment
@@ -35,7 +35,7 @@ Installation
 
    - Choose **Image File** > :fa:`plus` **Add File**. Browse to the Era .QCOW2 file, select it, and click **Open**. Click **Next > Save**.
 
-**OR**
+      **OR**
 
    - Choose **URL**, paste the URL (which you copied via *Copy Download Link* above), and click **Upload File**. Click **Next > Save**.
 
@@ -99,13 +99,13 @@ Installation
 
    - In the *Type or paste script* text box, paste the following script, and replace the indicated references (ex. <NETMASK-IP> would be 255.255.255.128).
 
-   .. code-block:: bash
+      .. code-block:: bash
 
-      #cloud-config
-      runcmd:
-       - configure_static_ip ip=<STATIC-IP-ADDRESS> gateway=<GATEWAY-ADDRESS> netmask=<NETMASK-IP> nameserver=<NAMESERVER>
+         #cloud-config
+         runcmd:
+          - configure_static_ip ip=<STATIC-IP-ADDRESS> gateway=<GATEWAY-ADDRESS> netmask=<NETMASK-IP> nameserver=<NAMESERVER>
 
-   All parameters except the nameserver parameter are mandatory.
+      All parameters except the *nameserver* parameter are mandatory.
 
 #. Click the **Save** button to create the VM.
 
@@ -246,7 +246,7 @@ A SQL Server database server must meet the following requirements before you are
 
 #. From the dropdown, select **Databases**, then **Sources** from the lefthand menu.
 
-#. Click :fa:`plus`**Register > Microsoft SQL Server > Database**.
+#. Click :fa:`plus` **Register > Microsoft SQL Server > Database**.
 
    .. figure:: images/era8.png
 
@@ -293,7 +293,7 @@ Before additional SQL Server VMs can be provisioned, a *Software Profile* must f
 
 #. From the dropdown, select **Profiles**, and then **Software** from the left-hand menu.
 
-#. Click :fa:`plus`**Create**, and then **Microsoft SQL Server**. Fill out the following fields:
+#. Click :fa:`plus` **Create**, and then **Microsoft SQL Server**. Fill out the following fields:
 
    - **Profile Name** - MSSQL_2016
    - **Database Server** - Select your registered MSSQL VM
@@ -311,7 +311,7 @@ You've completed all the one-time operations required to be able to provision an
 
 #. In **Era**, select **Databases** from the dropdown menu, and then **Sources** from the left-hand menu.
 
-#. Click :fa:`plus`**Provision > Microsoft SQL Server > Database**.
+#. Click :fa:`plus` **Provision > Microsoft SQL Server > Database**.
 
    .. figure:: images/era12.png
 
@@ -412,7 +412,7 @@ This exercise will walk you through creating a web server configured for your *F
       - **Image** - CentOS_7_cloud.qcow2
       - Click **Add**
 
-   - Click :fa:`plus`**Add New NIC**
+   - Click :fa:`plus` **Add New NIC**
 
       - **Network Name** - Primary
       - Click **Add**
@@ -432,4 +432,4 @@ This exercise will walk you through creating a web server configured for your *F
 
 #. Once the VM has completed deploying, open `http://<FIESTAWEB_PROD-IP-ADDRESS>:5001` in a new browser tab to access the *Fiesta* application.
 
-Excellent! You've provisioned your first database from a MS SQL profile. Keep going to see how to create a database clone either using the UI: :ref:`db/basic_clone_ui` or via APIs: :ref:`db/basic_clone_api`. Maybe you'd like to skip to creating an Always-On Availability Group (AAG)? :ref:`db/advanced_aag`
+Excellent! You've provisioned your first database from a MS SQL profile. Keep going to see how to create a database clone either using the UI: :ref:`basic_clone_ui` or via APIs: :ref:`basic_clone_api`. Maybe you'd like to skip to creating an Always-On Availability Group (AAG)? :ref:`advanced_aag`
