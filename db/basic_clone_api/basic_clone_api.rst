@@ -59,13 +59,13 @@ By default, a clone will be created from the most recent *Point in Time*. While 
 
 .. note::
 
-   If you care to paste this into another program, be sure it keeps the formatting intact, as programs such as the built-in Windows Notepad will not. Recommend Notepad++ or Sublime Text.
+   If you care to paste this into another program, be sure that program retains the formatting, as some (ex. built-in Windows Notepad) will not. Recommend Notepad++ or Sublime Text.
 
 .. figure:: images/3.png
 
 #. Click **Close** and then click **X** to close the *Clone Database* wizard.
 
-#. From the *admin* dropdown, choose **REST API Explorer**.
+#. From the *admin* dropdown, choose **REST API Explorer**. A new browser tab will open. You will use this throughout this section.
 
    .. figure:: images/4.png
 
@@ -83,7 +83,9 @@ By default, a clone will be created from the most recent *Point in Time*. While 
 
 #. Click **Execute**.
 
-#. From the dropdown, select **Operations** to monitor the progress. This should take approximately 15 minutes.
+#. Scroll down to observe the responses to your API calls.
+
+#. In Era, select **Operations** from the dropdown to monitor the progress. This should take approximately 15 minutes.
 
 Deploy Development Web Server
 +++++++++++++++++++++++++++++
@@ -131,7 +133,7 @@ Refreshing Cloned Databases
 
 Now that you have a functioning development environment, it's time to create some changes within your production environment.
 
-#. In a new browser tab, return to your *Production* Fiesta web application (i.e. *FiestaWEB_Prod* web server). Click **Products > Add New Product**.
+#. In a new browser tab, return to your *Production* Fiesta web app (i.e. *FiestaWEB_Prod* web server). Click **Products > Add New Product**.
 
    .. figure:: images/16.png
 
@@ -156,31 +158,59 @@ Now that you have a functioning development environment, it's time to create som
 
    .. figure:: images/18.png
 
-#. In a separate browser tab, open your **Dev** Fiesta web application. Confirm that the products and inventory added to the **Production** instance are not present.
+#. In a separate browser tab, open your **Dev** Fiesta web app (i.e. *FiestaWEB_Dev*). Observe that the products and inventory added to the *Production* instance are NOT present.
 
-.. #. **Era > Time Machines**, select the Time Machine that corresponds to your production database. Select **Actions > Log Catch Up > Yes** to ensure the latest database entries have been flushed to disk.
-..
-..    .. figure:: images/19.png
-..
-.. #. Monitor the log catch up on the **Operations** page. This should take approximately 1 minute.
-..
-..    .. figure:: images/20.png
-..
-.. #. In **Era > Databases > Clones**, select your cloned database and click **Refresh**.
-..
-..    .. figure:: images/21.png
-..
-.. #. By default, the database will be refreshed to the most recent **Point in Time**, but you can manually specify a time or individual snapshot. For the purposes of this exercise, use the most recent time. Click **Refresh**.
-..
-..    .. figure:: images/22.png
-..
-.. #. Monitor the refresh on the **Operations** page. This should take approximately 4 minutes.
-..
-.. #. Once the refresh has completed, open your **Dev** Fiesta web app and validate the product and inventory data now matches your production database.
-..
-..    .. figure:: images/18.png
-..
-..    With a few mouse clicks, your DBA was able to push current production data to the cloned database. This could be further automated through the Era CLI or APIs.
+#. In Era, choose **Time Machines** from the dropdown. Select the *Time Machine* that corresponds to your production database (i.e. *FiestaDB_Prod*). Select **Actions > Log Catch Up > API Equivalent**.
+
+#. Review the **JSON Data** and example **Script** presented by the Era UI for programmatically generating a database clone based on your inputs.
+
+#. Click **Copy** within the *Script* section (right-hand side) to capture the *Time Machice ID* (ex. `18c121fd-db4c-4436-8113-da5c70424475`).
+
+   .. figure:: images/19a.png
+
+#. Return to the *API Explorer* browser tab.
+
+#. Click on **POST ​/tms​/{timemachine_id}​/log-catchups Start Log Catchup for given time machine**.
+
+   .. figure:: images/19.png
+
+#. Click **Try it out**, and then paste the *Time Machine ID* previously copied, into the *timemachine_id* box.
+
+   .. figure:: images/19b.png
+
+#. Within Era, click **Copy** within the *JSON* section (left-hand side).
+
+#. Return to the *API Explorer* browser tab.
+
+#. Paste in the *JSON* data you copied into the **BODY** section.
+
+#. Click **Execute** to ensure the latest database entries have been flushed to disk.
+
+#. Scroll down to observe the responses to your API calls.
+
+#. In Era, select **Operations** from the dropdown to monitor the progress. This should take approximately 1 minute.
+
+#. Choose **Databases** from the dropdown, then **Clones** from the left-hand side. Select your cloned database and click **Refresh**.
+
+#. By default, the database will be refreshed to the most recent *Point in Time*, but you can manually specify a time or individual snapshot. For the purposes of this exercise, leave the default and click **API Equivalent**.
+
+   .. figure:: images/21a.png
+
+#. Click **Copy** within the *JSON* section (left-hand side).
+
+#. Return to the *API Explorer* browser tab.
+
+#. Click on **POST ​/clones​/{clone_id}​/refresh Start Refresh Operation for given Clone**.
+
+   .. figure:: images/22.png
+
+#. Monitor the refresh on the *Operations* page. This should take approximately 5 minutes.
+
+#. Once the refresh has completed, open your *Development* Fiesta web app (i.e. *FiestaWEB_Dev*) and validate the product and inventory mofifications are now present, as they were in your *Production* database.
+
+   .. figure:: images/18.png
+
+With a few mouse clicks, your DBA was able to push current production data to the cloned database utilized for development work within minutes.
 
 Takeaways
 +++++++++
