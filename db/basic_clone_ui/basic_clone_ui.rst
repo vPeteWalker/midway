@@ -16,9 +16,7 @@ In this lab you will use the UI to:
 - Make changes to your production database, and refresh your development environment.
 - Use your *FiestaDB_Dev* environment to observe the modifications made to the production database are reflected in the development environment.
 
-.. note::
-
-   Before proceeding with the below, please be aware that the same steps will be accomplished also using the :ref:`basic_clone_api` section.
+Before proceeding with the below, please be aware that the same steps will be accomplished also using the :ref:`basic_clone_api` section.
 
 Cloning from the Era UI
 +++++++++++++++++++++++

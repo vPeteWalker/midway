@@ -16,9 +16,7 @@ In this lab you will API calls to:
 - Make changes to your production database, and refresh your development environment.
 - Use your *FiestaDB_Dev* environment to observe the modifications made to the production database are reflected in the development environment.
 
-.. note::
-
-   Before proceeding with the below, please be aware that the same steps will be accomplished also using the :ref:`basic_clone_ui` section.
+Before proceeding with the below, please be aware that the same steps will be accomplished also using the :ref:`basic_clone_ui` section.
 
 Cloning from the Era API
 ++++++++++++++++++++++++
@@ -31,7 +29,7 @@ In this exercise you will explore the workflow for cloning a database through th
 
 #. Select **Actions > Create Database Clone > Database**.
 
-By default, a clone will be created from the most recent *Point in Time*. While not utilized in this workshop, you can specify a previous point in time or snapshot.
+   By default, a clone will be created from the most recent *Point in Time*. While not utilized in this workshop, you can specify a previous point in time or snapshot.
 
 #. Click **Next**.
 
@@ -210,7 +208,7 @@ Now that you have a functioning development environment, it's time to create som
 
    .. figure:: images/18.png
 
-With a few mouse clicks, your DBA was able to push current production data to the cloned database utilized for development work within minutes.
+Programmatically, your DBA was able to push current production data to the cloned database utilized for development work within minutes.
 
 Takeaways
 +++++++++

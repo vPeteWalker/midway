@@ -404,7 +404,7 @@ This exercise will walk you through creating a web server configured for your *F
    - **vCPUs** - 2
    - **Number of Cores Per vCPU** - 1
    - **Memory** - 4 GiB
-   - Click **+ Add New Disk**
+   - Click :fa:`plus` **Add New Disk**
 
       - **Type** - Disk
       - **Operation** - Clone from Image Service
