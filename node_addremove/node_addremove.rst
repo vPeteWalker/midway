@@ -18,6 +18,8 @@ A customer may choose to add a node to account for a new workloads, or perhaps i
 
 **Covered Test IDs:** `Core-009, Core-010 <https://confluence.eng.nutanix.com:8443/display/SEW/Official+Nutanix+POC+Guide+-+INTERNAL>`_
 
+`Nutanix POC Test Plan Tracker <https://docs.google.com/spreadsheets/d/15r8Q1kCIJY4ErwL1CaHHwv4Q7gmCbLOz5IaR51t9se0/edit#gid=398743295>`_
+
 .. note::
 
    Before performing the procedure below, make sure you are running the latest version of the Nutanix Cluster Check (NCC) health checks and upgrade NCC if necessary.  Run all NCC checks, and check the Health Dashboard. If any health checks are failing, resolve them to ensure that the cluster is healthy before continuing.
@@ -30,7 +32,7 @@ A customer may choose to add a node to account for a new workloads, or perhaps i
 Remove node
 +++++++++++
 
-#. From the dropdown, choose the **Home** dashboard. Observe the **Hosts** count within the *Hardware Sumnmary*, and the total **Storage**, **CPU**, and **Memory** values before and after proceeding with the instructions below.
+#. From the dropdown within Prism Element, choose the **Home** dashboard. Observe the **Hosts** count within the *Hardware Summary*, and the total **Storage**, **CPU**, and **Memory** values before and after proceeding with the instructions below.
 
    .. figure:: images/7.png
       :align: center
@@ -49,9 +51,9 @@ Remove node
 Add node
 ++++++++
 
-#. From the dropdown, choose the **Home** dashboard. Observe the **Hosts** count within the *Hardware Sumnmary*, and the total **Storage**, **CPU**, and **Memory** values before and after proceeding with the instructions below.
+#. From the dropdown within Prism Element, choose the **Home** dashboard. Observe the **Hosts** count within the *Hardware Sumnmary*, and the total **Storage**, **CPU**, and **Memory** values before and after proceeding with the instructions below.
 
-   .. figure:: images/7.png
+   .. figure:: images/8.png
       :align: center
 
 #. Either click :fa:`gear` **> Settings > Expand Cluster**, or from the dropdown menu choose **Hardware > +Expand Cluster**.
@@ -83,7 +85,12 @@ Add node
    The network addresses are validated before continuing. If an issue is discovered, the problem addresses are highlighted in red. If there are no issues, the process moves to the *Assign Rack* screen with a message at the top when the hypervisor, AOS, or other relevant feature is incompatible with the cluster version.
 
       .. figure:: images/3.png
-         :align: center
+         :align: left
+         Example if Hypervisor does need to be upgraded
+
+      .. figure:: images/3a.png
+         :align: right
+         Example if Hypervisor does NOT need to be upgraded
 
 #. When all the fields are correct, click the **Expand Cluster** button.
 

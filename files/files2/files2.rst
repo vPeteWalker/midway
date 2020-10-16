@@ -62,7 +62,7 @@ A *distributed* (home) share is the repository for the user's personal files, an
 
       .. note::
 
-         Best suited for home directories, user profiles and application folders. This option distributes top-level directories across FileServer VMs and allows for increased capacity and user connections. Note that only folders can be created at the root and these top-level folders must be managed using Nutanix Files MMC plugin and can be downloaded from `HERE <http://download.nutanix.com/misc/MMC/Latest/Files_MMC_TLD_setup.msi>`_. Once created, a distributed share/export cannot be downgraded to standard.
+         Best suited for home directories, user profiles and application folders. This option distributes top-level directories across FileServer VMs and allows for increased capacity and user connections. Note that only folders can be created at the root and these top-level folders must be managed using Nutanix Files MMC plugin and can be downloaded from `HERE <http://download.nutanix.com/misc/MMC/Files_MMC_TLD_setup.msi>`_. Once created, a distributed share/export cannot be downgraded to standard.
 
 .. Testing with client desktop
 .. ...........................
@@ -402,7 +402,15 @@ During this exercise, you will explore the new, integrated File Analytics capabi
 
 #. Click **Add** the Everyone permissions with the following:
 
-#. Open a PowerShell window as another non-Administrator user account by holding **Shift** and right-clicking the **PowerShell** icon in the start menu and selecting **More > Run as a different user**.
+   - Read & Execute
+   - List folder contents
+   - Read
+
+   .. figure:: images/43.png
+
+#. Choose **OK** then **OK** again
+
+#. Open a PowerShell window as another non-Administrator user account (ex. User01 - full listed provided in ref:`prereqs`) by holding **Shift** and right-clicking the **PowerShell** icon in the start menu and selecting **More > Run as a different user**.
 
    .. figure:: images/24.png
 

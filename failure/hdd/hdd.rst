@@ -29,7 +29,7 @@ This test demonstrates the ability of Nutanix's AOS to immediately begin rebuild
 
    .. figure:: images/hdd0.png
 
-#. Click on the host, then scroll down. On the left hand side, you will see a summary screen for the host itself, similar to the below. Use this to identify how many and what type (SSD or HDD) of drives the host contains.
+#. Click on the host, then scroll down. On the left-hand side, you will see a summary screen for the host itself, similar to the below. Use this to identify how many and what type (SSD or HDD) of drives the host contains.
 
    .. figure:: images/hdd1.png
 

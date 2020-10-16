@@ -1,0 +1,24 @@
+#cloud-config
+
+users:
+  - name: centos
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+chpasswd:
+  list: |
+    root:nutanix/4u
+    centos:nutanix/4u
+  expire: False
+ssh_pwauth: True
+
+runcmd:
+ - yum install -y "http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm"
+# - yum update -y
+ - setenforce 0
+ - sed -i 's/enforcing/disabled/g' /etc/selinux/config /etc/selinux/config
+ - systemctl stop firewalld
+ - systemctl disable firewalld
+ - yum install -y mysql-community-server.x86_64 wget
+ - /bin/systemctl start mysqld
+ - /bin/systemctl enable mysqld
+ - wget https://raw.githubusercontent.com/nutanixworkshops/midway/master/flow/flowappsec/configuredb.sh
+ - bash /configuredb.sh nutanix/4u

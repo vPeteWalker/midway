@@ -10,6 +10,8 @@ In this module you will perform initial cluster configuration, including Pulse, 
 
 **Covered Test IDs:** `Core-003, Core-004, Core-005, Core-006, Core-008 <https://confluence.eng.nutanix.com:8443/display/SEW/Official+Nutanix+POC+Guide+-+INTERNAL>`_
 
+`Nutanix POC Test Plan Tracker <https://docs.google.com/spreadsheets/d/15r8Q1kCIJY4ErwL1CaHHwv4Q7gmCbLOz5IaR51t9se0/edit#gid=398743295>`_
+
 This initial configuration needs to be completed for both a Hosted or on-prem POC. These steps could be performed without the customer present, but there is opportunity throughout to call out Nutanix differentiators and to highlight the simplicity of the deployment process.
 
 Initial Login
@@ -71,7 +73,7 @@ Cluster Settings
 
 #. Next we'll validate network details set during the Foundation process. Start by selecting **Settings** from the dropdown menu.
 
-   Under **Network**, select **Name Servers** and verify your DNS entries are correct. Select **NTP Servers** and verify your entries are correct.
+   Under **Network**, select **Name Servers** and verify your DNS entries are correct. Select **NTP Servers** and verify your entries are correct. Refer to the `Prism Web Console Guide - Recommendations for Time Synchronization section <https://portal.nutanix.com/page/documents/details?targetId=Web-Console-Guide-Prism-v5_18:wc-ntp-server-time-sync-recommendations-c.html>`_ for guidance.
 
    .. figure:: images/5.png
 
@@ -121,17 +123,17 @@ Lifecycle Manager
 Storage Configuration
 +++++++++++++++++++++
 
-*Next we'll deploy storage for our virtual machines to use. One of the key benefits of Nutanix is the lack of tuning required to provision storage ready to run your VMs.*
+   *Next we'll deploy storage for our virtual machines to use. One of the key benefits of Nutanix is the lack of tuning required to provision storage ready to run your VMs.*
 
 #. Select **Storage** from the dropdown menu.
 
-*Similar to the Dashboard view, the Storage Overview provides key metrics relevant to storage, including capacity, data efficiency, performance, and alerting.
+   *Similar to the Dashboard view, the Storage Overview provides key metrics relevant to storage, including capacity, data efficiency, performance, and alerting.
 
 #. Select the **Table** view.
 
-*The two main storage concepts in Nutanix are a Storage Pool and a Storage Container. The Storage Pool is simply the aggregation of all physical disks within the cluster. There is only one Storage Pool, as the Nutanix distributed storage fabric is intelligently spreading data across all physical disks to provide optimal performance and capacity utilization - no multiple LUNs or volumes to manage separately. Storage Containers are logical policies that apply to the Storage Pool (in vSphere each Storage Container would be presented as a Datastore to the hypervisor). Container policies allow you to do things like turn on and off different data efficiency settings like compression or erasure coding.*
+   *The two main storage concepts in Nutanix are a Storage Pool and a Storage Container. The Storage Pool is simply the aggregation of all physical disks within the cluster. There is only one Storage Pool, as the Nutanix distributed storage fabric is intelligently spreading data across all physical disks to provide optimal performance and capacity utilization - no multiple LUNs or volumes to manage separately. Storage Containers are logical policies that apply to the Storage Pool (in vSphere each Storage Container would be presented as a Datastore to the hypervisor). Container policies allow you to do things like turn on and off different data efficiency settings like compression or erasure coding.*
 
-*While the cluster already has a default container, we'll create an additional container to show you how simple the process is. Typically you would only have multiple containers when there are different data efficiency requirements, for example, not wanting compression enabled on a datastore primarily storing pre-compressed data such as video files. Alternatively you may create different storage containers to map to different projects or business units for reporting or quota purposes.*
+   *While the cluster already has a default container, we'll create an additional container to show you how simple the process is. Typically you would only have multiple containers when there are different data efficiency requirements, for example, not wanting compression enabled on a datastore primarily storing pre-compressed data such as video files. Alternatively you may create different storage containers to map to different projects or business units for reporting or quota purposes.*
 
 #. Click **+ Storage Container**.
 
@@ -144,6 +146,8 @@ Storage Configuration
    .. figure:: images/10.png
 
    *Compression is a great option for nearly all workloads, except for pre-compressed datasets. Erasure Coding is another option that can be used to minimize the storage footprint of your RF2 and RF3 replicas for write-cold data. Deduplication is appropriate for full byte-copy clones of VMs. In traditional storage arrays deduplication can also be helpful for eliminating zeros, but as Nutanix doesn't write zeros to begin with, we save that capacity without incurring any of the overhead of deduplication.*
+
+   *New production, all flash deployments will default to 0 min (Inline) Compression. Post Process Compression is used in the POC for the purposes of maximizing performance, especially when comparing performance figures to other platforms (e.g. VSAN will likely not test performance with storage efficiencies enabled).*
 
 #. Click **Save**.
 
@@ -158,7 +162,7 @@ Storage Configuration
 Network Configuration
 +++++++++++++++++++++
 
-*Before we deploy any VMs, we first need to review physical network connectivity and configure virtual networks, both of which are done in Prism for AHV clusters.*
+   *Before we deploy any VMs, we first need to review physical network connectivity and configure virtual networks, both of which are done in Prism for AHV clusters.*
 
 #. Select **Network** from the dropdown menu.
 
@@ -182,7 +186,7 @@ Network Configuration
 
 #. Click **Create Network**.
 
-   *This is the primary network we will use for VMs in the POC. For simplicity, it is the same VLAN used by the CVMs and hypervisor. In addition to adding the virtual network, we'll also configure AHV's integrated IP Address Management to provide IP assignment to VMs on this network. This can potentially eliminate the need for separately managed DHCP services in an environment. Rather than depending on lease times, AHV IPAM will assign addresses for the life of a VM, and also makes static assignments simple at the time of VM creation.*
+   *This is the primary network we will use for VMs in the POC. For simplicity, it is the same VLAN used by the CVMs and hypervisor. In addition to adding the virtual network, we'll also configure AHV's integrated IP Address Management to provide IP assignment to VMs on this network. This can potentially eliminate the need for separately managed DHCP services in an environment. Rather than depending on lease times, AHV IPAM will assign addresses for the life of a VM, and also makes static assignments simple at the time of VM creation. The prospect may require use of their own DHCP solution. If that is the case, do not enable IPAM in the below step.*
 
 #. Provide a name for the network. This guide will consistently refer to this as your **Primary** network throughout.
 
@@ -319,9 +323,9 @@ To streamline the POC deployment, we have provided a pre-packaged Windows Server
 Prism Central Deployment
 ++++++++++++++++++++++++
 
-*While you can operate a single Nutanix cluster without Prism Central, PC provides the ability to easily manage a large number of clusters, across datacenters, and provides advanced functionality such as Prism Ops for infrastructure analytics and automation, Calm for workload deployment and management automation, Leap for DR, and more.*
+   *While you can operate a single Nutanix cluster without Prism Central, PC provides the ability to easily manage a large number of clusters, across datacenters, and provides advanced functionality such as Prism Ops for infrastructure analytics and automation, Calm for workload deployment and management automation, Leap for DR, and more.*
 
-*Unlike traditional solutions requiring dedicated databases, licensing servers, and other components - Prism Central deploys as a virtual appliance, either as a single VM or a scale out cluster to provide redundancy and scale.*
+   *Unlike traditional solutions requiring dedicated databases, licensing servers, and other components - Prism Central deploys as a virtual appliance, either as a single VM or a scale out cluster to provide redundancy and scale.*
 
 #. Select **Home** from the dropdown menu. Under **Prism Central**, click **Register or create new**.
 
@@ -376,4 +380,16 @@ Prism Central Deployment
 
    .. figure:: images/22.png
 
-   *From this point, Prism Central will be used for the majority of day to day monitoring and operations - providing you a user interface that can manage multiple clusters simultaneously, including clusters running different hypervisors and hardware platforms.*
+#. Configure NTP server settings. Refer to the `Prism Web Console Guide - Recommendations for Time Synchronization section <https://portal.nutanix.com/page/documents/details?targetId=Web-Console-Guide-Prism-v5_18:wc-ntp-server-time-sync-recommendations-c.html>`_ for guidance.
+
+   - Click on :fa:`bars` **> Prism Central Settings > NTP Servers**.
+
+   - Enter the IP address or (preferred for external servers) the FQDN of each NTP server, and click **Add** after each one.
+
+#. Configure Name Server settings.
+
+   - Click on :fa:`bars` **> Prism Central Settings > Name Server.
+
+   - Delete and replace the existing value with the IP of your **AutoAD** VM.
+
+   *From this point, Prism Central will be used for the majority of day to day monitoring and operations - providing you a user interface that can manage multiple clusters simultaneously. This includes clusters running different hypervisors and hardware platforms. Prism Central enables the ability to perform limited VM management, potentially eliminating the need to use a separate interface for some tasks.*

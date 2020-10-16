@@ -4,17 +4,117 @@
 Securing Applications
 ---------------------
 
-In this module you will use Flow to secure communications within an example multi-tier application consisting of webserver and database CentOS VMs. For the purpose of streamlining the POC, the application has been provided in the form of a Calm Blueprint. The same overall principles for creating the policy and talking points would apply if using a customer provided application, you would simply need to account for differences in category assignment and connection ports/protocols.
+In this module you will use Flow to secure communications within an example multi-tier application consisting of webserver and database CentOS VMs.
 
-**Prerequisites:** Completion of :ref:`calmenable` and :ref:`deploypocapp`
+The same overall principles for creating the policy and talking points would apply if using a customer provided application, you would simply need to account for differences in category assignment and connection ports/protocols.
 
-**(Optional) Pre-requisite:** Completion of :ref:`deploygraylog`
+**(Optional) Prerequisites:**
+
+For the purpose of streamlining the POC, the application can either be provisioned using Calm or manually (using the provided CentOS disk image and cloud-init scripts):
+
+- If your POC will include Calm, you are encouraged to complete the :ref:`calmenable` and :ref:`deploypocapp` exercises.
+- If your POC will not include Calm, you can provision the application by following the `Manual POC App Deployment`_ steps below.
+
+.. note::
+
+   The manual process takes ~5 minutes to deploy your application, whereas the Calm exercises take ~15-30 minutes to complete.
+
+Additionally, you can leverage GrayLog as a remote syslog server which can be used for Flow logging:
+
+- This requires completion of the :ref:`calmenable` and :ref:`deploygraylog` exercises (as we leverage the built-in Marketplace Blueprint for GrayLog).
 
 **Expected Module Duration:** 45 minutes
 
 **Covered Test IDs:** N/A
 
-*With a real application in place to provide HTTP and database traffic, we can now walk through how Flow can be used to provide even finer-grained controls within the datacenter.*
+Manual POC App Deployment
+++++++++++++++++++++++++
+
+*The purpose of using a "real" application for this exercise is to demonstrate the additional capabilities of Flow for shaping policies around specific ports and service interactions between VMs (such as HTTP and database traffic), rather than all communication between individual or groups of VMs.*
+
+#. If you are using Calm to provision your POC App for this exercise, skip ahead to `Adding Categories`_.
+
+   *First we'll provision a CentOS VM that will run the MySQL database for our small eCommerce app.*
+
+#. In **Prism Central**, select :fa:`bars` **> Virtual Infrastructure > VMs**.
+
+#. Click **Create VM** and fill out the following fields:
+
+   - **Name** - MYSQL-POCApp
+   - **vCPUs** - 4
+   - **Number of Cores Per vCPU** - 1
+   - **Memory** - 4 GiB
+   - Click **+ Add New Disk**
+
+      - **Type** - Disk
+      - **Operation** - Clone from Image Service
+      - **Bus Type** - SCSI
+      - **Image** - CentOS7.qcow2
+      - Click **Add**
+
+   - Click **+ Add New NIC**
+
+      - **Network Name** - Primary
+      - Click **Add**
+
+   - Select **Custom Script**
+   - Select **Type or Paste Script** and paste in the following **Cloud-init** script:
+
+   .. literalinclude:: mysql.cloudconfig
+    :linenos:
+    :language: YAML
+
+#. Click **Save**.
+
+#. Power on the VM and click **Launch Console**.
+
+#. Monitor the VM deployment until you the bottom of the console indicates that Cloud-init has finished. The database should now be running, allowing us to provision the WebServer VM next.
+
+   .. figure:: images/18.png
+
+   .. note::
+
+      You could also verify the database is running by logging into the VM (U\:root P\:nutanix/4u) and executing ``systemdctl status mysqld``
+
+#. Note the IP Address of your **MYSQL-POCApp** VM in Prism (or by executing ``ifconfig`` in the VM console). *We will use this IP in the Cloud-init script for our WebServer to point the application to the IP address of the database.*
+
+#. Click **Create VM** and fill out the following fields:
+
+   - **Name** - WebServer-POCApp
+   - **vCPUs** - 4
+   - **Number of Cores Per vCPU** - 1
+   - **Memory** - 4 GiB
+   - Click **+ Add New Disk**
+
+      - **Type** - Disk
+      - **Operation** - Clone from Image Service
+      - **Bus Type** - SCSI
+      - **Image** - CentOS7.qcow2
+      - Click **Add**
+
+   - Click **+ Add New NIC**
+
+      - **Network Name** - Primary
+      - Click **Add**
+
+   - Select **Custom Script**
+   - Select **Type or Paste Script** and paste in the following **Cloud-init** script:
+
+   .. literalinclude:: webserver.cloudconfig
+    :linenos:
+    :language: YAML
+
+#. Do **NOT** click **Save** yet! On **Line 104** of the **Cloud-init** script you need to replace the string **YOUR-MYSQL-POCAPP-VM-IP-ADDRESS** with the previously noted IP address of your **MYSQL-POCApp** VM (e.g. 10.42.93.110) in the **Type or Paste Script** field.
+
+#. Click **Save**.
+
+#. Power on the VM and click **Launch Console**.
+
+#. Again, monitor the VM deployment until you the bottom of the console indicates that Cloud-init has finished.
+
+#. In your browser, browse to the IP address of your **WebServer-POCApp** VM and validate the application is running (as seen below).
+
+   .. figure:: images/19.png
 
 Adding Categories
 +++++++++++++++++
@@ -58,7 +158,7 @@ Creating a Security Policy
 
 *...*
 
-#. In **Prism Central**, select :fa:`bars` **> Policies > Security**.
+#. In **Prism Central**, select :fa:`bars` **> Policies > Security Policies**.
 
 #. Click **Create Security Policy > Secure Applications (App Policy) > Create**.
 
@@ -96,7 +196,7 @@ Creating a Security Policy
 
 #. Under **Inbound**, click **+ Add Source**.
 
-#. Fill out the following fields to allow all inbound IP addresses, and then click **Add**:
+#. Fill out the following fields to allow all inbound IP addresses:
 
    - **Add source by:** - Select **Subnet/IP**
    - Specify **0.0.0.0/0**
@@ -107,11 +207,12 @@ Creating a Security Policy
 
    .. figure:: images/5.png
 
-#. Click the radio button for **Select a service** under the *Service Details* section, and type **http** within the *Service Name* box and click on the **http** entry.
+#. Fill out the following fields:
 
-   .... figure:: images/5a.png
+   - **Protocol** - TCP
+   - **Ports** - 80
 
-   *Multiple services (defined as a group of protocols and ports) can be added to a single rule. If required, custom services based on TCP, UDP, or ICMP can be added utlizing by clicking New Service.*
+   *Multiple protocols and ports can be added to a single rule.*
 
 #. Click **Save**.
 
@@ -132,7 +233,7 @@ Creating a Security Policy
 
    .. figure:: images/6.png
 
-#. Select the :fa:`plus-circle` icon that appears to the left of **AppTier:Web**, specify **TCP** port **22** and click **Save**.
+#. Select the **+** icon that appears to the left of **AppTier:Web**, specify **TCP** port **22** and click **Save**.
 
 #. Repeat the previous step for **AppTier:DB** to allow Calm to communicate with the database VM.
 

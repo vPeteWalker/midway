@@ -60,6 +60,8 @@ Isolation Policy
 
       - If your pings fail BEFORE creating and enabling your Flow policy, confirm the Windows Firewall has been disabled within each VM, as it will block the ICMP traffic by default if left enabled.
 
+      **FEEDBACK** Should we illustrate how to disable the Windows firewall?
+
    *We'll use the ping as a simple indication of traffic being allowed between the VMs.*
 
 #. Select :fa:`bars` **> Policies > Security**.
@@ -80,7 +82,7 @@ Isolation Policy
 
       - Search for **AppType:Microsoft_SQL**
 
-   - (Optional, if **Syslog** configured for cluster) Enable **Policy Hit Logs**
+   - (Optional - if **Syslog** configured within Prism Central via :ref:`deploygraylog` section) Enable **Policy Hit Logs**
 
    .. figure:: images/2.png
 
@@ -132,3 +134,10 @@ Quarantining VMs
 #. (Optional) Launch the VM console for the quarantined VM and validate it can no longer reach any outside networks, or ping other WinServer clone VMs.
 
 #. Finally, stop all running ping commands.
+
+Before you go
++++++++++++++
+
+It's important that you revert each of the above modifications you made before continuing on with the workshop.
+
+   - **POC-Isolation** -

@@ -271,7 +271,7 @@ Adding Blueprints to the Marketplace
 Publishing the Blueprint
 ........................
 
-#. Select |Blueprints| **Blueprints** in the left hand toolbar to view and manage Calm Blueprints.
+#. Select |Blueprints| **Blueprints** in the left-hand toolbar to view and manage Calm Blueprints.
 
 #. Click your **WinServer-IaaS** Blueprint.
 
