@@ -7,7 +7,7 @@ Scenario
 As you go through this POC (Proof of Concept) Workshop you will use this Customer Scenario to provide some depth, context, and realism to the exercises that you do.  Read through the scenario below and take into account each stakeholder's perspective, their pain points, and their goals and requirements.
 You should be able to communicate the specific Nutanix Product/Feature in your POC sections to each of those stakeholders and explain how Nutanix can solve their business challenges, can help them achieve their goals, and how Nutanix differentiates itself from the competition.
 As you go through the review process with your manager, and potentially your peers, you will want to demonstrate that you not only have completed the section of this POC Guide that were assigned to you, or that you assigned yourself to accomplish, but you will also want to be able to demonstrate to management and your peers that you can articulate the Nutanix Value Proposition in light of this scenario.
-Think of how you might do this with an actual meeting with a prospect/customer at the end of a POC.  How would you show them success for the POC and how it met their requirements and reduced or eliminated their pain.
+Think of how you might do this with an actual meeting with a prospect/customer at the end of a POC.  How would you show them success for the POC and how it met their requirements and reduced or eliminated their pain.  This should not be a PowerPoint presentation, but a demonstration through verbal communication and a walk through of what was accomplished in the UI.
 
 Customer Scenario
 +++++++++++++++++
