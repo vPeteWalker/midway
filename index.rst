@@ -7,7 +7,8 @@
 
    self
    whatsnew/whatsnew
-
+   scenario/scenario
+   
 .. toctree::
    :maxdepth: 2
    :caption: Planning & Deployment
