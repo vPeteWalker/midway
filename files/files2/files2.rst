@@ -121,7 +121,7 @@ During this exercise, you will:
 
 #. We will be utilizing the **WinServer-2** VM previously created in the :ref:`vmmanage` section. Within Prism, make note of its IP address.
 
-#. Launch the console for **WinServer-2**, and log in as the **NTNXLAB\\Administrator** account.
+#. Launch the console for **WinServer-2**, and log in as the **Administrator** account.
 
 #. *Server Manager* will automatically open. Do not close this window, as we will be utilizing it to configure this server.
 
@@ -301,7 +301,7 @@ During this exercise, you will:
 
    .. figure:: images/distributed4.png
 
-#. Click **OK**.
+#. Add **Documents** after the *User01* folder as shown, and click **OK**. If prompted to create the *Documents* folder, click **Yes**.
 
    .. figure:: images/distributed5.png
 
@@ -418,7 +418,7 @@ During this exercise, you will explore the new, integrated File Analytics capabi
 
      .. code-block:: bash
 
-        cd /files.ntnxlab.local/smb01/MyFolder
+        cd \\files.ntnxlab.local\smb01\MyFolder
 
 #. Execute the following commands:
 

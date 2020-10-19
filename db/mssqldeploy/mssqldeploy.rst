@@ -21,7 +21,7 @@ This workshop includes detailed instructions to:
 
 The goal is provide a completely transparent process to install SQL to meet the requirements for Era, avoiding use of any pre-built images, scripts, or anything that could be considered "black box". This is especially important for POCs being performed in highly-secure environments, where pre-built images or scripts may be forbidden. Everything used here is either publicly available (ex. Microsoft ISO images) and/or in plain text that can be easily reviewed (ex. SQL query file).
 
-`Era User Guide v2.0 <https://portal.nutanix.com/page/documents/details?targetId=Nutanix-Era-User-Guide-v2_0:Nutanix-Era-User-Guide-v2_0>_`
+`Era User Guide v2.0 <https://portal.nutanix.com/page/documents/details?targetId=Nutanix-Era-User-Guide-v2_0:Nutanix-Era-User-Guide-v2_0>`_
 
 SQL Server 2016 - Manual Deployment
 +++++++++++++++++++++++++++++++++++

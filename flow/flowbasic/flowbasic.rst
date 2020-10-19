@@ -31,7 +31,7 @@ Enabling Flow
 
    .. note::
 
-      Enabling Flow with add an additional 1GiB of memory to your **PrismCentral** VM. This occurs automatically with Prism Central deployed on an AHV cluster, and does not require restarting Prism Central.
+      Enabling Flow will add an additional 1GiB of memory to your **PrismCentral** VM. This occurs automatically with Prism Central deployed on an AHV cluster, and does not require restarting Prism Central.
 
    *Because Flow microsegmentation exists as a policy engine within Prism Central, it can be enabled instantly without the need to deploy additional service VMs, installing software, or using a separate console - unlike competitive solutions like NSX which can be slow and costly to deploy and maintain.*
 
