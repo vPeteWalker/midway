@@ -112,15 +112,8 @@ Perform the following procedure to apply updates from the available software pro
    - **Update to Software Profile Version.** Select a software profile version to update from the drop-down list.
    - Under *Start Update*, select one of the following:
 
-Now. Select this option if you want to start updating the software version now.
-Later. Select this option and then select the day and time if you want to create a schedule for patching the software profile version.
-Click Pre-Post Commands and do the following in the indicated fields:
-Pre-Create Command. Type a complete OS command that you want to run before the single-instance database is created.
-Post-Create Command. Type a complete OS command that you want to run after the single-instance database is created.
-Figure. SQL Server AG Patching for Existing Database Server VM
-Click to enlarge
+   - **Now.** Select this option.
 
+#. Provide the Windows cluster name as confirmation and click Update.
 
-
-Provide the Windows cluster name as confirmation and click Update.
 A message appears at the top indicating that the operation to update a database has started. Click the message to monitor the progress of the operation. Alternatively, select Operations in the drop-down list of the main menu to monitor the progress of the operation.
