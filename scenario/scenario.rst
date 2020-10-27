@@ -1,18 +1,34 @@
 .. _scenario:
 
---------
-Scenario
---------
+-------------------------
+POC Validation & Scenario
+-------------------------
 
-As you go through this POC (Proof of Concept) Workshop you will use this Customer Scenario to provide some depth, context, and realism to the exercises that you do.  Read through the scenario below and take into account each stakeholder's perspective, their pain points, and their goals and requirements.
-You should be able to communicate the specific Nutanix Product/Feature in your POC sections to each of those stakeholders and explain how Nutanix can solve their business challenges, can help them achieve their goals, and how Nutanix differentiates itself from the competition.
-As you go through the review process with your manager, and potentially your peers, you will want to demonstrate that you not only have completed the section of this POC Guide that were assigned to you, or that you assigned yourself to accomplish, but you will also want to be able to demonstrate to management and your peers that you can articulate the Nutanix Value Proposition in light of this scenario.
-Think of how you might do this with an actual meeting with a prospect/customer at the end of a POC.  How would you show them success for the POC and how it met their requirements and reduced or eliminated their pain.  This should not be a PowerPoint presentation, but a demonstration through verbal communication and a walk through of what was accomplished in the UI.
+This POC Guide can be used as a tool for your manager, Enablement, or Portfolio Specialists to validate that you are capable of delivering a Basic POC in one or more product areas.
+
+.. note::
+
+   You may have already been validated for several products based on delivery of real world POCs. This guide is only meant to supplement the validation process.
+
+The Process:
+
+- You or your manager decide which products you should target for validation
+- Your manager schedules a time for your mock customer meeting. Ideally these meetings should include multiple individuals capable of providing quality feedback.
+- You reserve a HPOC cluster to complete the desired POC exercises. See :ref:`staging` for instruction on automatically staging the cluster *if you already have experience with basic AOS/AHV POCs.*
+- When presenting, use the provided scenario (or substitute your own). As you go through this POC (Proof of Concept) Workshop you will use the Customer Scenario to provide some depth, context, and realism to the exercises that you do.
+
+Your Goal:
+
+- Foremost, demonstrate that you have completed the exercise by showing your HPOC environment in a post-exercise state (VMs configured, Policies created, etc.).
+- Take into account each stakeholder's perspective, their pain points, and their goals and requirements.
+- Communicate the specific Nutanix Product/Feature in your POC sections to each of those stakeholders and explain how Nutanix can solve their business challenges, can help them achieve their goals, and how Nutanix differentiates itself from the competition.
+- Think of how you might do this with an actual meeting with a prospect/customer at the end of a POC.  How would you show them success for the POC and how it met their requirements and reduced or eliminated their pain?
+- This should not be a PowerPoint presentation, but a demonstration through verbal communication and a walk through of what was accomplished in the UI.
 
 Customer Scenario
 +++++++++++++++++
 
-Customer is a large retailer with multiple locations across the country.  They have several datacenters and also several remote branch offices that provide localized IT services.  They have engaged with Nutanix because they are looking to consolidate a few of their data centers and are interested in the Nutanix HCI platform and software services that Nutanix offers.
+The Customer is a retailer with multiple locations across the country.  They have several datacenters and also several remote branch offices that provide localized IT services.  They have engaged with Nutanix because they are looking to consolidate a few of their data centers and are interested in the Nutanix HCI platform and software services that Nutanix offers.
 
 Their VP of Infrastructure has communicated to her staff that as part of this consolidation she also wants to reduce the complexity of their current solution.  There are too many silos, dependencies, and complicated engineered solutions which slow the business down.  She wants to be able to be flexible and nimble as they introduce new products to the market to beat their competition and gain an edge.  Security is also a huge concern for her and her team as they try to keep up with the pace of the business.  Several companies in their industry have been brought to their knees with Ransomware and other targeted attacks.  Because of this she wants to increase their capabilities to recover from failures and need to ensure that there are no single points of failure and wants to be able to recover from individual failures to also entire datacenter site-wide failures.
 
