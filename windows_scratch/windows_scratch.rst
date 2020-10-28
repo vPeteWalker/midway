@@ -155,6 +155,8 @@ Click on :fa:`plus` **Add New Disk**. Change the *Type* to **CD-ROM**. Change th
 
 #. Remove one CD-ROM drive by clicking the :fa:`times` icon.
 
+#. On the remaining CD-ROM drive, click the :fa:`eject` icon.
+
 #. Click **Save**.
 
 This image can now serve as the Windows Server 2016 base image during the POC process.
@@ -244,6 +246,8 @@ Installing Windows 2019 from ISO
 #. Within Prism Element, right click on your *Windows2019* VM, and choose **Update**.
 
 #. Remove one CD-ROM drive by clicking the :fa:`times` icon.
+
+#. On the remaining CD-ROM drive, click the :fa:`eject` icon.
 
 #. Click **Save**.
 

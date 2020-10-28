@@ -18,8 +18,9 @@ This workshop includes detailed instructions to:
    - Deploy and configure Era 2.0
    - Clone SQL Server database - using both UI and API
    - Create and configure a highly-available database environment
+   - Apply patches to both single, and clustered database environments
 
-The goal is provide a completely transparent process to install SQL to meet the requirements for Era, avoiding use of any pre-built images, scripts, or anything that could be considered "black box". This is especially important for POCs being performed in highly-secure environments, where pre-built images or scripts may be forbidden. Everything used here is either publicly available (ex. Microsoft ISO images) and/or in plain text that can be easily reviewed (ex. SQL query file).
+The goal is provide a completely transparent process to install SQL to meet the minumum requirements for Era, while avoiding use of any pre-built images, scripts, or anything that could be considered "black box". This is especially important for POCs being performed in highly-secure environments, where pre-built images or scripts may be forbidden. Everything used here is either publicly available (ex. Microsoft ISO images) and/or in plain text that can be easily reviewed (ex. SQL query file).
 
 `Era User Guide v2.0 <https://portal.nutanix.com/page/documents/details?targetId=Nutanix-Era-User-Guide-v2_0:Nutanix-Era-User-Guide-v2_0>`_
 
@@ -36,7 +37,7 @@ Upload SQL Server 2016 ISO
 
 #. Log on to Prism Element, and choose **Settings** from the dropdown.
 
-#. Click on **Image Configuration**.
+#. Click on **Image Configuration** from the left-hand side.
 
 #. Click on :fa:`plus` **Upload Image**.
 
@@ -55,7 +56,7 @@ Upload SQL Server 2016 ISO
 Deploy and configure Windows Server 2016 from clone
 ...................................................
 
-#. In **Prism Central**, select :fa:`bars` **Virtual Infrastructure > VMs**.
+#. Choose **VM** from the dropdown menu.
 
 #. Highlight your base Windows 2016 image (i.e. *Windows2016*), right click, and choose **Clone**.
 
@@ -73,7 +74,7 @@ Deploy and configure Windows Server 2016 from clone
 
    - Within the *Image* dropdown, choose **MSSQL2016**. Click **Update**.
 
-   - Select :fa:`plus`**Add New Disk**.
+   - Select :fa:`plus` **Add New Disk**.
 
    - **Size** - 100 GiB.
 
@@ -85,13 +86,13 @@ Deploy and configure Windows Server 2016 from clone
 
    We will utilize the additional disk will store the database and log files, as required by Era: "Database files must not exist in the Windows OS boot drive" (i.e. the "C:" drive). It will be presented to Windows as the "E:" drive, outlined in the proceeding steps. Refer to the Era User Guide for a full list of requirements.
 
-#. Right click the new VM, and select **Power On**.
+#. Right click the *Win16SQL16* VM, and select **Power On**.
 
 #. Once powered on, right click the VM, and select **Launch Console**.
 
 #. Click **Next > Accept**.
 
-#. Use *nutanix/4u* for both the **Password** and **Reenter Password** fields. Click **OK**.
+#. Use **nutanix/4u** for both the *Password* and *Reenter Password* fields. Click **OK**.
 
 #. Log in to the VM using the *Administrator* username, and *nutanix/4u* password.
 
@@ -103,7 +104,7 @@ Deploy and configure Windows Server 2016 from clone
 
    - Click **Change**.
 
-   - Enter the same name you chose for the VM within the *Computer Name* field. Click **OK > OK > Close > Restart Now**.
+   - Enter the same name you chose for the VM within the *Computer Name* field (ex. Win16SQL16). Click **OK > OK > Close > Restart Now**.
 
 #. Join the domain.
 
@@ -123,11 +124,11 @@ Deploy and configure Windows Server 2016 from clone
 
 #. Disable Windows Firewall for all networks.
 
-   - Log in to the VM using the *DOMAIN* Administrator username (i.e. ntnxlab.local\administrator), and *nutanix/4u* password.
+   - Log in to the VM using the *DOMAIN* Administrator username (i.e. ntnxlab.local\\administrator or administrator@ntnxlab.local), and *nutanix/4u* password.
 
    - Open *Server Manager* and select **Local Server**.
 
-   - Within the *Windows Firewall* entry, click on **Domain: On**.
+   - Within the *Windows Firewall* entry, click on the **Domain: On** link.
 
    - In the left pane, click on **Turn Windows Firewall on or off**.
 
@@ -149,13 +150,13 @@ Deploy and configure Windows Server 2016 from clone
 
 #. Close the console.
 
-#. Using Prism Central, determine the IP address of your *Win16SQL16* VM.
+#. Using Prism, determine the IP address of your *Win16SQL16* VM.
 
 #. Remote Desktop into your *Win16SQL16* VM using the *Domain* Administrator (i.e. ntnxlab.local\administrator) username.
 
 #. Close *Server Manager*.
 
-#. Open **Disk Management** (diskmgmt.msc) and perform the following disk operations:
+#. Open **Computer Management** and then select **Disk Management** perform the following disk operations:
 
    - Mark **Disk 1** online by right clicking on *Disk 1* and choosing **Online**.
 
@@ -177,12 +178,29 @@ Deploy and configure Windows Server 2016 from clone
 
       For complete details for running SQL Server on Nutanix (including guidance around NUMA, hyperthreading, SQL Server configuration settings, and more), see the `Nutanix Microsoft SQL Server Best Practices Guide <https://portal.nutanix.com/#/page/solutions/details?targetId=BP-2015-Microsoft-SQL-Server:BP-2015-Microsoft-SQL-Server>`_.
 
+Deploy and configure Windows Server 2019 from clone
+...................................................
+
+This process is almost exactly the same as on Windows 2016, with one notable difference to be aware of:
+
+- Disable Windows Firewall for all networks.
+
+   - Log in to the VM using the *DOMAIN* Administrator username (i.e. ntnxlab.local\\administrator or administrator@ntnxlab.local), and *nutanix/4u* password.
+
+   - Open *Server Manager* and select **Local Server**.
+
+   - Within the *Windows Firewall* entry, click on the **Domain: On** link.
+
+   - Click on **Domain Network**. Under *Windows Defender Firewall* move the selector to **Off**. Click :fa:`arrow-left`
+
+   - Repeat the same process for *Private* and *Public* networks.
+
+   - Close the *Windows Security* window.
+
 SQL Server 2016 Installation (Windows 2016)
 ...........................................
 
-#. Within Prism Central, make note of the IP address for your *Win16SQL16* VM.
-
-#. Remote Desktop into your *Win16SQL16* VM using the *DOMAIN* Administrator (i.e. ntnxlab.local\administrator) username.
+#. Remote Desktop into your *Win16SQL16* VM using the *DOMAIN* Administrator (i.e. ntnxlab.local\\administrator or administrator@ntnxlab.local), and *nutanix/4u* password.
 
 #. Download `this <https://github.com/nutanixworkshops/EraWithMSSQL/raw/master/deploy_mssql_era/FiestaDB-MSSQL.sql>`_ file to the desktop of your *Win16SQL16* VM. We will be using this file in proceeding steps to populate the database we create with data. Recommend using Chrome as the browser, as it allows you to **right click > Save As...**, whereas Internet Explorer does not. Choose **All Files** in the file type dropdown, otherwise you may inadvertantly save the file as *.txt* instead of *.sql*, preventing you from running it as a script from within *SQL Server Management Tools*.
 
