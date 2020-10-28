@@ -72,7 +72,7 @@ Installing Windows 2016 from ISO
 
 #. Log on to Prism Element, and choose **Settings** from the dropdown.
 
-#. Click on **Image Configuration**.
+#. Click on **Image Configuration** from the left-hand side.
 
 #. Click on :fa:`plus` **Upload Image**.
 
@@ -96,11 +96,9 @@ Installing Windows 2016 from ISO
 
    - **Name** - Windows2016
 
-   - **vCPU** - 2
+   - **vCPU(s)** - 2
 
    - **Memory** - 4
-
-#. Click on :fa:`plus` **Add New Disk**.
 
 #. Within the *Disks* section, click on the pencil next to the *CD-ROM* entry. Within the *Operation* dropdown, choose **Clone from Image Service**. Within the *Image* dropdown, choose **Windows2016ISO**. Click **Update**.
 
@@ -128,25 +126,21 @@ Click on :fa:`plus` **Add New Disk**. Change the *Type* to **CD-ROM**. Change th
 
 #. Click **Load Driver > Browse**.
 
-#. Choose the CD-ROM drive that has the VirtIO ISO loaded. Click on **Windows Server 2016 > amd64**. Click **OK**.
+#. Choose the CD-ROM drive that has the VirtIO ISO loaded. Navigate to the **Windows Server 2016**, and then to the **amd64** folder. Click **OK**.
 
    .. figure:: images/7.png
 
-#. Highlight all entries by CTRL-clicking each entry, and click **Next**.
+#. Highlight all entries, and click **Next**.
 
-#. The installation disk should now be displayed. Click **Next** to begin the Windows installation process.
+#. The installation disk should now be displayed. Click **Next** to begin the Windows installation process. This should take approximately 5 minutes, after which the VM will reboot automatically.
 
-#. Set the Administrator as **nutanix/4u** for ease of use, and login as Administrator.
+#. At the *Customize Settings* screen, set the Administrator password as **nutanix/4u** for ease of use, and then log in as Administrator.
 
-#. Within Prism Element, right click on your *Windows2016* VM, and choose **Update**.
+#. Recommend installing all Windows updates. This can be very time consuming, so you may wish to move onto other tasks/demos while you monitor this from time to time and restart when prompted.
 
-#. Remove one CD-ROM drive by clicking the :fa:`times` icon.
+#. Windows Updates may require multiple restarts to apply all updates. Every time you are prompted to restart, do so, and check for Windows Updates once again. Proceed only when there are no other updates to apply.
 
-#. Recommend you perform all Windows updates. This can be very time consuming, so you may wish to move onto other tasks/demos while you monitor this from time to time and restart when prompted.
-
-#. Windows Updates will require multiple restarts to apply all updates. Every time you are prompted to restart, do so, and check for Windows Updates once again. Process only when there are no other updates to apply.
-
-#. Ensure the date/time are correct. If not, right click on the time (lower right hand corner) and choose **Adjust Date/Time**. Make the required changes, and close the window once complete.
+#. Ensure the date/time are correct. If not, right click on the time in the lower right-hand corner, and choose **Adjust Date/Time**. Make the required changes, and close the window once complete.
 
 #. Execute **C:\\Windows\\System32\\Sysprep\\Sysprep.exe**. Check the box for **Generalize**, and from the *Shutdown Options* dropdown, choose **Shutdown**.
 
@@ -157,14 +151,20 @@ Click on :fa:`plus` **Add New Disk**. Change the *Type* to **CD-ROM**. Change th
 
       Per Microsoft: "When a system is generalized, specific configuration data for a given installation of Windows is removed. For example, during the generalize configuration pass, the unique security ID (SID) and other hardware-specific settings are removed from the image."
 
-#. Once the shutdown is complete, this image can now serve as the Windows Server 2016 base image during the POC process.
+#. Within Prism Element, right click on your *Windows2016* VM, and choose **Update**.
+
+#. Remove one CD-ROM drive by clicking the :fa:`times` icon.
+
+#. Click **Save**.
+
+This image can now serve as the Windows Server 2016 base image during the POC process.
 
 Installing Windows 2019 from ISO
 ++++++++++++++++++++++++++++++++
 
 #. Log on to Prism Element, and choose **Settings** from the dropdown.
 
-#. Click on **Image Configuration**.
+#. Click on **Image Configuration** from the left-hand side.
 
 #. Click on :fa:`plus` **Upload Image**.
 
@@ -174,13 +174,13 @@ Installing Windows 2019 from ISO
 
    - **Image Type** - ISO
 
-#. Within *Image Source*, click **Upload a file > Choose File**. Browse to the ISO file for Windows 2019, select it, and click **Open**.
+#. Within *Image Source*, click :fa:`dot-circle` **Upload a file > Choose File**. Browse to the ISO file for Windows 2019, select it, and click **Open**.
 
 #. Click **Save**.
 
    .. figure:: images/1a.png
 
-#. Within Prism Element, click on :fa:`bars` **> Virtual Infrastructure > VMs**.
+#. Choose **VM** from the dropdown menu.
 
 #. Click on :fa:`plus` **Create VM**.
 
@@ -188,11 +188,9 @@ Installing Windows 2019 from ISO
 
    - **Name** - Windows2019
 
-   - **vCPU** - 2
+   - **vCPU(s)** - 2
 
    - **Memory** - 4
-
-#. Click on :fa:`plus` **Add New Disk**.
 
 #. Within the *Disks* section, click on the pencil next to the *CD-ROM* entry. Within the *Operation* dropdown, choose **Clone from Image Service**. Within the *Image* dropdown, choose **Windows2019ISO**. Click **Update**.
 
@@ -200,13 +198,13 @@ Installing Windows 2019 from ISO
 
    .. figure:: images/2.png
 
-Click on :fa:`plus` **Add New Disk**. Change the *Type* to **CD-ROM**. Change the *Operation* to **Clone from Image Service**. Change *Image* to **VirtIO**. Click **Add**.
+#. Click on :fa:`plus` **Add New Disk**. Change the *Type* to **CD-ROM**. Change the *Operation* to **Clone from Image Service**. Change *Image* to **VirtIO**. Click **Add**.
 
 #. Click :fa:`plus` **Add New NIC**. Ensure *Primary* is selected, and click **Add**.
 
 #. Click **Save**.
 
-#. Within Prism Element, right click on your *Windows2019* VM, and choose **Power on**.
+#. Right click on your *Windows2019* VM, and choose **Power on**.
 
 #. Wait a few moments, then right click on your *Windows2019* VM, and choose **Launch Console**.
 
@@ -220,23 +218,19 @@ Click on :fa:`plus` **Add New Disk**. Change the *Type* to **CD-ROM**. Change th
 
 #. Click **Load Driver > Browse**.
 
-#. Choose the CD-ROM drive that has the VirtIO ISO loaded. Click on **Windows Server 2019 > amd64**. Click **OK**.
+#. Choose the CD-ROM drive that has the VirtIO ISO loaded. Navigate to the **Windows Server 2019**, and then to the **amd64** folder. Click **OK**.
 
    .. figure:: images/7a.png
 
-#. Highlight all entries by CTRL-clicking each entry, and click **Next**.
+#. Highlight all entries, and click **Next**.
 
-#. The installation disk should now be displayed. Click **Next** to begin the Windows installation process.
+#. The installation disk should now be displayed. Click **Next** to begin the Windows installation process. This should take approximately 5 minutes, after which the VM will reboot automatically.
 
-#. Set the Administrator as **nutanix/4u** for ease of use, and login as Administrator.
+#. At the *Customize Settings* screen, set the Administrator password as **nutanix/4u** for ease of use, and then log in as Administrator.
 
-#. Within Prism Element, right click on your *Windows2019* VM, and choose **Update**.
+#. Recommend installing all Windows updates. This can be very time consuming, so you may wish to move onto other tasks/demos while you monitor this from time to time and restart when prompted.
 
-#. Remove one CD-ROM drive by clicking the :fa:`times` icon.
-
-#. Recommend you perform all Windows updates. This can be very time consuming, so you may wish to move onto other tasks/demos while you monitor this from time to time and restart when prompt
-
-#. Windows Updates will require multiple restarts to apply all updates. Every time you are prompted to restart, do so, and check for Windows Updates once again. Process only when there are no other updates to apply.
+#. Windows Updates may require multiple restarts to apply all updates. Every time you are prompted to restart, do so, and check for Windows Updates once again. Proceed only when there are no other updates to apply.
 
 #. Execute **C:\\Windows\\System32\\Sysprep\\Sysprep.exe**. Check the box for **Generalize**, and from the *Shutdown Options* dropdown, choose **Shutdown**.
 
@@ -247,4 +241,10 @@ Click on :fa:`plus` **Add New Disk**. Change the *Type* to **CD-ROM**. Change th
 
       Per Microsoft: "When a system is generalized, specific configuration data for a given installation of Windows is removed. For example, during the generalize configuration pass, the unique security ID (SID) and other hardware-specific settings are removed from the image."
 
-#. Once the shutdown is complete, this image can now serve as the Windows Server 2019 base image during the POC process.
+#. Within Prism Element, right click on your *Windows2019* VM, and choose **Update**.
+
+#. Remove one CD-ROM drive by clicking the :fa:`times` icon.
+
+#. Click **Save**.
+
+This image can now serve as the Windows Server 2019 base image during the POC process.
