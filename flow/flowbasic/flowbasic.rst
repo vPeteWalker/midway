@@ -6,9 +6,11 @@ Starting with Flow
 
 In this module you will enable Flow within Prism Central and create a simple isolation policy to provide microsegmentation between two VM categories.
 
-**Prerequisites:** Completion of :ref:`vmmanage`
+**Prerequisite:**
 
-**(Optional) Pre-requisite:** Completion of :ref:`deploygraylog`
+This exercise assumes you have already applied categories to your VMs as described in :ref:`categories` in the :ref:`vmmanage` exercise. If you used the automatic staging for your cluster, you will need to manually apply the VM categories as described in the :ref:`categories` section.
+
+**(Optional) Prerequisite:** Completion of :ref:`deploygraylog`
 
 **Expected Module Duration:** 30 minutes
 

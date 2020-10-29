@@ -282,6 +282,8 @@ Filtering and Searching
 
    .. figure:: images/14.png
 
+.. _categories:
+
 Categories & RBAC
 +++++++++++++++++
 

@@ -8,7 +8,7 @@ In this module you will use Flow to secure communications within an example mult
 
 The same overall principles for creating the policy and talking points would apply if using a customer provided application, you would simply need to account for differences in category assignment and connection ports/protocols.
 
-**(Optional) Prerequisites:**
+**Prerequisites:**
 
 For the purpose of streamlining the POC, the application can either be provisioned using Calm or manually (using the provided CentOS disk image and cloud-init scripts):
 
