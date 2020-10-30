@@ -83,7 +83,7 @@ This exercise will walk you through creating a web server configured for your *F
       - **Image** - CentOS_7_cloud.qcow2
       - Click **Add**
 
-   - Click :fa:`plus`**Add New NIC**
+   - Click :fa:`plus` **Add New NIC**
 
       - **Network Name** - Primary
       - Click **Add**

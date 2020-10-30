@@ -11,7 +11,7 @@ Network Configuration
 
 Era requires the *Manage IP address pool* option enabled on a VLAN for certain features. If you do not intend on completing the :ref:`advanced_aag`, you may skip this section.
 
-#. Within Prism, click on **Settings** from the dropdown, and then **Network Configuration** from the left-hand side.
+#. Within Prism, click on **Settings** from the dropdown, and then **Network Configuration** from the left-hand menu.
 
 #. Click :fa:`plus` **Create Network**.
 
@@ -69,9 +69,9 @@ Installation
 
 #. Select :fa:`bars` **Virtual Infrastructure > VMs**. and then click **Create VM**.
 
-   Do the following in the indicated fields.
+   Enter the following in the indicated fields.
 
-   - **Name** Enter a name of the VM.
+   - **Name** Era
 
    - **vCPU(s)** 4
 
@@ -79,9 +79,9 @@ Installation
 
 #. Click **Add New Disk**.
 
-   Do the following in the indicated fields.
+   Enter the following in the indicated fields.
 
-   - **Operation** Select **Clone from Image Service**.
+   - **Operation** Clone from Image Service.
 
    - **Image** Select the Era image (ex. Era)
 
@@ -89,11 +89,11 @@ Installation
 
 #. To create a network interface for the VM, click **Add New NIC**.
 
-   -  **VLAN Name** Verify **Primary** is selected.
+   -  **VLAN Name** Verify Primary is selected.
 
    - Click **Add** to create a network interface for the VM and return to the *Create VM* dialog box.
 
-#. (Optional) If you want to assign a static IP address to the Era VM, do the following:
+#. (Optional) If you want to assign a static IP address to the Era VM, perform the following:
 
    - Select the **Custom Script** check box.
 
@@ -126,9 +126,9 @@ Configuration
 
 #. Within the logon screen, set a password for the administrator user (admin) in the *Enter new password* and *Re-enter new password* fields, and click **Set Password**.
 
-#. In the *Era’s Cluster* screen, do the following in the indicated fields:
+#. In the *Era’s Cluster* screen, enter the following in the indicated fields:
 
-   - **Name** Type a name of the Nutanix cluster as you want the name to appear in Era.
+   - **Name** EraCluster
 
    - (Optional) **Description** Type a description of the Nutanix cluster.
 
@@ -177,27 +177,27 @@ Windows Domain Configuration
 
 #. From the dropdown, choose **Profiles**.
 
-#. Select **Windows Domain**.
+#. Select **Windows Domain** from the left-hand menu.
 
-#. Click **Create**.
+#. Click :fa:`plus` **Create**.
 
-#. In the *Create Windows Domain Profile* screen, do the following in the indicated fields:
+#. In the *Create Windows Domain Profile* screen, enter the following in the indicated fields:
 
    - **Name** NTNXLAB
 
    - **Domain to Join (FQDN)** ntnxlab.local
 
-#. In the *Domain Account with Permission to Join Computer to the Domain* section, do the following in the indicated fields:
+#. In the *Domain Account with Permission to Join Computer to the Domain* section, enter the following in the indicated fields:
 
-   - **Username** ntnxlab.local\administrators
+   - **Username** ntnxlab.local\\administrators
 
    - **Password** nutanix/4u
 
 #. In the *SQL Service Startup Account* section, deselect **Specify Startup Account in Profile**.
 
-#. In the *Era Worker Service Account* section, do the following in the indicated fields:
+#. In the *Era Worker Service Account* section, enter the following in the indicated fields:
 
-   - **Username** ntnxlab.local\administrators
+   - **Username** ntnxlab.local\\administrators
 
    - **Password** nutanix/4u
 
@@ -205,12 +205,14 @@ Windows Domain Configuration
 
 #. Click **Create**.
 
-Configure UI Timeout
+(Optional) Configure UI Timeout
 ....................
 
 #. Click on the **admin** dropdown at the top right, and choose **Profile**.
 
 #. Set the *Timeout* setting to **Never**. This will help avoid being logged out unexpectedly during your POC.
+
+#. Click **Save**.
 
 Modifying Era VM Network Settings Post-Launch
 .............................................
@@ -220,7 +222,7 @@ Modifying Era VM Network Settings Post-Launch
    These instructions are taken from the *Assigning A Static IP Address To The Era VM By Using The Console* section of the Era Guide. However, you may utilize any or all of the parameters for the `era-server set` command to accomplish your goal. For example, if you only need to modify the name server that the Era VM is using, you would type `era_server set nameserver=<NAMESERVER-IP>`.
 
 #. Within Prism, right click the Era VM, and click **Launch Console**
-.
+
 #. Use the following credentials to log on to Era:
 
    - **User name**: era
@@ -240,17 +242,17 @@ A SQL Server database server must meet the following requirements before you are
    - A local user account or a domain user account with administrator privileges on the database server must be provided.
    - Windows account or the SQL login account provided must be a member of sysadmin role.
    - SQL Server instance must be running.
-   - Database files must not exist in C:\ Drive.
+   - Database files must not exist in boot drive.
    - Database must be in an online state.
    - Windows remote management (WinRM) must be enabled.
 
-#. From the dropdown, select **Databases**, then **Sources** from the lefthand menu.
+#. From the dropdown, select **Databases**, then **Sources** from the left-hand menu.
 
 #. Click :fa:`plus` **Register > Microsoft SQL Server > Database**.
 
    .. figure:: images/era8.png
 
-#. The *Register a SQL Server Database* window appears. In the *Database Server VM* screen, do the following in the indicated fields:
+#. The *Register a SQL Server Database* window appears. In the *Database Server VM* screen, enter the following in the indicated fields:
 
    - Select **Not registered** within *Database is on a Server VM that is:*.
 
@@ -280,7 +282,7 @@ A SQL Server database server must meet the following requirements before you are
 
 #. The registration process will take approximately 5 minutes. In the meantime, proceed with the remaining steps in this section. Wait for the registration process to complete to proceed to the next section.
 
-   - From the dropdown menu, select **SLAs**. Era has five built-in SLAs (Gold, Silver, Bronze, Zero, and Brass). SLAs control however the database server is backed up. This can with a combination of Continuous Protection, Daily, Weekly Monthly and Quarterly protection intervals.
+   - From the dropdown menu, select **SLAs**. Era has five built-in SLAs (Gold, Silver, Bronze, Brass, and None). SLAs control however the database server is backed up. This can with a combination of Continuous Protection, Daily, Weekly Monthly and Quarterly protection intervals.
 
    - From the dropdown menu, select **Profiles**.
 
@@ -303,6 +305,8 @@ Before additional SQL Server VMs can be provisioned, a *Software Profile* must f
 #. Select **Operations** from the dropdown menu to monitor the registration. This process should take approximately 5 minutes.
 
 #. Once the profile creation completes successfully, return to Prism Central. Right click your *Win16SQL16* VM, and choose **Power Off Actions > Guest Shutdown**.
+
+Confirm the *Win16SQL16* is powered off before proceeding.
 
 Creating a New Microsoft SQL Database Server
 ............................................
@@ -377,7 +381,7 @@ You've completed all the one-time operations required to be able to provision an
 
    .. figure:: images/era19.png
 
-#. Remote Desktop into your *FiestaDB_Prod* VM using the *Domain* Administrator (i.e. ntnxlab.local\administrator) username.
+#. Remote Desktop into your *FiestaDB_Prod* VM using the *Domain* Administrator (i.e. ntnxlab.local\\administrator or administrator@ntnxlab.local), and *nutanix/4u* password.
 
 #. Launch **SQL Server Management Studio**.
 

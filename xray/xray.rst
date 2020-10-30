@@ -15,6 +15,29 @@ Starting with X-Ray
 Before you begin
 ++++++++++++++++
 
+Disable Recycle Bin
+...................
+
+You must disable the recycle bin on your AOS cluster, which is enabled by default, before proceeding.
+
+#. SSH to any CVM in the cluster.
+
+#. Run the command `recycle_bin -operation update_time_to_live -recycle_bin_ttl_secs -1` to disable to recycle bin.
+
+#. Run the command `recycle_bin -operation delete -container_name storage_container -delete_all` to delete all recycle bin contents.
+
+Enable Recycle Bin
+..................
+
+One your X-Ray tests are complete, you may choose to re-enable the recycle bin.
+
+#. Run the command `recycle_bin -operation update_time_to_live -recycle_bin_ttl_secs 60` to enable the recycle bin.\
+
+Refer to the Restore Storage Entities From Recycle Bin section of the `Acropolis Advanced Administration Guide <https://portal.nutanix.com/page/documents/details?targetId=Advanced-Admin-AOS-v5_18:wc-vm-restore-recycle-wc-r.html>`_ for full details.
+
+Competition
+...........
+
 If you are competing against VSAN or VXRAIL, it is highly recommended that you view this series before beginning a POC where VSAN or VXRAIL is one of your competitors. `MicroLRN: Whiteboard Warriors - Using X-Ray Against VSAN <https://nutanix.mindtickle.com/#/courses/series/1232012167626956869?series=1232012167626956869>`_
 
 If you are in a competitive POC, and performance is one of or perhaps *the* deciding factor, recommend against using workload simulators/perf tests on older, especially hybrid clusters. These type of POCs should be run on the latest generation available, using all-flash configurations only.

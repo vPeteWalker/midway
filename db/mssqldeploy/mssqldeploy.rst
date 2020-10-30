@@ -12,6 +12,8 @@ Traditional database VM deployment resembles the diagram below. The process gene
 
 For details on deploying Microsoft SQL Server on Nutanix best practices, please refer to `Microsoft SQL Server - Nutanix Best Practices <https://nutanixinc.sharepoint.com/sites/solutions/Solutions%20and%20GSO%20Document%20Library/BP-2015-Microsoft-SQL-Server.pdf>`_
 
+You may wish to download the SQL Server Management Studio (SSMS) installer ahead of time - https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms
+
 This workshop includes detailed instructions to:
    - Deploy a new VM from Windows 2016 or 2019 golden image (created in :ref:`_windows_scratch`)
    - Deploy and configure SQL Server 2016
@@ -152,7 +154,7 @@ Deploy and configure Windows Server 2016 from clone
 
 #. Using Prism, determine the IP address of your *Win16SQL16* VM.
 
-#. Remote Desktop into your *Win16SQL16* VM using the *Domain* Administrator (i.e. ntnxlab.local\administrator) username.
+#. Remote Desktop into your *Win16SQL16* VM using the *Domain* Administrator (i.e. ntnxlab.local\\administrator or administrator@ntnxlab.local), and *nutanix/4u* password.
 
 #. Close *Server Manager*.
 
@@ -236,7 +238,7 @@ The installation process should take approximately 5 minutes.
 
 #. Wait until the *SQL Server Management Tools* install is complete, then click **Restart**.
 
-#. Remote Desktop into your *Win16SQL16* VM using the *DOMAIN* Administrator (i.e. ntnxlab.local\administrator) username.
+#. Remote Desktop into your *Win16SQL16* VM using the *DOMAIN* Administrator (i.e. ntnxlab.local\\administrator or administrator@ntnxlab.local), and *nutanix/4u* password.
 
 #. Launch **SQL Server Management Studio**.
 
@@ -250,11 +252,11 @@ The installation process should take approximately 5 minutes.
 
    - Right click on **Databases** and choose **New Database**.
 
-   - Enter **FiestaDB_Prod** in the *Database name* field.
+   - Enter **Fiesta** in the *Database name* field.
 
-   - Scroll to the right, and select :fa:`ellipsis-h` within the *Path* section for the *FiestaDB_Prod* entry. Browse to the *databases* directory within the secondary drive (ex. E:\). Click **OK**.
+   - Scroll to the right, and select :fa:`ellipsis-h` within the *Path* section for the *Fiesta* entry. Browse to the *databases* directory within the secondary drive (ex. E:\). Click **OK**.
 
-   - Scroll to the right, and select :fa:`ellipsis-h` within the *Path* section for the *FiestaDB_Prod_log* entry. Browse to the *logs* directory within the secondary drive (ex. E:\). Click **OK**.
+   - Scroll to the right, and select :fa:`ellipsis-h` within the *Path* section for the *FiestaDB_log* entry. Browse to the *logs* directory within the secondary drive (ex. E:\). Click **OK**.
 
    .. figure:: images/5.png
 
@@ -263,10 +265,3 @@ The installation process should take approximately 5 minutes.
 #. Close the Remote Desktop session.
 
 *You have now successfully install Microsoft SQL Server. We will utilize this in proceeding modules with Era.*
-
-SQL Server 2016 Installation (Windows 2019)
-...........................................
-
-This process is almost exactly the same as on Windows 2016. A few notable differences to be aware of:
-
-- When running Disk Management, it may be necessary to run it from Control Panel -> Administrative tools, as running it via Start -> Run may result in an error around insufficient privileges.

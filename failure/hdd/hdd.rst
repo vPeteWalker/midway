@@ -87,6 +87,8 @@ This test demonstrates the ability of Nutanix's AOS to immediately begin rebuild
 
       Sample output of all commands
 
+#. Type **exit**.
+
 #. Run the command ``edit-hades``. This will open the text editor, enabling you to remove the necessary entries to bring the disk back online. It is recommended to take a screen shot to document the existing settings before making changes.
 
 #. Hit **Insert** to begin editing. Remove anything with the main heading **is_bad** or **disk_diagnostics**, including anything within those sections, as shown below. Once complete, hit **ESC** to stop editing, followed by **:wq** and **Enter** to exit the file editor.
@@ -101,9 +103,9 @@ This test demonstrates the ability of Nutanix's AOS to immediately begin rebuild
 
       After
 
-#. You may now exit your SSH session.
-
 #. Run the command ``genesis restart``. This will refresh Prism, and you will now see that the disk is available to add and repartition.
+
+#. You may now exit your SSH session.
 
 #. Return to Prism, select the disk, and choose **+ Repartition and Add > Yes**.
 
