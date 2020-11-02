@@ -101,7 +101,7 @@ This exercise will walk you through creating a web server configured for your *F
 
       Example: `- sed -i 's/REPLACE_DB_HOST_ADDRESS/10.42.69.85/g' /home/centos/Fiesta/config/config.js`
 
-#. Once the VM has completed deploying, open `http://<FIESTAWEB_DEV-IP-ADDRESS>:5001` in a new browser tab to access the *Fiesta* application.
+#. Once the VM has completed deploying, open `http://<FIESTAWEB_DEV-IP-ADDRESS>:5001`_ in a new browser tab to access the *Fiesta* application.
 
 Refreshing Cloned Databases
 +++++++++++++++++++++++++++
@@ -116,7 +116,7 @@ Now that you have a functioning development environment, it's time to create som
 
    - **Product Name** - The Best Balloons
    - **Suggested Retail Price** - 100.00
-   - **Product Image URL** - `https://partycity6.scene7.com/is/image/PartyCity/_pdp_sq_?$_1000x1000_$&$product=PartyCity/251182`
+   - **Product Image URL** - `https://partycity6.scene7.com/is/image/PartyCity/_pdp_sq_?$_1000x1000_$&$product=PartyCity/251182`_
    - **Product Comments** - Everybody Knows
 
    .. figure:: images/17.png

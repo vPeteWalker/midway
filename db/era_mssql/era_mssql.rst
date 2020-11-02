@@ -434,6 +434,6 @@ This exercise will walk you through creating a web server configured for your *F
 
       Example: `- sed -i 's/REPLACE_DB_HOST_ADDRESS/10.42.69.85/g' /home/centos/Fiesta/config/config.js`
 
-#. Once the VM has completed deploying, open `http://<FIESTAWEB_PROD-IP-ADDRESS>:5001` in a new browser tab to access the *Fiesta* application.
+#. Once the VM has completed deploying, open `http://<FIESTAWEB_PROD-IP-ADDRESS>:5001`_ in a new browser tab to access the *Fiesta* application.
 
 Excellent! You've provisioned your first database from a MS SQL profile. Keep going to see how to create a database clone either using the UI: :ref:`basic_clone_ui` or via APIs: :ref:`basic_clone_api`. Maybe you'd like to skip to creating an Always-On Availability Group (AAG)? :ref:`advanced_aag`
