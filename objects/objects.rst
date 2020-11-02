@@ -52,12 +52,19 @@ Prerequisites
 .............
 
 - Prism Central and AOS version 5.11
+
 - Prism Central has at least one AHV cluster registered to it.
+
 - Data Services IP and Cluster Virtual IP are set on the AHV cluster.
+
 - Prism Element and Prism Central are configured with DNS and NTP servers. (PC and PE Must have the same DNS servers configured)
+
 - At least one network created in AHV with the following properties:
    - A VLAN with at least 18 available addresses (subnet mask of at least /27)
    - IP Address Management enabled (IPAM)
    - An IP pool of at least 12 IPs defined within this network
    - 2 static IP addresses outside of this pool (within the same network) to allocate to internal services that require static addresses
    - 4 or more static IP addresses outside of this pool (within this same network, or a separate network) to allocate as Client Access IPs
+
+Deploy Objects
+++++++++++++++

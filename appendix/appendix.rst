@@ -86,12 +86,12 @@ When you first run Foundation, *do not* select VLAN tagging, as if you are using
 Networking
 ++++++++++
 
-Always refer to the latest version of the `AHV Administration Guide <https://portal.nutanix.com/page/documents/details?targetId=AHV-Admin-Guide-v5_18:AHV-Admin-Guide-v5_18>_` and `AHV Network Best Practices <https://portal.nutanix.com/page/documents/solutions/details?targetId=BP-2071-AHV-Networking:BP-2071-AHV-Networking>_` for networking best practices and guidance.
+Always refer to the latest version of the `AHV Administration Guide <https://portal.nutanix.com/page/documents/details?targetId=AHV-Admin-Guide-v5_18:AHV-Admin-Guide-v5_18>`_ and `AHV Network Best Practices <https://portal.nutanix.com/page/documents/solutions/details?targetId=BP-2071-AHV-Networking:BP-2071-AHV-Networking>`_ for networking best practices and guidance.
 
 Assigning The Controller VM To A VLAN
 .....................................
 
-Refer to the Assigning The Controller VM To A VLAN section of the `AHV Administration Guide <https://portal.nutanix.com/page/documents/details?targetId=AHV-Admin-Guide-v5_18:AHV-Admin-Guide-v5_18>_`
+Refer to the Assigning The Controller VM To A VLAN section of the `AHV Administration Guide <https://portal.nutanix.com/page/documents/details?targetId=AHV-Admin-Guide-v5_18:AHV-Admin-Guide-v5_18>`_
 
 .. note::
 
@@ -115,36 +115,6 @@ Refer to the Assigning The Controller VM To A VLAN section of the `AHV Administr
 
       `nutanix@cvm$ change_cvm_vlan 10`
 
-   Output similar to the following us displayed:
-
-   .. code:: bash
-
-      Replacing external NIC in CVM, old XML:
-      <interface type="bridge">
-          <mac address="52:54:00:02:23:48" />
-          <source bridge="br0" />
-          <vlan>
-              <tag id="10" />
-          </vlan>
-          <virtualport type="openvswitch">
-              <parameters interfaceid="95ce24f9-fb89-4760-98c5-01217305060d" />
-          </virtualport>
-          <target dev="vnet0" />
-          <model type="virtio" />
-          <alias name="net2" />
-          <address bus="0x00" domain="0x0000" function="0x0" slot="0x03" type="pci" />
-      </interface>
-
-      new XML:
-      <interface type="bridge">
-          <mac address="52:54:00:02:23:48" />
-          <model type="virtio" />
-          <address bus="0x00" domain="0x0000" function="0x0" slot="0x03" type="pci" />
-          <source bridge="br0" />
-          <virtualport type="openvswitch" />
-      </interface>
-      CVM external NIC successfully updated.
-
 #. Restart the network service.
 
       `nutanix@cvm$ sudo service network restart`
@@ -152,7 +122,7 @@ Refer to the Assigning The Controller VM To A VLAN section of the `AHV Administr
 Assigning An Acropolis Host To A VLAN
 .....................................
 
-Refer to the Assigning An Acropolis Host To A VLAN section of the `AHV Administration Guide <https://portal.nutanix.com/page/documents/details?targetId=AHV-Admin-Guide-v5_18:AHV-Admin-Guide-v5_18>_`
+Refer to the Assigning An Acropolis Host To A VLAN section of the `AHV Administration Guide <https://portal.nutanix.com/page/documents/details?targetId=AHV-Admin-Guide-v5_18:AHV-Admin-Guide-v5_18>`_
 
 #. Log on to the AHV host with SSH.
 
