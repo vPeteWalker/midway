@@ -71,23 +71,17 @@ Make sure that the specific hardware you are using in a Physical PoC can support
 Foundation
 ++++++++++
 
-Sometimes you may have PoC gear that Foundation will not see as discoverable
+PoC gear not see as discoverable by Foundation
 
-   You will need to bare-metal the cluster: <https://portal.nutanix.com/page/documents/details?targetId=Field-Installation-Guide-v4-4:v44-cluster-image-foundation-t.html%23task_lmh_msc_zm>
+   Refer to the `Prepare Bare Metal Nodes For Foundation section of the Field Installation Guide <https://portal.nutanix.com/page/documents/details?targetId=Field-Installation-Guide-v4-4:v44-cluster-image-foundation-t.html%23task_lmh_msc_zm>`_
 
-      Have this ready on your laptop already just in case using VirtualBox.
+      Install and configure the Foundation VM on your laptop using VirtualBox.
 
-      Run through this Foundation guide prior to the Foundation scheduled at the customer location to validate you have the latest ISOs and diagnostics
+      Run through this Foundation guide prior to the Foundation scheduled at the customer location to validate you have the latest ISOs and diagnostics.
 
-It is suggested that you bring your own 1GBaseT flat switch to customer premise to do foundation process, and set your laptop ethernet port to the same subnet/DG/network as the IPMI network
-*VALIDATE* Also make sure (1) built in, 1GbaseT data port is plugged in for Foundation discovery
+It is suggested that you bring your own 1GBaseT flat switch to customer premise to do foundation process. Set your laptop ethernet port IP address to the same subnet/network as the IPMI network. Also make sure (1) built in, 1GbaseT data port is plugged in for Foundation discovery.
 
-If only IPMI is utilized, Foundation will attempt to discover the nodes via IPv6 which may not always work/be successful.
-
-When you first run Foundation do NOT select VLAN tagging, as you are likely using a flat switch that will not support the VLAN tagging and the nodes will not be able to communicate with one another
-You can change VLAN settings in AHV/CVM at a later time if required
-
-   You can change VLAN settings in AHV/CVM at a later time if required
+When you first run Foundation, *do not* select VLAN tagging, as if you are using the recommended flat switch, it will not support VLAN tagging, and therefore the nodes will not be able to communicate with one another. You can change VLAN settings in AHV/CVM at a later time if required (see *Networking* section).
 
 Networking
 ++++++++++
