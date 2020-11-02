@@ -125,6 +125,22 @@
 
    appendix/appendix
 
+.. toctree::
+   :maxdepth: 2
+   :caption: Objects
+   :name: _Objects
+   :hidden:
+
+   objects/objects
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Prism Ops
+   :name: _prismops
+   :hidden:
+
+   prismops/prismops
+
 ===============================
 SE POC Guide Introduction (AHV)
 ===============================
