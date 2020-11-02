@@ -122,11 +122,11 @@ Rather than deploy an additional Fiesta web server VM, you will update the confi
    - **Username** - centos
    - **Password** - nutanix/4u
 
-#. Run `cat Fiesta/config/config.js` to display the current Fiesta config.
+#. Run ``cat Fiesta/config/config.js`` to display the current Fiesta config.
 
-#. Run `sudo sed -i 's/CURRENT_DB_HOST_ADDRESS_VALUE/AAG_LISTENER_IP_ADDRESS_VALUE/g' ~/Fiesta/config/config.js` (ex. `sudo sed -i 's/10.42.69.62/10.42.69.109/g' ~/Fiesta/config/config.js`) to modify the Fiesta config to reference the newly-created AAG.
+#. Run ``sudo sed -i 's/CURRENT_DB_HOST_ADDRESS_VALUE/AAG_LISTENER_IP_ADDRESS_VALUE/g' ~/Fiesta/config/config.js`` (ex. ``sudo sed -i 's/10.42.69.62/10.42.69.109/g' ~/Fiesta/config/config.js``) to modify the Fiesta config to reference the newly-created AAG.
 
-#. Run `cat Fiesta/config/config.js` to confirm the update was successful.
+#. Run ``cat Fiesta/config/config.js`` to confirm the update was successful.
 
    .. figure:: images/12.png
 
@@ -136,13 +136,13 @@ Rather than deploy an additional Fiesta web server VM, you will update the confi
 
       After
 
-#. Run `sudo systemctl restart fiesta` to apply the configuration changes.
+#. Run ``sudo systemctl restart fiesta`` to apply the configuration changes.
 
 .. note::
 
    The same command can be used to modify any portion of the config.js file used for Fiesta. For example, perhaps you entered a typo in the domain name, and it would be faster to correct it, versus completely redeploying the Fiesta server blueprint.
 
-   `sudo sed -i 's/ntnxlabTYPO.local/ntnxlab.local/g' ~/Fiesta/config/config.js`
+   ``sudo sed -i 's/ntnxlabTYPO.local/ntnxlab.local/g' ~/Fiesta/config/config.js``
 
 Failing A Cluster Server
 ++++++++++++++++++++++++

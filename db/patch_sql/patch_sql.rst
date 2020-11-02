@@ -30,10 +30,12 @@ A software profile versions are created in Era to support patching of SQL Server
 #. Click **Create**. The *Create Software Profile Version* window appears.
 
 #. Do the following in the indicated fields:
-   - **Name.** SQL2016_SP1_CU15
-   - **Patch File Location.** Upload *SQLServer2016-KB4495257-x64.exe* either from a file share (HPOC) or upload from your PC.
 
-   .. figure:: images/2.png
+   - **Name.** SQL2016_SP1_CU15
+
+   - **Patch File Location.** Upload ``SQLServer2016-KB4495257-x64.exe`` either from a file share (HPOC) or upload from your PC.
+
+      .. figure:: images/2.png
 
 Updating a Software Profile Version
 +++++++++++++++++++++++++++++++++++
@@ -50,7 +52,7 @@ After profile creation is successful, you must publish the profile to make the p
 
    .. figure:: images/3.png
 
-You are selecting this option to make the profile version visible for updates. If you have selected this option, Era provides a recommendation on the database server VM homepage that all database server VMs using an earlier version of this software profile should update to this new version.
+   You are selecting this option to make the profile version visible for updates. If you have selected this option, Era provides a recommendation on the database server VM homepage that all database server VMs using an earlier version of this software profile should update to this new version.
 
 #. Click **Next > Update**.
 
@@ -61,19 +63,23 @@ Perform the following procedure to apply updates from the available software pro
 
 #. Within Era, select **Database Server VMs** from the drop-down list.
 
-#. Click on **List** from the left-hand side, then click the database server VM you wish to update the software profile version (i.e. `FiestaDB_Dev`). The *Database Server VM Summary* page appears.
+#. Click on **List** from the left-hand side, then click the database server VM for which you want to update the software profile version (ex. `FiestaDB_Dev`). The *Database Server VM Summary* page appears.
 
 #. Go to the *Software Profile Version* widget, and click **Update**. The *Update Database Server VM* window appears.
 
-The *Software Profile Version* widget displays the current version, recommended version, and the status of the software profile version.
+   The *Software Profile Version* widget displays the current version, recommended version, and the status of the software profile version.
 
-.. Note::
+   .. note::
 
-   The `Update` option only appears when a new software profile version is available.
+      The `Update` option only appears when a new software profile version is available.
 
-#. Do the following in the indicated fields:
-   - **Update to Software Profile Version**. SQL2016_SP1_CU15.
-   - **Start Update** Later.
+#. Select the following in the indicated fields:
+
+   - **Update to Software Profile Version**. SQL2016_SP1_CU15
+
+   - **Start Update** Now
+
+   .. figure:: images/4.png
 
 #. Confirm the update by typing **FiestaDB_Dev** in the text box, and click **Update**.
 
@@ -84,36 +90,24 @@ Patching a SQL Server Database Server Cluster
 
 Perform the following procedure to apply updates from the available software profile versions to a provisioned/registered database server cluster (Windows cluster). Patches are applied in a rolling upgrade.
 
-#. In the drop-down list of the main menu, select **Database Server VMs**.
+#. Within Era, select **Database Server VMs** from the drop-down list.
 
-#. Go to **List** from the left-hand side, and click the database server cluster for which you want to update the software profile version. The *Server Cluster Summary* page appears.
+#. Go to **List** from the left-hand side, then click the database server cluster for which you want to update the software profile version (ex. `Fiesta01`). The *Server Cluster Summary* page appears.
 
-#. Go to the *Software Profile Version* widget and click **Update**. The Update Windows Cluster window appears.
+#. Go to the *Software Profile Version* widget and click **Update**. The *Update Windows Cluster* window appears.
 
-#. The *Software Profile Version* widget displays the current version, recommended version, and the status of the software profile version.
+   The *Software Profile Version* widget displays the current version, recommended version, and the status of the software profile version.
 
-.. Note::
+   .. Note::
 
-   The Update option only appears when a new software profile version is available.
+      The `Update` option only appears when a new software profile version is available.
 
-#. For registered database server clusters which have not been patched in Era, do the following in the indicated fields:
-   - **Software Profile.** Select a software profile from the drop-down list.
-   - **Version.** Select a software profile version from the drop-down list.
+#. Select the following in the indicated fields:
 
-#. Under *Start Update*, select one of the following:
-   - **Now.** Select this option if you want to start updating the software version now.
-   - **Later.** Select this option and then select the day and time if you want to create a schedule for patching the software profile version.
+   - **Update to Software Profile Version**. SQL2016_SP1_CU15
 
-#. Click **Pre-Post Commands** and do the following in the indicated fields:
-   - **Pre-Create Command.** Type a complete OS command that you want to run before the single-instance database is created.
-   - **Post-Create Command.** Type a complete OS command that you want to run after the single-instance database is created.
+   - **Start Update** Now
 
-#. For registered database server clusters and provisioned database server clusters which have been patched at least once in Era, do the following in the indicated fields:
-   - **Update to Software Profile Version.** Select a software profile version to update from the drop-down list.
-   - Under *Start Update*, select one of the following:
-
-   - **Now.** Select this option.
-
-#. Provide the Windows cluster name as confirmation and click Update.
+   .. figure:: images/5.png
 
 A message appears at the top indicating that the operation to update a database has started. Click the message to monitor the progress of the operation. Alternatively, select Operations in the drop-down list of the main menu to monitor the progress of the operation.
