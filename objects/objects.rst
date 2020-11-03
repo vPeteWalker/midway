@@ -27,44 +27,67 @@ Objects allows users to store petabytes of unstructured data on the Nutanix plat
 Use Cases for Nutanix Objects
 +++++++++++++++++++++++++++++
 
-DevOps
+Backup – You can integrate Objects with the backup applications such as Commvault, HYCU, Veeam, and Veritas. You can create backups to protect your data with a simple, scalable, and cost-effective active archive solution. You can start with small storage and scale to petabytes of storage to deliver great performance. Objects supports the multipart upload API with which you can reduce slow upload times by breaking data into chunks and upload documents, images, and videos to the global namespace.
 
-   - Single global namespace for multi-geography collaboration for teams spread around the world
-   - S3 support
-   - Time-to-first-byte of 10ms or less
+Long-term Retention – You can use Objects for long-term data retention. Built-in object versioning provides storage protection and searches your data without the problem of tape systems. Versioning maintains previous copies of the object to avoid data loss from overwrites or deletes. Write-Once-Read-Many (WORM) buckets help you meet regulatory compliance requirements for healthcare, financial services, and government sectors by protecting your data from being overwritten or deleted.
 
-Long Term Data Retention
-
-   - WORM compliance
-   - Object versioning
-   - Lifecycle policies
-
-Backup Target
-
-   - Support for HYCU, Commvault, Veritas NetBackup, Rubrik
-   - Ability to support multiple backup clients simultaneously
-   - Ability to handle really small and really large backup files simultaneously with a key-value store based metadata structure and multi-part upload capabilities
-
-Prerequisites and Cluster Preparation Guidance
-++++++++++++++++++++++++++++++++++++++++++++++
+DevOps – Easy application access to your data in a global namespace using simple PUT and GET commands makes Objects the perfect fit for your dev-ops data. Easily integrate REST API calls within your programs or scripts without tracking complex directory structures. DevOps and IT ops can use the S3-compatible interface for cross-geo, cross-team collaboration, and agile development.
 
 Prerequisites
-.............
++++++++++++++
 
-- Prism Central and AOS version 5.11
+Below is a truncated list of prerequisites and requirements applicable to the POC use case. Please refer to the `Deployment Prerequisites - AHV and ESXi section of the Objects User Guide <https://portal.nutanix.com/page/documents/details?targetId=Objects-v3_0:v30-deployment-guidelines-r.html>`_ for full details.
 
-- Prism Central has at least one AHV cluster registered to it.
+General Requirements
+....................
 
-- Data Services IP and Cluster Virtual IP are set on the AHV cluster.
+- Prism Element version 5.11.2 or later and Prism Central version 5.17.1 or later running in your environment.
 
-- Prism Element and Prism Central are configured with DNS and NTP servers. (PC and PE Must have the same DNS servers configured)
+- Recommended browser: Google Chrome
 
-- At least one network created in AHV with the following properties:
-   - A VLAN with at least 18 available addresses (subnet mask of at least /27)
-   - IP Address Management enabled (IPAM)
-   - An IP pool of at least 12 IPs defined within this network
-   - 2 static IP addresses outside of this pool (within the same network) to allocate to internal services that require static addresses
-   - 4 or more static IP addresses outside of this pool (within this same network, or a separate network) to allocate as Client Access IPs
+- One or two node deployments are for test or POC use only.
 
-Deploy Objects
-++++++++++++++
+- Ensure that no upgrade is in progress while deploying Objects.
+
+- Ensure that the Object Store domain should be dedicated for the Object store deployment. For example, if the top level domain is mycompany.com, then the object store domain can be a sub domain such as testobjectstore.mycompany.com.
+
+Network Requirements
+....................
+
+- Configure Domain Name Servers (DNS) on both Prism Element and Prism Central.
+
+- Configure Network Time Protocol (NTP) servers on both Prism Element and Prism Central.
+
+- Configure the virtual IP address and the data services IP address.
+
+Deploying Objects
++++++++++++++++++
+
+Enable Objects
+..............
+
+#. Log on to Prism Central, and click the :fa:`bars` **> Services > Objects**.
+
+#. To enable the *Object Store Services*, click **Enable > Enable**.
+
+   After you enable Objects, ensure that you perform LCM inventory and upgrade the MSP and Objects Manager to the latest versions before you start with deployment.
+
+You can now use the Objects services.
+
+Create Object Store
+...................
+
+#. Log on to Prism Central, and click the :fa:`bars` **> Services > Objects**.
+
+#. Click **Create Object Store**.
+
+#. In the Prerequisites window, click **Continue** if you fulfill the prerequisites.
+
+#. On the *Name* page, fill out the following fields and click **Next**:
+
+   - **Object Store Name** store01
+   - **Domain** ntnxlab.local
+
+#. On the *Configure* page, fill out the following fields and click **Next**:
+
+   - **Capacity** 1 TiB

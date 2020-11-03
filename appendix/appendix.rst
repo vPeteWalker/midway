@@ -4,6 +4,55 @@
 Appendix
 --------
 
+IP Address Allocation
++++++++++++++++++++++
+
+.. list-table::
+   :widths: 25 75
+   :header-rows: 1
+
+   * - IP Address
+     - Description
+   * - .37
+     - Cluster Virtual IP
+   * - .38
+     - Cluster Data Services IP
+   * - .39
+     - Prism Central
+   * - 40
+     - AutoAD, NTNXLAB.local Domain Controller
+   * -
+     -
+   * -
+     -
+   * -
+     -
+   * -
+     -
+   * -
+     -
+   * -
+     -
+   * -
+     -
+   * -
+     -
+   * -
+     -
+   * -
+     -
+   * -
+     -
+   * -
+     -
+   * -
+     -
+   * -
+     -
+   * -
+     -
+
+
 Resources
 +++++++++++
 
