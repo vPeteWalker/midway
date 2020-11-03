@@ -19,12 +19,12 @@ IP Address Allocation
      - Cluster Data Services IP
    * - .39
      - Prism Central
-   * - 40
+   * - .40
      - AutoAD, NTNXLAB.local Domain Controller
-   * -
-     -
-   * -
-     -
+   * - .41 - .42
+     - Objects - Internal Access (2)
+   * - .43 - .46
+     - Objects - Client Access (4)
    * -
      -
    * -

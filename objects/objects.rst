@@ -70,7 +70,7 @@ Enable Objects
 
 #. To enable the *Object Store Services*, click **Enable > Enable**.
 
-   After you enable Objects, ensure that you perform LCM inventory and upgrade the MSP and Objects Manager to the latest versions before you start with deployment.
+After you enable Objects, ensure that you perform LCM inventory and upgrade the *MSP* (v2.0+) and *Objects Manager* (v3.0+) to the latest versions before you start with deployment. This will upgrade Objects to 3.0.
 
 You can now use the Objects services.
 
@@ -83,11 +83,44 @@ Create Object Store
 
 #. In the Prerequisites window, click **Continue** if you fulfill the prerequisites.
 
-#. On the *Name* page, fill out the following fields and click **Next**:
+#. On the *Name* page, fill out the following fields, and click **Next**:
 
    - **Object Store Name** store01
    - **Domain** ntnxlab.local
 
-#. On the *Configure* page, fill out the following fields and click **Next**:
+   .. figure:: images/1.png
+
+#. On the *Configure* page, fill out the following fields, and click **Next**:
 
    - **Capacity** 1 TiB
+
+   .. figure:: images/2.png
+
+#. On the *Cluster Details* page, fill out the following fields, and click **Create**:
+
+   - Select your cluster (ex. `PHX-POC069`) on which you want to deploy the object store.
+
+   - **Internal Access Network** Primary
+
+   - **Internal Access IPs** Choose two unallocated IP address (ex. .41, .42)
+
+   - **Client Access Network** Primary
+
+   - **Client Access IPs** Choose two unallocated IP address (ex. .41, .42, .43, .44)
+
+   .. figure:: images/3.png
+
+.. note::
+
+   Deployment will take approximately 40 minutes, and will vary based on WAN speed. The deployment will sit at 5% for a long time while the software is downloaded from S3.
+
+Create Bucket
+.............
+
+#. Log on to Prism Central, and click the :fa:`bars` **> Services > Objects**.
+
+#. Click the name of object store in which you want to create a bucket (ex. `store01`). The object store opens in a new window.
+
+#. Click **Create Bucket**.
+
+#.
