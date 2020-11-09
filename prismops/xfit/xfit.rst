@@ -1,8 +1,8 @@
-.. _prismops:
+.. _xfit:
 
----------
-Prism Ops
----------
+-----
+X-Fit
+-----
 
 **Prerequisites:** N/A
 

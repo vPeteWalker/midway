@@ -21,14 +21,16 @@ IP Address Allocation
      - Prism Central
    * - .40
      - AutoAD, NTNXLAB.local Domain Controller
-   * - .41 - .42
+   * - .41
+     - Foundation
+   * - .42 - .43
      - Objects - Internal Access (2)
-   * - .43 - .46
+   * - .44 - .47
      - Objects - Client Access (4)
-   * -
-     -
-   * -
-     -
+   * - .50 - .125
+     - IPAM range
+   * - .126
+     - IPAM DHCP Server
    * -
      -
    * -

@@ -49,8 +49,6 @@ General Requirements
 
 - Ensure that no upgrade is in progress while deploying Objects.
 
-- Ensure that the Object Store domain should be dedicated for the Object store deployment. For example, if the top level domain is mycompany.com, then the object store domain can be a sub domain such as testobjectstore.mycompany.com.
-
 Network Requirements
 ....................
 
@@ -106,7 +104,7 @@ Create Object Store
 
    - **Client Access Network** Primary
 
-   - **Client Access IPs** Choose two unallocated IP address (ex. .41, .42, .43, .44)
+   - **Client Access IPs** Choose two unallocated IP address (ex. .43, .44, .45, .46)
 
    .. figure:: images/3.png
 
