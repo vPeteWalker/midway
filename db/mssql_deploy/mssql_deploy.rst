@@ -1,4 +1,4 @@
-.. _mssqldeploy:
+.. _mssql_deploy:
 
 Please complete :ref:`windows_scratch` before proceeding.
 

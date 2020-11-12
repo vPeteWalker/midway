@@ -1,6 +1,6 @@
 .. _patch_sql:
 
-Please complete :ref:`mssqldeploy` before proceeding.
+Please complete :ref:`mssql_deploy` before proceeding.
 
 ----------------------
 Patching Microsoft SQL

@@ -1,6 +1,6 @@
 .. _era_mssql:
 
-Please complete :ref:`mssqldeploy` before proceeding.
+Please complete :ref:`mssql_deploy` before proceeding.
 
 --------------
 Era Deployment
@@ -256,7 +256,7 @@ A SQL Server database server must meet the following requirements before you are
 
    - Select **Not registered** within *Database is on a Server VM that is:*.
 
-   - **IP Address or Name of VM** Select the VM you created in the :ref:`mssqldeploy` section.
+   - **IP Address or Name of VM** Select the VM you created in the :ref:`mssql_deploy` section.
 
    - **Windows Administrator Name** Type the user name of the administrator account (ex. administrator@ntnxlab.local).
 

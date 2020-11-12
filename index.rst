@@ -110,20 +110,21 @@
    :name: _Era
    :hidden:
 
-   db/mssqldeploy/mssqldeploy
+   db/mssql_deploy/mssql_deploy
    db/era_mssql/era_mssql
    db/basic_clone_ui/basic_clone_ui
    db/basic_clone_api/basic_clone_api
    db/advanced_aag/advanced_aag
-   db/patch_sql/patch_sql
+   db/mssql_patch/mssql_patch
+   db/mssql_restore/mssql_restore
 
 .. toctree::
    :maxdepth: 2
-   :caption: Appendix
-   :name: _Appendix
+   :caption: Prism Ops
+   :name: _prismops
    :hidden:
 
-   appendix/appendix
+   prismops/prismops
 
 .. toctree::
    :maxdepth: 2
@@ -135,11 +136,11 @@
 
 .. toctree::
    :maxdepth: 2
-   :caption: Prism Ops
-   :name: _prismops
+   :caption: Appendix
+   :name: _Appendix
    :hidden:
 
-   prismops/prismops
+   appendix/appendix
 
 ===============================
 SE POC Guide Introduction (AHV)
