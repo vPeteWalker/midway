@@ -4,8 +4,8 @@
 Appendix
 --------
 
-IP Address Allocation
-+++++++++++++++++++++
+IP Address Allocation (Primary Cluster)
++++++++++++++++++++++++++++++++++++++++
 
 .. list-table::
    :widths: 25 75
@@ -54,6 +54,27 @@ IP Address Allocation
    * -
      -
 
+IP Address Allocation (Additional Cluster)
+++++++++++++++++++++++++++++++++++++++++++
+
+.. list-table::
+   :widths: 25 75
+   :header-rows: 1
+
+   * - IP Address
+     - Description
+   * - .37
+     - Cluster Virtual IP
+   * - .38
+     - Cluster Data Services IP
+   * - .39
+     - Prism Central
+   * - .48
+     - Era Agent VM
+   * - .50 - .125
+     - IPAM range
+   * - .126
+     - IPAM DHCP Server
 
 Resources
 +++++++++++

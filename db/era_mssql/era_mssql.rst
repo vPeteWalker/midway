@@ -128,7 +128,7 @@ Configuration
 
 #. In the *Era’s Cluster* screen, enter the following in the indicated fields:
 
-   - **Name** EraCluster
+   - **Name** EraCluster01
 
    - (Optional) **Description** Type a description of the Nutanix cluster.
 
