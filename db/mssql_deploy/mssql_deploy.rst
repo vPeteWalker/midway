@@ -1,7 +1,5 @@
 .. _mssql_deploy:
 
-Please complete :ref:`windows_scratch` before proceeding.
-
 ------------------------
 Microsoft SQL Deployment
 ------------------------
@@ -15,16 +13,24 @@ For details on deploying Microsoft SQL Server on Nutanix best practices, please 
 You may wish to download the SQL Server Management Studio (SSMS) installer ahead of time - https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms
 
 This workshop includes detailed instructions to:
-   - Deploy a new VM from Windows 2016 or 2019 golden image (created in :ref:`_windows_scratch`)
+   - Deploy a new VM from Windows 2016 or 2019 from clone (created in :ref:`vmmanage` or :ref:`windows_scratch`)
    - Deploy and configure SQL Server 2016
-   - Deploy and configure Era 2.0
-   - Clone SQL Server database - using both UI and API
-   - Create and configure a highly-available database environment
-   - Apply patches to both single, and clustered database environments
 
 The goal is provide a completely transparent process to install SQL to meet the minumum requirements for Era, while avoiding use of any pre-built images, scripts, or anything that could be considered "black box". This is especially important for POCs being performed in highly-secure environments, where pre-built images or scripts may be forbidden. Everything used here is either publicly available (ex. Microsoft ISO images) and/or in plain text that can be easily reviewed (ex. SQL query file).
 
+.. note::
+
+   It is less time-consuming to use a pre-configured Windows + SQL image, so if that option is available to you, it's recommended to use that method.
+
 `Era User Guide v2.0 <https://portal.nutanix.com/page/documents/details?targetId=Nutanix-Era-User-Guide-v2_0:Nutanix-Era-User-Guide-v2_0>`_
+
+**Prerequisites:** Completion of :ref:`windows_scratch` or :ref:`vmmanage`
+
+**(Optional) Pre-requisite:** N/A
+
+**Expected Module Duration:** 90 minutes
+
+**Covered Test IDs:** N/A
 
 SQL Server 2016 - Manual Deployment
 +++++++++++++++++++++++++++++++++++
@@ -33,6 +39,10 @@ These instructions will walk you through:
 
 - Cloning a Windows VM.
 - Manually install SQL Server 2016. This VM will act as a master image to create a profile for deploying additional SQL VMs with Nutanix and Microsoft best practices automatically applied by Era.
+
+.. note::
+
+   It is less time-consuming to use a pre-configured Windows + SQL image, so if that option is available to you, it's recommended to use that method.
 
 Upload SQL Server 2016 ISO
 ..........................

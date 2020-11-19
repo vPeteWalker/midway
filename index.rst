@@ -98,14 +98,6 @@
 
 .. toctree::
    :maxdepth: 2
-   :caption: Windows from Scratch
-   :name: _windows_scratch
-   :hidden:
-
-   windows_scratch/windows_scratch
-
-.. toctree::
-   :maxdepth: 2
    :caption: Era
    :name: _Era
    :hidden:
@@ -114,25 +106,27 @@
    db/era_mssql/era_mssql
    db/basic_clone_ui/basic_clone_ui
    db/basic_clone_api/basic_clone_api
-   db/advanced_aag/advanced_aag
-   db/mssql_patch/mssql_patch
    db/mssql_restore/mssql_restore
+   db/advanced_aag/advanced_aag
+   db/multi_clusterTBD/multi_clusterTBD
+   db/patch_sql/patch_sql
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Prism Ops
-   :name: _prismops
-   :hidden:
+.. .. toctree::
+..    :maxdepth: 2
+..    :caption: Prism Ops
+..    :name: _prismops
+..    :hidden:
+..
+..    prismops/xfit
+..    prismops/xplay
 
-   prismops/prismops
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Objects
-   :name: _Objects
-   :hidden:
-
-   objects/objects
+.. .. toctree::
+..    :maxdepth: 2
+..    :caption: Objects
+..    :name: _Objects
+..    :hidden:
+..
+..    objects/objects
 
 .. toctree::
    :maxdepth: 2
@@ -141,6 +135,7 @@
    :hidden:
 
    appendix/appendix
+   windows_scratch/windows_scratch
 
 ===============================
 SE POC Guide Introduction (AHV)

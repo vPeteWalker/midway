@@ -1,7 +1,5 @@
 .. _basic_clone_api:
 
-Please complete :ref:`era_mssql` before proceeding.
-
 ----------------------------
 Time Machine & Cloning - API
 ----------------------------
@@ -16,7 +14,17 @@ In this lab you will API calls to:
 - Make changes to your production database, and refresh your development environment.
 - Use your *FiestaDB_Dev* environment to observe the modifications made to the production database are reflected in the development environment.
 
-Before proceeding with the below, please be aware that the same steps will be accomplished also using the :ref:`basic_clone_ui` section.
+**Prerequisites:** Completion of :ref:`era_mssql`
+
+**(Optional) Pre-requisite:** N/A
+
+**Expected Module Duration:** 30 minutes
+
+**Covered Test IDs:** N/A
+
+.. raw:: html
+
+  <strong><font color="red">Before proceeding with the below, please be aware that the same steps will be accomplished also using the :ref:`basic_clone_ui` section.</font></strong>
 
 Cloning from the Era API
 ++++++++++++++++++++++++

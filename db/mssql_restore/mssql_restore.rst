@@ -4,6 +4,16 @@
 Restoring Microsoft SQL
 -----------------------
 
+The below will guide you through the necessary steps within Era to restore a Microsoft SQL database.
+
+**Prerequisites:** Completion of :ref:`era_mssql`
+
+**(Optional) Pre-requisite:** N/A
+
+**Expected Module Duration:** 15 minutes
+
+**Covered Test IDs:** N/A
+
 #. Within Era, select **Databases** from the drop-down menu.
 
 #. On the left-hand side, select **Sources**, and then click on the database you wish to restore (i.e. `FiestaDB_Prod`).

@@ -1,10 +1,24 @@
 .. _era_mssql:
 
-Please complete :ref:`mssql_deploy` before proceeding.
-
 --------------
 Era Deployment
 --------------
+
+The below will guide you through the necessary steps to initially deploy and configure Era, along with post-installation steps related to Microsoft SQL Server.
+
+**Prerequisites:** Completion of :ref:`mssql_deploy`
+
+**(Optional) Pre-requisite:** N/A
+
+**Expected Module Duration:** 90 minutes
+
+**Covered Test IDs:** N/A
+
+This workshop includes detailed instructions to:
+   - Deploy and configure Era 2.0
+   - Clone SQL Server database - using both UI and API methods
+   - Create and configure a highly-available database environment
+   - Apply patches to both single, and clustered database environments
 
 Network Configuration
 +++++++++++++++++++++

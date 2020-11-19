@@ -4,14 +4,22 @@
 Deploying Windows From Scratch
 ------------------------------
 
-This guide assumes there are business or technical reasons that prevent the use of a pre-configured Windows disk image for your POC. This method, while more time consuming, starts with a base of the evaluation Windows ISO image from Microsoft. Depending on your situation, the ISO or disk image may be something the customer requires they provide, due to internal security policies, or personal preference. Otherwise, using the Nutanix or customer provided pre-installed Windows image may be preferable for your needs.
+This section assumes there are business or technical reasons that prevent the use of a pre-configured Windows disk image for your POC. This method, while more time consuming, starts with a base of the evaluation Windows ISO image from Microsoft. Depending on your situation, the ISO or disk image may be something the customer requires they provide, due to internal security policies, or personal preference. Otherwise, using the Nutanix or customer provided pre-installed Windows image may be preferable for your needs.
+
+**Prerequisites:** Completion of :ref:`clusterconfig`
+
+**(Optional) Pre-requisite:** N/A
+
+**Expected Module Duration:** 30 minutes
+
+**Covered Test IDs:** N/A
 
 Before you get started
 ++++++++++++++++++++++
 
 There are a few pieces of software that are required to be able to accomplish this section:
 
-   - Windows image (2016 or 2019)
+   - Windows image (2016 and/or 2019)
    - VirtIO ISO
    - (Optional) Chrome or Firefox
 
@@ -252,3 +260,30 @@ Installing Windows 2019 from ISO
 #. Click **Save**.
 
 This image can now serve as the Windows Server 2019 base image during the POC process.
+
+Creating a Windows Disk Image
+.............................
+
+#. SSH to any CVM in the cluster.
+
+#. Run the command `acli vm.get <VM_NAME> include_vmdisk_paths=1 | grep -E 'disk_list|vmdisk_nfs_path|vmdisk_size|vmdisk_uuid'` to list all disks attached to your VM.
+
+   Ex. `acli vm.get Windows2016 include_vmdisk_paths=1 | grep -E 'disk_list|vmdisk_nfs_path|vmdisk_size|vmdisk_uuid'`
+
+   .. figure:: images/10.png
+
+      Sample Output
+
+   We are interested in the highlighted disk, as it is the Windows boot disk we initially created with a size of 100 GiB.
+
+#. Run the command `qemu-img convert -f raw nfs://127.0.0.1/<FULL_DISK_PATH> -O qcow2 nfs://127.0.0.1/Images/<IMAGE_NAME>.qcow2 -p` to copy the disk image and save it as a .QCOW2 file.
+
+   Ex. `qemu-img convert -f raw nfs://127.0.0.1/default-container-98754/.acropolis/vmdisk/06cd7ae6-671c-452c-b638-55d9ed319409 -O qcow2 nfs://127.0.0.1/default-container-98754/Windows2016.qcow2 -p`
+
+   This will take approximately 15 minutes to complete.
+
+#. Upload the .QCOW2 image to the Image Configuration service within Prism, using the `nfs://127.0.0.1/<CONTAINER>/<IMAGE_NAME>.qcow2` path.
+
+   Ex. `nfs://127.0.0.1/default-container-98754/Windows2016.qcow2`
+
+You can now utilize this golden image by attaching this disk to any new VM you create.
