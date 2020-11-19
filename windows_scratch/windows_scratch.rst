@@ -286,4 +286,6 @@ Creating a Windows Disk Image
 
    Ex. `nfs://127.0.0.1/default-container-98754/Windows2016.qcow2`
 
+   .. figure:: images/11.png
+
 You can now utilize this golden image by attaching this disk to any new VM you create.
