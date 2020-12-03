@@ -7,9 +7,9 @@ In this section, we will be simulating a Network Interface Card (NIC), and obser
 
 There are two example scenarios you can run to demonstrate the cluster resiliency during this event:
 
-   - BASIC: Create two VMs, one on the host that is running on the host you are simulating the NIC failure on, one on a host that will remain untouched. Begin a continuous ping between these VMs prior to issuing the shutdown command via SSH, and observe that there are no lost pings. Creating VMs is oulined in :ref:`vmmanage`
+   - BASIC: Create two VMs, one on the host that is running on the host you are simulating the NIC failure on, one on a host that will remain untouched. Begin a continuous ping between these VMs prior to issuing the shutdown command via SSH, and observe that there are no lost pings. Creating VMs is outlined in :ref:`vmmanage`
 
-   - RECOMMENDED: Use X-ray to run OLTP or VDI workload. Setup of X-Ray is oulined in :ref:`xray`. Instructions for running the OLTP Simulator can be found in :ref:`xray3`.
+   - RECOMMENDED: Use X-ray to run OLTP or VDI workload. Setup of X-Ray is outlined in :ref:`xray`. Instructions for running the OLTP Simulator can be found in :ref:`xray3`.
 
 .. note::
 
