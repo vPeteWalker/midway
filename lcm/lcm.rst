@@ -33,11 +33,11 @@ Below you will see two sections, one for LCM within Prism Central (PC), and one 
 
 While the long-term goal is to migrate the operations that are currently in PE to PC, there are several that exist in PE today, and therefore require use of both PE and PC for full functionality.
 
-Below is a flowchart that illustrates the LCM process.
+The following illustrates the LCM process.
 
-   .. figure:: images/1.png
+      .. figure:: images/1.png
 
-   .. figure:: images/2.png
+      .. figure:: images/2.png
 
 .. note::
 

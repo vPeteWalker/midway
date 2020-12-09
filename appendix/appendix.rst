@@ -227,13 +227,13 @@ Refer to the `Load Balancing Within Bond Interfaces section of the <https://port
 
    `nutanix@CVM$ ssh root@192.168.5.1 "ovs-appctl bond/show"`
 
-Link aggregation is required to take full advantage of the bandwidth provided by multiple links. In OVS it is accomplished though dynamic link aggregation with LACP and load balancing using balance-tcp.
+   Link aggregation is required to take full advantage of the bandwidth provided by multiple links. In OVS it is accomplished though dynamic link aggregation with LACP and load balancing using balance-tcp.
 
-Nutanix and OVS require dynamic link aggregation with LACP instead of static link aggregation on the physical switch. Do not use static link aggregation such as etherchannel with AHV.
+   Nutanix and OVS require dynamic link aggregation with LACP instead of static link aggregation on the physical switch. Do not use static link aggregation such as etherchannel with AHV.
 
-.. note::
+   .. note::
 
-   Nutanix recommends enabling LACP on the AHV host with fallback to active-backup. Then configure the connected upstream switches. Different switch vendors may refer to link aggregation as port channel or LAG. Using multiple upstream switches may require additional configuration such as a multichassis link aggregation group (MLAG) or virtual PortChannel (vPC). Configure switches to fall back to active-backup mode in case LACP negotiation fails (sometimes called fallback or no suspend-individual). This switch setting assists with node imaging and initial configuration where LACP may not yet be available on the host.
+      Nutanix recommends enabling LACP on the AHV host with fallback to active-backup. Then configure the connected upstream switches. Different switch vendors may refer to link aggregation as port channel or LAG. Using multiple upstream switches may require additional configuration such as a multichassis link aggregation group (MLAG) or virtual PortChannel (vPC). Configure switches to fall back to active-backup mode in case LACP negotiation fails (sometimes called fallback or no suspend-individual). This switch setting assists with node imaging and initial configuration where LACP may not yet be available on the host.
 
 #. If upstream LACP negotiation fails, the default AHV host configuration disables the bond, thus blocking all traffic. The following command allows fallback to active-backup bond mode in the AHV host in the event of LACP negotiation failure:
 
@@ -284,27 +284,10 @@ General Networking
 
    `ovs-appctl bond/list`
 
-
-
-Miscellaneous Commands
-++++++++++++++++++++++
-
-To SSH into the local CVM on an AHV host:
-
-   `ssh nutanix@192.168.5.254`
-
-To shutdown an AHV host:
-
-   `shutdown -h now`
-
-To start a VM in AHV:
-
-   `virsh start VM_name`
-
 Reset Web Console or nCLI Password
 ++++++++++++++++++++++++++++++++++
 
-The following commands are taken from the `Reset Web Console or nCLI Password <https://portal.nutanix.com/page/documents/kbs/details?targetId=kA0600000008WqqCAE>`_ portal article.
+The following is taken from the `Reset Web Console or nCLI Password <https://portal.nutanix.com/page/documents/kbs/details?targetId=kA0600000008WqqCAE>`_ portal article.
 
 You can use the solution if you need to do the following:
 
@@ -333,3 +316,33 @@ If you receive "Password has been already used. Choose another". Please follow b
 #. To change your password without knowing your current password:
 
    ``ncli user reset-password user-name='admin' password='nutanix/4u'``
+
+Extend timeouts for PE and PC
++++++++++++++++++++++++++++++
+
+Complete the following to extend the timeout of PE and PC.
+
+#. Click the :fa:`gear` icon.
+
+#. Select **UI Settings** from within the *Appearance* section on the left-hand side.
+
+#. Select **1 hour** from the *Session Timeout For Current User* drop-down.
+
+#. Select **Never** from the *Default Session Timeout For Non-Admin Users*.
+
+#. Click **Save**.
+
+Miscellaneous Commands
+++++++++++++++++++++++
+
+- To SSH into the local CVM on an AHV host:
+
+   `ssh nutanix@192.168.5.254`
+
+- To shutdown an AHV host:
+
+   `shutdown -h now`
+
+- To start a VM in AHV:
+
+   `virsh start VM_name`
