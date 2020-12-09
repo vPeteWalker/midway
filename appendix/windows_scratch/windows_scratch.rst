@@ -44,8 +44,6 @@ Nutanix Virt IO is a collection of drivers for paravirtual devices that enhance 
 
    - **Image Type** - ISO
 
-
-
    **Choose one of the following**:
 
    **EITHER**
@@ -114,7 +112,7 @@ Installing Windows 2016 from ISO
 
    .. figure:: images/2.png
 
-Click on :fa:`plus` **Add New Disk**. Change the *Type* to **CD-ROM**. Change the *Operation* to **Clone from Image Service**. Change *Image* to **VirtIO**. Click **Add**.
+#. Click on :fa:`plus` **Add New Disk**. Change the *Type* to **CD-ROM**. Change the *Operation* to **Clone from Image Service**. Change *Image* to **VirtIO**. Click **Add**.
 
 #. Click :fa:`plus` **Add New NIC**. Ensure *Primary* is selected, and click **Add**. and click **Add**.
 

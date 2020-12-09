@@ -36,8 +36,9 @@
    :hidden:
 
    node_addremove/node_addremove
-   aos_upgrade/aos_upgrade
    lcm/lcm
+   lcm/lcm/pc
+   lcm/lcm/pe
    .. pcapimanage/pcapimanage
    .. climanage/climanage
 
@@ -135,7 +136,7 @@
    :hidden:
 
    appendix/appendix
-   windows_scratch/windows_scratch
+   appendix/windows_scratch/windows_scratch
 
 ===============================
 SE POC Guide Introduction (AHV)

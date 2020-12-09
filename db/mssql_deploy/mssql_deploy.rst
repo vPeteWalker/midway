@@ -37,7 +37,8 @@ SQL Server 2016 - Manual Deployment
 
 These instructions will walk you through:
 
-- Cloning a Windows VM.
+- Cloning a previously-created Windows VM.
+
 - Manually install SQL Server 2016. This VM will act as a master image to create a profile for deploying additional SQL VMs with Nutanix and Microsoft best practices automatically applied by Era.
 
 .. note::
@@ -65,8 +66,11 @@ Upload SQL Server 2016 ISO
 
    .. figure:: images/1.png
 
-Deploy and configure Windows Server 2016 from clone
-...................................................
+Deploying Windows Server 2016
+.............................
+
+From Clone
+**********
 
 #. Choose **VM** from the dropdown menu.
 
@@ -97,6 +101,45 @@ Deploy and configure Windows Server 2016 from clone
 .. note::
 
    We will utilize the additional disk will store the database and log files, as required by Era: "Database files must not exist in the Windows OS boot drive" (i.e. the "C:" drive). It will be presented to Windows as the "E:" drive, outlined in the proceeding steps. Refer to the Era User Guide for a full list of requirements.
+
+From Disk Image
+***************
+
+#. Click **Create VM** and fill out the following fields:
+
+   - **Name** - Win16SQL16
+   - **vCPUs** - 2
+   - **Number of Cores Per vCPU** - 1
+   - **Memory** - 4 GiB
+   - Click **+ Add New Disk**
+
+      - **Type** - Disk
+      - **Operation** - Clone from Image Service
+      - **Bus Type** - SCSI
+      - **Image** - Windows2016.qcow2
+      - Click **Add**
+
+      - **Type** - Disk
+      - **Operation** - Allocate on Storage Container
+      - **Bus Type** - SCSI
+      - **Size (GiB)** - 100
+      - Click **Add**
+
+      - **Type** - CD-ROM
+      - **Operation** - Clone from Image Service
+      - **Bus Type** - IDE
+      - **Image** - MSSQL2016
+      - Click **Add**
+
+   - Click **+ Add New NIC**
+
+      - **Network Name** - Primary
+      - Click **Add**
+
+   - Click **Save**
+
+Configuring Windows Server 2016
+...............................
 
 #. Right click the *Win16SQL16* VM, and select **Power On**.
 

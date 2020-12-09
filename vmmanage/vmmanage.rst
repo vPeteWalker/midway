@@ -48,10 +48,6 @@ Creating VMs
 
    *In this environment we're using a pre-built OS image as you would for the majority of your VM deployments on the cluster. However, if we were creating a Windows VM from installation media, we would also need to mount and install the VirtIO storage driver in order for Windows to find the virtual disk drive. Modern Linux distributions will include a version of this driver, so additional steps aren't required during installation.*
 
-   .. note::
-
-      A future version of this guide will include an appendix exercise for creating the OS images from .iso install media.
-
 #. Select the checkbox beside the newly created VM and click **Actions > Power On**. Optionally, and new in AOS 5.18, you can right click > **Power On**.
 
    .. figure:: images/1.png
