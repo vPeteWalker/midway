@@ -103,53 +103,40 @@ X-Ray
 Failure Scenarios
 +++++++++++++++++
 
-Put video of HDD failure here?
-
-
-Windows from scratch
-++++++++++++++++++++
-
 Era
 +++
 
+Selecting Physical PoCs vs HPoCs - Tips/tricks and pitfalls to avoid
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Selecting Physical PoCs vs HPoCs
-++++++++++++++++++++++++++++++++
+It is suggested to ensure the hardware is in working condition before sending it to the customer.
 
-PoC hardware may not always be in proper working condition
+Ensure HPOC/POC hardware is capable at excelling at the tests being performed. Some hardware may not be desirable for performance testing, especially hybrid clusters.
 
-   It is suggested that if at all possible you have an opportunity to vet out the HW, and/or confirm that the PoC team has done so before sending it to the customer. We have been burned with bad HW in PoCs before.
+To properly test replication, the customer may not feel comfortable replicating from their on-premise network to the Nutanix corp network or Xi Leap, regardless of secure VPN connectivity. In this event, it is recommended that two physical PoC units be used to accomplished this task.
 
-HPoC environments may not support certain versions of sw for integration with Nutanix portfolio products, and an on site PoC may be the best way to show the customer how integration will work for certain specialty products
+For physical POCs within a customer's datacenter, it is recommended to run in an isolated environment to avoid negatively impacting the customer's production systems.
 
-HPoCs may not be desirable if the customer wants real workload testing
+NVMe drives are not recommended for use in POCs where a drive pull test is a part of the success criteria.
 
-To properly test replication the customer may not feel comfortable replicating from their on-premise network to the Nutanix corp network or Xi Leap regardless of secure VPN connectivity
+If benchmarking is a requirement for POC success, engage the performance team to ensure both the CVMs and the cluster are correctly sized for the performance tests (ex. IOMeter, VDIBench, X-Ray) prior to deployment.
 
-   It is recommended that 2 Physical PoC units be used to accomplished this task
+If it is required functionality, ensure that the specific hardware you are using in a physical POC can support any necessary PCIe devices.
 
-If possible it is suggested that the PoC be done in an isolated environment as to not adversely affect production systems accidentally
-
-NVMe drives are not suggested for use in PoCs where customers wish to pull drives
-
-If benchmarking is a requirement for PoC success make sure to engage the performance team to ensure CVMs and the cluster are rightsized for IOMeter, VDIBench, XRAY(Suggested) etc. prior to deployment.
-
-Make sure that the specific hardware you are using in a Physical PoC can support PCIe devices
-
-   Ex. The 1065S - Are single proc and cannot support PCIe devices and only have 1GBaseT built in NICs for example
+   Ex. The 1065S is a single processor node. It cannot support PCIe devices, and only has a 1GBaseT built in NIC.
 
    .. figure:: images/1.png
 
 Foundation
 ++++++++++
 
-PoC gear not see as discoverable by Foundation
+In situations where the node(s) are not discoverable by Foundation.
 
-   Refer to the `Prepare Bare Metal Nodes For Foundation section of the Field Installation Guide <https://portal.nutanix.com/page/documents/details?targetId=Field-Installation-Guide-v4-4:v44-cluster-image-foundation-t.html%23task_lmh_msc_zm>`_
+   - Refer to the `Prepare Bare Metal Nodes For Foundation section of the Field Installation Guide <https://portal.nutanix.com/page/documents/details?targetId=Field-Installation-Guide-v4-4:v44-cluster-image-foundation-t.html%23task_lmh_msc_zm>`_.
 
-      Install and configure the Foundation VM on your laptop using VirtualBox.
+   - Install and configure the Foundation VM on your laptop using VirtualBox.
 
-      Run through this Foundation guide prior to the Foundation scheduled at the customer location to validate you have the latest ISOs and diagnostics.
+   - Run through this Foundation guide prior to the Foundation scheduled at the customer location to validate you have the latest ISOs and diagnostics.
 
 It is suggested that you bring your own 1GBaseT flat switch to customer premise to do foundation process. Set your laptop ethernet port IP address to the same subnet/network as the IPMI network. Also make sure (1) built in, 1GbaseT data port is plugged in for Foundation discovery.
 
@@ -163,7 +150,7 @@ Always refer to the latest version of the `AHV Administration Guide <https://por
 Assigning The Controller VM To A VLAN
 .....................................
 
-Refer to the Assigning The Controller VM To A VLAN section of the `AHV Administration Guide <https://portal.nutanix.com/page/documents/details?targetId=AHV-Admin-Guide-v5_18:AHV-Admin-Guide-v5_18>`_
+Refer to the Assigning The Controller VM To A VLAN section of the `AHV Administration Guide <https://portal.nutanix.com/page/documents/details?targetId=AHV-Admin-Guide-v5_18:AHV-Admin-Guide-v5_18>`_.
 
 .. note::
 
@@ -308,6 +295,6 @@ To shutdown an AHV host:
 
    `shutdown -h now`
 
-To start a VM in AHV
+To start a VM in AHV:
 
    `virsh start VM_name`
