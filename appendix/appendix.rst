@@ -284,8 +284,10 @@ General Networking
 
    `ovs-appctl bond/list`
 
-Miscellaneous Helpful Commands
-..............................
+
+
+Miscellaneous Commands
+++++++++++++++++++++++
 
 To SSH into the local CVM on an AHV host:
 
@@ -298,3 +300,36 @@ To shutdown an AHV host:
 To start a VM in AHV:
 
    `virsh start VM_name`
+
+Reset Web Console or nCLI Password
+++++++++++++++++++++++++++++++++++
+
+The following commands are taken from the `Reset Web Console or nCLI Password <https://portal.nutanix.com/page/documents/kbs/details?targetId=kA0600000008WqqCAE>`_ portal article.
+
+You can use the solution if you need to do the following:
+
+- To perform password recovery for the Prism web console or ncli for the CVMs in your Nutanix cluster.
+
+- If you have lost your password, forgotten your Prism password, or had previously changed it and need to set the password back to the default.
+
+.. Note::
+
+   You need to log in to the CVM through a secure session shell (SSH) or console to perform the solution steps.
+
+If you receive "Password has been already used. Choose another". Please follow below steps:
+
+.. Note::
+
+   You cannot change password using the same password as the current password. As a workaround, you can change the current password to something else five times (each attempt must be different from the first and previous attempts). Once complete, you are able to set the password to be the original password.
+
+#. To unlock an user (admin used in this example):
+
+   ``allssh sudo faillock --reset --user admin``
+
+#. To erase your password history (to bypass cannot be last 10 password check):
+
+   ``allssh sudo rm /etc/security/opasswd && allssh sudo touch /etc/security/opasswd``
+
+#. To change your password without knowing your current password:
+
+   ``ncli user reset-password user-name='admin' password='nutanix/4u'``
