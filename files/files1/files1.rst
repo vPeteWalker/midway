@@ -150,37 +150,30 @@ Deploying Files Analytics
 
 .. note::
 
-   As of Files Analytics version 2.1.1.1, only SMB file shares are supported. If you are only testing using NFS exports, you may skip this section.
+   As of Files Analytics version 2.2.0, only SMB file shares are supported. If you are only testing using NFS exports, you may skip this section.
 
-#. Go to **Support Portal > Downloads > Files** and download the File Analytics QCOW2 and JSON files.
+#. In **Prism > File Server**, click **Deploy File Analytics**.
 
-#. In Prism, go to the *File Server* view, and click the **Deploy File Analytics** action link.
+   .. figure:: images/11d.png
 
-#. In the *Deploy File Analytics* window, click **Deploy**.
+#. Select the latest available version to download directly to the cluster and click **Next**.
 
-#. Upload installation files.
+   .. figure:: images/11b.png
 
-   - In the *Upload installation binary* section, click on the **upload the File Analytics binary** link to upload the File Analytics JSON and QCOW files.
+   .. note::
 
-   - Under *File Analytics Metadata File (.Json)*, click **Choose File** to choose the downloaded JSON file.
+      If delivering an on-prem POC and the customer has a slow Internet connection, you can pre-download the Files Analytics image from https://portal.nutanix.com and upload through Prism at this stage.
 
-   - Under *File Analytics Instalation Binary (.Qcow2)*, click **Choose File** to choose the downloaded QCOW file.
+#. Fill out the following fields:
 
-   - Click **Upload Now** after choosing the files.
+   - **Name** - POC
+   - **Server Size** - Small
+   - **Storage Container** - Select your **Default** container
+   - **Network List** - Select your **Primary** VLAN
 
-#. Click **Install** once the upload has completed.
+   .. figure:: images/11c.png
 
-#. Do the following in the indicated fields:
-
-   - **Name**: Enter **AVM** for the File Analytics VM (AVM).
-
-   - **Network List**: Select the **Primary - Managed** VLAN.
-
-   - **Storage Capacity**: Adjust as necessary, depending on available storage capacity (minimum 2 TiB).
-
-      .. figure:: images/11m.png
-
-   - Scroll down, and click the **Show Advanced Settings** box. Within the **DNS Resolver IP (Comma Separated)** field, enter the IP address of your AutoAD VM, or customer-provided domain controller.
+#. Click the **Show Advanced Settings** box. Set the **DNS Resolver IP (Comma Separated)** to the IP address of your AutoAD VM, or customer-provided domain controller.
 
       .. figure:: images/11a.png
 
