@@ -39,7 +39,7 @@ Remove node
 
 #. From the dropdown, choose the **Hardware** dashboard, then click the **Diagram** or **Table** tab.
 
-#. Select the target host, and click the **Remove Host** link on the right of the *Summary* line. A dialog box appears to verify the action. Click the **OK** button.
+#. Select the target host, and click the **Remove Host** link on the right of the *Summary* line. A dialog box appears to verify the action. Click the **Remove** button.
 
    .. figure:: images/6.png
       :align: center
@@ -51,7 +51,7 @@ Remove node
 Add node
 ++++++++
 
-#. From the dropdown within Prism Element, choose the **Home** dashboard. Observe the **Hosts** count within the *Hardware Sumnmary*, and the total **Storage**, **CPU**, and **Memory** values before and after proceeding with the instructions below.
+#. From the dropdown within Prism Element, choose the **Home** dashboard. Observe the **Hosts** count within the *Hardware Summary*, and the total **Storage**, **CPU**, and **Memory** values before and after proceeding with the instructions below.
 
    .. figure:: images/8.png
       :align: center

@@ -137,7 +137,7 @@ While using the local Prism admin account keeps a POC simple, most organizations
 
    .. note::
 
-      You need to use the username@FQDN format when authenticating.
+      You need to use the username@FQDN format when authenticating. Password is `nutanix/4u`.
 
    .. figure:: images/5.png
 

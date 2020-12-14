@@ -38,8 +38,9 @@
    :hidden:
 
    node_addremove/node_addremove
-   aos_upgrade/aos_upgrade
    lcm/lcm
+   lcm/pc
+   lcm/pe
    .. pcapimanage/pcapimanage
    .. climanage/climanage
 
@@ -98,6 +99,47 @@
    failure/power/power
    failure/psu/psu
 
+.. toctree::
+   :maxdepth: 2
+   :caption: Era
+   :name: _Era
+   :hidden:
+
+   db/mssql_deploy/mssql_deploy
+   db/era_mssql/era_mssql
+   db/basic_clone_ui/basic_clone_ui
+   db/basic_clone_api/basic_clone_api
+   db/mssql_restore/mssql_restore
+   db/advanced_aag/advanced_aag
+   db/multi_clusterTBD/multi_clusterTBD
+   db/patch_sql/patch_sql
+
+.. .. toctree::
+..    :maxdepth: 2
+..    :caption: Prism Ops
+..    :name: _prismops
+..    :hidden:
+..
+..    prismops/xfit
+..    prismops/xplay
+
+.. .. toctree::
+..    :maxdepth: 2
+..    :caption: Objects
+..    :name: _Objects
+..    :hidden:
+..
+..    objects/objects
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Appendix
+   :name: _Appendix
+   :hidden:
+
+   appendix/appendix
+   appendix/windows_scratch/windows_scratch
+
 ===============================
 SE POC Guide Introduction (AHV)
 ===============================
@@ -151,6 +193,11 @@ How Do I Get Support?
 If you're experiencing product issues during a POC, you can engage Nutanix Support directly by creating a case at https://portal.nutanix.com or calling 1-855-NUTANIX, Option 3. The full list of international support phone numbers can be found `here <https://www.nutanix.com/support-services/product-support/support-phone-numbers>`_.
 
 For non-blocking issues, you can also try to engage Support in `#sre <slack://channel?team=T0252CLM8&id=C07SH5139>`_  or product specific channels (e.g. #calm, #era, #flow, etc.) in Slack.
+
+Appendix
+++++++++
+
+It is highly recommended to read through the Appendix before you begin any POC, to understand what guidance is available for each portion of the workshop. While not applicable in every situation, consider these "good to know" before you begin your POC. For quick reference, that section is located here: :ref:`appendix`.
 
 Feedback
 ++++++++

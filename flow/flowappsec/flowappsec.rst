@@ -74,7 +74,7 @@ Manual POC App Deployment
 
    .. note::
 
-      You could also verify the database is running by logging into the VM (U\:root P\:nutanix/4u) and executing ``systemdctl status mysqld``
+      You could also verify the database is running by logging into the VM (U\:root P\:nutanix/4u) and executing ``systemctl status mysqld``
 
 #. Note the IP Address of your **MYSQL-POCApp** VM in Prism (or by executing ``ifconfig`` in the VM console). *We will use this IP in the Cloud-init script for our WebServer to point the application to the IP address of the database.*
 

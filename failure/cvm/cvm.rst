@@ -3,13 +3,13 @@
 CVM Failure
 +++++++++++
 
-In this section, we will be simulating a Controller Virtual Machine (CVM) failure by executing a command that will shut off the CVM unexpectedly (versus a gradual shutdown for maintenance). This test demonstrates the ability of Nutanix's AOS to immediately failover storage I/O operations to another CVM wjthin the cluster without interruption to any VMs running on that host.
+In this section, we will be simulating a Controller Virtual Machine (CVM) failure by executing a command that will shut off the CVM unexpectedly (versus a gradual shutdown for maintenance). This test demonstrates the ability of Nutanix's AOS to immediately failover storage I/O operations to another CVM within the cluster without interruption to any VMs running on that host.
 
 There are two example scenarios you can run to demonstrate the cluster resiliency during this event:
 
-   - BASIC: Create two VMs, one on the host that is running the CVM you are shutting down, one on a host that will remain untouched. Begin a continuous ping between these VMs prior to issuing the shutdown command via SSH, and observe that there are no lost pings. Creating VMs is oulined in :ref:`vmmanage`
+   - BASIC: Create two VMs, one on the host that is running the CVM you are shutting down, one on a host that will remain untouched. Begin a continuous ping between these VMs prior to issuing the shutdown command via SSH, and observe that there are no lost pings. Creating VMs is outlined in :ref:`vmmanage`
 
-   - RECOMMENDED: Use X-ray to run OLTP or VDI workload. Setup of X-Ray is oulined in :ref:`xray`. Instructions for running the OLTP Simulator can be found in :ref:`xray3`.
+   - RECOMMENDED: Use X-ray to run OLTP or VDI workload. Setup of X-Ray is outlined in :ref:`xray`. Instructions for running the OLTP Simulator can be found in :ref:`xray3`.
 
 .. note::
 

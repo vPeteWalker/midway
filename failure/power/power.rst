@@ -7,7 +7,7 @@ There are two example scenarios you can run to demonstrate the cluster resilienc
 
    - BASIC: Follow the instructions below.
 
-   - RECOMMENDED: Use X-Ray to run Total Power Loss test (estimated time of completion: 2 hours). Setup of X-Ray is oulined in :ref:`xray`. Instructions for running the OLTP Simulator can be found in :ref:`xray3`.
+   - RECOMMENDED: Use X-Ray to run Total Power Loss test (estimated time of completion: 2 hours). Setup of X-Ray is outlined in :ref:`xray`. Instructions for running the OLTP Simulator can be found in :ref:`xray3`.
 
 .. note::
 

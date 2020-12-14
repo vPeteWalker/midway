@@ -26,7 +26,7 @@ Creating VMs
 #. Click **Create VM** and fill out the following fields:
 
    - **Name** - WinServer
-   - **vCPUs** - 4
+   - **vCPUs** - 2
    - **Number of Cores Per vCPU** - 1
    - **Memory** - 4 GiB
    - Click **+ Add New Disk**
@@ -48,11 +48,7 @@ Creating VMs
 
    *In this environment we're using a pre-built OS image as you would for the majority of your VM deployments on the cluster. However, if we were creating a Windows VM from installation media, we would also need to mount and install the VirtIO storage driver in order for Windows to find the virtual disk drive. Modern Linux distributions will include a version of this driver, so additional steps aren't required during installation.*
 
-   .. note::
-
-      A future version of this guide will include an appendix exercise for creating the OS images from .iso install media.
-
-#. Select the checkbox beside the newly created VM and click **Actions > Power On**. Optionally, and new in AOS 5.18, you can right click
+#. Select the checkbox beside the newly created VM and click **Actions > Power On**. Optionally, and new in AOS 5.18, you can right click > **Power On**.
 
    .. figure:: images/1.png
       :align: left
@@ -156,7 +152,7 @@ Updating VMs
 
 #. Increase the **Memory** to 6 GiB.
 
-#. Modify the vCPU setting to **4**.
+#. Modify the vCPU setting to **6**.
 
 #. Under **Disks**, click :fa:`pencil` next to your existing **DISK** and increase the size by 10 GiB. Click **Update**.
 
@@ -307,7 +303,7 @@ Categories & RBAC
 
    .. figure:: images/19.png
 
-#. Select your **WinServer-\*** clones and click **Actions > Manage Categories**.
+#. Select your **WinServer-** clones and click **Actions > Manage Categories**.
 
 #. Apply the **Environment:POC** value and save.
 
