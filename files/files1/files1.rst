@@ -45,14 +45,7 @@ There are many options at various stages that are available to configure Files t
 
    Please be aware that any information such as server names, IP addresses, and similar information contained within any screen shots are strictly for demonstration purposes. Do not use these values when proceeding with any of the steps contained within this workshop.
 
-   This workshop was created with the following versions of Nutanix products. There may be differences - in both written steps and screen shots - between what is shown throughout this workshop, and what you experience if you are using later versions of the individual software packages listed below.
-
-   - AOS             - 5.17.1.1
-   - PC              - 5.17.1.1
-   - Files           - 3.6.5
-   - Files Analytics - 2.1.1.1
-
-   Finally, while you are welcome to vary your inputs compared to the instructions listed below, please be aware that by diverting from these instructions, you may negatively impact your ability to successfully complete this workshop.
+   You are welcome to vary your inputs compared to the instructions listed below, please be aware that by diverting from these instructions, you may negatively impact your ability to successfully complete this workshop.
 
    Refer to :ref:`ntnxlab` for details on AD Security Groups, user accounts, and passwords when using the AutoAD VM.
 
