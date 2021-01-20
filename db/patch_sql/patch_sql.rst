@@ -37,11 +37,13 @@ A software profile versions are created in Era to support patching of SQL Server
 
 #. Do the following in the indicated fields:
 
-   - **Name.** SQL2016_SP1_CU15
+   - **Name** SQL2016_SP1_CU15
 
-   - **Patch File Location.** Upload ``SQLServer2016-KB4495257-x64.exe`` either from a file share (HPOC) or upload from your PC.
+   - **Patch File Location** Upload ``SQLServer2016-KB4495257-x64.exe`` either from a file share (HPOC) or upload from your PC.
 
       .. figure:: images/2.png
+
+   - Wait for the upload to complete, and then click **Create**.
 
 Updating a Software Profile Version
 +++++++++++++++++++++++++++++++++++

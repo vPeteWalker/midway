@@ -249,6 +249,9 @@ Modifying Era VM Network Settings Post-Launch
 Configuring Era for Microsoft SQL
 +++++++++++++++++++++++++++++++++
 
+Registering a Microsoft SQL Database Server
+...........................................
+
 Registering a database server with Era allows you to deploy databases to that resource, or to use that resource as the basis for a Software Profile.
 
 A SQL Server database server must meet the following requirements before you are able to register it with Era. Your SQL VM meets all of these criteria.
@@ -294,13 +297,13 @@ A SQL Server database server must meet the following requirements before you are
 
 #. In the *Status* column, click **Registering** to monitor the status, or choose **Operations** from the dropdown.
 
-#. The registration process will take approximately 5 minutes. In the meantime, proceed with the remaining steps in this section. Wait for the registration process to complete to proceed to the next section.
+#. The registration process will take approximately 10-15 minutes. In the meantime, proceed with the remaining steps in this section. Wait for the registration process to complete to proceed to the next section.
 
    - From the dropdown menu, select **SLAs**. Era has five built-in SLAs (Gold, Silver, Bronze, Brass, and None). SLAs control however the database server is backed up. This can with a combination of Continuous Protection, Daily, Weekly Monthly and Quarterly protection intervals.
 
    - From the dropdown menu, select **Profiles**.
 
-   Profiles pre-define resources and configurations, making it simple to consistently provision environments and reduce configuration sprawl. For example, Compute Profiles specifiy the size of the database server, including details such as vCPUs, cores per vCPU, and memory.
+   Profiles pre-define resources and configurations, making it simple to consistently provision environments and reduce configuration sprawl. For example, Compute Profiles specify the size of the database server, including details such as vCPUs, cores per vCPU, and memory.
 
 Creating A Software Profile
 ...........................
@@ -316,11 +319,9 @@ Before additional SQL Server VMs can be provisioned, a *Software Profile* must f
 
 #. Click **Next > Create**.
 
-#. Select **Operations** from the dropdown menu to monitor the registration. This process should take approximately 5 minutes.
+#. Select **Operations** from the dropdown menu to monitor the registration. This process should take approximately 5-7 minutes.
 
-#. Once the profile creation completes successfully, return to Prism Central. Right click your *Win16SQL16* VM, and choose **Power Off Actions > Guest Shutdown**.
-
-Confirm the *Win16SQL16* is powered off before proceeding.
+#. Once the profile creation completes successfully. Power off your *Win16SQL16* VM, confirm that *Win16SQL16* is powered off before proceeding.
 
 Creating a New Microsoft SQL Database Server
 ............................................
@@ -365,8 +366,9 @@ You've completed all the one-time operations required to be able to provision an
 
 #. Click **Next**, and fill out the following fields within the *Database* screen:
 
-   - **Database Name** - FiestaDB_Prod
-   - **Database Parameter Profile** - DEFAULT_SQLSERVER_DATABASE_PARAMS
+   - **Database Name in Era** - FiestaDB_Prod
+   - **Database Name on VM** - FiestaDB_Prod
+   - **Database Parameter Profile - Database** - DEFAULT_SQLSERVER_DATABASE_PARAMS
 
    .. figure:: images/era17.png
 
