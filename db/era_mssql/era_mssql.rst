@@ -140,6 +140,8 @@ Configuration
 
 #. Within the logon screen, set a password for the administrator user (admin) in the *Enter new password* and *Re-enter new password* fields, and click **Set Password**.
 
+#. Log in using the *Admin* username, and password.
+
 #. In the *Era’s Cluster* screen, enter the following in the indicated fields:
 
    - **Name** EraCluster01
@@ -160,7 +162,7 @@ Configuration
 
       .. figure:: images/era1.png
 
-#. (Optional) Configure the SMTP server. If you do not configure this, remove the e-mail address listed within the *Sender's EMail* box.
+#. (Optional) Configure the SMTP server. If you choose not to configure the SMTP, remove the e-mail address listed within the *Sender's EMail* box before you proceed.
 
 #. In the *Era Server's OS Time Zone* list, select a timezone, or leave the default UTC.
 
@@ -203,7 +205,7 @@ Windows Domain Configuration
 
 #. In the *Domain Account with Permission to Join Computer to the Domain* section, enter the following in the indicated fields:
 
-   - **Username** ntnxlab.local\\administrators
+   - **Username** ntnxlab.local\\administrator
 
    - **Password** nutanix/4u
 
@@ -211,7 +213,7 @@ Windows Domain Configuration
 
 #. In the *Era Worker Service Account* section, enter the following in the indicated fields:
 
-   - **Username** ntnxlab.local\\administrators
+   - **Username** ntnxlab.local\\administrator
 
    - **Password** nutanix/4u
 
