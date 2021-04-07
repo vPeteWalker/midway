@@ -7,6 +7,8 @@
 
    self
    whatsnew/whatsnew
+   scenario/scenario
+   staging/staging
 
 .. toctree::
    :maxdepth: 2
@@ -151,9 +153,25 @@ What Is This?
 
 The purpose of this guide is to provide detailed guidance to Nutanix or partner SEs on the delivery of a Proof of Concept either on-premises or using a Hosted POC cluster. It includes planning considerations, talking points, and step-by-step instructions for cluster deployment, configuration, and operation. **It is NOT the only way to deliver a Nutanix POC**. It simply serves as guidance for you to learn what good looks like, and provides a foundation upon which to build and modify in your own POCs.
 
-This guide can also be used in conjunction with the standard `Nutanix POC Test Plan Tracker <https://docs.google.com/spreadsheets/d/15r8Q1kCIJY4ErwL1CaHHwv4Q7gmCbLOz5IaR51t9se0/edit#gid=0>`_ spreadsheet.
+This guide can also be used for users to obtain **Level 200 - Basic POC Validation** by completing exercises and performing a validation delivery to Portfolio Specialists, Solution Architects, Enablement, and/or SE Managers. See :ref:`scenario` for additional details.
 
 Every successful POC has a well-defined test plan. While this guide will walk you through common uses and scenarios for Nutanix products, many POCs will also include workload or application specific requirements. When working with the customer to add these additional items to your test plan, keep in mind that: **Test items should identify success criteria (faster, simpler, provides new and required functionality, etc.) which are ideally measurable (less time to complete, less steps to configure), but may also be verification that a feature functions as expected (true/false).**
+
+How Do I Use This Guide?
+++++++++++++++++++++++++
+
+.. figure:: staging/images/boromir.jpg
+
+No two POCs are the same, and as such, much of this guide is meant to be used modularly.
+
+If you are already familiar with basic Nutanix cluster deployment and operation or using this tool to validate your ability to deliver a basic POC for a specific Nutanix Portfolio Product, see :ref:`staging` for instruction on how to automatically stage a HPOC cluster in order to skip directly to product exercises.
+
+If you are onboarding, you will be staging your cluster manually to become more familiar with basic Nutanix operations and benefits:
+
+   - To begin, review the **Planning & Deployment** section prior to your POC.
+   - The **Initial Configuration** section covers exercises that are common to all AHV POCs, and should be completed in order. The notable exception is you could optionally complete **Lifecycle Infrastructure** and/or **X-Ray** exercises, such as AOS upgrades, *before* completing any of the **Basic VM Management** exercises.
+   - Following that, additional modules can be completed in almost any order. If applicable, specific prerequisites will be noted at the beginning of each module. *This can be an important consideration based on your test plan. Depending on your test plan, it may be of far greater value/impact to show cluster lifecycle operations and failures on a cluster running multiple workloads, versus a freshly installed/empty cluster.*
+   - Each module provides an approximate **Duration** to complete. Take these into account when planning time to spend in front of the customer working through test cases.
 
 When Should I Do A POC?
 +++++++++++++++++++++++
@@ -168,20 +186,6 @@ POCs should generally be reserved for the following situations:
 - Project or opportunity with an approved, known budget
 - You can answer *Why Now?* - The customer has a compelling reason to buy but has additional considerations or concerns before making a platform choice
 - Trying to unseat an incumbent
-
-How Do I Use This Guide?
-++++++++++++++++++++++++
-
-No two POCs are the same, and as such, much of this guide is meant to be used modularly.
-
-.. raw:: html
-
-  <strong><font color="red">Do NOT simply complete the exercises in order as displayed in the left-hand menu.</font></strong>
-
-- To begin, review the **Planning & Deployment** section prior to your POC.
-- The **Initial Configuration** section covers exercises that are common to all AHV POCs, and should be completed in order. The notable exception is you could optionally complete **Lifecycle Infrastructure** and/or **X-Ray** exercises, such as AOS upgrades, *before* completing any of the **Basic VM Management** exercises.
-- Following that, additional modules can be completed in almost any order. If applicable, specific prerequisites will be noted at the beginning of each module. *This can be an important consideration based on your test plan. Depending on your test plan, it may be of far greater value/impact to show cluster lifecycle operations and failures on a cluster running multiple workloads, versus a freshly installed/empty cluster.*
-- Each module provides an approximate **Duration** to complete. Take these into account when planning time to spend in front of the customer working through test cases.
 
 How Do I Get Support?
 +++++++++++++++++++++

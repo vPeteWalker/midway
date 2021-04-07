@@ -8,7 +8,7 @@ In this module you will use Flow to secure communications within an example mult
 
 The same overall principles for creating the policy and talking points would apply if using a customer provided application, you would simply need to account for differences in category assignment and connection ports/protocols.
 
-**(Optional) Prerequisites:**
+**Prerequisites:**
 
 For the purpose of streamlining the POC, the application can either be provisioned using Calm or manually (using the provided CentOS disk image and cloud-init scripts):
 
@@ -156,8 +156,6 @@ Creating a Security Policy
 
 *Security policies are applied to categories and not to the VMs themselves. Therefore, it does not matter how many VMs are started up in a given category. Traffic associated with the VMs in a category is secured without administrative intervention, at any scale.*
 
-*...*
-
 #. In **Prism Central**, select :fa:`bars` **> Policies > Security Policies**.
 
 #. Click **Create Security Policy > Secure Applications (App Policy) > Create**.
@@ -203,16 +201,21 @@ Creating a Security Policy
 
    *Sources can also be specified by Categories, allowing for greater flexibility as this data can follow a VM regardless of changes to its network location. As an example, you could add a category for Administrator desktops that would also allow connections to the web and database via SSH (TCP Port 22).*
 
-#. To create an inbound rule, select the **+** icon that appears to the left of **AppTier:Web**.
+#. To create an inbound rule, select your **0.0.0.0 Inbound Traffic Subnet** and click the :fa:`pencil` icon that appears to the left of **AppTier:Web**.
 
-   .. figure:: images/5.png
+   .. figure:: images/5b.png
 
-#. Fill out the following fields:
+#. Under **Service Details**, click **Select a service**.
 
-   - **Protocol** - TCP
-   - **Ports** - 80
+   Flow includes pre-defined entries for many common network services, and also allows for multiple services to be specified in a single rule. In this instance, you want to allow HTTP traffic to your webserver VMs.
 
-   *Multiple protocols and ports can be added to a single rule.*
+#. Under **Service Name** you can specify **http** to use the existing service to allow for TCP/UDP Port 80 traffic.
+
+   .. figure:: images/5c.png
+
+   .. note::
+
+      You can define your own custom services (e.g. for homegrown apps) by clicking **+ New service** and specifying protocol(s) and port(s) to include.
 
 #. Click **Save**.
 
@@ -233,9 +236,13 @@ Creating a Security Policy
 
    .. figure:: images/6.png
 
-#. Select the **+** icon that appears to the left of **AppTier:Web**, specify **TCP** port **22** and click **Save**.
+#. Select your **Prism Central Inbound Traffic Subnet** and click the :fa:`pencil` icon that appears to the left of **AppTier:Web**.
 
-#. Repeat the previous step for **AppTier:DB** to allow Calm to communicate with the database VM.
+#. Click **+ Add Row** to and specify **ssh** as the **Service Name** to allow TCP/UDP Port 22 traffic.
+
+#. Click **Save**.
+
+#. Repeat Steps 19-21 for **AppTier:DB** to allow Calm to communicate with the database VM via **ssh**.
 
    .. figure:: images/7.png
 
