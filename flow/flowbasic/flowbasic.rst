@@ -46,13 +46,17 @@ Isolation Policy
 
 #. Verify you have your original **WinServer** VM assigned to **Environment:Production** and multiple VMs assigned to **Environment:POC** (e.g. **WinServer-1**-**WinServer-5**).
 
-#. Select **WinServer** and **WinServer-1** and additionally assign the **AppType:Microsoft_SQL** category and save.
+#. Select **WinServer** and **WinServer-1** and additionally assign the **TemplateType:Application** category and save.
 
    .. figure:: images/0.png
 
    *Note we do not see the existing categories assigned to these VMs as the bulk operation will only list categories that the VMs have in common.*
 
-#. From your original, **Environment:Production** **WinServer** VM, open the VM console and start recurring pings (`ping -t <IP ADDRESS>`) to both an **Environment:POC** **WinServer** VM and an **Environment:POC** + **AppType:Microsoft_SQL** **WinServer** VM.
+   .. note::
+
+      The choice of using the TemplateType category is somewhat arbitrary. The goal is to have an additional category we can use to group your two WinServer VMs. You could optionally create your own customer category:value pair for this purpose and use these for the exercise.
+
+#. From your original, **Environment:Production** **WinServer** VM, open the VM console and start recurring pings (`ping -t <IP ADDRESS>`) to both an **Environment:POC** **WinServer** VM and an **Environment:POC** + **TemplateType:Application** **WinServer** VM.
 
    .. figure:: images/1.png
 
@@ -82,7 +86,7 @@ Isolation Policy
    - **From This Category** - Environment:Production
    - Click **Apply the isolation only within a subset of the data center**
 
-      - Search for **AppType:Microsoft_SQL**
+      - Search for **TemplateType:Application**
 
    - (Optional - if **Syslog** configured within Prism Central via :ref:`deploygraylog` section) Enable **Policy Hit Logs**
 
@@ -140,6 +144,4 @@ Quarantining VMs
 Before you go
 +++++++++++++
 
-It's important that you revert each of the above modifications you made before continuing on with the workshop.
-
-   - **POC-Isolation** -
+It's important that you revert each of the above modifications you made before continuing on with the workshop. Unquarantine your VM and set your **POC-Isolation** policy back to **Monitor** mode.
