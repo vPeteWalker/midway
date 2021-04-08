@@ -319,23 +319,31 @@ Categories & RBAC
 
 #. Select the **Operator** role and click **Actions > Manage Assignment**.
 
-#. If using **AutoAD**, specify the **SSP Operators** security group. If using customer-provided AD, use the name of their pre-requisite Operator security group or individual user.
+#. Click **Add New** to begin adding a group assignment.
 
-   .. figure:: images/20.png
+#. If using **AutoAD**, specify the **SSP Operators** security group in the **Search User** field. If using customer-provided AD, use the name of their pre-requisite Operator security group or individual user.
+
+   .. figure:: images/20b.png
 
    .. note::
 
       If AD is properly configured, these values should begin auto-completing as you type.
 
-#. Under **Entities**, click the dropdown and note you can create role mappings to a number of different entities, including **Categories**. Select **Categories**.
+#. Under **Select Entities**, click the dropdown and note you can create role mappings to a number of different entities. The availability of these entities (VMs, Clusters, etc.) is defined by the permissions associated with the role.
 
-   .. figure:: images/21.png
+#. Select **AHV VM > In Category** from the dropdowns, and specify the **Environment:Production** category.
 
-#. Specify the **Environment:Production** category and click **Save**.
+   .. figure:: images/21b.png
 
-#. Repeat **Steps 10-13** to create a role assignment for the **Developer** role to the **SSP Developers** security group for the **Environment:POC** category.
+   .. note::
 
-   .. figure:: images/22.png
+      Alternatively, the **Individual entity** option allows administrators to provide access to all or individual VMs for a given role. However, using categories allows for dynamic access based on the categories assigned to VMs without having to modify the role assignment.
+
+#. Click **Save**.
+
+#. Repeat **Steps 10-15** to create a role assignment for the **Developer** role to the **SSP Developers** security group for the **AHV VM > In Category > Environment:POC** category.
+
+   .. figure:: images/22b.png
 
 #. Log out of Prism Central and login as a **Developer** user. (ex. devuser01 - refer to the *NTNXLAB.local Details* within :ref:`prereqs` for further details)
 
