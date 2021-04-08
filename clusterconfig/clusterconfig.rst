@@ -79,7 +79,7 @@ Cluster Settings
 
    Under **General**, select **Cluster Details** and verify **Cluster Virtual IP Address** is correct.
 
-   If on-prem, specify a static IP for **iSCSI Data Services IP** (in your CVM/hypervisor VLAN) and click **Save**. This IP is used to present block storage volumes directly to VMs or baremetal hosts and is required for Calm, Files, Karbon, Era, and others to function.
+   If on-prem, specify a static IP for **iSCSI Data Services IP** (in your CVM/hypervisor VLAN) and click **Save**. This IP is used to present block storage volumes directly to VMs or bare metal hosts and is required for Calm, Files, Karbon, Era, and others to function.
 
    .. figure:: images/6.png
 
@@ -87,7 +87,7 @@ Cluster Settings
 
 #. (Optional) Set up e-mail alerting from the cluster to a customer e-mail address. In **Settings**, under **Email and Alerts**, select **SMTP Server**.
 
-   This will already be configured for HPOC clusters, otherwise specify **SMTP Hostname**, **Port**, **Security Mode** and **From Email Address** using customer provided details.
+   This may already be configured for HPOC clusters, otherwise (and again, optionally) specify **SMTP Hostname**, **Port**, **Security Mode** and **From Email Address** using customer provided details.
 
    .. note::
 

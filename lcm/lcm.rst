@@ -49,4 +49,4 @@ The following illustrates the LCM process.
 
    - Visit the `Upgrade Paths <https://portal.nutanix.com/page/documents/upgrade-paths>`_ page, and choose **AOS** from the *Software Types* section. Input the *Current Release Version* and *Target Release Version* to confirm the upgrade you are attempting is supported.
 
-   - If you encounter errors with the upgrade procedure as outlined below (ex. install hang) contact support to assist. A failure on the initial node will prevent the upgrade process proceeding on subsequent nodes to ensure multiple nodes aren’t taken offline from the same issue.
+   - If you encounter errors with the upgrade procedure as outlined below (ex. install stops responding) contact support to assist. A failure on the initial node will prevent the upgrade process proceeding on subsequent nodes to ensure multiple nodes aren’t taken offline from the same issue.

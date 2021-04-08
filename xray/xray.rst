@@ -49,7 +49,7 @@ X-Ray is an automated testing framework and benchmarking application for enterpr
 
 X-Ray provides test scenarios for hyperconverged platforms that demonstrate variations in areas such as performance, data integrity, and availability.
 
-This guide will step you through installing and configuring X-Ray on AHV, using a single VLAN. Please refer to the `X-Ray Guide <https://portal.nutanix.com/page/documents/details/?targetId=X-Ray-Guide-v3_8%3AX-Ray-Guide-v3_8>`_ for detailed information on other configurations.
+This guide will step you through installing and configuring X-Ray on AHV, using a single VLAN. Please refer to the `X-Ray Guide <https://portal.nutanix.com/page/documents/details?targetId=X-Ray-Guide-v3_10:X-Ray-Guide-v3_10>`_ for detailed information on other configurations.
 
 .. note::
 

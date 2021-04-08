@@ -29,7 +29,7 @@ Network Settings
 
       This configuration does **NOT** carry over from the Prism Element configuration.
 
-#. Under **Alerts and Notifications > SMTP Server**, specify your **SMTP Server Settings** to match the values used in Prism Element.
+#. (Optional) Under **Alerts and Notifications > SMTP Server**, specify your **SMTP Server Settings**.
 
 #. (Optional) To configure SNMP based alerting for the cluster, see complete instructions in the `Prism Central Guide <https://portal.nutanix.com/page/documents/details/?targetId=Prism-Central-Guide-Prism-v5_17:mul-snmp-configure-pc-t.html#ntask_jqd_fd4_kbb>`_.
 
@@ -129,7 +129,7 @@ While using the local Prism admin account keeps a POC simple, most organizations
 
 #. If using customer-provided AD, specify a Security Group or individual user account to extend the **Cluster Admin** role.
 
-#. Sign out of Prism Central.
+#. Log out of Prism Central.
 
    .. figure:: images/4.png
 
@@ -140,5 +140,13 @@ While using the local Prism admin account keeps a POC simple, most organizations
       You need to use the username@FQDN format when authenticating. Password is `nutanix/4u`.
 
    .. figure:: images/5.png
+
+#. TO BE ADDED - EXAMPLE DEMONSTRATION STEPS USING CLUSTER ADMIN. HIGHLIGHT DIFFERENCES BETWEEN CLUSTER AND USER ADMIN.
+
+#. Log out of Prism Central.
+
+   .. figure:: images/4.png
+
+#. Log in as **admin**.
 
    *And now the fun starts!*

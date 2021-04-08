@@ -37,12 +37,10 @@
    :name: _info
    :hidden:
 
-   node_addremove/node_addremove
    lcm/lcm
-   lcm/pc
-   lcm/pe
-   .. pcapimanage/pcapimanage
-   .. climanage/climanage
+   lcm/pc/pc
+   lcm/pe/pe
+   node_addremove/node_addremove
 
 .. toctree::
    :maxdepth: 2
