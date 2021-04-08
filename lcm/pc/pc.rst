@@ -1,5 +1,8 @@
+Using Prism Central LCM
++++++++++++++++++++++++
+
 Performing Inventory with LCM
-+++++++++++++++++++++++++++++
+.............................
 
 .. note::
 
@@ -41,7 +44,7 @@ Performing Inventory with LCM
    - These processes are distributed to the LCM service running on all nodes. Each node picks up the work items, and runs the 2 scripts (one for CVM and another for the host).
 
 Performing Updates with LCM
-+++++++++++++++++++++++++++
+............................
 
 There are two example scenarios you can run to demonstrate the cluster resiliency during this event:
 

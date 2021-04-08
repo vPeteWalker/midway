@@ -39,8 +39,8 @@
 
    node_addremove/node_addremove
    lcm/lcm
-   lcm/pc/pc
    lcm/pe/pe
+   lcm/pc/pc
    .. pcapimanage/pcapimanage
    .. climanage/climanage
 
