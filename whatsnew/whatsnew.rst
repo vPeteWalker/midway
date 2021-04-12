@@ -22,24 +22,32 @@ Current Versions
    * - **Product**
      - **Guide Version**
    * - AOS
-     - 5.18.1.2
+     - 5.19.1.5
    * - AHV
-     - el7.nutanix.20190916.294
+     - el7.nutanix.20201105.1082
    * - Prism Central
-     - pc.2020.9.0.1
+     - pc.2020.11
    * - Foundation
-     - 4.6
+     - 4.6.2
    * - Nutanix Cluster Check (NCC)
-     - 3.10.1.2
+     - 4.0.1
    * - Calm
-     - 3.1.0
+     - 3.2.0
+   * - Era
+     - 2.1.1.1
    * - Files
-     - 3.7.0
+     - 3.8.0.1
    * - Files Analytics
-     - 2.2.0
+     - 3.0
+   * - X-Ray
+     - 3.10.2
 
 Changelog
 +++++++++
+
+- **4/16/2021**
+
+   Misc. fixes. Various updates to account for latest AOS, PC, Calm, Files, Files Analytics, Era, and X-Ray.
 
 - **12/14/2020**
 

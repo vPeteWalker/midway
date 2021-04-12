@@ -76,7 +76,7 @@ Isolation Policy
 
 #. Click **Create Security Policy**.
 
-#. Select **Isolate Environment (Isolation Policy)** and click **Create**.
+#. Select **Isolate Environment (Isolation Policy)**, and then click **Create**.
 
 #. Fill out the following fields:
 
@@ -90,11 +90,9 @@ Isolation Policy
 
    - (Optional - if **Syslog** configured within Prism Central via :ref:`deploygraylog` section) Enable **Policy Hit Logs**
 
-   .. figure:: images/2.png
-
    *As you can see, parameters for this type of policy are self-explanatory, and the policy can be further narrowed using an additional, third category - in this case, applying the isolation only to Microsoft SQL VMs rather than all Production/POC VMs. You could introduce other categories such as which project a VM belongs to, group ownership, physical location, etc. to create these simple isolation policies.*
 
-#. Click **Save and Monitor**.
+#. Choose *Monitor*, and then click **Save and Monitor**.
 
    *We could apply the policy immediately to begin blocking traffic, but one of the benefits of Flow is to be able to visualize real-time network traffic between the groups of VMs to understand what communication is currently taking place. This can be very helpful when creating other policy types, by identifying necessary connections that may otherwise get inadvertently blocked.*
 

@@ -19,59 +19,57 @@ Hosted POC cluster reservations are managed using the Reservation System: https:
 
 #. Provide your e-mail address and Okta password and click **Login**.
 
-#. From the toolbar, select **New Reservation**.
 
-#. Select either **PHX** (Phoenix, AZ, USA), **NX-US-East** (RTP, NC, USA), or **NX-BLR** (Bangalore, India) to see the pool of clusters for each datacenter.
 
-#. Set your Timezone using the dropdown menu on the right to ensure your reservation begins at the correct time.
+#. Set your correct time zone using the dropdown menu on the uppper right-hand side to ensure your reservation begins and ends at the correct time.
 
-#. Use the **FROM:** and **TO:** fields to specify the date range you are seeking for your reservation.
+#. Click **Reserve a Cluster > Nutanix Hosted**.
 
    .. figure:: images/0.png
 
+#. Select the desired datacenter. These are the most commonly used.
+
+   - **Sales - PHX** (Phoenix, AZ, USA)
+   - **Sales - NX-US-East** (Durham, NC, USA)
+   - **Sales - NX-BLR** (Bangalore, India)
+
+#. Specify the date range you are seeking for your reservation.
+
    .. note::
 
-      Do not select the **Only Available** filter as it will only show clusters that are available for the entire selected date range, which is uncommon. For POCs, it is recommended to use the **All Flash** filter.
+      Be aware that selecting the *Available Clusters Only* filter will only show clusters that are available for the entire selected date range. For POCs, it is recommended to use the **All Flash** filter.
 
    .. note::
 
       The **FROM:** time indicates when the reservation will start, the Foundation process will take ~1 hour of additional time before the cluster is ready to be used.
 
-      **It is recommended to start the reservation several hours before you need the cluster to be available to allow time for troubleshooting/re-imaging if you experience Foundation issues.**
+   .. note::
+
+      It is recommended to start the reservation several hours before you need the cluster to be available to allow time for troubleshooting/re-imaging if you experience Foundation issues.
 
 #. Green bars indicate the cluster is available during that time frame, click any green area to begin creating a reservation.
 
    .. figure:: images/1.png
 
-#. Using the **FROM:** and **TO:** fields, select the duration of your POC up to 14 days.
+#. Confirm the duration of your POC by clicking **Confirm**.
 
-#. Click **Find Customer/POC** and enter the **Account Name**. Select the **Opportunity**, **POC**, and **Primary Contact**.
+#. Fill out the fields in the *Purpose* section, ensuring you choose **Customer POC** from the *Reason* dropdown.
+
+#. Click **Next**.
 
    .. note::
 
       See `SE Wiki - Salesforce POC Process <https://confluence.eng.nutanix.com:8443/pages/viewpage.action?pageId=53219016>`_ for complete instruction on how to create POC records in Salesforce.
 
-#. Ensure that **Do Not CC Contact** is selected. This will prevent communications from **automation@nutanix.com** going directly to the customer. If is advisable instead to perform a warm handoff to ensure a customer is able to properly connect to the environment.
-
-#. Select **Customer POC** from the **Select Reason** dropdown.
-
-   .. figure:: images/2.png
+#. Fill out all fields in the *Customer Information* section. It is recommended to choose **Do Not CC Customer**, as you can always choose to forward the relevant information to the customer at a later date.
 
 #. Click **Next**.
 
-#. Select your desired version of AOS from the **Select AOS** dropdown. Do **NOT** select the latest version of AOS, as this will leave you unable to perform an upgrade.
+#. Select **Use a Runbook**, and then click **Select** for *POC Workshop*.
 
-#. Select **32GB** of **CVM Memory**.
+#. Click **Next**.
 
-#. Choose **All** for **Number of Nodes**. A later exercise will walk you through both node removal and cluster expansion.
-
-#. Each reservation will generate a random cluster for Prism, AHV, and CVM logins, but you do have the option of specifying a customized password (e.g. something simple for the customer to remember) at this time.
-
-#. Do **NOT** select any of the additional options, as Prism Central and Disk Image staging are part of the POC exercises.
-
-   .. figure:: images/3.png
-
-#. Click **Submit**.
+#. After reviewing the details of your reservation to ensure they are correct, click **Confirm**. You will receive an e-mail shortly containing the details of your reservation, but you can always return to the reservation system to show all active reservations.
 
 Troubleshooting HPOC Clusters
 +++++++++++++++++++++++++++++
@@ -81,7 +79,7 @@ If you experience issues with RX failing to properly Foundation a cluster, netwo
 Accessing HPOC Clusters
 +++++++++++++++++++++++
 
-When your reservation begins, RX will begin Foundation on your cluster based on your selections. Once complete, you will receive an e-mail from **automation@nutanix.com** (may be in your Clutter folder) with the following details:
+When your reservation begins, Foundation will begin on your cluster. Once complete, you will receive an e-mail from **automation@nutanix.com** (be sure to check your Junk/Clutter folder!) with the following details:
 
 ::
 
@@ -179,4 +177,4 @@ When your reservation begins, RX will begin Foundation on your cluster based on 
    IMPORTANT: The SFTP site is a shared environment. Anyone with the above credentials can view, modify, and delete data.
    Don’t upload sensitive information, and please deleted your data immediately after use.
 
-At this time you want to ensure the customer is able to access the HPOC cluster using either **Frame**, **Pulse Secure VPN**, or **Parallels** using one of the 20 pre-created **Lab Access User Credential** accounts.
+At this time, ensure the customer is able to access the HPOC cluster using either **Frame**, **Pulse Secure VPN**, or **Parallels** using one of the 20 pre-created **Lab Access User Credential** accounts.

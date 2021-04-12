@@ -8,7 +8,6 @@
    self
    whatsnew/whatsnew
    scenario/scenario
-   staging/staging
 
 .. toctree::
    :maxdepth: 2

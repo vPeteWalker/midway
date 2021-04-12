@@ -62,7 +62,7 @@ A *distributed* (home) share is the repository for the user's personal files, an
 
       .. note::
 
-         Best suited for home directories, user profiles and application folders. This option distributes top-level directories across FileServer VMs and allows for increased capacity and user connections. Note that only folders can be created at the root and these top-level folders must be managed using Nutanix Files MMC plugin and can be downloaded from `HERE <http://download.nutanix.com/misc/MMC/Files_MMC_TLD_setup.msi>`_. Once created, a distributed share/export cannot be downgraded to standard.
+         Best suited for home directories, user profiles and application folders. This option distributes top-level directories across FileServer VMs and allows for increased capacity and user connections. Note that only folders can be created at the root and these top-level folders must be managed using Nutanix Files MMC plugin and can be downloaded from `HERE <http://download.nutanix.com/misc/MMC/Files_MMC_TLD_setup.msi>`_ onto a Windows VM of your choosing. Once created, a distributed share/export cannot be downgraded to standard.
 
 .. Testing with client desktop
 .. ...........................

@@ -87,7 +87,9 @@ This test demonstrates the ability of Nutanix's AOS to immediately begin rebuild
 
       Sample output of all commands
 
-#. Type **exit**.
+#. Run the command ``disk remove-tombstone-entry serial-number=<DISK-SERIAL-NUMBER>`` to remove the disk from the tombstone list.
+
+#. Type **exit**, and then hit **Enter**.
 
 #. Run the command ``edit-hades``. This will open the text editor, enabling you to remove the necessary entries to bring the disk back online. It is recommended to take a screen shot to document the existing settings before making changes.
 

@@ -46,13 +46,6 @@ You'll need the following:
    .. note::
 
       See :ref:`hpoc` for further instruction
-- **Disk images**
-
-   - `AutoAD <http://10.42.194.11/workshop_staging/AutoAD.qcow2>`_ (~10GB)
-   - `CentOS <http://10.42.194.11/workshop_staging/CentOS7.qcow2>`_ (~1.5GB)
-   - `Windows Server 2016 <http://10.42.194.11/workshop_staging/Windows2016.qcow2>`_ (~20GB)
-
-   .. note:: The disk images do not need to be downloaded in advance of the POC, as they can be uploaded directly to the cluster using the links above.
 
 On-premises Prerequisites
 ++++++++++++++++++++++++++

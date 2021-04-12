@@ -240,23 +240,23 @@ Filtering and Searching
 
    .. figure:: images/10.png
 
-   *Imagine you have 10 different clusters being managed by Prism Central, and you want to identify just the VMs in two specific clusters with low memory utilization. In comparison, how is the customer doing this today, if they are even able to?*
+   Imagine you have 10 different clusters being managed by Prism Central, and you want to identify just the VMs in two specific clusters with low memory utilization. In comparison, how is the customer doing this today, if they are even able to?
 
 #. Click in the **Search Bar** and click :fa:`star`.
 
    .. figure:: images/11.png
 
-   *By clicking the :fa:`star`, you can save sets of filters to be able rapidly access commonly used queries. This new entry will be displayed at the top of your Favorites list, alongside other items you have favorited.*
+   By clicking the :fa:`star`, you can save sets of filters to be able rapidly access commonly used queries. This new entry will be displayed at the top of your Favorites list, alongside other items you have favorited.
 
       .. figure:: images/11a.png
 
-#. Using your filtered list, click **Focus > Performance**.
+#. Using your filtered list, click **View By > Performance**.
 
    .. figure:: images/12.png
 
-   *Each entity collects dozens of different metrics, so depending on your goal, you may want to see specific metrics for your filtered list. We include a few default views we think are helpful, but you can also easily create your own custom focus views. What scenarios can you create to illustrate how these abilities can solve problems for your customer?*
+   Each entity collects dozens of different metrics, so depending on your goal, you may want to see specific metrics for your filtered list. We include a few default views we think are helpful, but you can also easily create your own custom focus views. What scenarios can you create to illustrate how these abilities can solve problems for your customer?
 
-#. Click **Focus > + Add Custom**.
+#. Click **View by > + Add Custom**.
 
 #. Provide a focus name (e.g. **POC**) and select a few metrics. Click **Save** to display your custom focus.
 
@@ -270,7 +270,7 @@ Filtering and Searching
 
    .. figure:: images/15.png
 
-   *You can drill down into each entity (VMs, Hosts, Clusters, etc.) to view all of the metrics, alerts, etc. associated with that entity. For a VM you get a summary view of the most important information, but we can drill deeper into each of these areas, for instance, if we wanted to see a chart of the working set size of our VM over the past day.*
+   You can drill down into each entity (VMs, Hosts, Clusters, etc.) to view all of the metrics, alerts, etc. associated with that entity. For a VM you get a summary view of the most important information, but we can drill deeper into each of these areas, for instance, if we wanted to see a chart of the working set size of our VM over the past day.
 
    .. figure:: images/16.png
 
@@ -319,31 +319,25 @@ Categories & RBAC
 
 #. Select the **Operator** role and click **Actions > Manage Assignment**.
 
-#. Click **Add New** to begin adding a group assignment.
-
-#. If using **AutoAD**, specify the **SSP Operators** security group in the **Search User** field. If using customer-provided AD, use the name of their pre-requisite Operator security group or individual user.
-
-   .. figure:: images/20b.png
+#. If using **AutoAD**, specify the **SSP Operators** security group in the *New Users* watermarked field (beneath Users and Groups, center column). If using customer-provided AD, use the name of their pre-requisite Operator security group or individual user.
 
    .. note::
 
       If AD is properly configured, these values should begin auto-completing as you type.
 
-#. Under **Select Entities**, click the dropdown and note you can create role mappings to a number of different entities. The availability of these entities (VMs, Clusters, etc.) is defined by the permissions associated with the role.
+#. Under *Entities*, click the dropdown above the blank field. Note you can select a number of different entities. The availability of these entities (VMs, Clusters, etc.) is defined by the permissions associated with the role.
 
-#. Select **AHV VM > In Category** from the dropdowns, and specify the **Environment:Production** category.
-
-   .. figure:: images/21b.png
+#. Select **Category** from the dropdowns, and enter **Environment:Production** in the text field.
 
    .. note::
 
       Alternatively, the **Individual entity** option allows administrators to provide access to all or individual VMs for a given role. However, using categories allows for dynamic access based on the categories assigned to VMs without having to modify the role assignment.
 
+   .. figure:: images/20.png
+
 #. Click **Save**.
 
-#. Repeat **Steps 10-15** to create a role assignment for the **Developer** role to the **SSP Developers** security group for the **AHV VM > In Category > Environment:POC** category.
-
-   .. figure:: images/22b.png
+#. Repeat **Steps 10-15** to create a role assignment for the **Developer** role to the **SSP Developers** security group for the *Environment:POC* category.
 
 #. Log out of Prism Central and login as a **Developer** user. (ex. devuser01 - refer to the *NTNXLAB.local Details* within :ref:`prereqs` for further details)
 
@@ -353,7 +347,7 @@ Categories & RBAC
 
    .. figure:: images/24.png
 
-#. Repeat as an **Operator** user and confirm you have access to manage the appropriate resources. (ex. operator01 - refer to the *NTNXLAB.local Details* within :ref:`prereqs` for further details)
+#. Repeat as an *Operator* user and confirm you have access to manage the appropriate resources. (ex. operator01 - refer to the *NTNXLAB.local Details* within :ref:`prereqs` for further details)
 
    *This simple, but powerful, policy engine can let you roll out self-service VM administration to your users, making sure the right people have access to the right resources and abilities. This can be further extended using Projects to help enforce quotas.*
 
@@ -366,31 +360,34 @@ Protecting VMs
 
 #. Select :fa:`bars` **> Policies > Protection Policies**. Click **Create Protection Policy**.
 
-#. Fill out the following fields:
+#. Fill out the following fields within the *Configure Schedule* screen:
 
-   - **Name** - ProdVM-Protection
-   - **Primary Cluster(s)** - *Our POC cluster*
-   - **Recovery Location** - *We'll leave blank as we do not have a second cluster configured, this would be used for selecting remote replication or DR target.*
-   - **Policy Type** - Asynchronous
-
-      *AHV can support an async RPO as low as 1-minute, or even perform synchronous replication with other AHV clusters provided adequate bandwidth and a round trip latency < 5ms.*
-
-   - **Retention Policy** - Roll-up
-   - **Location Retention** - 7 days
-   - Click **+ Add Categories**
-
-      - Select **Environment:Production**
-      - Click **Save**
-
-   *This will ensure any existing VMs with this category assigned will automatically have this policy applied, as well as any newly created VMs assigned to the category.*
-
-   .. figure:: images/25.png
+   - **Policy name** - ProdVM-Protection
+   - **Location** - (default) *Local AZ*
+   - **Cluster** - *Your POC cluster*
 
 #. Click **Save**.
 
-   .. note::
+   .. figure:: images/25.png
 
-      After a few moments you should see **Tasks** appear to protect Production VM entities.
+#. Click :fa:`plus` **Add Local Schedule**.
+
+   - **Retention Type** - Roll-up
+   - **Location Retention** - 7 days
+
+   .. figure:: images/25a.png
+
+#. Before you click **Save Schedule**, hover over the **?** for both *Linear* and *Roll-up* to familiarize yourself and/or demonstrate the differences between the two.
+
+#. In the *Recovery Location* area (right-hand side of screen) click **Cancel**, as we are only setting up a local protection policy.
+
+#. Click **Next**.
+
+#. Within the *Add Entities* screen, select *Environment:Production*, and then click **Add**.
+
+   .. figure:: images/25b.png
+
+#. Click **Create** (lower right-hand side)
 
 #. Return to :fa:`bars` **> Virtual Infrastructure > VMs** and select your **WinServer** VM assigned to the **Environment:Production** category.
 
@@ -398,13 +395,17 @@ Protecting VMs
 
    .. figure:: images/26.png
 
-#. Select the Recovery Point and click **Actions > Restore**. *This will allow us to create an instant clone of the VM using the crash consistent snapshot*.
+   .. note::
+
+      You may have to wait a few minutes for the initial snapshot to be taken, once the preceding steps are complete.
+
+#. Select the Recovery Point, and then click **Actions > Restore**. *This will allow us to create an instant clone of the VM using the crash consistent snapshot*.
 
    .. figure:: images/27.png
 
 #. If desired, update the clone name. Click **Restore**.
 
-#. Click **Back to VMs** and note the clone is already available to be powered on.
+#. Click the **Back to VMs** link (upper left-hand side), and note that the clone has already been created, and is available to be powered on.
 
 #. Select the **Clone** VM and note that it does not inherit the categories of its parent VM. Assign the **Environment:Production** category to the **Clone** VM and verify that after a few moments it is added to the policy and its inital snapshot is created.
 
@@ -412,8 +413,8 @@ Protecting VMs
 
 #. Select both the **WinServer-1** and **WinServer-2** VMs and click **Actions > Protect**.
 
-#. Select the **ProdVM-Protection** policy and click **Protect**.
+#. Select the **ProdVM-Protection** policy, and then click **Protect**.
 
    .. figure:: images/28.png
 
-   *No additional software to configure, just define your RPO, how long you want to keep your snapshots, and optionally what additional clusters should they replicate to - and you have primary storage protection for your VMs throughout their entire lifecycle.*
+   No additional software to configure, just define your RPO, how long you want to keep your snapshots, and optionally what additional clusters should they replicate to - and you have primary storage protection for your VMs throughout their entire lifecycle.

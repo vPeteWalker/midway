@@ -60,7 +60,7 @@ Upload SQL Server 2016 ISO
 
    - **Image Type** - ISO
 
-#. Within *Image Source*, click **Upload a file > Choose File**. Browse to the ISO file for Windows 2016, select it, and click **Open**.
+#. Within *Image Source*, click **Upload a file > Choose File**. Browse to the ISO file for SQL 2016, select it, and click **Open**.
 
 #. Click **Save**.
 
