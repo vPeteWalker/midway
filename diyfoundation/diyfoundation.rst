@@ -39,7 +39,7 @@ A Hosted POC reservation provides a fully imaged cluster consisting of 4 nodes. 
 - Install the Foundation VM on Node A
 - Use Foundation to image Nodes B, C, and D and create a 3 node cluster
 
-Using an SSH client, connect to the **Node A CVM IP** (e.g. 10.21.\ *XYZ*\ .29) in your assigned block using the following credentials:
+Using an SSH client, connect to the **Node A CVM IP** (e.g. 10.21.\ *XXX*\ .29) in your assigned block using the following credentials:
 
 - **Username** - nutanix
 - **Password** - *<HPOC Cluster Password>*
@@ -151,9 +151,9 @@ Select **eth0** and press **Return**.
 Replacing the octet(s) that correspond to your HPOC network, fill out the following fields, select **OK** and press **Return**:
 
 - **Use DHCP** - Press **Space** to de-select
-- **Static IP** - 10.42.\ *XYZ*\ .41
+- **Static IP** - 10.42.\ *XXX*\ .41
 - **Netmask** - 255.255.255.128
-- **Gateway** - 10.42.\ *XYZ*\ .1
+- **Gateway** - 10.42.\ *XXX*\ .1
 
 .. figure:: images/4.png
 
@@ -185,9 +185,9 @@ On the **Start** page, fill out the following fields, replacing the octet(s) tha
 - **Will your production switch do link aggregation?** - No
 - **Will your production switch have VLANs** - No
 - **Netmask of Every Host and CVM** - 255.255.255.128
-- **Gateway of Every Host and CVM** - 10.42.\ *XYZ*\ .1
+- **Gateway of Every Host and CVM** - 10.42.\ *XXX*\ .1
 - **Netmask of Every IPMI** - 255.255.255.128
-- **Gateway of Every IPMI** - 10.42.\ *XYZ*\ .1
+- **Gateway of Every IPMI** - 10.42.\ *XXX*\ .1
 
 .. note::
 
@@ -203,12 +203,12 @@ As the remaining nodes do not currently belong to a cluster and are on the same 
 
 Replacing the octet(s) that correspond to your HPOC network, fill out the following fields and select **Next**:
 
-- **IPMI IP** - 10.42.\ *XYZ*\ .34
-- **Hypervisor IP** - 10.42.\ *XYZ*\ .26
-- **CVM IP** - 10.42.\ *XYZ*\ .30
-- **Node B Hypervisor Hostname** - POC\ *XYZ*\ -2
-- **Node C Hypervisor Hostname** - POC\ *XYZ*\ -3
-- **Node D Hypervisor Hostname** - POC\ *XYZ*\ -4
+- **IPMI IP** - 10.42.\ *XXX*\ .34
+- **Hypervisor IP** - 10.42.\ *XXX*\ .26
+- **CVM IP** - 10.42.\ *XXX*\ .30
+- **Node B Hypervisor Hostname** - POC\ *XXX*\ -2
+- **Node C Hypervisor Hostname** - POC\ *XXX*\ -3
+- **Node D Hypervisor Hostname** - POC\ *XXX*\ -4
 
 .. figure:: images/10.png
 
@@ -225,7 +225,7 @@ Fill out the following fields and click **Next**:
 - **Cluster Redundancy Factor** - RF2
 
   *Redundancy Factor 2 requires a minimum of 3 nodes, Redundancy Factor 3 requires a minimum of 5 nodes. Cluster creation during Foundation will fail if the appropriate minimum is not met.*
-- **Cluster Virtual IP** - 10.42.\ *XYZ*\ .37
+- **Cluster Virtual IP** - 10.42.\ *XXX*\ .37
 
   *Cluster Virtual IP needs to be within the same subnet as the CVM/hypervisor.*
 - **DNS Servers of Every CVM and Host** - 10.42.196.10
