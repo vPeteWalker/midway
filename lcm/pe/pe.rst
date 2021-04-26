@@ -33,7 +33,7 @@ Performing Inventory with LCM
 
    A bit of context on what LCM is actually doing during the inventory process, as it could take up to 20 minutes to perform on a 4-node cluster, and up to 40 minutes on a 32-node cluster.
 
-   - Use our master manifest to determine which modules are applicable on each host based on the hardware family.
+   - Use our manifest to determine which modules are applicable on each host based on the hardware family.
 
    - Download these modules (note only the control logic, no images needed) onto the catalog service.
 

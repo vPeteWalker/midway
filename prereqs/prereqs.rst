@@ -66,7 +66,7 @@ You'll need to verify the following with the customer:
 
 - **1x VLAN**
 
-   - A single network can be used for your CVM/AHV network, as well as user VMs. The customer may have a requirement to segregate UVMs and management interfaces, which would require additional VLANs or physical ports (and related wiring/tranceivers/switch ports).
+   - A single network can be used for your CVM/AHV network, as well as user VMs. The customer may have a requirement to separate UVMs and management interfaces, which would require additional VLANs or physical ports (and related wiring/tranceivers/switch ports).
    - Recommended to be /24 or larger subnet, with no DHCP configured.
    - This network should be routable to/from the customer network and to the Internet.
 

@@ -164,6 +164,12 @@ Configuration
 
 #. (Optional) Configure the SMTP server. If you choose not to configure the SMTP, remove the e-mail address listed within the *Sender's EMail* box before you proceed.
 
+      HPOC values:
+
+         - **Hostname Or IP Address** = mxb-002c1b01.gslb.pphosted.com
+         - **Port** = 25
+         - **From Email Address** = NutanixHostedPOC@nutanix.com
+
 #. In the *Era Server's OS Time Zone* list, select a timezone, or leave the default UTC.
 
    .. figure:: images/era2.png

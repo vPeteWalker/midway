@@ -39,7 +39,7 @@ These instructions will walk you through:
 
 - Cloning a previously-created Windows VM.
 
-- Manually install SQL Server 2016. This VM will act as a master image to create a profile for deploying additional SQL VMs with Nutanix and Microsoft best practices automatically applied by Era.
+- Manually install SQL Server 2016. This VM will act as a gold image to create a profile for deploying additional SQL VMs with Nutanix and Microsoft best practices automatically applied by Era.
 
 .. note::
 

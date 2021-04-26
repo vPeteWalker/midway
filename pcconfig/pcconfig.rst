@@ -33,6 +33,12 @@ Network Settings
 
 #. (Optional) To configure SNMP based alerting for the cluster, see complete instructions in the `Prism Central Guide <https://portal.nutanix.com/page/documents/details/?targetId=Prism-Central-Guide-Prism-v5_17:mul-snmp-configure-pc-t.html#ntask_jqd_fd4_kbb>`_.
 
+      HPOC values:
+
+         - **Hostname Or IP Address** = mxb-002c1b01.gslb.pphosted.com
+         - **Port** = 25
+         - **From Email Address** = NutanixHostedPOC@nutanix.com
+
 #. (Optional) If the customer has an available Syslog server, you can enable Audit, API Audit, and Flow logging under **Alerts and Notifications > Syslog Server**. See complete instructions in the `Prism Central Guide <https://portal.nutanix.com/#/page/docs/details?targetId=Prism-Central-Guide-Prism-v5_17:mul-syslog-server-configure-pc-t.html>`_. See :ref:`deploygraylog` for instructions on how to deploy a GrayLog virtual appliance to use for Syslog during your POC.
 
 Disk Images

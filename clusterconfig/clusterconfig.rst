@@ -89,9 +89,15 @@ Cluster Settings
 
    This may already be configured for HPOC clusters, otherwise (and again, optionally) specify **SMTP Hostname**, **Port**, **Security Mode** and **From Email Address** using customer provided details.
 
+   HPOC values:
+
+      - **Hostname Or IP Address** = mxb-002c1b01.gslb.pphosted.com
+      - **Port** = 25
+      - **From Email Address** = NutanixHostedPOC@nutanix.com
+
    .. note::
 
-      The customer may need to whitelist all CVM IPs and Cluster Virtual IP with their SMTP server in order to successfully send alert e-mails.
+      The customer may need to safelist all CVM IPs and Cluster Virtual IP with their SMTP server in order to successfully send alert e-mails.
 
    Under **Email and Alerts**, select **Alert Email Configuration** and add a comma separated list of all recipients who should receive alerts. Include your own e-mail, so you are alerted to any potential issues throughout the duration of the POC. Click **Save**.
 
