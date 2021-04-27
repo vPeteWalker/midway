@@ -305,7 +305,7 @@ A SQL Server database server must meet the following requirements before you are
 
 #. In the *Status* column, click **Registering** to monitor the status, or choose **Operations** from the dropdown.
 
-#. The registration process will take approximately 10-15 minutes. In the meantime, proceed with the remaining steps in this section. Wait for the registration process to complete to proceed to the next section.
+#. This process will take approximately 10-15 minutes. In the meantime, proceed with the remaining steps in this section. Wait for the progress to complete to proceed to the next section.
 
    - From the dropdown menu, select **SLAs**. Era has five built-in SLAs (Gold, Silver, Bronze, Brass, and None). SLAs control however the database server is backed up. This can with a combination of Continuous Protection, Daily, Weekly, Monthly, and Quarterly protection intervals.
 
@@ -327,7 +327,7 @@ Before additional SQL Server VMs can be provisioned, a *Software Profile* must f
 
 #. Click **Next > Create**.
 
-#. Select **Operations** from the dropdown menu to monitor the registration. This process should take approximately 5-7 minutes.
+#. Select **Operations** from the dropdown menu to monitor the progress. This process should take approximately 5-7 minutes.
 
 #. Once the profile creation completes successfully. Power off your *Win16SQL16* VM, confirm that *Win16SQL16* is powered off before proceeding.
 
