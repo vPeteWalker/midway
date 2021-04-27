@@ -157,7 +157,7 @@ Every successful POC has a well-defined test plan. While this guide will walk yo
 How Do I Use This Guide?
 ++++++++++++++++++++++++
 
-.. figure:: images/boromir.jpg
+.. figure:: images/boromir.png
 
 No two POCs are the same, and as such, much of this guide is meant to be used modularly.
 
