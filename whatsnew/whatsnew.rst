@@ -22,19 +22,19 @@ Current Versions
    * - **Product**
      - **Guide Version**
    * - AOS
-     - 5.19.1.5
+     - 5.19.2
    * - AHV
-     - el7.nutanix.20201105.1082
+     - el7.nutanix.20201105.1161
    * - Prism Central
      - pc.2020.11
    * - Foundation
-     - 4.6.2
+     - 5.0
    * - Nutanix Cluster Check (NCC)
      - 4.0.1
    * - Calm
-     - 3.2.0
+     - 3.2.2
    * - Era
-     - 2.1.1.1
+     - 2.2
    * - Files
      - 3.8.0.1
    * - Files Analytics
